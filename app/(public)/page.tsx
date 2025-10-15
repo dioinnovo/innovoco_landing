@@ -1078,7 +1078,7 @@ export default function LandingPage() {
                     <Building2 className="h-6 w-6 text-[#0A58D0]" />
                   </div>
                   <div className="text-left flex-1">
-                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Financial Services AI</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Financial Services</h3>
                     <p className="text-sm md:text-base text-[#525252] mt-1">Real-time fraud detection, credit risk ML models, and regulatory compliance automation</p>
                   </div>
                 </div>
@@ -1374,7 +1374,7 @@ export default function LandingPage() {
                     <HardHat className="h-6 w-6 text-[#D97706]" />
                   </div>
                   <div className="text-left flex-1">
-                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Construction & Home Services AI</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Construction & Home Services</h3>
                     <p className="text-sm md:text-base text-[#525252] mt-1">Computer vision inspections, automated quality control, and AI-powered report generation</p>
                   </div>
                 </div>
