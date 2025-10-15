@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import ContactModal from "@/components/landing/ContactModal";
 import { Footer } from '@/components/layout/footer';
 import {
@@ -1063,28 +1064,23 @@ export default function LandingPage() {
             </p>
           </motion.div>
 
-          {/* All Industries Visible - Clear Visual Hierarchy */}
-          <div className="space-y-16">
+          {/* Industries Accordion - Space-Saving Design */}
+          <Accordion type="single" collapsible defaultValue="financial" className="space-y-4">
             {/* Financial Services */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="relative"
-            >
-              {/* Industry Header Section */}
-              <div className="bg-gradient-to-br from-[#DBEAFE]/30 to-[#93C5FD]/10 rounded-[22px] p-8 mb-8 border border-[#93C5FD]/20">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD] flex items-center justify-center shadow-lg">
-                    <Building2 className="h-8 w-8 text-[#0A58D0]" />
+            <AccordionItem value="financial" className="border border-[#93C5FD]/30 rounded-[20px] overflow-hidden bg-white shadow-sm">
+              <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-gradient-to-br hover:from-[#DBEAFE]/20 hover:to-[#93C5FD]/5 transition-colors">
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD] flex items-center justify-center shadow-md flex-shrink-0">
+                    <Building2 className="h-6 w-6 text-[#0A58D0]" />
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-[#0B0F19] mb-2">Financial Services AI</h3>
-                    <p className="text-lg text-[#525252]">Real-time fraud detection, credit risk ML models, and regulatory compliance automation</p>
+                  <div className="text-left flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Financial Services AI</h3>
+                    <p className="text-sm md:text-base text-[#525252] mt-1">Real-time fraud detection, credit risk ML models, and regulatory compliance automation</p>
                   </div>
                 </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Card className="group bg-white border-border/30 hover:border-[#0A58D0]/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-[22px]">
                   <CardHeader>
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
@@ -1140,29 +1136,25 @@ export default function LandingPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </motion.div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
             {/* Healthcare */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative"
-            >
-              {/* Industry Header Section */}
-              <div className="bg-gradient-to-br from-[#D1FAE5]/30 to-[#6EE7B7]/10 rounded-[22px] p-8 mb-8 border border-[#6EE7B7]/20">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7] flex items-center justify-center shadow-lg">
-                    <HeartPulse className="h-8 w-8 text-[#0F766E]" />
+            <AccordionItem value="healthcare" className="border border-[#6EE7B7]/30 rounded-[20px] overflow-hidden bg-white shadow-sm">
+              <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-gradient-to-br hover:from-[#D1FAE5]/20 hover:to-[#6EE7B7]/5 transition-colors">
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7] flex items-center justify-center shadow-md flex-shrink-0">
+                    <HeartPulse className="h-6 w-6 text-[#0F766E]" />
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-[#0B0F19] mb-2">Healthcare Data Analytics</h3>
-                    <p className="text-lg text-[#525252]">Clinical decision support systems, readmission risk prediction, and HIPAA-compliant analytics</p>
+                  <div className="text-left flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Healthcare Data Analytics</h3>
+                    <p className="text-sm md:text-base text-[#525252] mt-1">Clinical decision support systems, readmission risk prediction, and HIPAA-compliant analytics</p>
                   </div>
                 </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Card className="group bg-white border-border/30 hover:border-[#0F766E]/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-[22px]">
                   <CardHeader>
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
@@ -1218,29 +1210,25 @@ export default function LandingPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </motion.div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
             {/* Manufacturing */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="relative"
-            >
-              {/* Industry Header Section */}
-              <div className="bg-gradient-to-br from-[#EDE9FE]/30 to-[#C4B5FD]/10 rounded-[22px] p-8 mb-8 border border-[#C4B5FD]/20">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD] flex items-center justify-center shadow-lg">
-                    <Factory className="h-8 w-8 text-[#7C3AED]" />
+            <AccordionItem value="manufacturing" className="border border-[#C4B5FD]/30 rounded-[20px] overflow-hidden bg-white shadow-sm">
+              <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-gradient-to-br hover:from-[#EDE9FE]/20 hover:to-[#C4B5FD]/5 transition-colors">
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD] flex items-center justify-center shadow-md flex-shrink-0">
+                    <Factory className="h-6 w-6 text-[#7C3AED]" />
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-[#0B0F19] mb-2">Manufacturing AI Solutions</h3>
-                    <p className="text-lg text-[#525252]">AI predictive maintenance, computer vision quality control, and IoT sensor analytics</p>
+                  <div className="text-left flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Manufacturing AI Solutions</h3>
+                    <p className="text-sm md:text-base text-[#525252] mt-1">AI predictive maintenance, computer vision quality control, and IoT sensor analytics</p>
                   </div>
                 </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Card className="group bg-white border-border/30 hover:border-[#7C3AED]/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-[22px]">
                   <CardHeader>
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
@@ -1296,29 +1284,25 @@ export default function LandingPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </motion.div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
             {/* Retail */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="relative"
-            >
-              {/* Industry Header Section */}
-              <div className="bg-gradient-to-br from-[#FECACA]/30 to-[#FCA5A5]/10 rounded-[22px] p-8 mb-8 border border-[#FCA5A5]/20">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FECACA] to-[#FCA5A5] flex items-center justify-center shadow-lg">
-                    <ShoppingCart className="h-8 w-8 text-[#DC2626]" />
+            <AccordionItem value="retail" className="border border-[#FCA5A5]/30 rounded-[20px] overflow-hidden bg-white shadow-sm">
+              <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-gradient-to-br hover:from-[#FECACA]/20 hover:to-[#FCA5A5]/5 transition-colors">
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FECACA] to-[#FCA5A5] flex items-center justify-center shadow-md flex-shrink-0">
+                    <ShoppingCart className="h-6 w-6 text-[#DC2626]" />
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-[#0B0F19] mb-2">Retail Analytics Platform</h3>
-                    <p className="text-lg text-[#525252]">AI-powered personalization, ML demand forecasting, and intelligent inventory optimization</p>
+                  <div className="text-left flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Retail Analytics Platform</h3>
+                    <p className="text-sm md:text-base text-[#525252] mt-1">AI-powered personalization, ML demand forecasting, and intelligent inventory optimization</p>
                   </div>
                 </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Card className="group bg-white border-border/30 hover:border-[#DC2626]/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-[22px]">
                   <CardHeader>
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FECACA] to-[#FCA5A5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
@@ -1374,9 +1358,10 @@ export default function LandingPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </motion.div>
-          </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
 
           {/* Client Logos - Creating FOMO before CTA */}
           <div className="mt-16 pt-16 border-t border-border/50">
