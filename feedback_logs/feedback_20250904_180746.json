@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-09-04T18:07:46.745904",
+  "question": "Show all tables in the database",
+  "sql": "SELECT name\nFROM sqlite_master\nWHERE type='table'\nORDER BY name;",
+  "feedback_type": "bad",
+  "comment": null
+}

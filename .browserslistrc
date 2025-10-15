@@ -1,0 +1,14 @@
+# Modern browsers only - no legacy JavaScript
+# This reduces bundle size by ~10KB
+
+# Production browsers
+[production]
+defaults and supports es6-module
+not dead
+not op_mini all
+
+# Development browsers
+[development]
+last 1 chrome version
+last 1 firefox version
+last 1 safari version

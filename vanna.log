@@ -1,0 +1,393 @@
+/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+/Users/diodelahoz/Projects/innovoco/nextjs-app/vanna_service.py:606: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [26515]
+INFO:     Waiting for application startup.
+Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5002 (Press CTRL+C to quit)
+Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+Number of requested results 10 is greater than number of elements in index 1, updating n_results = 1
+🏢 Starting Enhanced Innovoco Vanna Service...
+🚀 Initializing Enhanced Innovoco Vanna Service...
+📡 Azure Endpoint: https://diod-mevihjma-eastus2.cognitiveservices.azure.com
+🤖 Model Deployment: gpt-5-chat-01
+✅ Database ready with 11 tables
+🧠 Training AI Model with Azure OpenAI...
+Adding ddl: CREATE TABLE [Album]
+(
+    [AlbumId] INTEGER  NOT NULL,
+    [Title] NVARCHAR(160)  NOT NULL,
+    [ArtistId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),
+    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+Adding ddl: CREATE TABLE [Artist]
+(
+    [ArtistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])
+)
+Adding ddl: CREATE TABLE [Customer]
+(
+    [CustomerId] INTEGER  NOT NULL,
+    [FirstName] NVARCHAR(40)  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [Company] NVARCHAR(80),
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60)  NOT NULL,
+    [SupportRepId] INTEGER,
+    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),
+    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+Adding ddl: CREATE TABLE [Employee]
+(
+    [EmployeeId] INTEGER  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [FirstName] NVARCHAR(20)  NOT NULL,
+    [Title] NVARCHAR(30),
+    [ReportsTo] INTEGER,
+    [BirthDate] DATETIME,
+    [HireDate] DATETIME,
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60),
+    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),
+    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+Adding ddl: CREATE TABLE [Genre]
+(
+    [GenreId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Genre] PRIMARY KEY  ([GenreId])
+)
+Adding ddl: CREATE TABLE [Invoice]
+(
+    [InvoiceId] INTEGER  NOT NULL,
+    [CustomerId] INTEGER  NOT NULL,
+    [InvoiceDate] DATETIME  NOT NULL,
+    [BillingAddress] NVARCHAR(70),
+    [BillingCity] NVARCHAR(40),
+    [BillingState] NVARCHAR(40),
+    [BillingCountry] NVARCHAR(40),
+    [BillingPostalCode] NVARCHAR(10),
+    [Total] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),
+    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+Adding ddl: CREATE TABLE [InvoiceLine]
+(
+    [InvoiceLineId] INTEGER  NOT NULL,
+    [InvoiceId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    [Quantity] INTEGER  NOT NULL,
+    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),
+    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+Adding ddl: CREATE TABLE [MediaType]
+(
+    [MediaTypeId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])
+)
+Adding ddl: CREATE TABLE [Playlist]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])
+)
+Adding ddl: CREATE TABLE [PlaylistTrack]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),
+    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+Adding ddl: CREATE TABLE [Track]
+(
+    [TrackId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(200)  NOT NULL,
+    [AlbumId] INTEGER,
+    [MediaTypeId] INTEGER  NOT NULL,
+    [GenreId] INTEGER,
+    [Composer] NVARCHAR(220),
+    [Milliseconds] INTEGER  NOT NULL,
+    [Bytes] INTEGER,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),
+    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+Adding documentation....
+✅ Training completed with 20 comprehensive examples
+✅ Enhanced Vanna initialized and ready!
+✅ Enhanced API ready at http://localhost:5002
+🤔 Processing: What is the total revenue?
+SQL Prompt: [{'role': 'system', 'content': "You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE [Invoice]\n(\n    [InvoiceId] INTEGER  NOT NULL,\n    [CustomerId] INTEGER  NOT NULL,\n    [InvoiceDate] DATETIME  NOT NULL,\n    [BillingAddress] NVARCHAR(70),\n    [BillingCity] NVARCHAR(40),\n    [BillingState] NVARCHAR(40),\n    [BillingCountry] NVARCHAR(40),\n    [BillingPostalCode] NVARCHAR(10),\n    [Total] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),\n    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [InvoiceLine]\n(\n    [InvoiceLineId] INTEGER  NOT NULL,\n    [InvoiceId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    [Quantity] INTEGER  NOT NULL,\n    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),\n    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Track]\n(\n    [TrackId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(200)  NOT NULL,\n    [AlbumId] INTEGER,\n    [MediaTypeId] INTEGER  NOT NULL,\n    [GenreId] INTEGER,\n    [Composer] NVARCHAR(220),\n    [Milliseconds] INTEGER  NOT NULL,\n    [Bytes] INTEGER,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),\n    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Employee]\n(\n    [EmployeeId] INTEGER  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [FirstName] NVARCHAR(20)  NOT NULL,\n    [Title] NVARCHAR(30),\n    [ReportsTo] INTEGER,\n    [BirthDate] DATETIME,\n    [HireDate] DATETIME,\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60),\n    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),\n    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Artist]\n(\n    [ArtistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])\n)\n\nCREATE TABLE [Album]\n(\n    [AlbumId] INTEGER  NOT NULL,\n    [Title] NVARCHAR(160)  NOT NULL,\n    [ArtistId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),\n    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Customer]\n(\n    [CustomerId] INTEGER  NOT NULL,\n    [FirstName] NVARCHAR(40)  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [Company] NVARCHAR(80),\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60)  NOT NULL,\n    [SupportRepId] INTEGER,\n    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),\n    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [PlaylistTrack]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),\n    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Playlist]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])\n)\n\nCREATE TABLE [MediaType]\n(\n    [MediaTypeId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])\n)\n\n\n===Additional Context \n\n\n    Chinook Music Store Database:\n    - Complete music store data model with Artists, Albums, Tracks, Customers, Invoices\n    - Artists create Albums which contain Tracks\n    - Customers purchase Tracks through Invoices and InvoiceLines\n    - Tracks belong to Genres and MediaTypes\n    - Employees have hierarchical relationships (ReportsTo)\n    - Playlists contain multiple Tracks\n    \n    Key Metrics:\n    - Revenue: Sum of Invoice.Total or InvoiceLine.UnitPrice * Quantity\n    - Popular items: Count of InvoiceLine occurrences\n    - Customer lifetime value: Sum of all invoices per customer\n    - Track duration: Milliseconds field (divide by 60000 for minutes)\n    \n    Important Relationships:\n    - Artist -> Album (one to many)\n    - Album -> Track (one to many)\n    - Track -> InvoiceLine (one to many)\n    - Customer -> Invoice (one to many)\n    - Invoice -> InvoiceLine (one to many)\n    - Track -> Genre (many to one)\n    - Track -> MediaType (many to one)\n    \n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n6. Ensure that the output SQL is SQLite-compliant and executable, and free of syntax errors. \n"}, {'role': 'user', 'content': 'What is the total revenue?'}, {'role': 'assistant', 'content': 'SELECT SUM(Total) as TotalRevenue FROM Invoice'}, {'role': 'user', 'content': 'Sales by country'}, {'role': 'assistant', 'content': '\n            SELECT BillingCountry, \n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY BillingCountry\n            ORDER BY Revenue DESC\n        '}, {'role': 'user', 'content': 'Show revenue by year'}, {'role': 'assistant', 'content': "\n            SELECT strftime('%Y', InvoiceDate) as Year, \n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%Y', InvoiceDate)\n            ORDER BY Year\n        "}, {'role': 'user', 'content': 'Monthly sales trend'}, {'role': 'assistant', 'content': "\n            SELECT strftime('%Y-%m', InvoiceDate) as Month,\n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%Y-%m', InvoiceDate)\n            ORDER BY Month\n        "}, {'role': 'user', 'content': 'Top 10 customers by revenue'}, {'role': 'assistant', 'content': "\n            SELECT c.FirstName || ' ' || c.LastName as Customer,\n                   SUM(i.Total) as TotalSpent\n            FROM Customer c\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY c.CustomerId\n            ORDER BY TotalSpent DESC\n            LIMIT 10\n        "}, {'role': 'user', 'content': 'Artist revenue'}, {'role': 'assistant', 'content': '\n            SELECT ar.Name as Artist, \n                   SUM(il.UnitPrice * il.Quantity) as Revenue\n            FROM Artist ar\n            JOIN Album al ON ar.ArtistId = al.ArtistId\n            JOIN Track t ON al.AlbumId = t.AlbumId\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY ar.ArtistId\n            ORDER BY Revenue DESC\n            LIMIT 15\n        '}, {'role': 'user', 'content': 'Sales by day of week'}, {'role': 'assistant', 'content': "\n            SELECT CASE cast(strftime('%w', InvoiceDate) as integer)\n                     WHEN 0 THEN 'Sunday'\n                     WHEN 1 THEN 'Monday'\n                     WHEN 2 THEN 'Tuesday'\n                     WHEN 3 THEN 'Wednesday'\n                     WHEN 4 THEN 'Thursday'\n                     WHEN 5 THEN 'Friday'\n                     ELSE 'Saturday'\n                   END as DayOfWeek,\n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%w', InvoiceDate)\n            ORDER BY strftime('%w', InvoiceDate)\n        "}, {'role': 'user', 'content': 'Customer lifetime value'}, {'role': 'assistant', 'content': '\n            SELECT AVG(CustomerTotal) as AvgLifetimeValue\n            FROM (\n                SELECT CustomerId, SUM(Total) as CustomerTotal\n                FROM Invoice\n                GROUP BY CustomerId\n            )\n        '}, {'role': 'user', 'content': 'Employee sales performance'}, {'role': 'assistant', 'content': "\n            SELECT e.FirstName || ' ' || e.LastName as Employee,\n                   COUNT(DISTINCT i.InvoiceId) as SalesCount,\n                   SUM(i.Total) as TotalSales\n            FROM Employee e\n            JOIN Customer c ON e.EmployeeId = c.SupportRepId\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY e.EmployeeId\n            ORDER BY TotalSales DESC\n        "}, {'role': 'user', 'content': 'Best selling tracks'}, {'role': 'assistant', 'content': '\n            SELECT t.Name, COUNT(il.TrackId) as Sales\n            FROM Track t\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY t.TrackId\n            ORDER BY Sales DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'What is the total revenue?'}]huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+Insert of existing embedding ID: fb36a53e-afb0-5d99-9351-70683e880f9d-sql
+Add of existing embedding ID: fb36a53e-afb0-5d99-9351-70683e880f9d-sql
+
+Using model gpt-5-chat-01 for 2274.75 tokens (approx)
+LLM Response: SELECT SUM(Total) as TotalRevenue FROM Invoice
+📝 SQL: SELECT SUM(Total) as TotalRevenue FROM Invoice...
+Error generating follow-up questions: string indices must be integers
+✅ Auto-trained on successful query
+INFO:     127.0.0.1:55084 - "POST /api/ask HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55095 - "GET / HTTP/1.1" 200 OK
+Number of requested results 10 is greater than number of elements in index 1, updating n_results = 1
+🤔 Processing: Which categories perform best?
+SQL Prompt: [{'role': 'system', 'content': "You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE [Track]\n(\n    [TrackId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(200)  NOT NULL,\n    [AlbumId] INTEGER,\n    [MediaTypeId] INTEGER  NOT NULL,\n    [GenreId] INTEGER,\n    [Composer] NVARCHAR(220),\n    [Milliseconds] INTEGER  NOT NULL,\n    [Bytes] INTEGER,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),\n    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Genre]\n(\n    [GenreId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Genre] PRIMARY KEY  ([GenreId])\n)\n\nCREATE TABLE [Album]\n(\n    [AlbumId] INTEGER  NOT NULL,\n    [Title] NVARCHAR(160)  NOT NULL,\n    [ArtistId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),\n    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [InvoiceLine]\n(\n    [InvoiceLineId] INTEGER  NOT NULL,\n    [InvoiceId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    [Quantity] INTEGER  NOT NULL,\n    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),\n    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [PlaylistTrack]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),\n    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Employee]\n(\n    [EmployeeId] INTEGER  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [FirstName] NVARCHAR(20)  NOT NULL,\n    [Title] NVARCHAR(30),\n    [ReportsTo] INTEGER,\n    [BirthDate] DATETIME,\n    [HireDate] DATETIME,\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60),\n    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),\n    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Invoice]\n(\n    [InvoiceId] INTEGER  NOT NULL,\n    [CustomerId] INTEGER  NOT NULL,\n    [InvoiceDate] DATETIME  NOT NULL,\n    [BillingAddress] NVARCHAR(70),\n    [BillingCity] NVARCHAR(40),\n    [BillingState] NVARCHAR(40),\n    [BillingCountry] NVARCHAR(40),\n    [BillingPostalCode] NVARCHAR(10),\n    [Total] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),\n    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Customer]\n(\n    [CustomerId] INTEGER  NOT NULL,\n    [FirstName] NVARCHAR(40)  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [Company] NVARCHAR(80),\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60)  NOT NULL,\n    [SupportRepId] INTEGER,\n    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),\n    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Playlist]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])\n)\n\nCREATE TABLE [Artist]\n(\n    [ArtistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])\n)\n\n\n===Additional Context \n\n\n    Chinook Music Store Database:\n    - Complete music store data model with Artists, Albums, Tracks, Customers, Invoices\n    - Artists create Albums which contain Tracks\n    - Customers purchase Tracks through Invoices and InvoiceLines\n    - Tracks belong to Genres and MediaTypes\n    - Employees have hierarchical relationships (ReportsTo)\n    - Playlists contain multiple Tracks\n    \n    Key Metrics:\n    - Revenue: Sum of Invoice.Total or InvoiceLine.UnitPrice * Quantity\n    - Popular items: Count of InvoiceLine occurrences\n    - Customer lifetime value: Sum of all invoices per customer\n    - Track duration: Milliseconds field (divide by 60000 for minutes)\n    \n    Important Relationships:\n    - Artist -> Album (one to many)\n    - Album -> Track (one to many)\n    - Track -> InvoiceLine (one to many)\n    - Customer -> Invoice (one to many)\n    - Invoice -> InvoiceLine (one to many)\n    - Track -> Genre (many to one)\n    - Track -> MediaType (many to one)\n    \n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n6. Ensure that the output SQL is SQLite-compliant and executable, and free of syntax errors. \n"}, {'role': 'user', 'content': 'Most popular genres'}, {'role': 'assistant', 'content': '\n            SELECT g.Name as Genre, COUNT(il.TrackId) as TracksSold\n            FROM Genre g\n            JOIN Track t ON g.GenreId = t.GenreId\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY g.GenreId\n            ORDER BY TracksSold DESC\n        '}, {'role': 'user', 'content': 'Track count by genre'}, {'role': 'assistant', 'content': '\n            SELECT g.Name as Genre, COUNT(t.TrackId) as TrackCount\n            FROM Genre g\n            LEFT JOIN Track t ON g.GenreId = t.GenreId\n            GROUP BY g.GenreId\n            ORDER BY TrackCount DESC\n        '}, {'role': 'user', 'content': 'Most prolific artists'}, {'role': 'assistant', 'content': '\n            SELECT ar.Name, COUNT(t.TrackId) as TrackCount\n            FROM Artist ar\n            JOIN Album al ON ar.ArtistId = al.ArtistId\n            JOIN Track t ON al.AlbumId = t.AlbumId\n            GROUP BY ar.ArtistId\n            ORDER BY TrackCount DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'Best selling tracks'}, {'role': 'assistant', 'content': '\n            SELECT t.Name, COUNT(il.TrackId) as Sales\n            FROM Track t\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY t.TrackId\n            ORDER BY Sales DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'Top selling albums'}, {'role': 'assistant', 'content': '\n            SELECT al.Title, ar.Name as Artist, COUNT(il.TrackId) as TracksSold\n            FROM Album al\n            JOIN Artist ar ON al.ArtistId = ar.ArtistId\n            JOIN Track t ON al.AlbumId = t.AlbumId\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY al.AlbumId\n            ORDER BY TracksSold DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'List all albums'}, {'role': 'assistant', 'content': 'SELECT * FROM Album ORDER BY Title'}, {'role': 'user', 'content': 'Show all artists'}, {'role': 'assistant', 'content': 'SELECT * FROM Artist ORDER BY Name'}, {'role': 'user', 'content': 'Tracks longer than 5 minutes'}, {'role': 'assistant', 'content': '\n            SELECT Name, Milliseconds/60000.0 as Minutes\n            FROM Track\n            WHERE Milliseconds > 300000\n            ORDER BY Milliseconds DESC\n        '}, {'role': 'user', 'content': 'Employee sales performance'}, {'role': 'assistant', 'content': "\n            SELECT e.FirstName || ' ' || e.LastName as Employee,\n                   COUNT(DISTINCT i.InvoiceId) as SalesCount,\n                   SUM(i.Total) as TotalSales\n            FROM Employee e\n            JOIN Customer c ON e.EmployeeId = c.SupportRepId\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY e.EmployeeId\n            ORDER BY TotalSales DESC\n        "}, {'role': 'user', 'content': 'Artist revenue'}, {'role': 'assistant', 'content': '\n            SELECT ar.Name as Artist, \n                   SUM(il.UnitPrice * il.Quantity) as Revenue\n            FROM Artist ar\n            JOIN Album al ON ar.ArtistId = al.ArtistId\n            JOIN Track t ON al.AlbumId = t.AlbumId\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY ar.ArtistId\n            ORDER BY Revenue DESC\n            LIMIT 15\n        '}, {'role': 'user', 'content': 'Which categories perform best?'}]
+Using model gpt-5-chat-01 for 2152.0 tokens (approx)
+LLM Response: 
+            SELECT g.Name as Genre, SUM(il.UnitPrice * il.Quantity) as Revenue
+            FROM Genre g
+            JOIN Track t ON g.GenreId = t.GenreId
+            JOIN InvoiceLine il ON t.TrackId = il.TrackId
+            GROUP BY g.GenreId
+            ORDER BY Revenue DESC
+        
+📝 SQL: 
+            SELECT g.Name as Genre, SUM(il.UnitPrice * il.Quantity) as Revenue
+            FROM Gen...
+Error generating follow-up questions: string indices must be integers
+✅ Auto-trained on successful query
+INFO:     127.0.0.1:55201 - "POST /api/ask HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/routing.py", line 201, in serialize_response
+    return jsonable_encoder(response_content)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/encoders.py", line 223, in jsonable_encoder
+    obj_dict = _model_dump(
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/_compat.py", line 181, in _model_dump
+    return model.model_dump(mode=mode, **kwargs)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/pydantic/main.py", line 426, in model_dump
+    return self.__pydantic_serializer__.to_python(
+pydantic_core._pydantic_core.PydanticSerializationError: Unable to serialize unknown type: <class 'numpy.ndarray'>
+INFO:     127.0.0.1:55317 - "POST /api/suggestions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55584 - "POST /api/suggestions HTTP/1.1" 200 OK
+Number of requested results 10 is greater than number of elements in index 1, updating n_results = 1
+🤔 Processing: Show top 10 customers by sales
+SQL Prompt: [{'role': 'system', 'content': "You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE [Invoice]\n(\n    [InvoiceId] INTEGER  NOT NULL,\n    [CustomerId] INTEGER  NOT NULL,\n    [InvoiceDate] DATETIME  NOT NULL,\n    [BillingAddress] NVARCHAR(70),\n    [BillingCity] NVARCHAR(40),\n    [BillingState] NVARCHAR(40),\n    [BillingCountry] NVARCHAR(40),\n    [BillingPostalCode] NVARCHAR(10),\n    [Total] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),\n    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Customer]\n(\n    [CustomerId] INTEGER  NOT NULL,\n    [FirstName] NVARCHAR(40)  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [Company] NVARCHAR(80),\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60)  NOT NULL,\n    [SupportRepId] INTEGER,\n    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),\n    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Employee]\n(\n    [EmployeeId] INTEGER  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [FirstName] NVARCHAR(20)  NOT NULL,\n    [Title] NVARCHAR(30),\n    [ReportsTo] INTEGER,\n    [BirthDate] DATETIME,\n    [HireDate] DATETIME,\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60),\n    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),\n    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [InvoiceLine]\n(\n    [InvoiceLineId] INTEGER  NOT NULL,\n    [InvoiceId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    [Quantity] INTEGER  NOT NULL,\n    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),\n    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Playlist]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])\n)\n\nCREATE TABLE [Artist]\n(\n    [ArtistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])\n)\n\nCREATE TABLE [Track]\n(\n    [TrackId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(200)  NOT NULL,\n    [AlbumId] INTEGER,\n    [MediaTypeId] INTEGER  NOT NULL,\n    [GenreId] INTEGER,\n    [Composer] NVARCHAR(220),\n    [Milliseconds] INTEGER  NOT NULL,\n    [Bytes] INTEGER,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),\n    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [PlaylistTrack]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),\n    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [MediaType]\n(\n    [MediaTypeId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])\n)\n\nCREATE TABLE [Album]\n(\n    [AlbumId] INTEGER  NOT NULL,\n    [Title] NVARCHAR(160)  NOT NULL,\n    [ArtistId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),\n    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\n\n===Additional Context \n\n\n    Chinook Music Store Database:\n    - Complete music store data model with Artists, Albums, Tracks, Customers, Invoices\n    - Artists create Albums which contain Tracks\n    - Customers purchase Tracks through Invoices and InvoiceLines\n    - Tracks belong to Genres and MediaTypes\n    - Employees have hierarchical relationships (ReportsTo)\n    - Playlists contain multiple Tracks\n    \n    Key Metrics:\n    - Revenue: Sum of Invoice.Total or InvoiceLine.UnitPrice * Quantity\n    - Popular items: Count of InvoiceLine occurrences\n    - Customer lifetime value: Sum of all invoices per customer\n    - Track duration: Milliseconds field (divide by 60000 for minutes)\n    \n    Important Relationships:\n    - Artist -> Album (one to many)\n    - Album -> Track (one to many)\n    - Track -> InvoiceLine (one to many)\n    - Customer -> Invoice (one to many)\n    - Invoice -> InvoiceLine (one to many)\n    - Track -> Genre (many to one)\n    - Track -> MediaType (many to one)\n    \n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n6. Ensure that the output SQL is SQLite-compliant and executable, and free of syntax errors. \n"}, {'role': 'user', 'content': 'Top 10 customers by revenue'}, {'role': 'assistant', 'content': "\n            SELECT c.FirstName || ' ' || c.LastName as Customer,\n                   SUM(i.Total) as TotalSpent\n            FROM Customer c\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY c.CustomerId\n            ORDER BY TotalSpent DESC\n            LIMIT 10\n        "}, {'role': 'user', 'content': 'Best selling tracks'}, {'role': 'assistant', 'content': '\n            SELECT t.Name, COUNT(il.TrackId) as Sales\n            FROM Track t\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY t.TrackId\n            ORDER BY Sales DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'Employee sales performance'}, {'role': 'assistant', 'content': "\n            SELECT e.FirstName || ' ' || e.LastName as Employee,\n                   COUNT(DISTINCT i.InvoiceId) as SalesCount,\n                   SUM(i.Total) as TotalSales\n            FROM Employee e\n            JOIN Customer c ON e.EmployeeId = c.SupportRepId\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY e.EmployeeId\n            ORDER BY TotalSales DESC\n        "}, {'role': 'user', 'content': 'Customers by country'}, {'role': 'assistant', 'content': '\n            SELECT Country, COUNT(*) as CustomerCount\n            FROM Customer\n            GROUP BY Country\n            ORDER BY CustomerCount DESC\n        '}, {'role': 'user', 'content': 'Monthly sales trend'}, {'role': 'assistant', 'content': "\n            SELECT strftime('%Y-%m', InvoiceDate) as Month,\n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%Y-%m', InvoiceDate)\n            ORDER BY Month\n        "}, {'role': 'user', 'content': 'Sales by day of week'}, {'role': 'assistant', 'content': "\n            SELECT CASE cast(strftime('%w', InvoiceDate) as integer)\n                     WHEN 0 THEN 'Sunday'\n                     WHEN 1 THEN 'Monday'\n                     WHEN 2 THEN 'Tuesday'\n                     WHEN 3 THEN 'Wednesday'\n                     WHEN 4 THEN 'Thursday'\n                     WHEN 5 THEN 'Friday'\n                     ELSE 'Saturday'\n                   END as DayOfWeek,\n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%w', InvoiceDate)\n            ORDER BY strftime('%w', InvoiceDate)\n        "}, {'role': 'user', 'content': 'Top selling albums'}, {'role': 'assistant', 'content': '\n            SELECT al.Title, ar.Name as Artist, COUNT(il.TrackId) as TracksSold\n            FROM Album al\n            JOIN Artist ar ON al.ArtistId = ar.ArtistId\n            JOIN Track t ON al.AlbumId = t.AlbumId\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY al.AlbumId\n            ORDER BY TracksSold DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'Customer lifetime value'}, {'role': 'assistant', 'content': '\n            SELECT AVG(CustomerTotal) as AvgLifetimeValue\n            FROM (\n                SELECT CustomerId, SUM(Total) as CustomerTotal\n                FROM Invoice\n                GROUP BY CustomerId\n            )\n        '}, {'role': 'user', 'content': 'Show revenue by year'}, {'role': 'assistant', 'content': "\n            SELECT strftime('%Y', InvoiceDate) as Year, \n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%Y', InvoiceDate)\n            ORDER BY Year\n        "}, {'role': 'user', 'content': 'Sales by country'}, {'role': 'assistant', 'content': '\n            SELECT BillingCountry, \n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY BillingCountry\n            ORDER BY Revenue DESC\n        '}, {'role': 'user', 'content': 'Show top 10 customers by sales'}]
+Using model gpt-5-chat-01 for 2298.5 tokens (approx)
+LLM Response: 
+            SELECT c.FirstName || ' ' || c.LastName as Customer,
+                   SUM(i.Total) as TotalSpent
+            FROM Customer c
+            JOIN Invoice i ON c.CustomerId = i.CustomerId
+            GROUP BY c.CustomerId
+            ORDER BY TotalSpent DESC
+            LIMIT 10
+        
+📝 SQL: 
+            SELECT c.FirstName || ' ' || c.LastName as Customer,
+                   SUM(i.Total) as...
+Error generating follow-up questions: string indices must be integers
+✅ Auto-trained on successful query
+INFO:     127.0.0.1:55584 - "POST /api/ask HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/routing.py", line 201, in serialize_response
+    return jsonable_encoder(response_content)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/encoders.py", line 223, in jsonable_encoder
+    obj_dict = _model_dump(
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/_compat.py", line 181, in _model_dump
+    return model.model_dump(mode=mode, **kwargs)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/pydantic/main.py", line 426, in model_dump
+    return self.__pydantic_serializer__.to_python(
+pydantic_core._pydantic_core.PydanticSerializationError: Unable to serialize unknown type: <class 'numpy.ndarray'>
+INFO:     127.0.0.1:55768 - "POST /api/suggestions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56281 - "OPTIONS /api/suggestions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56281 - "POST /api/suggestions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57294 - "POST /api/suggestions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57778 - "POST /api/suggestions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58152 - "POST /api/suggestions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58152 - "OPTIONS /api/ask HTTP/1.1" 200 OK
+Number of requested results 10 is greater than number of elements in index 1, updating n_results = 1
+🤔 Processing: Show top 10 customers by sales
+SQL Prompt: [{'role': 'system', 'content': "You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE [Invoice]\n(\n    [InvoiceId] INTEGER  NOT NULL,\n    [CustomerId] INTEGER  NOT NULL,\n    [InvoiceDate] DATETIME  NOT NULL,\n    [BillingAddress] NVARCHAR(70),\n    [BillingCity] NVARCHAR(40),\n    [BillingState] NVARCHAR(40),\n    [BillingCountry] NVARCHAR(40),\n    [BillingPostalCode] NVARCHAR(10),\n    [Total] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),\n    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Customer]\n(\n    [CustomerId] INTEGER  NOT NULL,\n    [FirstName] NVARCHAR(40)  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [Company] NVARCHAR(80),\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60)  NOT NULL,\n    [SupportRepId] INTEGER,\n    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),\n    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Employee]\n(\n    [EmployeeId] INTEGER  NOT NULL,\n    [LastName] NVARCHAR(20)  NOT NULL,\n    [FirstName] NVARCHAR(20)  NOT NULL,\n    [Title] NVARCHAR(30),\n    [ReportsTo] INTEGER,\n    [BirthDate] DATETIME,\n    [HireDate] DATETIME,\n    [Address] NVARCHAR(70),\n    [City] NVARCHAR(40),\n    [State] NVARCHAR(40),\n    [Country] NVARCHAR(40),\n    [PostalCode] NVARCHAR(10),\n    [Phone] NVARCHAR(24),\n    [Fax] NVARCHAR(24),\n    [Email] NVARCHAR(60),\n    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),\n    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [InvoiceLine]\n(\n    [InvoiceLineId] INTEGER  NOT NULL,\n    [InvoiceId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    [Quantity] INTEGER  NOT NULL,\n    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),\n    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [Playlist]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])\n)\n\nCREATE TABLE [Artist]\n(\n    [ArtistId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])\n)\n\nCREATE TABLE [Track]\n(\n    [TrackId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(200)  NOT NULL,\n    [AlbumId] INTEGER,\n    [MediaTypeId] INTEGER  NOT NULL,\n    [GenreId] INTEGER,\n    [Composer] NVARCHAR(220),\n    [Milliseconds] INTEGER  NOT NULL,\n    [Bytes] INTEGER,\n    [UnitPrice] NUMERIC(10,2)  NOT NULL,\n    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),\n    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [PlaylistTrack]\n(\n    [PlaylistId] INTEGER  NOT NULL,\n    [TrackId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),\n    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION,\n    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\nCREATE TABLE [MediaType]\n(\n    [MediaTypeId] INTEGER  NOT NULL,\n    [Name] NVARCHAR(120),\n    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])\n)\n\nCREATE TABLE [Album]\n(\n    [AlbumId] INTEGER  NOT NULL,\n    [Title] NVARCHAR(160)  NOT NULL,\n    [ArtistId] INTEGER  NOT NULL,\n    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),\n    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) \n\t\tON DELETE NO ACTION ON UPDATE NO ACTION\n)\n\n\n===Additional Context \n\n\n    Chinook Music Store Database:\n    - Complete music store data model with Artists, Albums, Tracks, Customers, Invoices\n    - Artists create Albums which contain Tracks\n    - Customers purchase Tracks through Invoices and InvoiceLines\n    - Tracks belong to Genres and MediaTypes\n    - Employees have hierarchical relationships (ReportsTo)\n    - Playlists contain multiple Tracks\n    \n    Key Metrics:\n    - Revenue: Sum of Invoice.Total or InvoiceLine.UnitPrice * Quantity\n    - Popular items: Count of InvoiceLine occurrences\n    - Customer lifetime value: Sum of all invoices per customer\n    - Track duration: Milliseconds field (divide by 60000 for minutes)\n    \n    Important Relationships:\n    - Artist -> Album (one to many)\n    - Album -> Track (one to many)\n    - Track -> InvoiceLine (one to many)\n    - Customer -> Invoice (one to many)\n    - Invoice -> InvoiceLine (one to many)\n    - Track -> Genre (many to one)\n    - Track -> MediaType (many to one)\n    \n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n6. Ensure that the output SQL is SQLite-compliant and executable, and free of syntax errors. \n"}, {'role': 'user', 'content': 'Show top 10 customers by sales'}, {'role': 'assistant', 'content': "\n            SELECT c.FirstName || ' ' || c.LastName as Customer,\n                   SUM(i.Total) as TotalSpent\n            FROM Customer c\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY c.CustomerId\n            ORDER BY TotalSpent DESC\n            LIMIT 10\n        "}, {'role': 'user', 'content': 'Top 10 customers by revenue'}, {'role': 'assistant', 'content': "\n            SELECT c.FirstName || ' ' || c.LastName as Customer,\n                   SUM(i.Total) as TotalSpent\n            FROM Customer c\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY c.CustomerId\n            ORDER BY TotalSpent DESC\n            LIMIT 10\n        "}, {'role': 'user', 'content': 'Best selling tracks'}, {'role': 'assistant', 'content': '\n            SELECT t.Name, COUNT(il.TrackId) as Sales\n            FROM Track t\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY t.TrackId\n            ORDER BY Sales DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'Employee sales performance'}, {'role': 'assistant', 'content': "\n            SELECT e.FirstName || ' ' || e.LastName as Employee,\n                   COUNT(DISTINCT i.InvoiceId) as SalesCount,\n                   SUM(i.Total) as TotalSales\n            FROM Employee e\n            JOIN Customer c ON e.EmployeeId = c.SupportRepId\n            JOIN Invoice i ON c.CustomerId = i.CustomerId\n            GROUP BY e.EmployeeId\n            ORDER BY TotalSales DESC\n        "}, {'role': 'user', 'content': 'Customers by country'}, {'role': 'assistant', 'content': '\n            SELECT Country, COUNT(*) as CustomerCount\n            FROM Customer\n            GROUP BY Country\n            ORDER BY CustomerCount DESC\n        '}, {'role': 'user', 'content': 'Monthly sales trend'}, {'role': 'assistant', 'content': "\n            SELECT strftime('%Y-%m', InvoiceDate) as Month,\n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%Y-%m', InvoiceDate)\n            ORDER BY Month\n        "}, {'role': 'user', 'content': 'Sales by day of week'}, {'role': 'assistant', 'content': "\n            SELECT CASE cast(strftime('%w', InvoiceDate) as integer)\n                     WHEN 0 THEN 'Sunday'\n                     WHEN 1 THEN 'Monday'\n                     WHEN 2 THEN 'Tuesday'\n                     WHEN 3 THEN 'Wednesday'\n                     WHEN 4 THEN 'Thursday'\n                     WHEN 5 THEN 'Friday'\n                     ELSE 'Saturday'\n                   END as DayOfWeek,\n                   COUNT(*) as Orders,\n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%w', InvoiceDate)\n            ORDER BY strftime('%w', InvoiceDate)\n        "}, {'role': 'user', 'content': 'Top selling albums'}, {'role': 'assistant', 'content': '\n            SELECT al.Title, ar.Name as Artist, COUNT(il.TrackId) as TracksSold\n            FROM Album al\n            JOIN Artist ar ON al.ArtistId = ar.ArtistId\n            JOIN Track t ON al.AlbumId = t.AlbumId\n            JOIN InvoiceLine il ON t.TrackId = il.TrackId\n            GROUP BY al.AlbumId\n            ORDER BY TracksSold DESC\n            LIMIT 10\n        '}, {'role': 'user', 'content': 'Customer lifetime value'}, {'role': 'assistant', 'content': '\n            SELECT AVG(CustomerTotal) as AvgLifetimeValue\n            FROM (\n                SELECT CustomerId, SUM(Total) as CustomerTotal\n                FROM Invoice\n                GROUP BY CustomerId\n            )\n        '}, {'role': 'user', 'content': 'Show revenue by year'}, {'role': 'assistant', 'content': "\n            SELECT strftime('%Y', InvoiceDate) as Year, \n                   SUM(Total) as Revenue\n            FROM Invoice\n            GROUP BY strftime('%Y', InvoiceDate)\n            ORDER BY Year\n        "}, {'role': 'user', 'content': 'Show top 10 customers by sales'}]
+Using model gpt-5-chat-01 for 2321.5 tokens (approx)
+LLM Response: SELECT c.FirstName || ' ' || c.LastName as Customer,
+       SUM(i.Total) as TotalSpent
+FROM Customer c
+JOIN Invoice i ON c.CustomerId = i.CustomerId
+GROUP BY c.CustomerId
+ORDER BY TotalSpent DESC
+LIMIT 10
+📝 SQL: SELECT c.FirstName || ' ' || c.LastName as Customer,
+       SUM(i.Total) as TotalSpent
+FROM Customer...
+Error generating follow-up questions: string indices must be integers
+✅ Auto-trained on successful query
+INFO:     127.0.0.1:58152 - "POST /api/ask HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/routing.py", line 201, in serialize_response
+    return jsonable_encoder(response_content)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/encoders.py", line 223, in jsonable_encoder
+    obj_dict = _model_dump(
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/fastapi/_compat.py", line 181, in _model_dump
+    return model.model_dump(mode=mode, **kwargs)
+  File "/Users/diodelahoz/Library/Python/3.9/lib/python/site-packages/pydantic/main.py", line 426, in model_dump
+    return self.__pydantic_serializer__.to_python(
+pydantic_core._pydantic_core.PydanticSerializationError: Unable to serialize unknown type: <class 'numpy.ndarray'>

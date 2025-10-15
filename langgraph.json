@@ -1,0 +1,10 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "master_orchestrator": "./lib/orchestrator/api/master-graph.ts:graph",
+    "enhanced_orchestrator": "./lib/orchestrator/api/enhanced-graph.ts:graph",
+    "qualification_subgraph": "./lib/orchestrator/api/qualification-graph.ts:graph",
+    "ui_interaction": "./lib/orchestrator/api/ui-interaction-graph.ts:graph"
+  },
+  "env": ".env.local"
+}

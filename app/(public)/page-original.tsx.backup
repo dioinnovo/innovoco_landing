@@ -1,0 +1,2064 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { MotionWrapper, MotionText, MotionCard, MotionList, MotionListItem } from "@/components/ui/motion-wrapper";
+import { AnimatedSection, AnimatedDiv } from "@/components/ui/animated-section";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import ContactModal from "@/components/landing/ContactModal";
+import { Footer } from '@/components/layout/footer';
+import {
+  ArrowRight,
+  Sparkles,
+  Database,
+  Brain,
+  Zap,
+  Shield,
+  TrendingUp,
+  Users,
+  Building2,
+  Factory,
+  ShoppingCart,
+  HeartPulse,
+  DollarSign,
+  Cloud,
+  Code2,
+  Layers,
+  CheckCircle,
+  PlayCircle,
+  Download,
+  BookOpen,
+  MessageSquare,
+  Award,
+  Globe,
+  Cpu,
+  BarChart3,
+  Bot,
+  GitBranch,
+  Rocket,
+  Clock,
+  Target,
+  ChevronRight,
+  Lightbulb,
+} from "lucide-react";
+
+export default function LandingPage() {
+  const [activeIndustry, setActiveIndustry] = useState("financial");
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    // Clear any hash from URL on initial load to prevent jumping
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+      window.scrollTo(0, 0);
+    }
+
+    const handleScroll = () => {
+      const sections = ['hero', 'services', 'data-warehouse', 'advanced-analytics', 'ai-transformation', 'approach', 'solutions', 'industries', 'about', 'demo'];
+      const scrollPosition = window.scrollY + 100; // Offset for header
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Call once to set initial state
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Skip to content link for keyboard navigation */}
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+      
+      {/* Navigation Header */}
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50" role="banner">
+        <div className="container mx-auto px-6 py-4">
+          <nav className="flex items-center justify-between" role="navigation" aria-label="Main navigation">
+            <div className="flex items-center space-x-8">
+              <Link href="/" className="flex items-center group">
+                <Image 
+                  src="/images/logos/innovoco-logo.png"
+                  alt="Innovoco Logo"
+                  width={140}
+                  height={40}
+                  className="object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
+                  style={{ height: '40px', width: 'auto' }}
+                  priority
+                />
+              </Link>
+              
+              <div className="hidden md:flex items-center space-x-6">
+                <a 
+                  href="#data-warehouse" 
+                  className={`text-sm transition-colors relative ${activeSection === 'data-warehouse' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
+                >
+                  Data
+                  {activeSection === 'data-warehouse' && (
+                    <span className="absolute -bottom-[12px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6]" />
+                  )}
+                </a>
+                <a 
+                  href="#advanced-analytics" 
+                  className={`text-sm transition-colors relative ${activeSection === 'advanced-analytics' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
+                >
+                  Analytics
+                  {activeSection === 'advanced-analytics' && (
+                    <span className="absolute -bottom-[12px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6]" />
+                  )}
+                </a>
+                <a 
+                  href="#ai-transformation" 
+                  className={`text-sm transition-colors relative ${activeSection === 'ai-transformation' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
+                >
+                  AI
+                  {activeSection === 'ai-transformation' && (
+                    <span className="absolute -bottom-[12px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6]" />
+                  )}
+                </a>
+                <a 
+                  href="#solutions" 
+                  className={`text-sm transition-colors relative ${activeSection === 'solutions' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
+                >
+                  Use Cases
+                  {activeSection === 'solutions' && (
+                    <span className="absolute -bottom-[12px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6]" />
+                  )}
+                </a>
+                <a 
+                  href="#about" 
+                  className={`text-sm transition-colors relative ${activeSection === 'about' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
+                >
+                  Team
+                  {activeSection === 'about' && (
+                    <span className="absolute -bottom-[12px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6]" />
+                  )}
+                </a>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Link href="/dashboard" aria-label="Sign in to dashboard">
+                <Button variant="ghost" size="sm" className="hover:bg-[#0A58D0]/10 hover:text-[#0A58D0] active:bg-[#0A58D0]/20 transition-colors">
+                  Sign In
+                </Button>
+              </Link>
+              <Button 
+                onClick={() => setContactModalOpen(true)}
+                size="sm" 
+                className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white border-[#3C82F6]"
+                aria-label="Open contact form"
+              >
+                Book My Call
+              </Button>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main id="main-content" role="main">
+      
+      {/* Hero Section */}
+      <motion.section 
+        id="hero"
+        className="relative overflow-hidden py-16 md:py-20 px-4 md:px-6"
+        initial={{ opacity: 0.95 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#DBEAFE] via-[#EDE9FE] to-[#FECACA]" />
+        <div className="absolute inset-0 bg-white/70" />
+        
+        <div className="container mx-auto relative z-10">
+          <motion.div 
+            className="max-w-5xl mx-auto text-center"
+            initial={{ opacity: 0.9, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div 
+              className="inline-flex items-center gap-2 mb-4 px-5 py-2 text-xs font-semibold tracking-wider uppercase text-blue-600"
+              initial={{ opacity: 0.95 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2, delay: 0.05 }}
+            >
+              <Rocket className="h-3 w-3" />
+              10+ Years of Enterprise Data Excellence
+            </motion.div>
+            
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold mb-6 text-[#0B0F19]"
+              initial={{ opacity: 0.9, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.05 }}
+            >
+              Your Enterprise Data Warehouse.
+              <br />
+              <motion.span 
+                className="bg-gradient-to-r from-[#93C5FD] via-[#A78BFA] to-[#F87171] bg-clip-text text-transparent"
+                initial={{ opacity: 0.95, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+              >
+                Now AI-Powered
+              </motion.span>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-lg md:text-xl lg:text-2xl text-[#525252] mb-6 md:mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0.9, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            >
+            Decades of enterprise-grade data expertise turned into AI-driven analytics, automation, and intelligent decisioning. Trusted by global organizations, Innovoco delivers secure, scalable transformation that accelerates insight and delivers competitive advantage.
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+              initial={{ opacity: 0.9, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
+            >
+              <Button 
+                onClick={() => setContactModalOpen(true)}
+                size="lg" 
+                className="bg-[#0A58D0] hover:bg-[#084BB3] active:bg-[#063C8F] text-white border-[#0A58D0] transition-all duration-200 transform hover:scale-105 active:scale-95"
+                aria-label="Book my consultation with the team"
+              >
+                Book My Consultation
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+              </Button>
+              <Link href="/case-studies" aria-label="See my success stories">
+                <Button size="lg" variant="outline" className="border-[#0A58D0]/30 text-[#0B0F19] hover:bg-[#0A58D0]/10 hover:border-[#0A58D0] hover:text-[#0A58D0] active:bg-[#0A58D0]/20 transition-all duration-200">
+                  <PlayCircle className="mr-2 h-5 w-5" aria-hidden="true" />
+                  Show Me Success Stories
+                </Button>
+              </Link>
+            </motion.div>
+            
+            {/* Trust Indicators - Optimized for mobile */}
+            <motion.div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-6 md:pt-8 border-t border-border/50"
+              initial={{ opacity: 0.95 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+            >
+              <motion.div 
+                className="text-center"
+                initial={{ opacity: 0.9, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: 0.2 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">500+</div>
+                <div className="text-xs md:text-sm text-[#525252]">Solutions Delivered</div>
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                initial={{ opacity: 0.9, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: 0.25 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">10+</div>
+                <div className="text-xs md:text-sm text-[#525252]">Years Expertise</div>
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                initial={{ opacity: 0.9, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">300+</div>
+                <div className="text-xs md:text-sm text-[#525252]">Enterprise Clients</div>
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                initial={{ opacity: 0.9, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: 0.35 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">90D</div>
+                <div className="text-xs md:text-sm text-[#525252]">AI Deployment</div>
+              </motion.div>
+            </motion.div>
+            </motion.div>
+
+            {/* Partnership Section */}
+            <motion.div 
+              className="mt-16 pt-16 border-t border-border/50"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+            >
+              <motion.div 
+                className="text-center mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2, delay: 0.35 }}
+              >
+                <h2 className="text-2xl font-semibold mb-3 text-[#0B0F19]">
+                  Leading Industry Partnerships
+                </h2>
+                <p className="text-base text-[#525252]">
+                  Trusted by global enterprises to deliver cutting-edge data and AI solutions
+                </p>
+              </motion.div>
+              
+              {/* Logo Carousel */}
+              <motion.div 
+                className="relative overflow-hidden py-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="flex w-max partner-carousel"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2, delay: 0.45 }}
+                  onAnimationComplete={(definition) => {
+                    // Start scroll animation after fade in
+                    const element = document.querySelector('.partner-carousel');
+                    if (element) {
+                      element.classList.add('animate-scroll');
+                    }
+                  }}
+                >
+                  {/* First set of logos */}
+                  <div className="flex items-center gap-12 px-8">
+                    <Link 
+                      href="https://www.microsoft.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/microsoft-gold-partner.png"
+                        alt="Microsoft Gold Partner"
+                        width={200}
+                        height={55}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://cloud.google.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/google-cloud-premier-partner-1.webp"
+                        alt="Google Cloud Platform"
+                        width={320}
+                        height={104}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '96px' }}
+                        loading="lazy"
+                        quality={75}
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.qlik.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/qlik.png"
+                        alt="Qlik"
+                        width={200}
+                        height={59}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.databricks.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/databricks.png"
+                        alt="Databricks"
+                        width={250}
+                        height={56}
+                        className="object-contain h-14"
+                        loading="lazy"
+                        quality={75}
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.snowflake.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/snowflake.svg"
+                        alt="Snowflake"
+                        width={240}
+                        height={59}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '44px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 120px, 240px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.informatica.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/informatica.png"
+                        alt="Informatica"
+                        width={250}
+                        height={61}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '48px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 125px, 250px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.langchain.com/langgraph" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/langgraph.png"
+                        alt="LangGraph"
+                        width={200}
+                        height={55}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://n8n.io" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/n8n-logo.png"
+                        alt="n8n"
+                        width={120}
+                        height={120}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                  </div>
+                  {/* Duplicate set for seamless loop */}
+                  <div className="flex items-center gap-12 px-8">
+                    <Link 
+                      href="https://www.microsoft.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/microsoft-gold-partner.png"
+                        alt="Microsoft Gold Partner"
+                        width={200}
+                        height={55}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://cloud.google.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/google-cloud-premier-partner-1.webp"
+                        alt="Google Cloud Platform"
+                        width={320}
+                        height={104}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '96px' }}
+                        loading="lazy"
+                        quality={75}
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.qlik.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/qlik.png"
+                        alt="Qlik"
+                        width={200}
+                        height={59}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.databricks.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/databricks.png"
+                        alt="Databricks"
+                        width={250}
+                        height={56}
+                        className="object-contain h-14"
+                        loading="lazy"
+                        quality={75}
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.snowflake.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/snowflake.svg"
+                        alt="Snowflake"
+                        width={240}
+                        height={59}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '44px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 120px, 240px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.informatica.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/informatica.png"
+                        alt="Informatica"
+                        width={250}
+                        height={61}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '48px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 125px, 250px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://www.langchain.com/langgraph" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/langgraph.png"
+                        alt="LangGraph"
+                        width={200}
+                        height={55}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                    <Link 
+                      href="https://n8n.io" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <Image 
+                        src="/images/logos/n8n-logo.png"
+                        alt="n8n"
+                        width={120}
+                        height={120}
+                        className="object-contain"
+                        style={{ width: 'auto', height: '32px' }}
+                        loading="lazy"
+                        quality={75}
+                        sizes="(max-width: 768px) 100px, 200px"
+                      />
+                    </Link>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </div>
+      </motion.section>
+
+      {/* Services Section */}
+      <AnimatedSection id="services" className="py-14 px-6 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <div className="text-xs font-bold tracking-wider uppercase text-blue-600 mb-2">
+              What We Do
+            </div>
+            <h2 className="text-4xl font-bold mb-4 text-[#0B0F19]">
+              Enterprise Data Warehouse & AI Services
+            </h2>
+            <p className="text-lg text-[#525252] max-w-4xl mx-auto">
+              We combine decades of enterprise data warehouse expertise with modern AI to deliver secure, 
+              scalable, and intelligent transformation, built for executive outcomes: faster decisions, 
+              stronger compliance, and measurable ROI.
+            </p>
+          </div>
+
+          {/* Layered Services */}
+          <div className="flex flex-col gap-6 mt-7">
+            {/* Layer 1: Data Warehouse & Architecture */}
+            <div id="data-warehouse" className="grid md:grid-cols-2 gap-4 items-center bg-card/50 rounded-2xl shadow-sm overflow-hidden scroll-mt-20">
+              <div className="p-6">
+                <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-600 text-white font-bold mb-3">
+                  1
+                </div>
+                <h3 className="text-2xl font-bold mb-2 text-[#0B0F19]">Data Warehouse & Architecture</h3>
+                <p className="text-base text-[#525252] mb-4">Enterprise-grade foundation for your data intelligence</p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Comprehensive Infrastructure Design</p>
+                      <p className="text-sm text-[#525252]">Expert architecture for cloud, on-premises, and hybrid data warehouses</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Security & Governance Excellence</p>
+                      <p className="text-sm text-[#525252]">Industry-leading practices embedding protection at every layer</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Modernization & Migration Expertise</p>
+                      <p className="text-sm text-[#525252]">Tool-assisted methodologies refined through 500+ implementations</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-[#525252] font-medium">Building AI-ready data foundations with proven methodologies</p>
+                </div>
+              </div>
+              <div className="p-4 bg-gradient-to-br from-background to-muted/10">
+                <Image 
+                  src="/data-warehouse-illustration.png"
+                  alt="Data Warehouse & Architecture"
+                  width={800}
+                  height={800}
+                  quality={75}
+                  className="w-full h-auto rounded-2xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* Layer 2: Advanced Analytics & BI */}
+            <div id="advanced-analytics" className="grid md:grid-cols-2 gap-4 items-center bg-card/50 rounded-2xl shadow-sm overflow-hidden scroll-mt-20">
+              <div className="p-6 md:order-2">
+                <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-purple-600 text-white font-bold mb-3">
+                  2
+                </div>
+                <h3 className="text-2xl font-bold mb-2 text-[#0B0F19]">Advanced Analytics & BI</h3>
+                <p className="text-base text-[#525252] mb-4">Transforming data into strategic intelligence</p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-purple-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Analytics Implementation Excellence</p>
+                      <p className="text-sm text-[#525252]">End-to-end BI solutions optimized for your unique requirements</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-purple-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Executive Dashboard Development</p>
+                      <p className="text-sm text-[#525252]">Custom KPI tracking and strategic visualization solutions</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-purple-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Managed Analytics Services</p>
+                      <p className="text-sm text-[#525252]">Continuous optimization with enterprise-grade reliability and governance</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-[#525252] font-medium">Empowering data-driven decision making across your organization</p>
+                </div>
+              </div>
+              <div className="p-4 bg-gradient-to-br from-background to-muted/10 md:order-1">
+                <Image 
+                  src="/analytics-bi-illustration.png"
+                  alt="Advanced Analytics & BI"
+                  width={800}
+                  height={800}
+                  quality={75}
+                  className="w-full h-auto rounded-2xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* Layer 3: AI-Powered Transformation */}
+            <div id="ai-transformation" className="grid md:grid-cols-2 gap-4 items-center bg-card/50 rounded-2xl shadow-sm overflow-hidden scroll-mt-20">
+              <div className="p-6">
+                <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-orange-600 text-white font-bold mb-3">
+                  3
+                </div>
+                <h3 className="text-2xl font-bold mb-2 text-[#0B0F19]">AI-Powered Transformation</h3>
+                <p className="text-base text-[#525252] mb-4">Intelligent solutions layered on your data foundation</p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-orange-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">AI Process Automation</p>
+                      <p className="text-sm text-[#525252]">Intelligent workflows designed to optimize your operations</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-orange-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Conversational Analytics Platform</p>
+                      <p className="text-sm text-[#525252]">Natural language interfaces making data accessible to all users</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-orange-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Intelligent Pipeline Management</p>
+                      <p className="text-sm text-[#525252]">Self-monitoring systems with predictive maintenance capabilities</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-[#525252] font-medium">Future-ready AI architecture built on enterprise best practices</p>
+                </div>
+              </div>
+              <div className="p-4 bg-gradient-to-br from-background to-muted/10">
+                <Image 
+                  src="/ai-transformation-network.png"
+                  alt="AI-Powered Transformation"
+                  width={800}
+                  height={800}
+                  quality={75}
+                  className="w-full h-auto rounded-2xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* Layer 4: Cloud Optimization & Compliance */}
+            <div className="grid md:grid-cols-2 gap-4 items-center bg-card/50 rounded-2xl shadow-sm overflow-hidden">
+              <div className="p-6 md:order-2">
+                <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-teal-600 text-white font-bold mb-3">
+                  4
+                </div>
+                <h3 className="text-2xl font-bold mb-2 text-[#0B0F19]">Cloud Optimization & Compliance</h3>
+                <p className="text-base text-[#525252] mb-4">Excellence in cloud economics and security</p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-teal-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Cloud FinOps Practice</p>
+                      <p className="text-sm text-[#525252]">Continuous monitoring and optimization of cloud resources</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-teal-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Compliance Automation Framework</p>
+                      <p className="text-sm text-[#525252]">Automated governance aligned with SOC2, GDPR, and HIPAA standards</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-teal-600 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-medium">Security Architecture Services</p>
+                      <p className="text-sm text-[#525252]">Comprehensive protection strategies with continuous threat assessment</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-[#525252] font-medium">Enterprise-grade security and compliance through proven expertise</p>
+                </div>
+              </div>
+              <div className="p-4 bg-gradient-to-br from-background to-muted/10 md:order-1">
+                <Image 
+                  src="/cloud-optimization-illustration.png"
+                  alt="Cloud Optimization & Compliance"
+                  width={800}
+                  height={800}
+                  quality={75}
+                  className="w-full h-auto rounded-2xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Platforms */}
+          <div className="mt-8 rounded-2xl p-4 flex flex-wrap gap-2 items-center bg-muted/20">
+            <span className="font-bold text-base mr-2">Platforms:</span>
+            {[
+              "Azure AI Foundry",
+              "Microsoft SQL / Azure SQL",
+              "Google Vertex AI",
+              "BigQuery",
+              "LangGraph Platform",
+              "n8n (Self-host)",
+              "Power Automate",
+              "Qlik",
+              "Snowflake",
+              "Informatica",
+              "Databricks"
+            ].map((platform) => (
+              <span key={platform} className="inline-flex items-center gap-2 bg-background rounded-full px-3 py-2 text-sm">
+                {platform}
+              </span>
+            ))}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button 
+              onClick={() => setContactModalOpen(true)}
+              className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white border-[#3C82F6]"
+            >
+              Discuss My Roadmap
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Link href="/case-studies">
+              <Button variant="outline" className="border-[#0A58D0]/30 text-[#0B0F19] hover:bg-[#0A58D0]/10 hover:border-[#0A58D0] hover:text-[#0A58D0] active:bg-[#0A58D0]/20 transition-all duration-200">
+                See Case Studies
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Platform Overview Section */}
+      <AnimatedSection id="approach" className="py-20 px-6 bg-slate-50" delay={0.1}>
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <div className="text-xs font-bold tracking-wider uppercase text-indigo-600 mb-2">
+              Our Approach
+            </div>
+            <h2 className="text-4xl font-bold mb-4 text-[#0B0F19]">
+              How We Transform Your Data Infrastructure
+            </h2>
+            <p className="text-xl text-[#525252] max-w-3xl mx-auto">
+              Leveraging a decade of data warehouse expertise, we build custom AI solutions that put 
+              your organization at the forefront of data innovation and analytics
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Data Intelligence */}
+            <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                  <Database className="h-6 w-6 text-[#0A58D0]" />
+                </div>
+                <CardTitle className="text-lg">Data Warehouse Modernization</CardTitle>
+                <CardDescription className="text-sm">
+                  We've built 500+ data warehouses. Now we make them AI-intelligent.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Natural language SQL generation</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Seamless enterprise integration</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Automated data quality management</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Real-time anomaly detection</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* AI Agents */}
+            <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EDE9FE] to-[#A78BFA] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                  <Bot className="h-6 w-6 text-[#8B5CF6]" />
+                </div>
+                <CardTitle className="text-lg">AI Agents</CardTitle>
+                <CardDescription className="text-sm">
+                  Deploy intelligent agents that work 24/7 to optimize your operations
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Multi-agent orchestration</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Self-healing pipelines</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Conversational analytics</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Predictive maintenance</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Workflow Automation */}
+            <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FECACA] to-[#F87171] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                  <GitBranch className="h-6 w-6 text-[#DC2626]" />
+                </div>
+                <CardTitle className="text-lg">Workflow Automation</CardTitle>
+                <CardDescription className="text-sm">
+                  Automate complex business processes with visual workflow builders
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">400+ pre-built integrations</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">No-code workflow designer</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Event-driven architecture</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#D1FAE5] flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-[#0F766E]" />
+                    </div>
+                    <span className="text-sm text-[#525252]">Enterprise governance</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Solutions by Use Case */}
+      <AnimatedSection id="solutions" className="py-20 px-6 bg-slate-50" delay={0.2}>
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <div className="text-xs font-bold tracking-wider uppercase text-purple-600 mb-2">
+              Solutions
+            </div>
+            <h2 className="text-4xl font-bold mb-4 text-[#0B0F19]">
+              Custom AI Solutions Built on Proven Experience
+            </h2>
+            <p className="text-xl text-[#525252] max-w-3xl mx-auto">
+              Every solution is customized to your specific needs, backed by our decade of 
+              enterprise data expertise
+            </p>
+          </div>
+
+          <Tabs defaultValue="data" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mb-8 rounded-full border border-gray-200 p-1.5 bg-gray-100/50 backdrop-blur-sm shadow-sm h-14">
+              <TabsTrigger value="data" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-[#0A58D0] data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-gray-100 transition-all duration-300 data-[state=inactive]:text-[#525252] data-[state=inactive]:hover:text-[#0A58D0] flex items-center justify-center h-full px-4 font-medium text-sm">Data & Analytics</TabsTrigger>
+              <TabsTrigger value="operations" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-[#0A58D0] data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-gray-100 transition-all duration-300 data-[state=inactive]:text-[#525252] data-[state=inactive]:hover:text-[#0A58D0] flex items-center justify-center h-full px-4 font-medium text-sm">Operations</TabsTrigger>
+              <TabsTrigger value="customer" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-[#0A58D0] data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-gray-100 transition-all duration-300 data-[state=inactive]:text-[#525252] data-[state=inactive]:hover:text-[#0A58D0] flex items-center justify-center h-full px-4 font-medium text-sm">Customer Experience</TabsTrigger>
+              <TabsTrigger value="innovation" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-[#0A58D0] data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-gray-100 transition-all duration-300 data-[state=inactive]:text-[#525252] data-[state=inactive]:hover:text-[#0A58D0] flex items-center justify-center h-full px-4 font-medium text-sm">Innovation</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="data" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <MessageSquare className="h-6 w-6 text-[#0A58D0]" />
+                    </div>
+                    <CardTitle className="text-lg">Conversational Analytics</CardTitle>
+                    <CardDescription className="text-sm">
+                      Ask questions in plain English, get insights in seconds
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="p-3 rounded-lg bg-muted/50 border border-border/50">
+                        <p className="text-sm font-medium mb-1">Example Query:</p>
+                        <p className="text-sm text-muted-foreground italic">
+                          "Show me revenue trends by product category for Q4 and predict next quarter"
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="text-center p-2 rounded-lg bg-[#DBEAFE]/30">
+                          <div className="text-lg font-bold text-[#0A58D0]">300%</div>
+                          <div className="text-xs text-[#525252]">adoption</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#DBEAFE]/30">
+                          <div className="text-lg font-bold text-[#0A58D0]">75%</div>
+                          <div className="text-xs text-[#525252]">less tickets</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#DBEAFE]/30">
+                          <div className="text-lg font-bold text-[#0A58D0]">10x</div>
+                          <div className="text-xs text-[#525252]">faster</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D1FAE5] to-[#10B981] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <Shield className="h-6 w-6 text-[#0F766E]" />
+                    </div>
+                    <CardTitle className="text-lg">Data Quality Guardian</CardTitle>
+                    <CardDescription className="text-sm">
+                      AI-powered data governance and quality management
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="p-3 rounded-lg bg-muted/50 border border-border/50">
+                        <p className="text-sm font-medium mb-1">Key Features:</p>
+                        <p className="text-sm text-[#525252]">
+                          Automatic anomaly detection • Schema evolution • GDPR compliance
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="text-center p-2 rounded-lg bg-[#D1FAE5]/30">
+                          <div className="text-lg font-bold text-[#0F766E]">95%</div>
+                          <div className="text-xs text-[#525252]">quality</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#D1FAE5]/30">
+                          <div className="text-lg font-bold text-[#0F766E]">60%</div>
+                          <div className="text-xs text-[#525252]">faster</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#D1FAE5]/30">
+                          <div className="text-lg font-bold text-[#0F766E]">Zero</div>
+                          <div className="text-xs text-[#525252]">violations</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="operations" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EDE9FE] to-[#A78BFA] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <Cpu className="h-6 w-6 text-[#8B5CF6]" />
+                    </div>
+                    <CardTitle className="text-lg">Pipeline Support Agent</CardTitle>
+                    <CardDescription className="text-sm">
+                      24/7 autonomous monitoring and healing of data pipelines
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="p-3 rounded-lg bg-muted/50 border border-border/50">
+                        <p className="text-sm font-medium mb-1">Incident Response:</p>
+                        <p className="text-sm text-[#525252]">
+                          Detect → Diagnose → Fix → Deploy → Verify
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="text-center p-2 rounded-lg bg-[#EDE9FE]/30">
+                          <div className="text-lg font-bold text-[#8B5CF6]">90%</div>
+                          <div className="text-xs text-[#525252]">fewer fails</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#EDE9FE]/30">
+                          <div className="text-lg font-bold text-[#8B5CF6]">15m</div>
+                          <div className="text-xs text-[#525252]">resolution</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#EDE9FE]/30">
+                          <div className="text-lg font-bold text-[#8B5CF6]">80%</div>
+                          <div className="text-xs text-[#525252]">prevented</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FCD34D] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <Zap className="h-6 w-6 text-[#D97706]" />
+                    </div>
+                    <CardTitle className="text-lg">DataOps Accelerator</CardTitle>
+                    <CardDescription className="text-sm">
+                      AI-driven CI/CD for your data infrastructure
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="p-3 rounded-lg bg-muted/50 border border-border/50">
+                        <p className="text-sm font-medium mb-1">Automation Stack:</p>
+                        <p className="text-sm text-[#525252]">
+                          IaC • Auto-scaling • Performance tuning • Cost optimization
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="text-center p-2 rounded-lg bg-[#FEF3C7]/30">
+                          <div className="text-lg font-bold text-[#D97706]">40%</div>
+                          <div className="text-xs text-[#525252]">savings</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#FEF3C7]/30">
+                          <div className="text-lg font-bold text-[#D97706]">5x</div>
+                          <div className="text-xs text-[#525252]">faster</div>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-[#FEF3C7]/30">
+                          <div className="text-lg font-bold text-[#D97706]">Zero</div>
+                          <div className="text-xs text-[#525252]">downtime</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="customer" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <Users className="h-6 w-6 text-[#0A58D0]" />
+                    </div>
+                    <CardTitle className="text-lg">AI Voice Assistant</CardTitle>
+                    <CardDescription className="text-sm">
+                      Human-like agents for 24/7 customer support
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="text-center p-2 rounded-lg bg-[#DBEAFE]/30">
+                        <div className="text-lg font-bold text-[#0A58D0]">70%</div>
+                        <div className="text-xs text-[#525252]">savings</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#DBEAFE]/30">
+                        <div className="text-lg font-bold text-[#0A58D0]">40+</div>
+                        <div className="text-xs text-[#525252]">languages</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#DBEAFE]/30">
+                        <div className="text-lg font-bold text-[#0A58D0]">3s</div>
+                        <div className="text-xs text-[#525252]">response</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F87171] to-[#FECACA] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <Target className="h-6 w-6 text-[#DC2626]" />
+                    </div>
+                    <CardTitle className="text-lg">Intelligent Onboarding</CardTitle>
+                    <CardDescription className="text-sm">
+                      Automate 90% of employee onboarding tasks
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="text-center p-2 rounded-lg bg-[#FECACA]/30">
+                        <div className="text-lg font-bold text-[#DC2626]">1d</div>
+                        <div className="text-xs text-[#525252]">setup</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#FECACA]/30">
+                        <div className="text-lg font-bold text-[#DC2626]">90%</div>
+                        <div className="text-xs text-[#525252]">automated</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#FECACA]/30">
+                        <div className="text-lg font-bold text-[#DC2626]">100%</div>
+                        <div className="text-xs text-[#525252]">compliant</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="innovation" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#A78BFA] to-[#EDE9FE] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <Rocket className="h-6 w-6 text-[#8B5CF6]" />
+                    </div>
+                    <CardTitle className="text-lg">Agile Development On-Demand</CardTitle>
+                    <CardDescription className="text-sm">
+                      From idea to MVP in hours using AI agents
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="text-center p-2 rounded-lg bg-[#EDE9FE]/30">
+                        <div className="text-lg font-bold text-[#8B5CF6]">10x</div>
+                        <div className="text-xs text-[#525252]">faster</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#EDE9FE]/30">
+                        <div className="text-lg font-bold text-[#8B5CF6]">Auto</div>
+                        <div className="text-xs text-[#525252]">docs</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#EDE9FE]/30">
+                        <div className="text-lg font-bold text-[#8B5CF6]">Prod</div>
+                        <div className="text-xs text-[#525252]">ready</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="group bg-white border-border/30 hover:border-border/50 shadow-sm hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)] transition-all duration-300 rounded-[22px] overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FDDDE6] to-[#F9A8D4] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-300">
+                      <Brain className="h-6 w-6 text-[#EC4899]" />
+                    </div>
+                    <CardTitle className="text-lg">Research Assistant</CardTitle>
+                    <CardDescription className="text-sm">
+                      AI-powered market research and competitive analysis
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="text-center p-2 rounded-lg bg-[#FDDDE6]/30">
+                        <div className="text-lg font-bold text-[#EC4899]">24/7</div>
+                        <div className="text-xs text-[#525252]">insights</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#FDDDE6]/30">
+                        <div className="text-lg font-bold text-[#EC4899]">Auto</div>
+                        <div className="text-xs text-[#525252]">reports</div>
+                      </div>
+                      <div className="text-center p-2 rounded-lg bg-[#FDDDE6]/30">
+                        <div className="text-lg font-bold text-[#EC4899]">AI</div>
+                        <div className="text-xs text-[#525252]">trends</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </AnimatedSection>
+
+      {/* Industries Section */}
+      <AnimatedSection id="industries" className="py-20 px-6 bg-white" delay={0.1}>
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <div className="text-xs font-bold tracking-wider uppercase text-teal-600 mb-2">
+              Proven Results
+            </div>
+            <h2 className="text-4xl font-bold mb-4 text-[#0B0F19]">
+              Trusted Across Industries
+            </h2>
+            <p className="text-xl text-[#525252] max-w-3xl mx-auto">
+              Industry-specific AI solutions that understand your unique challenges
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Industry Selector */}
+            <div className="space-y-4">
+              <div 
+                className={`group p-5 rounded-2xl border cursor-pointer transition-all duration-300 ${
+                  activeIndustry === 'financial' 
+                    ? 'bg-[#DBEAFE]/10 border-[#93C5FD]/40 shadow-sm' 
+                    : 'bg-white border-border/20 hover:border-border/40 hover:shadow-sm'
+                }`}
+                onClick={() => setActiveIndustry('financial')}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 ${
+                    activeIndustry === 'financial'
+                      ? 'bg-gradient-to-br from-[#93C5FD] to-[#0A58D0] scale-105'
+                      : 'bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD] group-hover:scale-105'
+                  }`}>
+                    <DollarSign className={`h-5 w-5 ${
+                      activeIndustry === 'financial' ? 'text-white' : 'text-[#0A58D0]'
+                    }`} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[#0B0F19]">Financial Services</h3>
+                    <p className="text-sm text-[#525252]">Risk analysis, fraud detection, compliance automation</p>
+                  </div>
+                </div>
+              </div>
+
+              <div 
+                className={`group p-5 rounded-2xl border cursor-pointer transition-all duration-300 ${
+                  activeIndustry === 'healthcare' 
+                    ? 'bg-[#D1FAE5]/10 border-[#10B981]/40 shadow-sm' 
+                    : 'bg-white border-border/20 hover:border-border/40 hover:shadow-sm'
+                }`}
+                onClick={() => setActiveIndustry('healthcare')}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 ${
+                    activeIndustry === 'healthcare'
+                      ? 'bg-gradient-to-br from-[#10B981] to-[#0F766E] scale-105'
+                      : 'bg-gradient-to-br from-[#D1FAE5] to-[#10B981] group-hover:scale-105'
+                  }`}>
+                    <HeartPulse className={`h-5 w-5 ${
+                      activeIndustry === 'healthcare' ? 'text-white' : 'text-[#0F766E]'
+                    }`} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[#0B0F19]">Healthcare</h3>
+                    <p className="text-sm text-[#525252]">Patient analytics, clinical insights, operational efficiency</p>
+                  </div>
+                </div>
+              </div>
+
+              <div 
+                className={`group p-5 rounded-2xl border cursor-pointer transition-all duration-300 ${
+                  activeIndustry === 'retail' 
+                    ? 'bg-[#FECACA]/10 border-[#F87171]/40 shadow-sm' 
+                    : 'bg-white border-border/20 hover:border-border/40 hover:shadow-sm'
+                }`}
+                onClick={() => setActiveIndustry('retail')}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 ${
+                    activeIndustry === 'retail'
+                      ? 'bg-gradient-to-br from-[#F87171] to-[#DC2626] scale-105'
+                      : 'bg-gradient-to-br from-[#FECACA] to-[#F87171] group-hover:scale-105'
+                  }`}>
+                    <ShoppingCart className={`h-5 w-5 ${
+                      activeIndustry === 'retail' ? 'text-white' : 'text-[#DC2626]'
+                    }`} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[#0B0F19]">Retail & E-commerce</h3>
+                    <p className="text-sm text-[#525252]">Inventory optimization, personalization, demand forecasting</p>
+                  </div>
+                </div>
+              </div>
+
+              <div 
+                className={`group p-5 rounded-2xl border cursor-pointer transition-all duration-300 ${
+                  activeIndustry === 'manufacturing' 
+                    ? 'bg-[#EDE9FE]/10 border-[#A78BFA]/40 shadow-sm' 
+                    : 'bg-white border-border/20 hover:border-border/40 hover:shadow-sm'
+                }`}
+                onClick={() => setActiveIndustry('manufacturing')}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 ${
+                    activeIndustry === 'manufacturing'
+                      ? 'bg-gradient-to-br from-[#A78BFA] to-[#8B5CF6] scale-105'
+                      : 'bg-gradient-to-br from-[#EDE9FE] to-[#A78BFA] group-hover:scale-105'
+                  }`}>
+                    <Factory className={`h-5 w-5 ${
+                      activeIndustry === 'manufacturing' ? 'text-white' : 'text-[#8B5CF6]'
+                    }`} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[#0B0F19]">Manufacturing</h3>
+                    <p className="text-sm text-[#525252]">Predictive maintenance, quality control, supply chain</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Industry Details */}
+            <Card className="bg-white border-border/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.15)] transition-all duration-300 rounded-[22px] overflow-hidden">
+              <CardHeader>
+                <CardTitle>
+                  {activeIndustry === 'financial' && 'Financial Services Solutions'}
+                  {activeIndustry === 'healthcare' && 'Healthcare Solutions'}
+                  {activeIndustry === 'retail' && 'Retail & E-commerce Solutions'}
+                  {activeIndustry === 'manufacturing' && 'Manufacturing Solutions'}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {activeIndustry === 'financial' && (
+                  <div className="space-y-4">
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Real-time Risk Analysis</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        AI-powered risk assessment that analyzes millions of transactions in real-time
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          99.9% accuracy</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          &lt;100ms latency</span>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Automated Compliance</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Ensure regulatory compliance with AI that understands changing regulations
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          SOX compliant</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          BASEL III ready</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {activeIndustry === 'healthcare' && (
+                  <div className="space-y-4">
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Clinical Decision Support</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        AI assistants that provide evidence-based insights at point of care
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          HIPAA compliant</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          FDA validated</span>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Patient Flow Optimization</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Reduce wait times and improve patient satisfaction with AI scheduling
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          30% shorter waits</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          25% more capacity</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {activeIndustry === 'retail' && (
+                  <div className="space-y-4">
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Dynamic Pricing Engine</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Optimize pricing in real-time based on demand, competition, and inventory
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          15% margin increase</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          Real-time updates</span>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Inventory Intelligence</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Predict demand patterns and optimize stock levels across all channels
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          40% less overstock</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          95% availability</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {activeIndustry === 'manufacturing' && (
+                  <div className="space-y-4">
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Predictive Maintenance</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Prevent equipment failures before they happen with AI anomaly detection
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          70% less downtime</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          30% cost savings</span>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-[#DBEAFE]/20 rounded-2xl border border-[#93C5FD]/20">
+                      <h4 className="font-semibold mb-2">Quality Assurance AI</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Computer vision and ML for real-time quality control on production lines
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          99.7% accuracy</span>
+                        <span className="flex items-center gap-1.5">
+                          <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center">
+                            <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                          </div>
+                          50% fewer defects</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+          
+          {/* Client Logos - Creating FOMO before CTA */}
+          <div className="mt-16 pt-16 border-t border-border/50">
+            <div className="text-center mb-8">
+              <p className="text-[#525252]">
+                Join 300+ enterprises driving real business impact with data and AI
+              </p>
+            </div>
+            <div className="relative overflow-hidden py-4">
+              <div className="flex animate-scroll-fast" style={{ width: 'fit-content' }}>
+                {/* First set of logos */}
+                <div className="flex items-center gap-8 px-8 flex-shrink-0">
+                  <Link href="https://www.ars.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/ars_logo.png"
+                      alt="ARS Rescue Rooter"
+                      width={132}
+                      height={44}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.nortekair.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/nortek-air-solutions-logo.png"
+                      alt="Nortek Air Solutions"
+                      width={126}
+                      height={42}
+                      className="object-contain scale-105"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.enercare.ca/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/enercare-logo.png"
+                      alt="Enercare"
+                      width={132}
+                      height={44}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://flynncompanies.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center">
+                    <Image 
+                      src="/images/logos/flynn-companies-logo.png"
+                      alt="Flynn Companies"
+                      width={120}
+                      height={40}
+                      className="object-contain"
+                      style={{ width: 'auto', maxHeight: '48px' }}
+                    />
+                  </Link>
+                  <Link href="https://www.indigo.ca/en-ca/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/indigo-logo.png"
+                      alt="Indigo"
+                      width={176}
+                      height={66}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.apotex.com/ca/en/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center">
+                    <Image 
+                      src="/images/logos/apotex-logo.png"
+                      alt="Apotex"
+                      width={120}
+                      height={40}
+                      className="object-contain"
+                      style={{ width: 'auto', maxHeight: '48px' }}
+                    />
+                  </Link>
+                  <Link href="https://graftonapparel.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 relative w-60 h-20 flex items-center justify-center overflow-hidden">
+                    <Image 
+                      src="/images/logos/grafton-apparel-logo.png"
+                      alt="Grafton Apparel"
+                      fill={true}
+                      sizes="240px"
+                      className="object-contain scale-[1.3]"
+                    />
+                  </Link>
+                  <Link href="https://www.spinriteyarns.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-52 h-24 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/spinrite-logo.png"
+                      alt="Spinrite Yarns"
+                      width={252}
+                      height={101}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.stellaradjusting.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-48 h-20 flex items-center justify-center">
+                    <Image 
+                      src="/images/logos/stellar_logo.png"
+                      alt="Stellar Public Adjusting Services"
+                      width={180}
+                      height={60}
+                      className="object-contain"
+                      style={{ width: 'auto', maxHeight: '56px' }}
+                    />
+                  </Link>
+                </div>
+                {/* Duplicate set for seamless loop */}
+                <div className="flex items-center gap-8 px-8 flex-shrink-0">
+                  <Link href="https://www.ars.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/ars_logo.png"
+                      alt="ARS Rescue Rooter"
+                      width={132}
+                      height={44}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.nortekair.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/nortek-air-solutions-logo.png"
+                      alt="Nortek Air Solutions"
+                      width={126}
+                      height={42}
+                      className="object-contain scale-105"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.enercare.ca/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/enercare-logo.png"
+                      alt="Enercare"
+                      width={132}
+                      height={44}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://flynncompanies.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center">
+                    <Image 
+                      src="/images/logos/flynn-companies-logo.png"
+                      alt="Flynn Companies"
+                      width={120}
+                      height={40}
+                      className="object-contain"
+                      style={{ width: 'auto', maxHeight: '48px' }}
+                    />
+                  </Link>
+                  <Link href="https://www.indigo.ca/en-ca/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/indigo-logo.png"
+                      alt="Indigo"
+                      width={176}
+                      height={66}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.apotex.com/ca/en/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-40 h-20 flex items-center justify-center">
+                    <Image 
+                      src="/images/logos/apotex-logo.png"
+                      alt="Apotex"
+                      width={120}
+                      height={40}
+                      className="object-contain"
+                      style={{ width: 'auto', maxHeight: '48px' }}
+                    />
+                  </Link>
+                  <Link href="https://graftonapparel.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 relative w-60 h-20 flex items-center justify-center overflow-hidden">
+                    <Image 
+                      src="/images/logos/grafton-apparel-logo.png"
+                      alt="Grafton Apparel"
+                      fill={true}
+                      sizes="240px"
+                      className="object-contain scale-[1.3]"
+                    />
+                  </Link>
+                  <Link href="https://www.spinriteyarns.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-52 h-24 flex items-center justify-center relative overflow-hidden">
+                    <Image 
+                      src="/images/logos/spinrite-logo.png"
+                      alt="Spinrite Yarns"
+                      width={252}
+                      height={101}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </Link>
+                  <Link href="https://www.stellaradjusting.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 opacity-60 transition-opacity flex-shrink-0 w-48 h-20 flex items-center justify-center">
+                    <Image 
+                      src="/images/logos/stellar_logo.png"
+                      alt="Stellar Public Adjusting Services"
+                      width={180}
+                      height={60}
+                      className="object-contain"
+                      style={{ width: 'auto', maxHeight: '56px' }}
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Team & About Section */}
+      <AnimatedSection id="about" className="py-20 px-6 bg-gradient-to-br from-slate-50 to-blue-50" delay={0.1}>
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <div className="text-xs font-bold tracking-wider uppercase text-indigo-600 mb-2">
+              Our Team
+            </div>
+            <h2 className="text-4xl font-bold mb-4 text-[#0B0F19]">
+              Pioneering Data Excellence Since 2011
+            </h2>
+            <p className="text-xl text-[#525252] max-w-3xl mx-auto">
+              Led by industry veterans with deep expertise in data, analytics, and AI transformation
+            </p>
+          </div>
+
+          {/* Team Members */}
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
+            <div className="text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                <Users className="h-16 w-16 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-bold text-[#0B0F19]">Paul Broughan</h3>
+              <p className="text-sm text-blue-600 font-semibold mb-2">CEO</p>
+              <p className="text-sm text-[#525252]">13+ years building data-driven enterprises, champion of customer-first innovation</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+                <Code2 className="h-16 w-16 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-bold text-[#0B0F19]">Chris Hill</h3>
+              <p className="text-sm text-purple-600 font-semibold mb-2">CTO</p>
+              <p className="text-sm text-[#525252]">Architect of 500+ enterprise implementations, expert in cloud-native data platforms</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
+                <Bot className="h-16 w-16 text-green-600" />
+              </div>
+              <h3 className="text-lg font-bold text-[#0B0F19]">Diostenes De La Hoz</h3>
+              <p className="text-sm text-green-600 font-semibold mb-2">Head of AI & Automation</p>
+              <p className="text-sm text-[#525252]">Leading AI transformation strategies, bridging enterprise data with intelligent automation</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                <BarChart3 className="h-16 w-16 text-orange-600" />
+              </div>
+              <h3 className="text-lg font-bold text-[#0B0F19]">James Ball</h3>
+              <p className="text-sm text-orange-600 font-semibold mb-2">Head of Analytics</p>
+              <p className="text-sm text-[#525252]">Transforming raw data into actionable insights, specialist in BI and predictive analytics</p>
+            </div>
+          </div>
+
+          {/* Core Values */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-center mb-8 text-[#0B0F19]">Our Values Drive Everything We Do</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="group bg-white border-border/20 shadow-sm hover:shadow-md hover:border-border/30 transition-all duration-300 rounded-[22px]">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-base">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]/50 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <Users className="h-4 w-4 text-[#0A58D0]" />
+                    </div>
+                    Customer First
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-[#525252] leading-relaxed">
+                    Every decision starts with one question: "How does this benefit our client?" This philosophy has guided 
+                    us through 500+ successful implementations.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="group bg-white border-border/20 shadow-sm hover:shadow-md hover:border-border/30 transition-all duration-300 rounded-[22px]">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-base">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#EDE9FE] to-[#A78BFA]/50 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <Sparkles className="h-4 w-4 text-[#8B5CF6]" />
+                    </div>
+                    Innovation with Purpose
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-[#525252] leading-relaxed">
+                    We adopt new technologies not because they're trendy, but because they solve real business problems. 
+                    Our AI solutions are built on proven data foundations.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="group bg-white border-border/20 shadow-sm hover:shadow-md hover:border-border/30 transition-all duration-300 rounded-[22px]">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-base">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#D1FAE5] to-[#10B981]/50 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <Shield className="h-4 w-4 text-[#0F766E]" />
+                    </div>
+                    Integrity & Trust
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-[#525252] leading-relaxed">
+                    Bootstrapped growth means we've earned every client through merit. We deliver on promises, 
+                    own our mistakes, and always put ethics first.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Key Stats */}
+          <div className="border-t border-border/30 pt-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] bg-clip-text text-transparent mb-1">13+</div>
+                <div className="text-sm text-[#525252]">Years of Excellence</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-[#0F766E] to-[#10B981] bg-clip-text text-transparent mb-1">300+</div>
+                <div className="text-sm text-[#525252]">Enterprise Clients</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] bg-clip-text text-transparent mb-1">500+</div>
+                <div className="text-sm text-[#525252]">Projects Delivered</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-[#DC2626] to-[#EF4444] bg-clip-text text-transparent mb-1">95%</div>
+                <div className="text-sm text-[#525252]">Client Retention</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Final CTA Section */}
+      <section id="demo" className="py-20 px-6 bg-gradient-to-br from-[#DBEAFE] via-[#FECACA]/50 to-[#93C5FD]">
+        <AnimatedDiv className="container mx-auto text-center" delay={0.2}>
+          <Badge className="mb-6 px-4 py-1" variant="outline">
+            <Clock className="h-3 w-3 mr-1" />
+            Limited Spots - Book Mine Today
+          </Badge>
+          
+          <h2 className="text-5xl font-bold mb-6 text-[#0B0F19]">
+            Ready to Lead Your Industry's AI Transformation?
+          </h2>
+          
+          <p className="text-xl text-[#525252] mb-12 max-w-3xl mx-auto">
+            Let's discuss how we can transform your data infrastructure into a competitive advantage.
+          </p>
+
+          {/* Value Propositions - Compact Display */}
+          <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3 sm:gap-4 max-w-sm sm:max-w-3xl mx-auto mb-8 px-4 sm:px-0">
+            <div className="flex items-center justify-center sm:justify-start gap-3 bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] sm:max-w-none mx-auto w-full">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex-shrink-0 overflow-hidden">
+                <Image 
+                  src="/fluent-chat-icon.png" 
+                  alt="Chat consultation" 
+                  width={48} 
+                  height={48}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="text-center sm:text-left">
+                <h4 className="font-bold text-[#0B0F19] text-sm">Free Consultation</h4>
+                <p className="text-xs text-[#525252] mt-0.5">
+                  No-obligation discussion
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center sm:justify-start gap-3 bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] sm:max-w-none mx-auto w-full">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex-shrink-0 overflow-hidden">
+                <Image 
+                  src="/fluent-rocket-icon.png" 
+                  alt="30-Day POC" 
+                  width={48} 
+                  height={48}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="text-center sm:text-left">
+                <h4 className="font-bold text-[#0B0F19] text-sm">30-Day POC</h4>
+                <p className="text-xs text-[#525252] mt-0.5">
+                  See real results quickly
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center sm:justify-start gap-3 bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] sm:max-w-none mx-auto w-full">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex-shrink-0 overflow-hidden">
+                <Image 
+                  src="/zero-risk-shield.png"
+                  alt="Zero Risk Shield"
+                  width={48}
+                  height={48}
+                  className="object-contain"
+                />
+              </div>
+              <div className="text-center sm:text-left">
+                <h4 className="font-bold text-[#0B0F19] text-sm">Zero Risk</h4>
+                <p className="text-xs text-[#525252] mt-0.5">
+                  No commitment required
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* CTA Button - Centered */}
+          <div className="flex justify-center">
+            <Button 
+              onClick={() => setContactModalOpen(true)}
+              size="lg" 
+              className="bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] hover:from-[#0A58D0]/90 hover:to-[#3B82F6]/90 text-white shadow-[0_8px_30px_rgba(10,88,208,0.5)] hover:shadow-[0_12px_40px_rgba(10,88,208,0.7)] transition-all duration-300 px-14 py-8 text-xl font-bold rounded-full transform hover:scale-110 min-h-[80px]"
+            >
+              Book My Consultation
+              <ArrowRight className="ml-3 h-6 w-6" />
+            </Button>
+          </div>
+        </AnimatedDiv>
+      </section>
+
+      {/* Footer */}
+      <Footer onContactClick={() => setContactModalOpen(true)} />
+
+      {/* Contact Modal */}
+      <ContactModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
+      </main>
+    </div>
+  );
+}
