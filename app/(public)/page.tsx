@@ -49,6 +49,10 @@ import {
   Phone,
   Menu,
   X,
+  HardHat,
+  Camera,
+  FileText,
+  Wrench,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -1358,6 +1362,115 @@ export default function LandingPage() {
                     </div>
                   </CardContent>
                 </Card>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Construction & Home Services */}
+            <AccordionItem value="construction" className="border border-[#FDE68A]/30 rounded-[20px] overflow-hidden bg-white shadow-sm">
+              <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-gradient-to-br hover:from-[#FEF3C7]/20 hover:to-[#FDE68A]/5 transition-colors">
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] flex items-center justify-center shadow-md flex-shrink-0">
+                    <HardHat className="h-6 w-6 text-[#D97706]" />
+                  </div>
+                  <div className="text-left flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#0B0F19]">Construction & Home Services AI</h3>
+                    <p className="text-sm md:text-base text-[#525252] mt-1">Computer vision inspections, automated quality control, and AI-powered report generation</p>
+                  </div>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                {/* First Row: Two Cards */}
+                <div className="grid md:grid-cols-2 gap-6 mt-4 mb-6">
+                <Card className="group bg-white border-border/30 hover:border-[#D97706]/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-[22px]">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                      <Camera className="h-6 w-6 text-[#D97706]" />
+                    </div>
+                    <CardTitle className="text-xl">AI-Powered Property Inspections</CardTitle>
+                    <CardDescription className="text-base leading-relaxed">
+                      Computer vision roof and property damage detection with automated drone inspections—reducing inspection time by 50% with 99.7% accuracy
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">50%</div>
+                        <div className="text-sm text-[#525252]">faster</div>
+                      </div>
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">99.7%</div>
+                        <div className="text-sm text-[#525252]">accuracy</div>
+                      </div>
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">30%</div>
+                        <div className="text-sm text-[#525252]">time ↓</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="group bg-white border-border/30 hover:border-[#D97706]/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-[22px]">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                      <FileText className="h-6 w-6 text-[#D97706]" />
+                    </div>
+                    <CardTitle className="text-xl">Automated Report Generation</CardTitle>
+                    <CardDescription className="text-base leading-relaxed">
+                      AI-generated inspection reports with damage labeling and compliance checks—from 3 hours of manual work to 30 minutes automated
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">84%</div>
+                        <div className="text-sm text-[#525252]">dev time ↓</div>
+                      </div>
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">30min</div>
+                        <div className="text-sm text-[#525252]">vs 3hrs</div>
+                      </div>
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">Auto</div>
+                        <div className="text-sm text-[#525252]">PDF gen</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                </div>
+
+                {/* Second Row: HVAC Card */}
+                <div className="grid md:grid-cols-2 gap-6">
+                <Card className="group bg-white border-border/30 hover:border-[#D97706]/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-[22px]">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                      <Wrench className="h-6 w-6 text-[#D97706]" />
+                    </div>
+                    <CardTitle className="text-xl">HVAC Predictive Maintenance</CardTitle>
+                    <CardDescription className="text-base leading-relaxed">
+                      IoT sensor analytics predict equipment failures before they happen—70% reduction in breakdowns and 40% energy savings with lifecycle management
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">70%</div>
+                        <div className="text-sm text-[#525252]">failures ↓</div>
+                      </div>
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">40%</div>
+                        <div className="text-sm text-[#525252]">energy ↓</div>
+                      </div>
+                      <div className="text-center p-3 rounded-lg bg-[#FEF3C7]/30">
+                        <div className="text-2xl font-bold text-[#D97706]">25%</div>
+                        <div className="text-sm text-[#525252]">cost ↓</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Placeholder for visual balance */}
+                <div className="hidden md:block"></div>
                 </div>
               </AccordionContent>
             </AccordionItem>
