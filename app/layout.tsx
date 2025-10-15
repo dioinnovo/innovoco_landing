@@ -15,10 +15,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://innovoco.com'),
   title: {
-    default: "Innovoco | Enterprise AI & Data Transformation Services",
+    default: "Enterprise AI & Data Transformation | Proven Implementation Services",
     template: "%s | Innovoco"
   },
-  description: "Transform your data warehouse into an intelligent business partner. Enterprise AI strategy, data engineering, and AI implementation services. 10+ years expertise, 1000+ solutions delivered.",
+  description: "Transform your data warehouse into an AI-powered advantage. Enterprise AI strategy, implementation, and scaling services. From POC to production in 12-16 weeks. 1000+ solutions delivered, 500+ enterprises transformed.",
   keywords: [
     "enterprise AI consulting",
     "data warehouse modernization",
@@ -49,20 +49,20 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://innovoco.com',
-    title: 'Innovoco | Enterprise AI & Data Transformation',
-    description: 'Transform your data warehouse into an intelligent business partner with enterprise AI services.',
+    title: 'Enterprise AI & Data Transformation | Proven Implementation at Scale',
+    description: 'Transform your data warehouse into an AI-powered advantage. From POC to production in 12-16 weeks. 1000+ solutions delivered, 500+ enterprises transformed.',
     siteName: 'Innovoco',
     images: [{
       url: '/images/og-image.png',
       width: 1200,
       height: 630,
-      alt: 'Innovoco - Enterprise AI and Data Transformation',
+      alt: 'Innovoco - Enterprise AI and Data Transformation Leader',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Innovoco | Enterprise AI & Data Transformation',
-    description: 'Enterprise AI strategy, implementation, and managed services.',
+    title: 'Enterprise AI & Data Transformation | Proven Implementation',
+    description: 'Enterprise AI strategy, implementation, and scaling services. 12-16 weeks from POC to production. 1000+ solutions, 500+ enterprises transformed.',
     images: ['/images/twitter-card.png'],
   },
   alternates: {

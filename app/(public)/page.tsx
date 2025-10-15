@@ -276,12 +276,15 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-white/70" />
         
         <div className="container mx-auto relative z-10">
-          <motion.div 
+          <motion.div
             className="max-w-5xl mx-auto text-center"
             initial={{ opacity: 0.9, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
+            {/* SEO-optimized H1 for search engines */}
+            <h1 className="sr-only">Enterprise AI and Data Transformation Services | Proven Implementation at Scale</h1>
+
             <motion.div
               className="inline-flex items-center gap-2 mb-4 md:mb-6 px-4 py-2 text-sm font-semibold tracking-wide uppercase text-blue-600 bg-blue-50/80 rounded-full border border-blue-200"
               initial={{ opacity: 0.95 }}
@@ -289,26 +292,27 @@ export default function LandingPage() {
               transition={{ duration: 0.2, delay: 0.05 }}
             >
               <Award className="h-4 w-4" />
-              <span>10+ Years of AI & Analytics Excellence</span>
+              <span>Enterprise AI & Data Transformation Leader</span>
             </motion.div>
             
-            <motion.h1
+            <motion.div
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 text-[#0B0F19] leading-tight"
               initial={{ opacity: 0.9, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.05 }}
+              role="heading"
+              aria-level={2}
             >
-              Your Enterprise Data Warehouse.
-              <br />
+              Transform Your Data Warehouse Into an{' '}
               <motion.span
                 className="bg-gradient-to-r from-[#93C5FD] via-[#A78BFA] to-[#F87171] bg-clip-text text-transparent"
                 initial={{ opacity: 0.95, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.1 }}
               >
-                Now AI-Powered
+                AI-Powered Business Advantage
               </motion.span>
-            </motion.h1>
+            </motion.div>
             
             <motion.p
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#525252] mb-6 md:mb-8 max-w-3xl mx-auto px-4"
@@ -316,8 +320,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
-              Enterprise AI strategy, data engineering, and AI implementation services that turn complex data into competitive advantage.
-              From POC to production in 12-16 weeks, backed by 10+ years of proven expertise.
+              End-to-end AI transformation: Strategy, implementation, and scale. We take you from POC to production in 12-16 weeks—while 85% of AI projects fail, our proven data foundation ensures your success.
             </motion.p>
             
             <motion.div
@@ -336,7 +339,7 @@ export default function LandingPage() {
                 <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
               </Button>
               <Link href="/case-studies" aria-label="View case studies" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="w-full border-2 border-[#0A58D0] text-[#0A58D0] hover:bg-[#0A58D0]/10 px-10 h-14 text-lg font-medium rounded-full">
+                <Button size="lg" variant="outline" className="w-full border-2 border-[#0A58D0] text-[#0A58D0] hover:bg-[#0A58D0]/10 hover:text-[#0A58D0] px-10 h-14 text-lg font-medium rounded-full">
                   View Case Studies
                 </Button>
               </Link>
@@ -356,8 +359,8 @@ export default function LandingPage() {
                 transition={{ duration: 0.2, delay: 0.2 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19] mb-1">500+</div>
-                <div className="text-xs md:text-sm text-[#525252]">Data & AI Solutions</div>
+                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19] mb-1">1000+</div>
+                <div className="text-xs md:text-sm text-[#525252]">Solutions Delivered</div>
               </motion.div>
               <motion.div
                 className="text-center"
@@ -367,7 +370,7 @@ export default function LandingPage() {
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="text-2xl md:text-3xl font-bold text-[#0B0F19] mb-1">10+</div>
-                <div className="text-xs md:text-sm text-[#525252]">Years Expertise</div>
+                <div className="text-xs md:text-sm text-[#525252]">Years Scaling AI</div>
               </motion.div>
               <motion.div
                 className="text-center"
@@ -376,8 +379,8 @@ export default function LandingPage() {
                 transition={{ duration: 0.2, delay: 0.3 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19] mb-1">300+</div>
-                <div className="text-xs md:text-sm text-[#525252]">Enterprise Clients</div>
+                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19] mb-1">500+</div>
+                <div className="text-xs md:text-sm text-[#525252]">Enterprises Transformed</div>
               </motion.div>
               <motion.div
                 className="text-center"
@@ -393,17 +396,19 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Partnership Section */}
-            <motion.div 
+            <motion.div
               className="mt-16 pt-16 border-t border-border/50"
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5 }}
             >
-              <motion.div 
+              <motion.div
                 className="text-center mb-6"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.2, delay: 0.35 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 }}
               >
                 <h2 className="text-2xl font-semibold mb-3 text-[#0B0F19]">
                   Leading Industry Partnerships
@@ -414,17 +419,19 @@ export default function LandingPage() {
               </motion.div>
               
               {/* Logo Carousel */}
-              <motion.div 
+              <motion.div
                 className="relative overflow-hidden py-8"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.2 }}
               >
-                <motion.div 
+                <motion.div
                   className="flex w-max partner-carousel"
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2, delay: 0.45 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.3 }}
                   onAnimationComplete={(definition) => {
                     // Start scroll animation after fade in
                     const element = document.querySelector('.partner-carousel');
@@ -732,7 +739,8 @@ export default function LandingPage() {
         <div className="container mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
@@ -751,7 +759,8 @@ export default function LandingPage() {
             <motion.div
               id="ai"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
@@ -826,8 +835,9 @@ export default function LandingPage() {
             <motion.div
               id="analytics"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
               <div className="p-6 md:p-8 md:order-1">
@@ -900,8 +910,9 @@ export default function LandingPage() {
             <motion.div
               id="data"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
               <div className="p-4 bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]/20 rounded-2xl">
@@ -973,8 +984,9 @@ export default function LandingPage() {
             {/* Service 4: Managed AI Operations - Image Right */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
               <div className="p-6 md:p-8 md:order-1">
@@ -1052,7 +1064,8 @@ export default function LandingPage() {
         <div className="container mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
@@ -1480,7 +1493,7 @@ export default function LandingPage() {
           <div className="mt-16 pt-16 border-t border-border/50">
             <div className="text-center mb-8">
               <p className="text-[#525252]">
-                Join 300+ enterprises driving real business impact with data and AI
+                Join 500+ enterprises driving real business impact with enterprise-ready Agentic systems
               </p>
             </div>
             <div className="relative overflow-hidden py-4">
