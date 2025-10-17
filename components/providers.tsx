@@ -19,9 +19,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
       <ThemeProvider defaultTheme="light">
         {children}
-        <div className="print:hidden">
+        {/* Temporarily disabled for production - debugging in progress */}
+        {/* <div className="print:hidden">
           <VirtualAssistant apiEndpoint={chatEndpoint} />
-        </div>
+        </div> */}
       </ThemeProvider>
     </SessionProvider>
   );

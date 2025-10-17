@@ -7,10 +7,13 @@ import { RelatedServices } from '@/components/services/RelatedServices';
 import { SchemaMarkup } from '@/lib/seo/SchemaMarkup';
 import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
 import { Brain, Database, Rocket, Building2, HeartPulse, ShoppingCart, Factory, TrendingUp, Shield, Zap } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { trackServicePageView, useScrollDepthTracking, trackIndustrySelection } from '@/lib/analytics/events';
+import ContactModal from '@/components/landing/ContactModal';
 
 export function IndustrySolutionsPageClient() {
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+
   const breadcrumbs = [
     { label: 'Solutions', href: '/solutions' },
     { label: 'Industries', href: '/solutions/industries' }
@@ -69,16 +72,14 @@ export function IndustrySolutionsPageClient() {
           subtitle="Proven Results in Healthcare, Finance, Manufacturing & Retail"
           description="Industry-specific AI and data transformation services designed for the unique challenges, regulations, and opportunities of your sector. From HIPAA-compliant healthcare analytics to real-time fraud detection in financial services, we deliver measurable results in complex enterprise environments."
           trustIndicators={[
-            { metric: "300+", label: "Enterprise Clients" },
+            { metric: "500+", label: "Enterprise Clients" },
             { metric: "4", label: "Core Industries" },
             { metric: "500+", label: "Industry Solutions" },
             { metric: "$50M+", label: "Value Generated" }
           ]}
           primaryCTA={{
             text: "Schedule Industry Consultation",
-            onClick: () => {
-              window.location.href = '/contact?service=industry-solutions';
-            }
+            onClick: () => setContactModalOpen(true)
           }}
           secondaryCTA={{
             text: "View Industry Case Studies",
@@ -564,7 +565,7 @@ export function IndustrySolutionsPageClient() {
         >
           <p>
             Ready to deploy AI and data solutions designed for your industry's unique requirements? Our proven methodologies have
-            delivered measurable results for 300+ enterprises across healthcare, financial services, manufacturing, and retail. Whether
+            delivered measurable results for 500+ enterprises across healthcare, financial services, manufacturing, and retail. Whether
             you're navigating HIPAA compliance, building real-time fraud detection, implementing predictive maintenance, or optimizing
             supply chains, we provide the industry expertise and technical capabilities to succeed.
           </p>
@@ -588,6 +589,12 @@ export function IndustrySolutionsPageClient() {
         {/* Related Services */}
         <RelatedServices services={relatedServices} />
       </ServicePageLayout>
+
+      {/* Contact Modal */}
+      <ContactModal
+        open={contactModalOpen}
+        onOpenChange={setContactModalOpen}
+      />
     </>
   );
 }

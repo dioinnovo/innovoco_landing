@@ -286,13 +286,13 @@ export default function LandingPage() {
             <h1 className="sr-only">Enterprise AI and Data Transformation Services | Proven Implementation at Scale</h1>
 
             <motion.div
-              className="inline-flex items-center gap-2 mb-4 md:mb-6 px-4 py-2 text-sm font-semibold tracking-wide uppercase text-blue-600 bg-blue-50/80 rounded-full border border-blue-200"
+              className="inline-flex items-center gap-2 mb-4 md:mb-6 px-4 py-2 font-semibold tracking-wide uppercase text-blue-600 bg-blue-50/80 rounded-full border border-blue-200"
               initial={{ opacity: 0.95 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2, delay: 0.05 }}
             >
               <Award className="h-4 w-4" />
-              <span>Enterprise AI & Data Transformation Leader</span>
+              <span className="text-xs sm:text-sm">Enterprise AI & Data Transformation Leader</span>
             </motion.div>
             
             <motion.div
@@ -735,12 +735,12 @@ export default function LandingPage() {
       </motion.section>
 
       {/* How We Transform Your Business - Services with Alternating Images */}
-      <AnimatedSection id="services" className="py-16 md:py-24 px-4 bg-gradient-to-br from-[#F8FAFC] to-[#F1F5F9]">
+      <section id="services" className="py-16 md:py-24 px-4 bg-gradient-to-br from-[#F8FAFC] to-[#F1F5F9]">
         <div className="container mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
@@ -760,7 +760,7 @@ export default function LandingPage() {
               id="ai"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
@@ -836,10 +836,21 @@ export default function LandingPage() {
               id="analytics"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
+              <div className="p-4 bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]/20 rounded-2xl md:order-2">
+                <Image
+                  src="/analytics-bi-illustration.png"
+                  alt="Advanced Analytics Business Intelligence Predictive Analytics Machine Learning Executive Dashboards KPI Tracking"
+                  width={800}
+                  height={800}
+                  quality={90}
+                  className="w-full h-auto rounded-xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
               <div className="p-6 md:p-8 md:order-1">
                 <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
                   Advanced Analytics & BI
@@ -893,17 +904,6 @@ export default function LandingPage() {
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </Button>
               </div>
-              <div className="p-4 bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]/20 md:order-2 rounded-2xl">
-                <Image
-                  src="/analytics-bi-illustration.png"
-                  alt="Advanced Analytics Business Intelligence Predictive Analytics Machine Learning Executive Dashboards KPI Tracking"
-                  width={800}
-                  height={800}
-                  quality={90}
-                  className="w-full h-auto rounded-xl"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
             </motion.div>
 
             {/* Service 3: Data Engineering & Modernization - Image Left */}
@@ -911,8 +911,8 @@ export default function LandingPage() {
               id="data"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
               <div className="p-4 bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]/20 rounded-2xl">
@@ -985,10 +985,21 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
+              <div className="p-4 bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]/20 rounded-2xl md:order-2">
+                <Image
+                  src="/cloud-optimization-illustration.png"
+                  alt="Managed AI Services - MLOps Monitoring Optimization"
+                  width={800}
+                  height={800}
+                  quality={90}
+                  className="w-full h-auto rounded-xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
               <div className="p-6 md:p-8 md:order-1">
                 <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
                   Managed AI Operations
@@ -1042,22 +1053,11 @@ export default function LandingPage() {
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </Button>
               </div>
-              <div className="p-4 bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]/20 md:order-2 rounded-2xl">
-                <Image
-                  src="/cloud-optimization-illustration.png"
-                  alt="Managed AI Services - MLOps Monitoring Optimization"
-                  width={800}
-                  height={800}
-                  quality={90}
-                  className="w-full h-auto rounded-xl"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
             </motion.div>
           </div>
 
         </div>
-      </AnimatedSection>
+      </section>
 
       {/* Industry-Specific AI Solutions - Consolidated */}
       <AnimatedSection id="industries" className="py-20 md:py-24 px-4 bg-gradient-to-br from-[#F8FAFC] to-[#F1F5F9]">
