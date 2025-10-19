@@ -78,10 +78,10 @@ export function Footer({ onContactClick }: FooterProps) {
         </div>
 
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-12 mb-12">
 
-          {/* Column 1: Company & Social - spans 2 columns on large screens */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-2">
+          {/* Column 1: Company & Social - spans full width on mobile/tablet, 2 columns on large screens */}
+          <div className="col-span-2 lg:col-span-2">
             <div className="mb-6">
               <Image
                 src="/images/logos/Innovoco-Logo-hires.png"
@@ -153,8 +153,8 @@ export function Footer({ onContactClick }: FooterProps) {
           </div>
 
           {/* Column 2: Solutions */}
-          <div className="col-span-1">
-            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Solutions</h3>
+          <div className="col-span-1 lg:col-span-1">
+            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Solutions</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/#ai" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
@@ -185,8 +185,8 @@ export function Footer({ onContactClick }: FooterProps) {
           </div>
 
           {/* Column 3: Company */}
-          <div className="col-span-1">
-            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Company</h3>
+          <div className="col-span-1 lg:col-span-1">
+            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Company</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/#about" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
@@ -215,8 +215,8 @@ export function Footer({ onContactClick }: FooterProps) {
           </div>
 
           {/* Column 4: Resources */}
-          <div className="col-span-1">
-            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Resources</h3>
+          <div className="col-span-1 lg:col-span-1">
+            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Resources</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/blog" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
@@ -238,12 +238,27 @@ export function Footer({ onContactClick }: FooterProps) {
                   Terms of Service
                 </Link>
               </li>
+              <li>
+                <Link href="/sitemap" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Sitemap
+                </Link>
+              </li>
+              <li>
+                <Link href="/accessibility" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Accessibility
+                </Link>
+              </li>
+              <li>
+                <button className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 text-left block">
+                  Cookie Settings
+                </button>
+              </li>
             </ul>
           </div>
 
           {/* Column 5: Offices */}
-          <div className="col-span-1">
-            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Offices</h3>
+          <div className="col-span-1 lg:col-span-1">
+            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Offices</h3>
             <div className="space-y-4">
               <div>
                 <p className="text-sm font-medium text-white mb-1">Miami, USA</p>
@@ -251,7 +266,7 @@ export function Footer({ onContactClick }: FooterProps) {
                   href="https://maps.google.com/?q=333+SE+2nd+Avenue+Suite+2000+Miami+FL+33131"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block leading-relaxed"
+                  className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block leading-relaxed"
                 >
                   333 SE 2nd Avenue<br />
                   Suite 2000<br />
@@ -265,7 +280,7 @@ export function Footer({ onContactClick }: FooterProps) {
                   href="https://maps.google.com/?q=The+Exchange+Tower+130+King+St+W+Toronto+ON+M5X+2A2"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block leading-relaxed"
+                  className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block leading-relaxed"
                 >
                   The Exchange Tower<br />
                   130 King St W<br />
@@ -276,33 +291,17 @@ export function Footer({ onContactClick }: FooterProps) {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar - Simplified */}
         <div className="pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-              <p className="text-sm text-gray-500">
-                © {currentYear} Innovoco. All rights reserved.
-              </p>
-              <span className="hidden md:block text-gray-700">•</span>
-              <p className="text-sm text-gray-500 flex items-center gap-1">
-                <MapPin className="h-3 w-3" />
-                Offices: Florida | Ontario | Remote-First
-              </p>
-            </div>
-            
-            <div className="flex items-center gap-4 text-sm">
-              <Link href="/sitemap" className="text-gray-500 hover:text-gray-400 transition-colors">
-                Sitemap
-              </Link>
-              <span className="text-gray-700">•</span>
-              <Link href="/accessibility" className="text-gray-500 hover:text-gray-400 transition-colors">
-                Accessibility
-              </Link>
-              <span className="text-gray-700">•</span>
-              <button className="text-gray-500 hover:text-gray-400 transition-colors">
-                Cookie Settings
-              </button>
-            </div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-center">
+            <p className="text-sm text-gray-500">
+              © {currentYear} Innovoco. All rights reserved.
+            </p>
+            <span className="hidden md:block text-gray-700">•</span>
+            <p className="text-sm text-gray-500 flex items-center gap-1">
+              <MapPin className="h-3 w-3" />
+              Offices: Florida | Ontario | Remote-First
+            </p>
           </div>
         </div>
       </div>

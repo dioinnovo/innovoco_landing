@@ -738,14 +738,12 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Landscape Matrix */}
-      <section className="w-full max-w-7xl mx-auto px-4 py-6 md:py-8 print:py-3 print:px-2 print:break-before-page print:landscape">
-        <div className="flex items-center justify-between mb-6 print:mb-4 flex-wrap gap-2">
+      <section className="container mx-auto max-w-6xl px-4 py-6 md:py-8 print:py-3 print:px-2 print:break-before-page print:landscape">
+        <div className="flex items-center justify-between mb-6 print:mb-4">
           <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] print:text-2xl print:text-black">Landscape Matrix</h2>
           <div className="text-xs text-[#6B7280] dark:text-[#9CA3AF] print:text-gray-600">As of {TODAY}</div>
         </div>
-        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="inline-block min-w-full align-middle">
-            <div className="overflow-hidden rounded-[22px] border border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm print:shadow-none print:border-gray-300 print:overflow-visible">
+        <div className="overflow-x-auto rounded-[22px] border border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm print:shadow-none print:border-gray-300 print:overflow-visible">
               <Table className="min-w-full">
             <TableHeader className="bg-muted/50 print:bg-gray-100">
               <TableRow>
@@ -775,8 +773,6 @@ export default function CaseStudiesPage() {
               Azure & Vertex both provide agent runtimes, evals, and prompt tooling; LangGraph adds framework‑agnostic orchestration, including long‑running state across clouds.
             </TableCaption>
           </Table>
-            </div>
-          </div>
         </div>
       </section>
 

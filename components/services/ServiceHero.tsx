@@ -114,27 +114,29 @@ export function ServiceHero({
           transition={{ duration: 0.4, delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Button
-            size="lg"
-            onClick={primaryCTA.onClick}
-            className="
-              bg-[#2563EB]
-              hover:bg-[#1D4ED8]
-              text-white
-              px-8
-              py-6
-              text-base
-              font-medium
-              rounded-lg
-              shadow-sm
-              hover:shadow-md
-              transition-all
-              duration-200
-            "
-          >
-            {primaryCTA.text}
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          {primaryCTA && (
+            <Button
+              size="lg"
+              onClick={primaryCTA.onClick}
+              className="
+                bg-[#2563EB]
+                hover:bg-[#1D4ED8]
+                text-white
+                px-8
+                py-6
+                text-base
+                font-medium
+                rounded-lg
+                shadow-sm
+                hover:shadow-md
+                transition-all
+                duration-200
+              "
+            >
+              {primaryCTA.text}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          )}
 
           {secondaryCTA && (
             <Button
