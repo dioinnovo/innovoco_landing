@@ -52,7 +52,7 @@ function SignInForm() {
         <CardHeader className="space-y-1">
           <div className="flex justify-center mb-4">
             <Image
-              src="/images/logos/innovoco-logo.png"
+              src="/images/logos/Innovoco-Logo-hires.png"
               alt="Innovoco"
               width={150}
               height={40}
@@ -122,16 +122,6 @@ function SignInForm() {
               )}
             </Button>
           </form>
-
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-            <p className="text-sm text-gray-600 mb-2">
-              <strong>Demo Credentials:</strong>
-            </p>
-            <div className="space-y-1 text-xs text-gray-600">
-              <p>Admin: admin@innovoco.com / admin123</p>
-              <p>User: demo@innovoco.com / demo123</p>
-            </div>
-          </div>
         </CardContent>
       </Card>
     </div>

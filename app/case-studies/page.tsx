@@ -25,7 +25,6 @@ import {
   User,
   Rocket,
   Briefcase,
-  X,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -39,12 +38,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { PrintPDFButton } from "@/components/case-studies/print-pdf-button";
 import { Footer } from '@/components/layout/footer';
+import ContactModal from "@/components/landing/ContactModal";
 
 // --- Data (exec-ready) ---
 const TODAY = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -297,50 +293,55 @@ const dataUseCases = [
   {
     id: 1,
     title: "Conversational Data Analytics",
-    desc: "Empower every executive to become a data analyst. Ask questions in plain English, receive insights in seconds. No SQL knowledge required.",
+    desc: "Enable non-technical executives and teams to access critical business insights through natural language queries. Transform data access from a technical bottleneck into a competitive advantage.",
     example:
       "Show me our top performing products by region last quarter and predict next month's demand",
     impact: [
-      "300% increase in data adoption across organizations",
-      "75% reduction in IT support tickets",
-      "10x faster insight generation",
-      "Enterprise‑grade security with row‑level permissions",
+      "Democratize data access across your organization without SQL training",
+      "Accelerate decision-making with instant answers to business questions",
+      "Reduce dependency on technical teams and eliminate reporting backlogs",
+      "Improve data governance through centralized query tracking and audit trails",
+      "Enable executives to explore data independently with enterprise-grade security",
     ],
   },
   {
     id: 2,
     title: "AI‑Powered Master Data Management",
-    desc: "Ensure your data is AI‑ready with intelligent cleaning, standardization, and governance powered by machine learning algorithms.",
+    desc: "Protect revenue and reduce operational costs by establishing enterprise-wide data quality and governance. Transform fragmented data into a strategic asset that powers AI initiatives and regulatory compliance.",
     impact: [
-      "Automatic schema evolution • Duplicate detection • Anomaly identification • Quality scoring",
-      "95% data quality improvement in 30 days",
-      "60% reduction in data preparation time",
-      "Automated GDPR/CCPA compliance tracking",
-      "Self‑documenting data lineage",
+      "Eliminate costly data quality issues that drain millions in annual revenue",
+      "Automated duplicate detection, anomaly identification, and quality scoring",
+      "Accelerate data preparation while ensuring GDPR/CCPA compliance",
+      "Build the data foundation required to scale AI across your enterprise",
+      "Reduce operational costs and improve cross-selling opportunities through unified customer views",
+      "Self-documenting data lineage for audit trails and regulatory reporting",
     ],
   },
   {
     id: 3,
     title: "Intelligent Pipeline Support Agent",
-    desc: "Never lose sleep over failed pipelines again. Our AI agent diagnoses, resolves, and prevents data pipeline issues autonomously.",
+    desc: "Minimize costly downtime and free your engineering teams from firefighting. AI-powered autonomous monitoring detects, diagnoses, and resolves data pipeline issues around the clock.",
     impact: [
       "Detect → Diagnose → Generate Fix → Human Approval → Deploy → Verify",
-      "90% reduction in pipeline failures",
-      "24/7 autonomous monitoring and healing",
-      "15‑minute average resolution time",
-      "Predictive maintenance prevents 80% of issues",
+      "Dramatically reduce pipeline failures and mean time to resolution",
+      "24/7 autonomous monitoring eliminates on-call engineer fatigue",
+      "Save millions by preventing downtime that impacts business operations",
+      "Predictive maintenance catches issues before they cascade into failures",
+      "Reduce engineering overhead while improving data reliability and trust",
     ],
   },
   {
     id: 4,
     title: "AI‑Driven DataOps Platform",
-    desc: "Revolutionize your data operations with AI‑powered CI/CD, automated testing, and intelligent resource optimization.",
+    desc: "Accelerate your path to enterprise AI by modernizing data operations. Gain the agility to respond to market changes in days, not quarters, while optimizing infrastructure costs.",
     impact: [
       "Infrastructure as Code • Auto‑scaling • Performance Optimization • Cost Management",
-      "40% reduction in infrastructure costs",
-      "5x faster deployment cycles",
-      "Zero‑downtime updates and migrations",
-      "Automated compliance documentation",
+      "Boost analytics team productivity and accelerate time to market",
+      "Optimize infrastructure costs through intelligent resource allocation",
+      "Enable faster deployment cycles with zero‑downtime updates",
+      "Scale AI initiatives beyond pilots with enterprise-grade automation",
+      "Automated compliance documentation and self-healing pipelines",
+      "Critical foundation for organizations competing in the AI-driven economy",
     ],
   },
 ];
@@ -350,49 +351,57 @@ const functionalUseCases = [
   {
     id: 1,
     title: "Intelligent Inspection Report System",
-    desc: "Transform field inspections with voice‑powered AI that creates comprehensive reports in real‑time, reducing documentation time by 80%.",
+    desc: "Multiply field team productivity with hands-free AI documentation. Transform inspections across construction, utilities, insurance, and real estate while delivering superior client service.",
     impact: [
-      "Inspector speaks → AI transcribes → RAG finds similar cases → Report generated → Human reviews → Client receives",
-      "Voice‑to‑text with 99% accuracy in technical terminology",
-      "Automatic photo annotation and damage assessment",
-      "Historical case matching for consistent reporting",
-      "One‑click client delivery with digital signatures",
+      "Inspector speaks → AI transcribes → Finds similar cases → Report generated → Human reviews → Client receives",
+      "Dramatically reduce documentation time, enabling more inspections per day",
+      "Hands-free operation critical for challenging field conditions",
+      "Automatic photo annotation and consistent damage assessment",
+      "Historical case matching ensures reporting consistency and quality",
+      "Accelerate client delivery and improve customer satisfaction",
+      "Address skilled labor shortages by making teams more efficient",
     ],
   },
   {
     id: 2,
     title: "AI Voice Assistant Platform",
-    desc: "Deploy human‑like AI agents that handle customer inquiries 24/7, seamlessly escalating to human agents when needed.",
+    desc: "Transform customer service from a cost center into a competitive advantage. Deliver immediate, intelligent support 24/7 while dramatically reducing operational expenses and improving satisfaction.",
     impact: [
       "Natural voice synthesis • Sentiment analysis • Intent recognition • Smart routing",
-      "70% reduction in call center costs",
-      "24/7 availability in 40+ languages",
-      "3‑second average response time",
-      "Seamless CRM integration with full context",
+      "Achieve strong return on investment through operational cost savings",
+      "Handle customer inquiries around the clock in multiple languages",
+      "Deliver immediate responses while human agents handle complex cases",
+      "Improve customer satisfaction through faster, more consistent service",
+      "Scale customer support without proportional headcount increases",
+      "Essential capability for competitive parity in 2025 marketplace",
     ],
   },
   {
     id: 3,
     title: "Intelligent HR Onboarding Suite",
-    desc: "Streamline employee onboarding from application to first day, with AI handling 90% of administrative tasks automatically.",
+    desc: "Win the talent war by delivering exceptional employee experiences from day one. Accelerate productivity, improve retention, and reduce HR administrative burden through intelligent automation.",
     impact: [
       "Background checks → Credential creation → Equipment provisioning → Training assignment",
-      "5‑day to 1‑day onboarding acceleration",
-      "Automatic Microsoft 365 & security provisioning",
-      "AI‑powered performance history analysis",
-      "Compliance tracking and audit trails",
+      "Accelerate time-to-productivity and improve new hire retention",
+      "Enhance employee satisfaction during critical first 90 days",
+      "Reduce errors in employee data collection and system provisioning",
+      "Free HR teams from repetitive tasks to focus on strategic initiatives",
+      "Automatic compliance tracking with complete audit trails",
+      "Create competitive advantage in attracting and retaining top talent",
     ],
   },
   {
     id: 4,
     title: "BMAD‑Powered Development Accelerator",
-    desc: "From idea to MVP in hours, not months. Our AI agent system creates pitch decks, technical specs, and working prototypes automatically.",
+    desc: "Accelerate innovation cycles and reduce time-to-market with multi-agent AI systems. Transform how your organization builds, tests, and deploys software solutions.",
     impact: [
       "Research Agent → Design Agent → Architecture Agent → Development Agent → Testing Agent",
-      "10x faster prototype development",
-      "Automatic technical documentation",
-      "Multi‑agent collaboration framework",
-      "Production‑ready code generation",
+      "Dramatically accelerate prototype development and reduce concept-to-deployment time",
+      "Eliminate fragmented tools and reduce development complexity",
+      "Enable rapid experimentation and faster learning cycles",
+      "Automatic technical documentation and compliance tracking",
+      "Improve system resilience with distributed, parallel agent operations",
+      "Essential for organizations competing in the AI-driven economy",
     ],
   },
 ];
@@ -417,8 +426,8 @@ export default function CaseStudiesPage() {
             {/* Left side - Logo and Title */}
             <div className="flex items-center gap-6">
               <Link href="/" className="flex items-center">
-                <Image 
-                  src="/images/logos/innovoco-logo.png"
+                <Image
+                  src="/images/logos/Innovoco-Logo-hires.png"
                   alt="Innovoco Logo"
                   width={628}
                   height={179}
@@ -1064,13 +1073,6 @@ export default function CaseStudiesPage() {
                         {w.value}
                       </p>
                     </div>
-
-                    {/* Action button */}
-                    <div className="pt-2 border-t border-[#E5E7EB]/20 dark:border-[#374151]/20">
-                      <button className={`w-full py-2 px-3 rounded-lg ${theme.gradient} ${theme.iconColor} text-sm font-medium border border-current/20 hover:border-current/30 transition-colors duration-200 hover:shadow-sm`}>
-                        View Implementation
-                      </button>
-                    </div>
                   </CardContent>
                 </Card>
               );
@@ -1400,106 +1402,7 @@ export default function CaseStudiesPage() {
       </div>
 
       {/* Contact Modal */}
-      <Dialog open={contactModalOpen} onOpenChange={setContactModalOpen}>
-        <DialogContent className="sm:max-w-[600px] rounded-[22px] p-0 overflow-hidden border-border/20">
-          <DialogClose className="absolute right-4 top-4 rounded-full w-8 h-8 bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors z-50">
-            <X className="w-4 h-4 text-[#0B0F19] dark:text-[#F9FAFB]" />
-          </DialogClose>
-          
-          {/* Glass overlay header */}
-          <div className="relative bg-gradient-to-br from-[#0A58D0] via-[#8B5CF6] to-[#DC2626] p-8">
-            <div className="absolute inset-0 bg-black/20"></div>
-            <DialogHeader className="relative z-10">
-              <DialogTitle className="text-2xl font-bold text-white">Schedule Executive Briefing</DialogTitle>
-              <p className="text-white/90 mt-2">Let's discuss how AI can transform your enterprise</p>
-            </DialogHeader>
-          </div>
-          
-          {/* Form Content */}
-          <div className="p-6 space-y-6 bg-white dark:bg-[#0B0F19]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium text-[#0B0F19] dark:text-[#F9FAFB]">
-                  Full Name *
-                </Label>
-                <Input 
-                  id="name" 
-                  placeholder="John Smith" 
-                  className="rounded-lg border-[#E5E7EB] dark:border-[#374151] focus:border-[#0A58D0] dark:focus:border-[#93C5FD]" 
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-[#0B0F19] dark:text-[#F9FAFB]">
-                  Work Email *
-                </Label>
-                <Input 
-                  id="email" 
-                  type="email" 
-                  placeholder="john@company.com" 
-                  className="rounded-lg border-[#E5E7EB] dark:border-[#374151] focus:border-[#0A58D0] dark:focus:border-[#93C5FD]" 
-                />
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="company" className="text-sm font-medium text-[#0B0F19] dark:text-[#F9FAFB]">
-                  Company *
-                </Label>
-                <Input 
-                  id="company" 
-                  placeholder="Acme Corp" 
-                  className="rounded-lg border-[#E5E7EB] dark:border-[#374151] focus:border-[#0A58D0] dark:focus:border-[#93C5FD]" 
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="role" className="text-sm font-medium text-[#0B0F19] dark:text-[#F9FAFB]">
-                  Role
-                </Label>
-                <Input 
-                  id="role" 
-                  placeholder="CTO / VP Engineering" 
-                  className="rounded-lg border-[#E5E7EB] dark:border-[#374151] focus:border-[#0A58D0] dark:focus:border-[#93C5FD]" 
-                />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="message" className="text-sm font-medium text-[#0B0F19] dark:text-[#F9FAFB]">
-                What challenges are you looking to solve?
-              </Label>
-              <Textarea 
-                id="message" 
-                placeholder="Tell us about your data challenges, AI goals, or specific use cases..." 
-                className="min-h-[100px] rounded-lg border-[#E5E7EB] dark:border-[#374151] focus:border-[#0A58D0] dark:focus:border-[#93C5FD]" 
-              />
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button 
-                type="submit"
-                className="flex-1 bg-gradient-to-r from-[#0A58D0] to-[#8B5CF6] hover:from-[#0A58D0]/90 hover:to-[#8B5CF6]/90 text-white rounded-lg py-3 font-semibold transition-all duration-300"
-              >
-                Schedule Briefing
-              </Button>
-              <Button 
-                type="button"
-                variant="outline" 
-                onClick={() => setContactModalOpen(false)}
-                className="flex-1 border-[#E5E7EB] dark:border-[#374151] hover:bg-[#F9FAFB] dark:hover:bg-[#1F2937] rounded-lg py-3"
-              >
-                Cancel
-              </Button>
-            </div>
-            
-            <p className="text-xs text-center text-[#6B7280] dark:text-[#9CA3AF]">
-              We'll respond within 24 hours to schedule your briefing
-            </p>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <ContactModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
     </div>
   );
 }

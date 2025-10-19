@@ -323,11 +323,11 @@ export default function VannaChatWithSelector() {
       <div className="border-b bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Image 
-              src="/images/logos/innovoco-logo.png" 
-              alt="Innovoco" 
-              width={120} 
-              height={40} 
+            <Image
+              src="/images/logos/Innovoco-Logo-hires.png"
+              alt="Innovoco"
+              width={120}
+              height={40}
               className="h-8 w-auto"
               priority
             />

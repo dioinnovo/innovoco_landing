@@ -7,7 +7,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 const metrics = [
   { number: "500+", label: "BI Implementations" },
-  { number: "300+", label: "Enterprise Clients" },
+  { number: "500+", label: "Enterprise Clients" },
   { number: "10Y", label: "Data Excellence" },
   { number: "90D", label: "AI Deployment" },
 ];

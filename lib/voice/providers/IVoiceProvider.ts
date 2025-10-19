@@ -35,7 +35,7 @@ export interface IVoiceProvider {
   isConnected(): boolean;
   
   // Call management
-  startCall(): Promise<void>;
+  startCall(hasExistingContext?: boolean): Promise<void>;
   endCall(): void;
   isCallActive(): boolean;
   
@@ -63,7 +63,7 @@ export abstract class BaseVoiceProvider implements IVoiceProvider {
   // Abstract methods that must be implemented by specific providers
   abstract connect(token: string, wsUrl?: string, hasExistingContext?: boolean): Promise<void>;
   abstract disconnect(): void;
-  abstract startCall(): Promise<void>;
+  abstract startCall(hasExistingContext?: boolean): Promise<void>;
   abstract endCall(): void;
   abstract sendText(text: string): void;
   abstract setContext(messages: Array<{ text: string; isUser: boolean }>): void;

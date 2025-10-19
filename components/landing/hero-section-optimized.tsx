@@ -57,7 +57,7 @@ export function HeroSectionOptimized() {
               <div className="text-sm text-[#6B7280]">Years Data Warehouse Expertise</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#0B0F19]">300+</div>
+              <div className="text-3xl font-bold text-[#0B0F19]">500+</div>
               <div className="text-sm text-[#6B7280]">Industry Professionals</div>
             </div>
             <div className="text-center">

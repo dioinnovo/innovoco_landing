@@ -33,7 +33,7 @@ export default function OptimizedRootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Preload critical resources */}
-        <link rel="preload" href="/images/logos/innovoco-logo.png" as="image" />
+        <link rel="preload" href="/images/logos/Innovoco-Logo-hires.png" as="image" />
         
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />

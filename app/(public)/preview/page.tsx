@@ -79,7 +79,7 @@ export default function OptimizedLandingPage() {
               className="inline-flex items-center gap-2 mb-6 px-6 py-3 text-sm font-semibold tracking-wide uppercase text-blue-600 bg-blue-50/80 rounded-full border border-blue-200"
             >
               <Award className="h-4 w-4" />
-              Trusted by 300+ Enterprise Clients
+              Trusted by 500+ Enterprise Clients
             </motion.div>
 
             {/* Main Headline */}
@@ -122,7 +122,7 @@ export default function OptimizedLandingPage() {
                 <div className="text-sm text-[#525252]">Solutions Delivered</div>
               </div>
               <div className="bg-white/80 backdrop-blur border border-border/30 rounded-2xl p-4 shadow-sm">
-                <div className="text-3xl font-bold text-[#0A58D0] mb-1">300+</div>
+                <div className="text-3xl font-bold text-[#0A58D0] mb-1">500+</div>
                 <div className="text-sm text-[#525252]">Enterprise Clients</div>
               </div>
               <div className="bg-white/80 backdrop-blur border border-border/30 rounded-2xl p-4 shadow-sm">

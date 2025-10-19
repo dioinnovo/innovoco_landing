@@ -1,0 +1,209 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, HeartPulse, TrendingUp, Factory, ShoppingCart, CheckCircle } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+
+interface IndustryCardProps {
+  icon: LucideIcon;
+  iconGradient: string;
+  title: string;
+  description: string;
+  metrics: Array<{ label: string; value: string }>;
+  href: string;
+  delay: number;
+}
+
+const IndustryCardComponent = ({
+  icon: Icon,
+  iconGradient,
+  title,
+  description,
+  metrics,
+  href,
+  delay
+}: IndustryCardProps) => {
+  const scrollToSection = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById(href);
+    if (element) {
+      const offset = 100; // Account for fixed header
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      className="h-full"
+    >
+      <Card className="
+        group
+        h-full
+        bg-white
+        border-border/30
+        hover:border-border/50
+        shadow-sm
+        hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)]
+        transition-all
+        duration-300
+        rounded-[22px]
+        overflow-hidden
+        flex
+        flex-col
+      ">
+        <CardHeader className="pb-4 flex-grow">
+          {/* Icon Container with 3D Fluent styling */}
+          <div className={`
+            w-16 h-16
+            rounded-xl
+            ${iconGradient}
+            flex items-center justify-center
+            mb-4
+            group-hover:scale-105
+            transition-transform
+            duration-300
+            shadow-sm
+          `}>
+            <Icon className="h-8 w-8 text-white" />
+          </div>
+
+          <CardTitle className="text-xl font-semibold text-[#0B0F19] mb-2 leading-tight">
+            {title}
+          </CardTitle>
+
+          <CardDescription className="text-sm text-[#525252] leading-relaxed mb-4">
+            {description}
+          </CardDescription>
+
+          {/* Metrics */}
+          <div className="space-y-2">
+            {metrics.map((metric, index) => (
+              <div key={index} className="flex items-start gap-2">
+                <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                </div>
+                <p className="text-xs text-[#525252]">
+                  <span className="font-semibold text-[#0B0F19]">{metric.value}</span> {metric.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </CardHeader>
+
+        <CardContent className="pt-4 border-t border-border/20">
+          <Button
+            onClick={scrollToSection}
+            variant="ghost"
+            className="
+              w-full
+              justify-between
+              text-[#0A58D0]
+              hover:text-[#084BB3]
+              hover:bg-[#DBEAFE]/30
+              transition-all
+              duration-300
+              group/btn
+            "
+          >
+            <span className="font-medium">Explore Solutions</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+          </Button>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+};
+
+export function IndustryOverviewCards() {
+  const industries = [
+    {
+      icon: HeartPulse,
+      iconGradient: "bg-gradient-to-br from-[#EF4444] to-[#DC2626]",
+      title: "Healthcare & Life Sciences",
+      description: "HIPAA-compliant AI automation and analytics for clinical excellence and operational efficiency.",
+      metrics: [
+        { value: "100+", label: "Healthcare Clients" },
+        { value: "25%", label: "Avg Readmission Reduction" },
+        { value: "90%+", label: "Diagnostic Accuracy" }
+      ],
+      href: "healthcare",
+      delay: 0.1
+    },
+    {
+      icon: TrendingUp,
+      iconGradient: "bg-gradient-to-br from-[#10B981] to-[#059669]",
+      title: "Financial Services & Banking",
+      description: "Real-time fraud detection automation, risk analytics, and regulatory compliance solutions.",
+      metrics: [
+        { value: "$50M+", label: "Fraud Savings Delivered" },
+        { value: "95%+", label: "Fraud Detection Rate" },
+        { value: "<100ms", label: "Transaction Scoring" }
+      ],
+      href: "financial",
+      delay: 0.2
+    },
+    {
+      icon: Factory,
+      iconGradient: "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]",
+      title: "Manufacturing & Industrial",
+      description: "Industry 4.0 intelligent automation, predictive maintenance, and supply chain optimization.",
+      metrics: [
+        { value: "30-50%", label: "Downtime Reduction" },
+        { value: "99%+", label: "Defect Detection" },
+        { value: "15-25%", label: "Forecast Improvement" }
+      ],
+      href: "manufacturing",
+      delay: 0.3
+    },
+    {
+      icon: ShoppingCart,
+      iconGradient: "bg-gradient-to-br from-[#3B82F6] to-[#2563EB]",
+      title: "Retail & E-Commerce",
+      description: "Customer 360 analytics, AI personalization, demand forecasting, and dynamic pricing automation.",
+      metrics: [
+        { value: "28%", label: "Avg Revenue Increase" },
+        { value: "15-25%", label: "Conversion Lift" },
+        { value: "20-30%", label: "Forecast Error Reduction" }
+      ],
+      href: "retail",
+      delay: 0.4
+    },
+  ];
+
+  return (
+    <section className="py-16 md:py-20 px-4 bg-gradient-to-br from-[#F8FAFC] to-[#F1F5F9]">
+      <div className="container mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0B0F19] mb-4">
+            AI Automation & Analytics by Industry
+          </h2>
+          <p className="text-lg text-[#525252] max-w-3xl mx-auto">
+            Proven intelligent automation and advanced analytics solutions tailored to the unique challenges,
+            regulations, and opportunities of your industry.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {industries.map((industry, index) => (
+            <IndustryCardComponent key={index} {...industry} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

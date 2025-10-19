@@ -33,18 +33,35 @@ import {
  * Greeting Node
  * Handles initial greeting and transitions to name collection
  *
- * FIXED: Properly handles state transitions
+ * ENHANCED: Tries to extract pain point from initial message
  */
 export async function greetingNode(
   state: LeadQualificationState
 ): Promise<Partial<LeadQualificationState>> {
   console.log('[greetingNode] Processing greeting phase');
 
+  const { leadInfo, lastRole, lastTranscript } = state;
+
   // First time entering greeting - set initial phase
   if (!state.phase || state.phase === 'greeting') {
-    // If we have a user message, move to name collection
-    if (state.lastRole === 'user' && state.lastTranscript) {
-      console.log('[greetingNode] User responded, moving to name collection');
+    // If we have a user message, try to extract pain point FIRST
+    if (lastRole === 'user' && lastTranscript) {
+      console.log('[greetingNode] User responded:', lastTranscript);
+
+      // Try to extract pain point from initial message
+      const painPoint = extractPainPoint(lastTranscript);
+      if (painPoint) {
+        console.log('[greetingNode] 🎯 Extracted pain point from initial message:', painPoint);
+        // User gave us their challenge right away - capture it!
+        return {
+          phase: 'name',
+          leadInfo: { ...leadInfo, painPoint },
+          aiResponse: "That's a great use case for AI! To help you better, what's your name?"
+        };
+      }
+
+      // No pain point detected, just move to name collection
+      console.log('[greetingNode] No pain point detected, moving to name collection');
       return {
         phase: 'name',
         aiResponse: "Great to meet you! What's your name?"
@@ -78,9 +95,13 @@ export async function nameNode(
   // If we already have a name, move on
   if (leadInfo.name) {
     console.log(`[nameNode] Name already collected: ${leadInfo.name}`);
+    // CONTEXT-AWARE: Acknowledge pain point if already collected
+    const response = leadInfo.painPoint
+      ? `Nice to meet you, ${leadInfo.name}! I understand you're looking to ${leadInfo.painPoint}. What company do you work for?`
+      : `Nice to meet you, ${leadInfo.name}! What company do you work for?`;
     return {
       phase: 'company',
-      aiResponse: `Nice to meet you, ${leadInfo.name}! What company do you work for?`
+      aiResponse: response
     };
   }
 
@@ -89,10 +110,14 @@ export async function nameNode(
     const name = extractName(lastTranscript);
     if (name) {
       console.log(`[nameNode] ✅ Extracted name: ${name}`);
+      // CONTEXT-AWARE: Acknowledge pain point if already collected
+      const response = leadInfo.painPoint
+        ? `Nice to meet you, ${name}! I understand you're looking to ${leadInfo.painPoint}. What company do you work for?`
+        : `Nice to meet you, ${name}! What company do you work for?`;
       return {
         leadInfo: { ...leadInfo, name },
         phase: 'company',
-        aiResponse: `Nice to meet you, ${name}! What company do you work for?`
+        aiResponse: response
       };
     }
 
@@ -134,6 +159,18 @@ export async function companyNode(
   // If we already have company, move on
   if (leadInfo.company) {
     console.log(`[companyNode] Company already collected: ${leadInfo.company}`);
+    // CONTEXT-AWARE: Skip to email if we already have pain point
+    if (leadInfo.painPoint) {
+      console.log(`[companyNode] Pain point already collected, skipping to email`);
+      return {
+        phase: 'email',
+        uiAction: {
+          type: 'show_text_input',
+          inputType: 'email',
+        },
+        aiResponse: `Perfect! I understand ${leadInfo.company} is looking to ${leadInfo.painPoint}. What's the best email to reach you at? Please type it on the screen.`
+      };
+    }
     return {
       phase: 'painPoint',
       aiResponse: `Great! And what kind of Data & AI solutions is ${leadInfo.company} looking to implement?`
@@ -145,6 +182,19 @@ export async function companyNode(
     const company = extractCompany(lastTranscript);
     if (company) {
       console.log(`[companyNode] Extracted company: ${company}`);
+      // CONTEXT-AWARE: Skip to email if we already have pain point
+      if (leadInfo.painPoint) {
+        console.log(`[companyNode] Pain point already collected, skipping to email`);
+        return {
+          leadInfo: { ...leadInfo, company },
+          phase: 'email',
+          uiAction: {
+            type: 'show_text_input',
+            inputType: 'email',
+          },
+          aiResponse: `Perfect! I understand ${company} is looking to ${leadInfo.painPoint}. What's the best email to reach you at? Please type it on the screen.`
+        };
+      }
       return {
         leadInfo: { ...leadInfo, company },
         phase: 'painPoint',
@@ -180,6 +230,7 @@ export async function companyNode(
 /**
  * Pain Point Collection Node
  * Extracts business challenge from user input
+ * ENHANCED: Skips if already collected
  */
 export async function painPointNode(
   state: LeadQualificationState
@@ -188,12 +239,17 @@ export async function painPointNode(
 
   const { leadInfo, lastTranscript, lastRole, retries, phase } = state;
 
-  // If we already have pain point, move on
+  // If we already have pain point, move directly to email
   if (leadInfo.painPoint) {
-    console.log(`[painPointNode] Pain point already collected: ${leadInfo.painPoint}`);
+    console.log(`[painPointNode] ✅ Pain point already collected: ${leadInfo.painPoint}`);
+    console.log('[painPointNode] Skipping pain point question, moving to email');
     return {
       phase: 'email',
-      aiResponse: `I understand. That's a great use case for AI automation. To send you relevant information, what's the best email to reach you at? Please type it on the screen.`
+      uiAction: {
+        type: 'show_text_input',
+        inputType: 'email',
+      },
+      aiResponse: `Perfect! I understand you're looking to ${leadInfo.painPoint}. To send you relevant information, what's the best email to reach you at? Please type it on the screen.`
     };
   }
 
@@ -314,13 +370,15 @@ export async function emailNode(
 
   // First time entering email phase - show UI immediately
   if (phase === 'email' && !retries?.email) {
-    console.log('[emailNode] First time in email phase, showing UI');
+    console.log('[emailNode] 🎯 First time in email phase, SHOWING EMAIL UI');
+    const uiAction = {
+      type: 'show_text_input',
+      inputType: 'email',
+    };
+    console.log('[emailNode] 📤 Returning UI action:', JSON.stringify(uiAction));
     return {
       phase: 'email',
-      uiAction: {
-        type: 'show_text_input',
-        inputType: 'email',
-      },
+      uiAction,
       aiResponse: 'Perfect! To send you our information, please type your email address in the field on screen.',
       retries: incrementRetry(retries, 'email'),
     };
@@ -470,13 +528,15 @@ export async function phoneNode(
   // CRITICAL FIX: First time entering phone phase - show UI immediately
   // This ensures UI appears when transitioning from emailConfirm
   if (phase === 'phone' && !retries?.phone) {
-    console.log('[phoneNode] 🎯 First time in phone phase, SHOWING UI IMMEDIATELY');
+    console.log('[phoneNode] 🎯 First time in phone phase, SHOWING PHONE UI IMMEDIATELY');
+    const uiAction = {
+      type: 'show_text_input',
+      inputType: 'phone',
+    };
+    console.log('[phoneNode] 📤 Returning UI action:', JSON.stringify(uiAction));
     return {
       phase: 'phone',
-      uiAction: {
-        type: 'show_text_input',
-        inputType: 'phone',
-      },
+      uiAction,
       aiResponse: 'Perfect! Now, could you please type your phone number in the field on screen?',
       retries: incrementRetry(retries, 'phone'),
     };

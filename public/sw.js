@@ -1,8 +1,8 @@
 // Service Worker for Innovoco - Cache Strategy
-const CACHE_NAME = 'innovoco-v1';
+const CACHE_NAME = 'innovoco-v2';
 const urlsToCache = [
   '/',
-  '/images/logos/innovoco-logo.png',
+  '/images/logos/Innovoco-Logo-hires.png',
 ];
 
 // Install event - cache essential resources

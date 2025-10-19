@@ -79,7 +79,7 @@ export default function DashboardLayout({
               </div>
             ) : (
               <Image 
-                src="/images/logos/innovoco-logo.png" 
+                src="/images/logos/Innovoco-Logo-hires.png" 
                 alt="Innovoco" 
                 width={120} 
                 height={40} 
@@ -160,7 +160,7 @@ export default function DashboardLayout({
         </Button>
         <Link href="/dashboard" className="flex items-center">
           <Image 
-            src="/images/logos/innovoco-logo.png" 
+            src="/images/logos/Innovoco-Logo-hires.png" 
             alt="Innovoco" 
             width={100} 
             height={32} 
@@ -181,7 +181,7 @@ export default function DashboardLayout({
             <div className="flex h-16 items-center px-4 border-b border-border/50">
               <Link href="/dashboard" className="flex items-center">
                 <Image 
-                  src="/images/logos/innovoco-logo.png" 
+                  src="/images/logos/Innovoco-Logo-hires.png" 
                   alt="Innovoco" 
                   width={120} 
                   height={40} 

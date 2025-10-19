@@ -145,7 +145,7 @@ The homepage includes inline sections for:
    - **Data Foundation First:** Unlike pure AI consultants, we build on proven data warehouse expertise
    - **Framework Agnostic:** Independent analysis across Azure, Google, LangChain ecosystem (not biased)
    - **Implementation Ready:** Strategy leads directly to execution (not theoretical)
-   - **Industry Proven:** 10+ years delivering 500+ solutions to 300+ enterprises
+   - **Industry Proven:** 10+ years delivering 500+ solutions to 500+ enterprises
 
 4. **Process & Methodology** (300-400 words)
    - Discovery phase (2-4 weeks)
@@ -1030,7 +1030,7 @@ The homepage includes inline sections for:
 3. **Company Information**
    - 500+ solutions delivered
    - 10+ years expertise
-   - 300+ enterprise clients
+   - 500+ enterprise clients
    - Technology stack (Next.js 15, TypeScript, LangChain, etc.)
 
 ### External Competitive Intelligence

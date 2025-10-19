@@ -52,7 +52,12 @@ function shouldProceedFromName(state: LeadQualificationState): 'company' | typeo
   return END;
 }
 
-function shouldProceedFromCompany(state: LeadQualificationState): 'painPoint' | typeof END {
+function shouldProceedFromCompany(state: LeadQualificationState): 'painPoint' | 'email' | typeof END {
+  // If we have company AND pain point, skip to email
+  if (state.leadInfo.company && state.leadInfo.painPoint) {
+    console.log('[shouldProceedFromCompany] Pain point already collected, skipping to email');
+    return 'email';
+  }
   // If we have company, proceed to pain point
   if (state.leadInfo.company) {
     return 'painPoint';
@@ -140,9 +145,10 @@ export function buildLeadQualificationGraph() {
     .addEdge(START, 'greeting')
 
     // Add conditional edges for each node
+    // ENHANCED: Flexible routing allows skipping already-collected data
     .addConditionalEdges('greeting', shouldProceedFromGreeting)
     .addConditionalEdges('name', shouldProceedFromName)
-    .addConditionalEdges('company', shouldProceedFromCompany)
+    .addConditionalEdges('company', shouldProceedFromCompany) // Can skip to email if pain point exists
     .addConditionalEdges('painPoint', shouldProceedFromPainPoint)
     .addConditionalEdges('email', shouldProceedFromEmail)
     .addConditionalEdges('emailConfirm', shouldProceedFromEmailConfirm)
@@ -156,6 +162,18 @@ export function buildLeadQualificationGraph() {
 
   return workflow.compile({
     checkpointer, // Enable persistence
+    // CRITICAL FIX: Interrupt before each node to prevent multi-step execution
+    // This forces the graph to pause and wait for user input after each step
+    interruptBefore: [
+      'name',
+      'company',
+      'painPoint',
+      'email',
+      'emailConfirm',
+      'phone',
+      'phoneConfirm',
+      'qualified'
+    ],
     // No recursion limit needed - graph has proper END conditions
   });
 }

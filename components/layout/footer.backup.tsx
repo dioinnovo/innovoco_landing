@@ -64,7 +64,7 @@ export function Footer({ onContactClick }: FooterProps) {
               />
             </div>
             <p className="text-sm font-semibold text-[#93C5FD] mb-2">
-              Enterprise AI & Automation Excellence
+              Enterprise AI & Data Tranformation
             </p>
             <p className="text-sm text-gray-400 mb-4">
               Transforming Fortune 500 data into intelligent action since 2015

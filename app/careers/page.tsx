@@ -190,8 +190,8 @@ export default function CareersPage() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
-              <Image 
-                src="/images/logos/innovoco-logo.png"
+              <Image
+                src="/images/logos/Innovoco-Logo-hires.png"
                 alt="Innovoco"
                 width={140}
                 height={40}

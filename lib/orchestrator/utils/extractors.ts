@@ -124,15 +124,17 @@ export function extractName(text: string): string | null {
     if (match) {
       const extractedName = match[1].trim();
       // Additional validation: avoid single common words
-      if (extractedName.split(' ').length === 1 && extractedName.length < 5) {
-        continue; // Skip single short words that are likely not names
+      // UPDATED: Lowered threshold from 5 to 3 to support names like "Dio", "Max", "Leo"
+      if (extractedName.split(' ').length === 1 && extractedName.length < 3) {
+        continue; // Skip very short single words (1-2 chars) that are likely not names
       }
       return extractedName;
     }
   }
 
   // Try to detect just first names when clearly stated
-  const firstNamePattern = /^(?:I'm |My name is |It's |This is )?([A-Z][a-z]{3,})$/;
+  // UPDATED: Changed {3,} to {1,} to support short names like "Dio", "Li", "Bo", "Jo"
+  const firstNamePattern = /^(?:I'm |My name is |It's |This is )?([A-Z][a-z]{1,})$/;
   const firstNameMatch = text.match(firstNamePattern);
   if (firstNameMatch && !greetings.includes(firstNameMatch[1].toLowerCase())) {
     return firstNameMatch[1];

@@ -46,7 +46,7 @@ export function HeroStatic() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-6 md:pt-8 border-t border-gray-200/50 hero-stats">
             <div className="text-center stat-item">
-              <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">500+</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">1000+</div>
               <div className="text-xs md:text-sm text-[#6B7280]">Solutions Delivered</div>
             </div>
             <div className="text-center stat-item">
@@ -54,7 +54,7 @@ export function HeroStatic() {
               <div className="text-xs md:text-sm text-[#6B7280]">Years Expertise</div>
             </div>
             <div className="text-center stat-item">
-              <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">300+</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">500+</div>
               <div className="text-xs md:text-sm text-[#6B7280]">Enterprise Clients</div>
             </div>
             <div className="text-center stat-item">

@@ -334,14 +334,14 @@ export default function AIStrategyPage() {
 
       <ServicePageLayout breadcrumbs={breadcrumbs}>
         <ServiceHero
-          badge="Trusted by 300+ Enterprises"
+          badge="Trusted by 500+ Enterprises"
           title="AI Strategy & Consulting Services"
           subtitle="Turn AI Vision into Measurable Business Results"
           description="Expert guidance to navigate AI adoption with confidence. Framework-agnostic roadmaps, governance, and ROI modeling backed by 10+ years of data expertise."
           trustIndicators={[
             { metric: "500+", label: "AI Solutions" },
             { metric: "10Y", label: "Data Expertise" },
-            { metric: "300+", label: "Enterprise Clients" },
+            { metric: "500+", label: "Enterprise Clients" },
             { metric: "90D", label: "Avg. Deployment" }
           ]}
           primaryCTA={{

@@ -54,11 +54,11 @@ function getGraph() {
 /**
  * Process a transcript through the LangGraph workflow
  *
- * FIXED PATTERN (with persistence):
- * 1. Update state with new transcript
- * 2. Invoke graph with thread_id for persistence
- * 3. Graph executes nodes until it hits END
- * 4. Return final state with UI actions
+ * UPDATED PATTERN (with interrupts):
+ * 1. Check if graph is currently interrupted
+ * 2. If interrupted: resume with new transcript
+ * 3. If not interrupted: invoke with updated state
+ * 4. Return state with UI actions and AI response
  *
  * @param sessionId - Unique session identifier
  * @param transcript - User or assistant transcript
@@ -77,13 +77,6 @@ export async function processTranscript(
   // Get or create session
   const currentState = await getOrCreateSession(sessionId);
 
-  // Update state with new transcript
-  const inputState: Partial<LeadQualificationState> = {
-    ...currentState,
-    lastTranscript: transcript,
-    lastRole: role,
-  };
-
   // Get compiled graph
   const graph = getGraph();
 
@@ -93,13 +86,41 @@ export async function processTranscript(
     recursionLimit: 50,
   };
 
-  // Invoke graph with persistence - it will execute until it hits END
-  console.log(`[GraphManager] Invoking graph from phase: ${currentState.phase}`);
-  console.log(`[GraphManager] Input role: ${role}, transcript: "${transcript.substring(0, 50)}..."`);
+  console.log(`[GraphManager] Processing ${role} input from phase: ${currentState.phase}`);
+  console.log(`[GraphManager] Transcript: "${transcript.substring(0, 50)}..."`);
 
-  const result = await graph.invoke(inputState, config);
+  // Check if graph is currently interrupted (waiting for user input)
+  const threadState = await graph.getState(config);
 
-  console.log(`[GraphManager] Phase: ${currentState.phase} → ${result.phase}`);
+  let result;
+
+  if (threadState.next && threadState.next.length > 0) {
+    // Graph is interrupted - resume execution with new transcript
+    console.log(`[GraphManager] 🔄 Graph is interrupted at nodes: ${threadState.next.join(', ')}`);
+    console.log(`[GraphManager] Resuming with new transcript...`);
+
+    // Update state with new transcript before resuming
+    const resumeState: Partial<LeadQualificationState> = {
+      ...currentState,
+      lastTranscript: transcript,
+      lastRole: role,
+    };
+
+    result = await graph.invoke(resumeState, config);
+  } else {
+    // Graph is not interrupted - normal invocation
+    console.log(`[GraphManager] 🚀 Starting new graph invocation`);
+
+    const inputState: Partial<LeadQualificationState> = {
+      ...currentState,
+      lastTranscript: transcript,
+      lastRole: role,
+    };
+
+    result = await graph.invoke(inputState, config);
+  }
+
+  console.log(`[GraphManager] Phase transition: ${currentState.phase} → ${result.phase}`);
   if (result.uiAction) {
     console.log(`[GraphManager] 🎯 UI Action:`, result.uiAction);
   }

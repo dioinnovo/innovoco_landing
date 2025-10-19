@@ -654,8 +654,16 @@ export function useRealtimeVoice(options: UseRealtimeVoiceOptions): UseRealtimeV
 
     setIsCallActive(true);
     setError(null);
-    setTranscripts([]);
-    setCurrentTranscript('');
+
+    // CRITICAL FIX: Only clear transcripts if starting fresh
+    // If continuing from chat, preserve the transcript history
+    if (!hasExistingMessages) {
+      setTranscripts([]);
+      setCurrentTranscript('');
+    } else {
+      console.log('Voice Provider: Preserving existing transcripts:', transcripts.length);
+    }
+
     callStartTimeRef.current = new Date();
     startCallTimer();
 
@@ -672,10 +680,11 @@ export function useRealtimeVoice(options: UseRealtimeVoiceOptions): UseRealtimeV
     }
 
     if (providerRef.current) {
-      await providerRef.current.startCall();
+      // CRITICAL FIX: Pass hasExistingMessages to provider so it can skip greeting
+      await providerRef.current.startCall(hasExistingMessages);
       console.log('Voice Provider: Call started', hasExistingMessages ? 'with existing context' : 'fresh');
     }
-  }, [isConnected, isCallActive, connect, startCallTimer, stopCallTimer]);
+  }, [isConnected, isCallActive, connect, startCallTimer, stopCallTimer, transcripts]);
 
   /**
    * End voice call

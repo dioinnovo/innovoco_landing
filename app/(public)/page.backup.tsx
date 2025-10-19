@@ -388,7 +388,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.2, delay: 0.3 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">300+</div>
+                <div className="text-2xl md:text-3xl font-bold text-[#0B0F19]">500+</div>
                 <div className="text-xs md:text-sm text-[#525252]">Enterprise Clients</div>
               </motion.div>
               <motion.div
@@ -1734,7 +1734,7 @@ export default function LandingPage() {
           <div className="mt-16 pt-16 border-t border-border/50">
             <div className="text-center mb-8">
               <p className="text-[#525252]">
-                Join 300+ enterprises driving real business impact with data and AI
+                Join 500+ enterprises driving real business impact with data and AI
               </p>
             </div>
             <div className="relative overflow-hidden py-4">
@@ -2048,7 +2048,7 @@ export default function LandingPage() {
                 <div className="text-sm text-[#525252]">Years of Excellence</div>
               </div>
               <div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-[#0F766E] to-[#10B981] bg-clip-text text-transparent mb-1">300+</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-[#0F766E] to-[#10B981] bg-clip-text text-transparent mb-1">500+</div>
                 <div className="text-sm text-[#525252]">Enterprise Clients</div>
               </div>
               <div>

@@ -40,13 +40,16 @@ export async function POST(request: NextRequest) {
     // Include UI action if graph triggered one
     if (result.uiAction) {
       response.uiAction = result.uiAction;
-      console.log(`[${sessionId}] 🎯 UI Action triggered:`, result.uiAction);
+      console.log(`[${sessionId}] 🎯 UI Action triggered:`, JSON.stringify(result.uiAction));
+      console.log(`[${sessionId}] 📤 Sending UI action to frontend:`, result.uiAction.type, result.uiAction.inputType);
+    } else {
+      console.log(`[${sessionId}] ℹ️  No UI action in this response`);
     }
 
     // Include AI response if graph generated one
     if (result.aiResponse) {
       response.aiResponse = result.aiResponse;
-      console.log(`[${sessionId}] 💬 AI Response:`, result.aiResponse);
+      console.log(`[${sessionId}] 💬 AI Response:`, result.aiResponse.substring(0, 100) + '...');
     }
 
     // If lead is qualified, log the lead data and send notifications

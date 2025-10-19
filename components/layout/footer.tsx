@@ -83,8 +83,8 @@ export function Footer({ onContactClick }: FooterProps) {
           {/* Column 1: Company & Social - spans full width on mobile */}
           <div className="col-span-2 md:col-span-2 lg:col-span-1">
             <div className="mb-6">
-              <Image 
-                src="/images/logos/innovoco-logo.png"
+              <Image
+                src="/images/logos/Innovoco-Logo-hires.png"
                 alt="Innovoco Logo"
                 width={628}
                 height={179}
@@ -94,7 +94,7 @@ export function Footer({ onContactClick }: FooterProps) {
               />
             </div>
             <p className="text-xs sm:text-sm font-semibold text-[#93C5FD] mb-3">
-              Enterprise AI & Automation Excellence
+              Enterprise AI & Data Transformation Leader
             </p>
             <p className="text-xs sm:text-sm text-gray-400 mb-6 leading-relaxed">
               Transforming Fortune 500 data into intelligent action since 2015
@@ -131,9 +131,9 @@ export function Footer({ onContactClick }: FooterProps) {
               >
                 <Twitter className="h-4 w-4 text-gray-400" />
               </a>
-              <a 
-                href="https://youtube.com/@innovoco" 
-                target="_blank" 
+              <a
+                href="https://www.youtube.com/@Innovoco"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-lg bg-white/5 hover:bg-[#FF0000]/20 border border-white/10 hover:border-[#FF0000]/30 transition-all duration-200"
                 aria-label="YouTube"
@@ -201,18 +201,18 @@ export function Footer({ onContactClick }: FooterProps) {
             <h3 className="font-semibold text-white mb-4 text-sm sm:text-base">Solutions</h3>
                 <ul className="space-y-2">
                   <li>
-                    <Link href="/#services" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Services
+                    <Link href="/#ai" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
+                      AI Solutions
                     </Link>
                   </li>
                   <li>
-                    <Link href="/#approach" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Approach
+                    <Link href="/#data" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
+                      Data Engineering
                     </Link>
                   </li>
                   <li>
-                    <Link href="/#solutions" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Solutions
+                    <Link href="/#analytics" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
+                      Analytics & BI
                     </Link>
                   </li>
                   <li>
@@ -234,16 +234,8 @@ export function Footer({ onContactClick }: FooterProps) {
             <ul className="space-y-2">
               <li>
                 <Link href="/#about" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                  About
+                  Our Team
                 </Link>
-              </li>
-              <li>
-                <button 
-                  onClick={onContactClick}
-                  className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 text-left"
-                >
-                  Contact
-                </button>
               </li>
               <li>
                 <Link href="/partners" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
@@ -254,6 +246,14 @@ export function Footer({ onContactClick }: FooterProps) {
                 <Link href="/careers" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
                   Careers
                 </Link>
+              </li>
+              <li>
+                <button
+                  onClick={onContactClick}
+                  className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 text-left"
+                >
+                  Contact Us
+                </button>
               </li>
             </ul>
           </div>
@@ -274,14 +274,9 @@ export function Footer({ onContactClick }: FooterProps) {
                       Webinars
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/press" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Press
-                    </Link>
-                  </li>
                 </ul>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-white mb-4 text-sm sm:text-base">Legal</h3>
                 <ul className="space-y-2">
@@ -293,11 +288,6 @@ export function Footer({ onContactClick }: FooterProps) {
                   <li>
                     <Link href="/terms" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
                       Terms of Service
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/security" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Security
                     </Link>
                   </li>
                 </ul>

@@ -135,7 +135,7 @@ export class OpenAIProvider extends BaseVoiceProvider {
     this.emit('disconnected');
   }
   
-  async startCall(): Promise<void> {
+  async startCall(hasExistingContext: boolean = false): Promise<void> {
     if (!this.connected) {
       throw new Error('Not connected');
     }
@@ -208,21 +208,27 @@ export class OpenAIProvider extends BaseVoiceProvider {
       this.callActive = true;
       this.emit('call_started');
 
-      // Trigger the assistant to greet the user proactively
-      // Send a response.create to make the assistant speak first
-      // IMPORTANT: Increased delay to ensure audio playback system is fully initialized
-      // This prevents the greeting from starting before the user's audio is ready
-      setTimeout(() => {
-        if (this.callActive && this.ws?.readyState === WebSocket.OPEN) {
-          this.sendMessage({
-            type: 'response.create',
-            response: {
-              modalities: ['text', 'audio'],
-              instructions: 'Start the conversation in English. Greet the user warmly and immediately ask for their name: "Hey there! Welcome to in-NOH-voh-co. I\'m Luci, your AI assistant. May I know who I\'m speaking with?"'
-            }
-          });
-        }
-      }, 1000); // Optimized delay: enough time for audio system to initialize without feeling too slow
+      // CRITICAL FIX: Only send greeting if this is a fresh conversation
+      // If hasExistingContext=true, the user has already chatted and we should continue seamlessly
+      if (!hasExistingContext) {
+        // Trigger the assistant to greet the user proactively
+        // Send a response.create to make the assistant speak first
+        // IMPORTANT: Increased delay to ensure audio playback system is fully initialized
+        // This prevents the greeting from starting before the user's audio is ready
+        setTimeout(() => {
+          if (this.callActive && this.ws?.readyState === WebSocket.OPEN) {
+            this.sendMessage({
+              type: 'response.create',
+              response: {
+                modalities: ['text', 'audio'],
+                instructions: 'Start the conversation in English. Greet the user warmly and immediately ask for their name: "Hey there! Welcome to in-NOH-voh-co. I\'m Luci, your AI assistant. May I know who I\'m speaking with?"'
+              }
+            });
+          }
+        }, 1000); // Optimized delay: enough time for audio system to initialize without feeling too slow
+      } else {
+        console.log('OpenAI Provider: Skipping greeting - continuing existing conversation');
+      }
 
     } catch (error) {
       console.error('Failed to start call:', error);

@@ -1,0 +1,19 @@
+{
+  "node": {
+    "40cfb1a4ba535aa2c0f38da37db0e2c3792ca9bafb": {
+      "workers": {
+        "app/(public)/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fdiodelahoz%2FProjects%2Finnovoco-public%2Fnextjs-app%2Fapp%2Factions%2Fcontact.ts%22%2C%5B%7B%22id%22%3A%2240cfb1a4ba535aa2c0f38da37db0e2c3792ca9bafb%22%2C%22exportedName%22%3A%22submitContactForm%22%2C%22filename%22%3A%22app%2Factions%2Fcontact.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(public)/page": "action-browser"
+      },
+      "filename": "app/actions/contact.ts",
+      "exportedName": "submitContactForm"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "4qo2ny0hKxYuwjA0r3+vnjws1u3ubYG/2WmMQ4KAz5k="
+}

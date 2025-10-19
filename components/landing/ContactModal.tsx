@@ -244,7 +244,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                 </Label>
                 <Input
                   id="name"
-                  placeholder="John Doe"
+                  placeholder="Full Name"
                   className={`h-10 rounded-lg border-border/30 focus:border-[#0A58D0] transition-colors ${
                     errors.name ? 'border-red-500 focus:border-red-500' : ''
                   }`}
@@ -263,7 +263,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                 <Input
                   id="email"
                   type="email"
-                  placeholder="john@company.com"
+                  placeholder="you@company.com"
                   className={`h-10 rounded-lg border-border/30 focus:border-[#0A58D0] transition-colors ${
                     errors.email ? 'border-red-500 focus:border-red-500' : ''
                   }`}
@@ -283,7 +283,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                 </Label>
                 <Input
                   id="company"
-                  placeholder="Acme Inc."
+                  placeholder="Tesla Motors"
                   className={`h-10 rounded-lg border-border/30 focus:border-[#0A58D0] transition-colors ${
                     errors.company ? 'border-red-500 focus:border-red-500' : ''
                   }`}

@@ -1292,8 +1292,8 @@ Every page must demonstrate:
 
 **Experience:**
 - "10+ years building enterprise data warehouses"
-- "500+ solutions delivered"
-- "300+ enterprise clients"
+- "1000+ solutions delivered"
+- "500+ enterprise clients"
 - Specific client success stories with metrics
 
 **Expertise:**
