@@ -78,10 +78,10 @@ export function Footer({ onContactClick }: FooterProps) {
         </div>
 
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12 mb-12">
-          
-          {/* Column 1: Company & Social - spans full width on mobile */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
+
+          {/* Column 1: Company & Social - spans 2 columns on large screens */}
+          <div className="col-span-1 sm:col-span-2 lg:col-span-2">
             <div className="mb-6">
               <Image
                 src="/images/logos/Innovoco-Logo-hires.png"
@@ -97,7 +97,7 @@ export function Footer({ onContactClick }: FooterProps) {
               Enterprise AI & Data Transformation Leader
             </p>
             <p className="text-xs sm:text-sm text-gray-400 mb-6 leading-relaxed">
-              Transforming Fortune 500 data into intelligent action since 2015
+              Transforming enterprise data into intelligent automation since 2015
             </p>
             
             {/* Contact Info */}
@@ -152,105 +152,61 @@ export function Footer({ onContactClick }: FooterProps) {
             </div>
           </div>
 
-          {/* Column 2: Offices */}
+          {/* Column 2: Solutions */}
           <div className="col-span-1">
-            <h3 className="font-semibold text-white mb-4 text-sm sm:text-base">Offices</h3>
-                <div className="space-y-4">
-                  <a 
-                    href="https://maps.google.com/?q=333+SE+2nd+Avenue+Suite+2000+Miami+FL+33131"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200"
-                  >
-                    <div className="flex items-start gap-2">
-                      <MapPin className="h-3 sm:h-4 w-3 sm:w-4 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <div className="font-medium text-xs sm:text-sm">Miami, USA</div>
-                        <div className="text-[10px] sm:text-xs text-gray-500 group-hover:text-gray-400 mt-1">
-                          333 SE 2nd Avenue<br />
-                          Suite 2000<br />
-                          Miami, FL 33131
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  
-                  <a 
-                    href="https://maps.google.com/?q=The+Exchange+Tower+130+King+St+W+Toronto+ON+M5X+2A2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200"
-                  >
-                    <div className="flex items-start gap-2">
-                      <MapPin className="h-3 sm:h-4 w-3 sm:w-4 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <div className="font-medium text-xs sm:text-sm">Toronto, Canada</div>
-                        <div className="text-[10px] sm:text-xs text-gray-500 group-hover:text-gray-400 mt-1">
-                          The Exchange Tower<br />
-                          130 King St W<br />
-                          Toronto, ON M5X 2A2
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-          </div>
-
-          {/* Column 3: Solutions */}
-          <div className="col-span-1">
-            <h3 className="font-semibold text-white mb-4 text-sm sm:text-base">Solutions</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link href="/#ai" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      AI Solutions
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/#data" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Data Engineering
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/#analytics" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Analytics & BI
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/#industries" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Industries
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/case-studies" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Case Studies
-                    </Link>
-                  </li>
-                </ul>
-          </div>
-
-          {/* Column 4: Company */}
-          <div className="col-span-1 md:col-span-1">
-            <h3 className="font-semibold text-white mb-4 text-sm sm:text-base">Company</h3>
-            <ul className="space-y-2">
+            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Solutions</h3>
+            <ul className="space-y-3">
               <li>
-                <Link href="/#about" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
+                <Link href="/#ai" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  AI Solutions
+                </Link>
+              </li>
+              <li>
+                <Link href="/#data" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Data Engineering
+                </Link>
+              </li>
+              <li>
+                <Link href="/#analytics" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Analytics & BI
+                </Link>
+              </li>
+              <li>
+                <Link href="/#industries" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Industries
+                </Link>
+              </li>
+              <li>
+                <Link href="/case-studies" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Case Studies
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Company */}
+          <div className="col-span-1">
+            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Company</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/#about" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
                   Our Team
                 </Link>
               </li>
               <li>
-                <Link href="/partners" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
+                <Link href="/partners" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
                   Partners
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
+                <Link href="/careers" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
                   Careers
                 </Link>
               </li>
               <li>
                 <button
                   onClick={onContactClick}
-                  className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 text-left"
+                  className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 text-left block"
                 >
                   Contact Us
                 </button>
@@ -258,39 +214,63 @@ export function Footer({ onContactClick }: FooterProps) {
             </ul>
           </div>
 
-          {/* Column 5: Resources */}
-          <div className="col-span-1 md:col-span-1">
-            <div className="space-y-6 sm:space-y-8">
+          {/* Column 4: Resources */}
+          <div className="col-span-1">
+            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Resources</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/blog" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/webinars" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Webinars
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 5: Offices */}
+          <div className="col-span-1">
+            <h3 className="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Offices</h3>
+            <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-white mb-4 text-sm sm:text-base">News</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link href="/blog" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/webinars" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Webinars
-                    </Link>
-                  </li>
-                </ul>
+                <p className="text-sm font-medium text-white mb-1">Miami, USA</p>
+                <a
+                  href="https://maps.google.com/?q=333+SE+2nd+Avenue+Suite+2000+Miami+FL+33131"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block leading-relaxed"
+                >
+                  333 SE 2nd Avenue<br />
+                  Suite 2000<br />
+                  Miami, FL 33131
+                </a>
               </div>
 
               <div>
-                <h3 className="font-semibold text-white mb-4 text-sm sm:text-base">Legal</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link href="/privacy" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Privacy Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/terms" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200">
-                      Terms of Service
-                    </Link>
-                  </li>
-                </ul>
+                <p className="text-sm font-medium text-white mb-1">Toronto, Canada</p>
+                <a
+                  href="https://maps.google.com/?q=The+Exchange+Tower+130+King+St+W+Toronto+ON+M5X+2A2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block leading-relaxed"
+                >
+                  The Exchange Tower<br />
+                  130 King St W<br />
+                  Toronto, ON M5X 2A2
+                </a>
               </div>
             </div>
           </div>

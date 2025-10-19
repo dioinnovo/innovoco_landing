@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { motion } from "framer-motion";
 import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
+import { ContactProvider, useContact } from '@/contexts/ContactContext';
 
 interface BreadcrumbItem {
   label: string;
@@ -16,10 +18,20 @@ interface ServicePageLayoutProps {
   breadcrumbs: BreadcrumbItem[];
 }
 
-export function ServicePageLayout({ children, breadcrumbs }: ServicePageLayoutProps) {
+function ServicePageLayoutInner({ children, breadcrumbs }: ServicePageLayoutProps) {
+  const { openContactModal } = useContact();
+
   return (
     <>
       <div className="min-h-screen bg-white">
+        {/* Skip to content link for keyboard navigation */}
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
+
+        {/* Navigation Header */}
+        <Header onContactClick={openContactModal} />
+
         {/* Breadcrumbs */}
         <nav className="bg-[#F8FAFC] border-b border-border/30" aria-label="Breadcrumb">
           <div className="container mx-auto max-w-7xl px-4 py-4">
@@ -55,7 +67,7 @@ export function ServicePageLayout({ children, breadcrumbs }: ServicePageLayoutPr
         </nav>
 
         {/* Main Content */}
-        <main className="container mx-auto max-w-7xl px-4">
+        <main id="main-content" className="container mx-auto max-w-7xl px-4" role="main">
           <motion.div
             initial={{ opacity: 0.95, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,5 +81,13 @@ export function ServicePageLayout({ children, breadcrumbs }: ServicePageLayoutPr
       {/* Footer */}
       <Footer />
     </>
+  );
+}
+
+export function ServicePageLayout(props: ServicePageLayoutProps) {
+  return (
+    <ContactProvider>
+      <ServicePageLayoutInner {...props} />
+    </ContactProvider>
   );
 }

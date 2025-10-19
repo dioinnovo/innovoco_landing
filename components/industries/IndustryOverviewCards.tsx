@@ -26,19 +26,6 @@ const IndustryCardComponent = ({
   href,
   delay
 }: IndustryCardProps) => {
-  const scrollToSection = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById(href);
-    if (element) {
-      const offset = 100; // Account for fixed header
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elementPosition - offset,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -46,80 +33,80 @@ const IndustryCardComponent = ({
       transition={{ duration: 0.5, delay }}
       className="h-full"
     >
-      <Card className="
-        group
-        h-full
-        bg-white
-        border-border/30
-        hover:border-border/50
-        shadow-sm
-        hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)]
-        transition-all
-        duration-300
-        rounded-[22px]
-        overflow-hidden
-        flex
-        flex-col
-      ">
-        <CardHeader className="pb-4 flex-grow">
-          {/* Icon Container with 3D Fluent styling */}
-          <div className={`
-            w-16 h-16
-            rounded-xl
-            ${iconGradient}
-            flex items-center justify-center
-            mb-4
-            group-hover:scale-105
-            transition-transform
-            duration-300
-            shadow-sm
-          `}>
-            <Icon className="h-8 w-8 text-white" />
-          </div>
-
-          <CardTitle className="text-xl font-semibold text-[#0B0F19] mb-2 leading-tight">
-            {title}
-          </CardTitle>
-
-          <CardDescription className="text-sm text-[#525252] leading-relaxed mb-4">
-            {description}
-          </CardDescription>
-
-          {/* Metrics */}
-          <div className="space-y-2">
-            {metrics.map((metric, index) => (
-              <div key={index} className="flex items-start gap-2">
-                <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
-                </div>
-                <p className="text-xs text-[#525252]">
-                  <span className="font-semibold text-[#0B0F19]">{metric.value}</span> {metric.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </CardHeader>
-
-        <CardContent className="pt-4 border-t border-border/20">
-          <Button
-            onClick={scrollToSection}
-            variant="ghost"
-            className="
-              w-full
-              justify-between
-              text-[#0A58D0]
-              hover:text-[#084BB3]
-              hover:bg-[#DBEAFE]/30
-              transition-all
+      <Link href={href} className="block h-full">
+        <Card className="
+          group
+          h-full
+          bg-white
+          border-border/30
+          hover:border-border/50
+          shadow-sm
+          hover:shadow-[0_0_2px_rgba(0,0,0,0.12),0_3px_6px_rgba(0,0,0,0.14)]
+          transition-all
+          duration-300
+          rounded-[22px]
+          overflow-hidden
+          flex
+          flex-col
+          cursor-pointer
+        ">
+          <CardHeader className="pb-4 flex-grow">
+            {/* Icon Container with 3D Fluent styling */}
+            <div className={`
+              w-16 h-16
+              rounded-xl
+              ${iconGradient}
+              flex items-center justify-center
+              mb-4
+              group-hover:scale-105
+              transition-transform
               duration-300
-              group/btn
-            "
-          >
-            <span className="font-medium">Explore Solutions</span>
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-          </Button>
-        </CardContent>
-      </Card>
+              shadow-sm
+            `}>
+              <Icon className="h-8 w-8 text-white" />
+            </div>
+
+            <CardTitle className="text-xl font-semibold text-[#0B0F19] mb-2 leading-tight">
+              {title}
+            </CardTitle>
+
+            <CardDescription className="text-sm text-[#525252] leading-relaxed mb-4">
+              {description}
+            </CardDescription>
+
+            {/* Metrics */}
+            <div className="space-y-2">
+              {metrics.map((metric, index) => (
+                <div key={index} className="flex items-start gap-2">
+                  <div className="w-4 h-4 rounded-full bg-[#D1FAE5] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle className="h-2.5 w-2.5 text-[#0F766E]" />
+                  </div>
+                  <p className="text-xs text-[#525252]">
+                    <span className="font-semibold text-[#0B0F19]">{metric.value}</span> {metric.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </CardHeader>
+
+          <CardContent className="pt-4 border-t border-border/20">
+            <div
+              className="
+                w-full
+                flex items-center justify-between
+                text-[#0A58D0]
+                group-hover:text-[#084BB3]
+                transition-all
+                duration-300
+                px-2 py-1
+              "
+            >
+              <span className="font-medium">Explore Solutions</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </div>
+          </CardContent>
+        </Card>
+      </Link>
     </motion.div>
   );
 };
@@ -136,7 +123,7 @@ export function IndustryOverviewCards() {
         { value: "25%", label: "Avg Readmission Reduction" },
         { value: "90%+", label: "Diagnostic Accuracy" }
       ],
-      href: "healthcare",
+      href: "/solutions/industries/healthcare",
       delay: 0.1
     },
     {
@@ -149,7 +136,7 @@ export function IndustryOverviewCards() {
         { value: "95%+", label: "Fraud Detection Rate" },
         { value: "<100ms", label: "Transaction Scoring" }
       ],
-      href: "financial",
+      href: "/solutions/industries/financial-services",
       delay: 0.2
     },
     {
@@ -162,7 +149,7 @@ export function IndustryOverviewCards() {
         { value: "99%+", label: "Defect Detection" },
         { value: "15-25%", label: "Forecast Improvement" }
       ],
-      href: "manufacturing",
+      href: "/solutions/industries/manufacturing",
       delay: 0.3
     },
     {
@@ -175,7 +162,7 @@ export function IndustryOverviewCards() {
         { value: "15-25%", label: "Conversion Lift" },
         { value: "20-30%", label: "Forecast Error Reduction" }
       ],
-      href: "retail",
+      href: "/solutions/industries/retail",
       delay: 0.4
     },
   ];

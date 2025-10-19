@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import ContactModal from "@/components/landing/ContactModal";
 import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
 import {
   ArrowRight,
   Sparkles,
@@ -47,8 +48,6 @@ import {
   ChevronRight,
   Lightbulb,
   Phone,
-  Menu,
-  X,
   HardHat,
   Camera,
   FileText,
@@ -58,7 +57,6 @@ import {
 export default function LandingPage() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Clear any hash from URL on initial load to prevent jumping
@@ -94,172 +92,13 @@ export default function LandingPage() {
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>
-      
+
       {/* Navigation Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50" role="banner">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-16 md:h-20" role="navigation" aria-label="Main navigation">
-            {/* Logo */}
-            <Link href="/" className="flex items-center group flex-shrink-0">
-              <Image
-                src="/images/logos/Innovoco-Logo-hires.png"
-                alt="Innovoco Logo"
-                width={140}
-                height={46}
-                className="h-8 md:h-10 w-auto transition-transform duration-300 ease-in-out group-hover:scale-105"
-                priority
-              />
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
-              <a
-                href="#ai"
-                className={`text-base font-medium transition-colors relative py-2 ${activeSection === 'ai' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
-              >
-                AI
-                {activeSection === 'ai' && (
-                  <span className="absolute -bottom-[20px] md:-bottom-[24px] left-0 right-0 h-[3px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] rounded-full" />
-                )}
-              </a>
-              <a
-                href="#analytics"
-                className={`text-base font-medium transition-colors relative py-2 ${activeSection === 'analytics' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
-              >
-                Analytics
-                {activeSection === 'analytics' && (
-                  <span className="absolute -bottom-[20px] md:-bottom-[24px] left-0 right-0 h-[3px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] rounded-full" />
-                )}
-              </a>
-              <a
-                href="#data"
-                className={`text-base font-medium transition-colors relative py-2 ${activeSection === 'data' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
-              >
-                Data
-                {activeSection === 'data' && (
-                  <span className="absolute -bottom-[20px] md:-bottom-[24px] left-0 right-0 h-[3px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] rounded-full" />
-                )}
-              </a>
-              <a
-                href="#industries"
-                className={`text-base font-medium transition-colors relative py-2 ${activeSection === 'industries' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
-              >
-                Industries
-                {activeSection === 'industries' && (
-                  <span className="absolute -bottom-[20px] md:-bottom-[24px] left-0 right-0 h-[3px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] rounded-full" />
-                )}
-              </a>
-              <a
-                href="#about"
-                className={`text-base font-medium transition-colors relative py-2 ${activeSection === 'about' ? 'text-[#0A58D0] font-semibold' : 'text-[#525252] hover:text-[#0B0F19]'}`}
-              >
-                Team
-                {activeSection === 'about' && (
-                  <span className="absolute -bottom-[20px] md:-bottom-[24px] left-0 right-0 h-[3px] bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] rounded-full" />
-                )}
-              </a>
-            </div>
-
-            {/* Desktop Right Section */}
-            <div className="hidden lg:flex items-center gap-4">
-              <Button
-                onClick={() => setContactModalOpen(true)}
-                className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-base px-6 h-10 font-medium rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                aria-label="Open contact form"
-              >
-                Book My Call
-              </Button>
-            </div>
-
-            {/* Mobile Right Section */}
-            <div className="flex lg:hidden items-center gap-2">
-              <Button
-                onClick={() => setContactModalOpen(true)}
-                size="sm"
-                className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-sm px-4 h-9 font-medium rounded-full"
-                aria-label="Open contact form"
-              >
-                Book Call
-              </Button>
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-6 w-6 text-[#0B0F19]" />
-                ) : (
-                  <Menu className="h-6 w-6 text-[#0B0F19]" />
-                )}
-              </button>
-            </div>
-          </nav>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-border/50 bg-background/95 backdrop-blur-md">
-            <div className="mx-auto max-w-7xl px-4 py-4 space-y-1">
-              <a
-                href="#ai"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                  activeSection === 'ai'
-                    ? 'bg-blue-50 text-[#0A58D0] font-semibold'
-                    : 'text-[#525252] hover:bg-gray-50 hover:text-[#0B0F19]'
-                }`}
-              >
-                AI
-              </a>
-              <a
-                href="#analytics"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                  activeSection === 'analytics'
-                    ? 'bg-blue-50 text-[#0A58D0] font-semibold'
-                    : 'text-[#525252] hover:bg-gray-50 hover:text-[#0B0F19]'
-                }`}
-              >
-                Analytics
-              </a>
-              <a
-                href="#data"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                  activeSection === 'data'
-                    ? 'bg-blue-50 text-[#0A58D0] font-semibold'
-                    : 'text-[#525252] hover:bg-gray-50 hover:text-[#0B0F19]'
-                }`}
-              >
-                Data
-              </a>
-              <a
-                href="#industries"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                  activeSection === 'industries'
-                    ? 'bg-blue-50 text-[#0A58D0] font-semibold'
-                    : 'text-[#525252] hover:bg-gray-50 hover:text-[#0B0F19]'
-                }`}
-              >
-                Industries
-              </a>
-              <a
-                href="#about"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                  activeSection === 'about'
-                    ? 'bg-blue-50 text-[#0A58D0] font-semibold'
-                    : 'text-[#525252] hover:bg-gray-50 hover:text-[#0B0F19]'
-                }`}
-              >
-                Team
-              </a>
-            </div>
-          </div>
-        )}
-      </header>
+      <Header
+        onContactClick={() => setContactModalOpen(true)}
+        isLandingPage={true}
+        activeSection={activeSection}
+      />
 
       {/* Main Content */}
       <main id="main-content" role="main">

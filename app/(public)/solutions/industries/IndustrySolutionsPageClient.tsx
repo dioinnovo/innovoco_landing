@@ -16,12 +16,12 @@ import { ActionCTASection } from '@/components/industries/ActionCTASection';
 import { SchemaMarkup } from '@/lib/seo/SchemaMarkup';
 import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
 import { Brain, Database, Rocket, Building2, HeartPulse, ShoppingCart, Factory, TrendingUp, Shield, Zap } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { trackServicePageView, useScrollDepthTracking, trackIndustrySelection } from '@/lib/analytics/events';
-import ContactModal from '@/components/landing/ContactModal';
+import { useContact } from '@/contexts/ContactContext';
 
 export function IndustrySolutionsPageClient() {
-  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const { openContactModal } = useContact();
 
   const breadcrumbs = [
     { label: 'AI Automation & Analytics by Industry', href: '/solutions/industries' }
@@ -86,7 +86,7 @@ export function IndustrySolutionsPageClient() {
           ]}
           primaryCTA={{
             text: "Schedule Automation Consultation",
-            onClick: () => setContactModalOpen(true)
+            onClick: openContactModal
           }}
           secondaryCTA={{
             text: "View Industry Case Studies",
@@ -151,17 +151,11 @@ export function IndustrySolutionsPageClient() {
         <DifferentiatorGrid columns={2} />
 
         {/* Get Started - Visual Action Cards */}
-        <ActionCTASection onConsultationClick={() => setContactModalOpen(true)} />
+        <ActionCTASection onConsultationClick={openContactModal} />
 
         {/* Related Services */}
         <RelatedServices services={relatedServices} />
       </ServicePageLayout>
-
-      {/* Contact Modal */}
-      <ContactModal
-        open={contactModalOpen}
-        onOpenChange={setContactModalOpen}
-      />
     </>
   );
 }
