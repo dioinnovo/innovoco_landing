@@ -15,7 +15,7 @@ interface ServiceHeroProps {
   subtitle: string;
   description: string;
   trustIndicators: TrustIndicator[];
-  primaryCTA: {
+  primaryCTA?: {
     text: string;
     href?: string;
     onClick?: () => void;

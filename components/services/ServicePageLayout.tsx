@@ -1,12 +1,12 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { motion } from "framer-motion";
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
-import { ContactProvider, useContact } from '@/contexts/ContactContext';
+import ContactModal from '@/components/landing/ContactModal';
 
 interface BreadcrumbItem {
   label: string;
@@ -18,8 +18,8 @@ interface ServicePageLayoutProps {
   breadcrumbs: BreadcrumbItem[];
 }
 
-function ServicePageLayoutInner({ children, breadcrumbs }: ServicePageLayoutProps) {
-  const { openContactModal } = useContact();
+export function ServicePageLayout({ children, breadcrumbs }: ServicePageLayoutProps) {
+  const [contactModalOpen, setContactModalOpen] = useState(false);
 
   return (
     <>
@@ -30,7 +30,7 @@ function ServicePageLayoutInner({ children, breadcrumbs }: ServicePageLayoutProp
         </a>
 
         {/* Navigation Header */}
-        <Header onContactClick={openContactModal} />
+        <Header onContactClick={() => setContactModalOpen(true)} />
 
         {/* Breadcrumbs */}
         <nav className="bg-[#F8FAFC] border-b border-border/30" aria-label="Breadcrumb">
@@ -80,14 +80,12 @@ function ServicePageLayoutInner({ children, breadcrumbs }: ServicePageLayoutProp
 
       {/* Footer */}
       <Footer />
-    </>
-  );
-}
 
-export function ServicePageLayout(props: ServicePageLayoutProps) {
-  return (
-    <ContactProvider>
-      <ServicePageLayoutInner {...props} />
-    </ContactProvider>
+      {/* Contact Modal */}
+      <ContactModal
+        open={contactModalOpen}
+        onOpenChange={setContactModalOpen}
+      />
+    </>
   );
 }

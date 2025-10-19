@@ -410,7 +410,7 @@ export default function CaseStudiesPage() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0B0F19] text-[#0B0F19] dark:text-[#F9FAFB] print:bg-white print:text-black">
+    <div className="min-h-screen bg-white dark:bg-[#0B0F19] text-[#0B0F19] dark:text-[#F9FAFB] print:bg-white print:text-black overflow-x-hidden">
       {/* Skip to content link for keyboard navigation */}
       <a 
         href="#main-content" 
@@ -421,18 +421,18 @@ export default function CaseStudiesPage() {
       
       {/* Navigation Header */}
       <header className="sticky top-0 z-50 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-md border-b border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm print:hidden">
-        <div className="container mx-auto px-6 py-4">
-          <nav className="flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <nav className="flex items-center justify-between gap-4">
             {/* Left side - Logo and Title */}
-            <div className="flex items-center gap-6">
-              <Link href="/" className="flex items-center">
+            <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+              <Link href="/" className="flex items-center flex-shrink-0">
                 <Image
                   src="/images/logos/Innovoco-Logo-hires.png"
                   alt="Innovoco Logo"
                   width={628}
                   height={179}
-                  className="object-contain"
-                  style={{ width: 'auto', height: '40px' }}
+                  className="object-contain max-w-[120px] sm:max-w-none"
+                  style={{ width: 'auto', height: '32px', maxHeight: '40px' }}
                   priority
                 />
               </Link>
@@ -442,7 +442,7 @@ export default function CaseStudiesPage() {
             </div>
             
             {/* Right side - Download button */}
-            <div>
+            <div className="flex-shrink-0">
               <PrintPDFButton />
             </div>
           </nav>
@@ -454,7 +454,7 @@ export default function CaseStudiesPage() {
       
         {/* Hero - Executive Decision Matrix */}
         <section className="border-b border-[#E5E7EB]/30 dark:border-[#374151]/30 bg-gradient-to-br from-[#DBEAFE]/20 via-[#EDE9FE]/10 to-[#FECACA]/10 dark:from-[#0B0F19] dark:via-[#1F2937]/30 dark:to-[#0B0F19] print:bg-white print:border-0 print:break-inside-avoid">
-        <div className="container mx-auto max-w-6xl px-4 py-8 sm:py-12 md:py-16 grid md:grid-cols-2 gap-6 md:gap-10 items-start print:py-6 print:gap-4 print:px-4">
+        <div className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-12 md:py-16 grid md:grid-cols-2 gap-6 md:gap-10 items-start print:py-6 print:gap-4 print:px-4">
           <div>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight leading-tight text-[#0B0F19] dark:text-[#F9FAFB] print:text-2xl print:text-black print:mb-3">
               Enterprise Agentic Frameworks — Executive & Enterprise Ready
@@ -595,7 +595,7 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Strategic Foundations - Fluent Design */}
-      <section className="container mx-auto max-w-6xl px-4 py-12 md:py-16 print:py-4 print:px-4 print:block print:max-w-full print:page-break-inside-avoid" style={{pageBreakInside: 'avoid'}}>
+      <section className="w-full max-w-6xl mx-auto px-4 py-12 md:py-16 print:py-4 print:px-4 print:block print:max-w-full print:page-break-inside-avoid" style={{pageBreakInside: 'avoid'}}>
         <div className="text-center mb-12 print:mb-4">
           <h2 className="text-4xl font-semibold text-[#0B0F19] dark:text-[#F3F2F1] mb-4 print:text-2xl print:font-bold print:text-black print:mb-2">
             Strategic Foundations
@@ -738,13 +738,15 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Landscape Matrix */}
-      <section className="container mx-auto max-w-6xl px-4 py-6 md:py-8 print:py-3 print:px-2 print:break-before-page print:landscape">
-        <div className="flex items-center justify-between mb-6 print:mb-4">
+      <section className="w-full max-w-7xl mx-auto px-4 py-6 md:py-8 print:py-3 print:px-2 print:break-before-page print:landscape">
+        <div className="flex items-center justify-between mb-6 print:mb-4 flex-wrap gap-2">
           <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] print:text-2xl print:text-black">Landscape Matrix</h2>
           <div className="text-xs text-[#6B7280] dark:text-[#9CA3AF] print:text-gray-600">As of {TODAY}</div>
         </div>
-        <div className="overflow-x-auto rounded-[22px] border border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm print:shadow-none print:border-gray-300 print:overflow-visible">
-          <Table>
+        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="inline-block min-w-full align-middle">
+            <div className="overflow-hidden rounded-[22px] border border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm print:shadow-none print:border-gray-300 print:overflow-visible">
+              <Table className="min-w-full">
             <TableHeader className="bg-muted/50 print:bg-gray-100">
               <TableRow>
                 <TableHead className="w-[260px] print:font-semibold">Category</TableHead>
@@ -773,12 +775,14 @@ export default function CaseStudiesPage() {
               Azure & Vertex both provide agent runtimes, evals, and prompt tooling; LangGraph adds framework‑agnostic orchestration, including long‑running state across clouds.
             </TableCaption>
           </Table>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Data Use Cases */}
       <section className="py-8 md:py-16 bg-gradient-to-br from-[#DBEAFE]/10 via-white to-[#EDE9FE]/10 dark:from-[#0B0F19] dark:via-[#1F2937]/30 dark:to-[#0B0F19] print:py-3 print:bg-white print:break-before-page">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="w-full max-w-6xl mx-auto px-4">
           <div className="text-center mb-10 print:mb-6">
             <div className="inline-flex items-center gap-2 text-sm font-medium text-[#0A58D0] dark:text-[#93C5FD] mb-4 print:text-blue-600">
               <Database className="h-4 w-4" />
@@ -855,7 +859,7 @@ export default function CaseStudiesPage() {
 
       {/* Functional Use Cases */}
       <section className="py-8 md:py-16 bg-gradient-to-br from-[#FECACA]/10 via-white to-[#DBEAFE]/10 dark:from-[#0B0F19] dark:via-[#1F2937]/30 dark:to-[#0B0F19] print:py-3 print:bg-white">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="w-full max-w-6xl mx-auto px-4">
           <div className="text-center mb-10 print:mb-6">
             <div className="inline-flex items-center gap-2 text-sm font-medium text-[#DC2626] dark:text-[#F87171] mb-4 print:text-red-600">
               <Briefcase className="h-4 w-4" />
@@ -933,7 +937,7 @@ export default function CaseStudiesPage() {
 
       {/* Enterprise Automation Workflows */}
       <section className="py-8 md:py-16 bg-white dark:bg-[#0B0F19] print:py-3 print:bg-white print:break-before-page">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="w-full max-w-6xl mx-auto px-4">
           <div className="text-center mb-10 print:mb-6">
             <div className="inline-flex items-center gap-2 text-sm font-medium text-[#8B5CF6] dark:text-[#A78BFA] mb-4 print:text-purple-600">
               <Workflow className="h-4 w-4" />
@@ -1083,7 +1087,7 @@ export default function CaseStudiesPage() {
 
       {/* Return on Investment */}
       <section className="py-8 md:py-16 bg-gradient-to-br from-[#DBEAFE]/10 via-white to-[#D1FAE5]/10 dark:from-[#0B0F19] dark:via-[#1F2937]/30 dark:to-[#0B0F19] print:py-6 print:bg-white print:break-before-page print:block">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="w-full max-w-6xl mx-auto px-4">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 text-sm font-medium text-[#10B981] dark:text-[#34D399] mb-4">
               <BarChart3 className="h-4 w-4" />
@@ -1217,7 +1221,7 @@ export default function CaseStudiesPage() {
 
       {/* Open‑Source vs Proprietary - Practical Take */}
       <section className="py-8 md:py-16 bg-gradient-to-br from-[#EDE9FE]/20 via-white to-[#DBEAFE]/20 dark:from-[#1F2937] dark:via-[#0B0F19] dark:to-[#1F2937] print:py-3 print:bg-white">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="w-full max-w-6xl mx-auto px-4">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 text-sm font-medium text-[#8B5CF6] dark:text-[#A78BFA] mb-4">
               <Library className="h-4 w-4" />

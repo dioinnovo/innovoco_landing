@@ -18,10 +18,8 @@ import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
 import { Brain, Database, Rocket, Building2, HeartPulse, ShoppingCart, Factory, TrendingUp, Shield, Zap } from 'lucide-react';
 import { useEffect } from 'react';
 import { trackServicePageView, useScrollDepthTracking, trackIndustrySelection } from '@/lib/analytics/events';
-import { useContact } from '@/contexts/ContactContext';
 
 export function IndustrySolutionsPageClient() {
-  const { openContactModal } = useContact();
 
   const breadcrumbs = [
     { label: 'AI Automation & Analytics by Industry', href: '/solutions/industries' }
@@ -84,10 +82,6 @@ export function IndustrySolutionsPageClient() {
             { metric: "500+", label: "AI Automation Solutions" },
             { metric: "$50M+", label: "Value Generated" }
           ]}
-          primaryCTA={{
-            text: "Schedule Automation Consultation",
-            onClick: openContactModal
-          }}
           secondaryCTA={{
             text: "View Industry Case Studies",
             href: "/case-studies"
@@ -151,7 +145,7 @@ export function IndustrySolutionsPageClient() {
         <DifferentiatorGrid columns={2} />
 
         {/* Get Started - Visual Action Cards */}
-        <ActionCTASection onConsultationClick={openContactModal} />
+        <ActionCTASection />
 
         {/* Related Services */}
         <RelatedServices services={relatedServices} />
