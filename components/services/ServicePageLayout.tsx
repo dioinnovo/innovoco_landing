@@ -1,24 +1,17 @@
 "use client";
 
 import { ReactNode, useState } from "react";
-import Link from "next/link";
-import { ChevronRight, Home } from "lucide-react";
 import { motion } from "framer-motion";
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import ContactModal from '@/components/landing/ContactModal';
 
-interface BreadcrumbItem {
-  label: string;
-  href: string;
-}
-
 interface ServicePageLayoutProps {
   children: ReactNode;
-  breadcrumbs: BreadcrumbItem[];
+  breadcrumbs?: any; // Keep for backward compatibility but not used
 }
 
-export function ServicePageLayout({ children, breadcrumbs }: ServicePageLayoutProps) {
+export function ServicePageLayout({ children }: ServicePageLayoutProps) {
   const [contactModalOpen, setContactModalOpen] = useState(false);
 
   return (
@@ -31,40 +24,6 @@ export function ServicePageLayout({ children, breadcrumbs }: ServicePageLayoutPr
 
         {/* Navigation Header */}
         <Header onContactClick={() => setContactModalOpen(true)} />
-
-        {/* Breadcrumbs */}
-        <nav className="bg-[#F8FAFC] border-b border-border/30" aria-label="Breadcrumb">
-          <div className="container mx-auto max-w-7xl px-4 py-4">
-            <ol className="flex items-center space-x-2 text-sm">
-              <li>
-                <Link
-                  href="/"
-                  className="flex items-center text-[#525252] hover:text-[#0A58D0] transition-colors"
-                >
-                  <Home className="h-4 w-4" />
-                  <span className="sr-only">Home</span>
-                </Link>
-              </li>
-              {breadcrumbs.map((crumb, index) => (
-                <li key={index} className="flex items-center">
-                  <ChevronRight className="h-4 w-4 text-[#94A3B8] mx-2" />
-                  {index === breadcrumbs.length - 1 ? (
-                    <span className="font-medium text-[#0B0F19]" aria-current="page">
-                      {crumb.label}
-                    </span>
-                  ) : (
-                    <Link
-                      href={crumb.href}
-                      className="text-[#525252] hover:text-[#0A58D0] transition-colors"
-                    >
-                      {crumb.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </nav>
 
         {/* Main Content */}
         <main id="main-content" className="container mx-auto max-w-7xl px-4" role="main">

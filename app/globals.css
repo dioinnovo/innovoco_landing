@@ -333,7 +333,7 @@ body {
   
   @page landscape {
     size: A4 landscape;
-    margin: 10mm;
+    margin: 10mm 5mm;
   }
 
   /* Avoid page breaks inside elements */
@@ -347,10 +347,30 @@ body {
     break-before: page;
     page-break-before: always;
   }
-  
+
   /* Landscape page */
   .print\\:landscape {
     page: landscape;
+  }
+
+  /* Landscape section specific styles */
+  .print\\:landscape {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .print\\:landscape table {
+    width: 100% !important;
+    font-size: 0.7rem !important;
+  }
+
+  .print\\:landscape th,
+  .print\\:landscape td {
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
   }
 
   /* Clean up cards and borders */

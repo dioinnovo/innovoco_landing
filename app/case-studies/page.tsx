@@ -738,10 +738,10 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Landscape Matrix */}
-      <section className="container mx-auto max-w-6xl px-4 py-6 md:py-8 print:py-3 print:px-2 print:break-before-page print:landscape">
-        <div className="flex items-center justify-between mb-6 print:mb-4">
-          <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] print:text-2xl print:text-black">Landscape Matrix</h2>
-          <div className="text-xs text-[#6B7280] dark:text-[#9CA3AF] print:text-gray-600">As of {TODAY}</div>
+      <section className="container mx-auto max-w-6xl px-4 py-6 md:py-8 print:py-2 print:px-0 print:break-before-page print:landscape">
+        <div className="flex items-center justify-between mb-6 print:mb-2">
+          <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] print:text-lg print:text-black">Landscape Matrix</h2>
+          <div className="text-xs text-[#6B7280] dark:text-[#9CA3AF] print:text-gray-600 print:text-[10px]">As of {TODAY}</div>
         </div>
         <div className="overflow-x-auto rounded-[22px] border border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm print:shadow-none print:border-gray-300 print:overflow-visible">
               <Table className="min-w-full">
