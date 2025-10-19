@@ -5,13 +5,22 @@ import { ServiceHero } from '@/components/services/ServiceHero';
 import { ServiceSection } from '@/components/services/ServiceSection';
 import { RelatedServices } from '@/components/services/RelatedServices';
 import { HealthcareSection } from '@/components/industries/HealthcareSection';
+import { HealthcareFAQs } from '@/components/industries/healthcare/HealthcareFAQs';
+import { HealthcareDifferentiators } from '@/components/industries/healthcare/HealthcareDifferentiators';
+import { HealthcareActionCTA } from '@/components/industries/healthcare/HealthcareActionCTA';
+import { HealthcareCaseStudies } from '@/components/industries/healthcare/HealthcareCaseStudies';
+import { SectionCTA } from '@/components/industries/healthcare/SectionCTA';
+import { RelatedIndustries } from '@/components/industries/healthcare/RelatedIndustries';
+import ContactModal from '@/components/landing/ContactModal';
 import { SchemaMarkup } from '@/lib/seo/SchemaMarkup';
 import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
 import { Brain, Database, Rocket, HeartPulse } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { trackServicePageView, useScrollDepthTracking } from '@/lib/analytics/events';
 
 export function HealthcarePageClient() {
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+
   const breadcrumbs = [
     { label: 'Solutions', href: '/solutions/industries' },
     { label: 'Healthcare & Life Sciences', href: '/solutions/industries/healthcare' }
@@ -75,9 +84,9 @@ export function HealthcarePageClient() {
             { metric: "90%+", label: "Diagnostic Accuracy" },
             { metric: "100%", label: "HIPAA Compliant" }
           ]}
-          secondaryCTA={{
-            text: "View Healthcare Case Studies",
-            href: "/case-studies"
+          primaryCTA={{
+            text: "Schedule HIPAA Compliance Assessment",
+            onClick: () => setContactModalOpen(true)
           }}
           backgroundGradient="bg-gradient-to-br from-[#FECACA] via-[#FED7AA] to-[#FEF3C7]"
         />
@@ -85,9 +94,59 @@ export function HealthcarePageClient() {
         {/* Healthcare-Specific Content */}
         <HealthcareSection />
 
+        {/* Section CTA 1: After Healthcare Solutions */}
+        <SectionCTA
+          title="Schedule Your Healthcare AI Assessment"
+          subtitle="HIPAA-compliant | 30-minute consultation | No obligation"
+          buttonText="Book Your Assessment"
+          onClick={() => setContactModalOpen(true)}
+        />
+
+        {/* Healthcare Case Studies */}
+        <HealthcareCaseStudies />
+
+        {/* Section CTA 2: After Case Studies */}
+        <SectionCTA
+          title="See How We Can Help Your Organization"
+          subtitle="Join 100+ healthcare providers transforming patient care with AI"
+          buttonText="Start Your Transformation"
+          onClick={() => setContactModalOpen(true)}
+        />
+
+        {/* Healthcare-Specific FAQs */}
+        <HealthcareFAQs />
+
+        {/* Section CTA 3: After FAQs */}
+        <SectionCTA
+          title="Still Have Questions? Let's Talk"
+          subtitle="Speak with a healthcare AI specialist about your specific needs"
+          buttonText="Schedule a Call"
+          onClick={() => setContactModalOpen(true)}
+        />
+
+        {/* Why Choose Us - Healthcare Focus */}
+        <HealthcareDifferentiators columns={2} />
+
+        {/* Section CTA 4: After Differentiators */}
+        <SectionCTA
+          title="Partner With Healthcare AI Experts"
+          subtitle="10+ years healthcare experience | HIPAA compliance guaranteed"
+          buttonText="Get Started Today"
+          onClick={() => setContactModalOpen(true)}
+        />
+
+        {/* Healthcare Action CTAs */}
+        <HealthcareActionCTA onConsultationClick={() => setContactModalOpen(true)} />
+
+        {/* Related Industries */}
+        <RelatedIndustries />
+
         {/* Related Services */}
         <RelatedServices services={relatedServices} />
       </ServicePageLayout>
+
+      {/* Contact Modal */}
+      <ContactModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
     </>
   );
 }

@@ -6,18 +6,13 @@ import { ServiceSection } from '@/components/services/ServiceSection';
 import { RelatedServices } from '@/components/services/RelatedServices';
 import { IndustryOverviewCards } from '@/components/industries/IndustryOverviewCards';
 import { IndustryFAQs, industryFAQs } from '@/components/industries/IndustryFAQs';
-import { TechnologyStack, healthcareTechnologies, financialTechnologies, manufacturingTechnologies, retailTechnologies } from '@/components/industries/TechnologyStack';
-import { HealthcareSection } from '@/components/industries/HealthcareSection';
-import { FinancialSection } from '@/components/industries/FinancialSection';
-import { ManufacturingSection } from '@/components/industries/ManufacturingSection';
-import { RetailSection } from '@/components/industries/RetailSection';
 import { DifferentiatorGrid } from '@/components/industries/DifferentiatorGrid';
 import { ActionCTASection } from '@/components/industries/ActionCTASection';
 import { SchemaMarkup } from '@/lib/seo/SchemaMarkup';
 import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
 import { Brain, Database, Rocket, Building2, HeartPulse, ShoppingCart, Factory, TrendingUp, Shield, Zap } from 'lucide-react';
 import { useEffect } from 'react';
-import { trackServicePageView, useScrollDepthTracking, trackIndustrySelection } from '@/lib/analytics/events';
+import { trackServicePageView, useScrollDepthTracking } from '@/lib/analytics/events';
 
 export function IndustrySolutionsPageClient() {
 
@@ -121,18 +116,6 @@ export function IndustrySolutionsPageClient() {
 
         {/* Industry Overview Cards */}
         <IndustryOverviewCards />
-
-        {/* Healthcare Solutions Section */}
-        <HealthcareSection />
-
-        {/* Financial Services Solutions Section */}
-        <FinancialSection />
-
-        {/* Manufacturing Solutions Section */}
-        <ManufacturingSection />
-
-        {/* Retail Solutions Section */}
-        <RetailSection />
 
         {/* FAQ Section */}
         <IndustryFAQs

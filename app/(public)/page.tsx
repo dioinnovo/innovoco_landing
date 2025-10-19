@@ -921,7 +921,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Industries Accordion - Space-Saving Design */}
-          <Accordion type="single" collapsible defaultValue="financial" className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-4">
             {/* Financial Services */}
             <AccordionItem value="financial" className="border border-[#93C5FD]/30 rounded-[20px] overflow-hidden bg-white shadow-sm">
               <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-gradient-to-br hover:from-[#DBEAFE]/20 hover:to-[#93C5FD]/5 transition-colors">
@@ -992,6 +992,19 @@ export default function LandingPage() {
                     </div>
                   </CardContent>
                 </Card>
+                </div>
+
+                {/* Explore Solutions Button */}
+                <div className="mt-8">
+                  <Link href="/solutions/industries/financial-services">
+                    <Button
+                      size="lg"
+                      className="w-full bg-[#0A58D0] hover:bg-[#084BB3] text-white transition-all duration-300 group rounded-full h-12"
+                    >
+                      <span className="font-semibold">Explore Financial Services Solutions</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -1067,6 +1080,19 @@ export default function LandingPage() {
                   </CardContent>
                 </Card>
                 </div>
+
+                {/* Explore Solutions Button */}
+                <div className="mt-8">
+                  <Link href="/solutions/industries/healthcare">
+                    <Button
+                      size="lg"
+                      className="w-full bg-[#0F766E] hover:bg-[#0D5B53] text-white transition-all duration-300 group rounded-full h-12"
+                    >
+                      <span className="font-semibold">Explore Healthcare Solutions</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </div>
               </AccordionContent>
             </AccordionItem>
 
@@ -1141,6 +1167,19 @@ export default function LandingPage() {
                   </CardContent>
                 </Card>
                 </div>
+
+                {/* Explore Solutions Button */}
+                <div className="mt-8">
+                  <Link href="/solutions/industries/manufacturing">
+                    <Button
+                      size="lg"
+                      className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white transition-all duration-300 group rounded-full h-12"
+                    >
+                      <span className="font-semibold">Explore Manufacturing Solutions</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </div>
               </AccordionContent>
             </AccordionItem>
 
@@ -1214,6 +1253,19 @@ export default function LandingPage() {
                     </div>
                   </CardContent>
                 </Card>
+                </div>
+
+                {/* Explore Solutions Button */}
+                <div className="mt-8">
+                  <Link href="/solutions/industries/retail">
+                    <Button
+                      size="lg"
+                      className="w-full bg-[#DC2626] hover:bg-[#B91C1C] text-white transition-all duration-300 group rounded-full h-12"
+                    >
+                      <span className="font-semibold">Explore Retail Solutions</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -1323,6 +1375,19 @@ export default function LandingPage() {
 
                 {/* Placeholder for visual balance */}
                 <div className="hidden md:block"></div>
+                </div>
+
+                {/* Explore Solutions Button */}
+                <div className="mt-8">
+                  <Link href="/solutions/industries/construction">
+                    <Button
+                      size="lg"
+                      className="w-full bg-[#D97706] hover:bg-[#B45309] text-white transition-all duration-300 group rounded-full h-12"
+                    >
+                      <span className="font-semibold">Explore Construction Solutions</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
