@@ -9,9 +9,10 @@ import ContactModal from '@/components/landing/ContactModal';
 interface ServicePageLayoutProps {
   children: ReactNode;
   breadcrumbs?: any; // Keep for backward compatibility but not used
+  customLogo?: string;
 }
 
-export function ServicePageLayout({ children }: ServicePageLayoutProps) {
+export function ServicePageLayout({ children, customLogo }: ServicePageLayoutProps) {
   const [contactModalOpen, setContactModalOpen] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ export function ServicePageLayout({ children }: ServicePageLayoutProps) {
         </a>
 
         {/* Navigation Header */}
-        <Header onContactClick={() => setContactModalOpen(true)} />
+        <Header onContactClick={() => setContactModalOpen(true)} customLogo={customLogo} />
 
         {/* Main Content */}
         <main id="main-content" className="container mx-auto max-w-7xl px-4" role="main">

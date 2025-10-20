@@ -10,10 +10,12 @@ interface HeaderProps {
   onContactClick?: () => void;
   isLandingPage?: boolean;
   activeSection?: string;
+  customLogo?: string;
 }
 
-export function Header({ onContactClick, isLandingPage = false, activeSection = "" }: HeaderProps) {
+export function Header({ onContactClick, isLandingPage = false, activeSection = "", customLogo }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const logoSrc = customLogo || "/images/logos/Innovoco-Logo-hires.png";
 
   // For non-landing pages, link back to landing page sections
   const getNavHref = (section: string) => {
@@ -35,11 +37,11 @@ export function Header({ onContactClick, isLandingPage = false, activeSection = 
           {/* Logo */}
           <Link href="/" className="flex items-center group flex-shrink-0">
             <Image
-              src="/images/logos/Innovoco-Logo-hires.png"
+              src={logoSrc}
               alt="Innovoco Logo"
-              width={140}
-              height={46}
-              className="h-8 md:h-10 w-auto transition-transform duration-300 ease-in-out group-hover:scale-105"
+              width={120}
+              height={39}
+              className="h-7 md:h-9 w-auto transition-transform duration-300 ease-in-out group-hover:scale-105"
               priority
             />
           </Link>

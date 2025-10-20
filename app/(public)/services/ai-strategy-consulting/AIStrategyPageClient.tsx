@@ -55,7 +55,7 @@ export function AIStrategyPageClient() {
         { name: "AI Strategy & Consulting", url: "https://innovoco.com/services/ai-strategy-consulting" }
       ])} />
 
-      <ServicePageLayout breadcrumbs={breadcrumbs}>
+      <ServicePageLayout breadcrumbs={breadcrumbs} customLogo="/images/logos/innovoco-ai-hires.png">
         <ServiceHero
           badge="Trusted by 500+ Enterprises"
           title="AI Strategy & Consulting Services"

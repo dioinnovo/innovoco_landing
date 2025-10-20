@@ -3,7 +3,8 @@
 import { ServiceSection } from '@/components/services/ServiceSection';
 import { UseCaseCard, UseCaseGrid } from './UseCaseCard';
 import { MetricCard, MetricGrid } from './MetricCard';
-import { TechnologyStack, healthcareTechnologies } from './TechnologyStack';
+import { TechnologyIntegration } from './TechnologyIntegration';
+import { healthcareTechnologies } from './TechnologyStack';
 import { HeartPulse, Activity, Users, Shield, Target, Brain, FileText, AlertTriangle } from 'lucide-react';
 
 export function HealthcareSection() {
@@ -68,57 +69,29 @@ export function HealthcareSection() {
               icon={AlertTriangle}
               title="Sepsis Early Warning"
               metric="6-12 hrs advance notice"
-              description="Real-time risk scoring using EHR data to alert clinicians before onset"
+              description="Real-time risk scoring using EHR data to alert clinicians before onset. Analyzes vital signs, lab results, and patient history to detect sepsis patterns 6-12 hours before clinical manifestation. Reduces sepsis mortality by 15-20%."
               gradient="bg-gradient-to-br from-[#FECACA] to-[#FCA5A5]"
-              expandable
-              details="Analyzes vital signs, lab results, and patient history to detect sepsis patterns 6-12 hours before clinical manifestation."
-              benefits={[
-                "Reduces sepsis mortality by 15-20%",
-                "Integrates with Epic, Cerner, Allscripts EHRs",
-                "Real-time alerting to clinical teams"
-              ]}
             />
             <UseCaseCard
               icon={FileText}
               title="Medical Image Analysis"
               metric="90%+ sensitivity"
-              description="AI-assisted radiology for detecting tumors, fractures, and abnormalities in X-rays, CT scans, MRIs"
+              description="AI-assisted radiology for detecting tumors, fractures, and abnormalities in X-rays, CT scans, MRIs. Computer vision models trained on NIH ChestX-ray and MIMIC datasets reduce diagnostic errors by 30-40%."
               gradient="bg-gradient-to-br from-[#FECACA] to-[#FCA5A5]"
-              expandable
-              details="Computer vision models trained on NIH ChestX-ray and MIMIC datasets, fine-tuned for your patient population."
-              benefits={[
-                "Faster turnaround times for radiology reports",
-                "Reduces diagnostic errors by 30-40%",
-                "FDA SaMD compliant when applicable"
-              ]}
             />
             <UseCaseCard
               icon={Users}
               title="Clinical Trial Matching"
               metric="40% faster enrollment"
-              description="NLP-based patient-trial matching to accelerate enrollment and improve outcomes"
+              description="NLP-based patient-trial matching to accelerate enrollment and improve outcomes. Natural language processing analyzes EHR data to match eligible patients with relevant clinical trials automatically."
               gradient="bg-gradient-to-br from-[#FECACA] to-[#FCA5A5]"
-              expandable
-              details="Natural language processing analyzes EHR data to match eligible patients with relevant clinical trials."
-              benefits={[
-                "Accelerates trial enrollment by 30-50%",
-                "Improves patient access to innovative treatments",
-                "Automated eligibility screening"
-              ]}
             />
             <UseCaseCard
               icon={Shield}
               title="Drug Interaction Detection"
               metric="Real-time alerts"
-              description="Alerts for dangerous medication combinations at prescription time"
+              description="Alerts for dangerous medication combinations at prescription time. Analyzes patient medications, allergies, and conditions to prevent adverse drug events. Reduces adverse drug events by 25-35%."
               gradient="bg-gradient-to-br from-[#FECACA] to-[#FCA5A5]"
-              expandable
-              details="Analyzes patient medications, allergies, and conditions to prevent adverse drug events."
-              benefits={[
-                "Reduces adverse drug events by 25-35%",
-                "Integrates with e-prescribing systems",
-                "Considers patient-specific factors"
-              ]}
             />
           </UseCaseGrid>
         </div>
@@ -187,11 +160,11 @@ export function HealthcareSection() {
         </div>
 
         {/* Technology Integrations */}
-        <TechnologyStack
+        <TechnologyIntegration
           title="Healthcare Technology Integrations"
           description="Seamless integration with leading EHR systems, health data platforms, and compliance frameworks"
           technologies={healthcareTechnologies}
-          columns={5}
+          gradient="from-[#FECACA] to-[#FCA5A5]"
         />
       </ServiceSection>
     </div>

@@ -3,7 +3,8 @@
 import { ServiceSection } from '@/components/services/ServiceSection';
 import { UseCaseCard, UseCaseGrid } from './UseCaseCard';
 import { MetricCard, MetricGrid } from './MetricCard';
-import { TechnologyStack, manufacturingTechnologies } from './TechnologyStack';
+import { TechnologyIntegration } from './TechnologyIntegration';
+import { manufacturingTechnologies } from './TechnologyStack';
 import { Factory, Wrench, Eye, TrendingDown, PackageCheck, Network, Activity, Shield } from 'lucide-react';
 
 export function ManufacturingSection() {
@@ -69,57 +70,29 @@ export function ManufacturingSection() {
               icon={Activity}
               title="Rotating Equipment Monitoring"
               metric="30-50% downtime reduction"
-              description="Vibration analysis predicting bearing failures in motors, pumps, and turbines"
+              description="Vibration analysis predicting bearing failures in motors, pumps, and turbines. Analyzes vibration, temperature, and sound data from rotating equipment using LSTM neural networks and gradient boosting models with 30-50% reduction in unplanned downtime, 20-30% extension of asset lifespans, and integration with CMMS systems (SAP PM, IBM Maximo)."
               gradient="bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]"
-              expandable
-              details="Analyze vibration, temperature, and sound data from rotating equipment using LSTM neural networks and gradient boosting models."
-              benefits={[
-                "30-50% reduction in unplanned downtime",
-                "20-30% extension of asset lifespans",
-                "Integration with CMMS systems (SAP PM, IBM Maximo)"
-              ]}
             />
             <UseCaseCard
               icon={Wrench}
               title="CNC Machine Health"
               metric="Tool wear prediction"
-              description="Tool wear prediction and spindle monitoring for precision manufacturing"
+              description="Tool wear prediction and spindle monitoring for precision manufacturing. Monitors CNC machine health through spindle vibration, cutting force, and acoustic emission sensors to predict tool wear and prevent quality defects with reduced scrap from worn tools, optimized tool replacement schedules, and real-time alerts for maintenance teams."
               gradient="bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]"
-              expandable
-              details="Monitor CNC machine health through spindle vibration, cutting force, and acoustic emission sensors to predict tool wear and prevent quality defects."
-              benefits={[
-                "Reduced scrap from worn tools",
-                "Optimized tool replacement schedules",
-                "Real-time alerts for maintenance teams"
-              ]}
             />
             <UseCaseCard
               icon={PackageCheck}
               title="Fleet Telematics"
               metric="Vehicle health tracking"
-              description="Predictive maintenance for trucks, forklifts, and material handling equipment"
+              description="Predictive maintenance for trucks, forklifts, and material handling equipment. Telematics data from fleet vehicles predicts battery failures, hydraulic issues, and brake wear before equipment breakdowns occur with reduced fleet downtime, optimized maintenance schedules, and lower repair costs through early detection."
               gradient="bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]"
-              expandable
-              details="Telematics data from fleet vehicles predicts battery failures, hydraulic issues, and brake wear before equipment breakdowns occur."
-              benefits={[
-                "Reduced fleet downtime",
-                "Optimized maintenance schedules",
-                "Lower repair costs through early detection"
-              ]}
             />
             <UseCaseCard
               icon={TrendingDown}
               title="HVAC Optimization"
               metric="Energy + maintenance"
-              description="Predictive maintenance plus energy optimization for building management systems"
+              description="Predictive maintenance plus energy optimization for building management systems. Optimizes HVAC systems for both energy efficiency and equipment reliability using predictive maintenance and control optimization algorithms with 15-25% energy cost reduction, predictive maintenance for HVAC equipment, and automated fault detection and diagnostics."
               gradient="bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]"
-              expandable
-              details="Optimize HVAC systems for both energy efficiency and equipment reliability using predictive maintenance and control optimization algorithms."
-              benefits={[
-                "15-25% energy cost reduction",
-                "Predictive maintenance for HVAC equipment",
-                "Automated fault detection and diagnostics"
-              ]}
             />
           </UseCaseGrid>
         </div>
@@ -251,11 +224,11 @@ export function ManufacturingSection() {
         </div>
 
         {/* Technology Integrations */}
-        <TechnologyStack
+        <TechnologyIntegration
           title="Manufacturing Technology Integrations"
           description="Comprehensive integration with ERP, MES, IoT platforms, and shop floor systems via OPC UA and MQTT"
           technologies={manufacturingTechnologies}
-          columns={5}
+          gradient="from-[#EDE9FE] to-[#C4B5FD]"
         />
       </ServiceSection>
     </div>

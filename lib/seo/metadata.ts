@@ -97,25 +97,6 @@ export const SERVICE_METADATA = {
     ],
     canonical: "https://innovoco.com/services/managed-ai-services",
   },
-  industries: {
-    title: "AI Automation & Analytics Solutions | Healthcare, Finance, Manufacturing, Retail",
-    description: "Enterprise AI automation and analytics solutions for healthcare, financial services, manufacturing, and retail. Transform operations with intelligent automation and advanced analytics. Proven ROI across industries.",
-    keywords: [
-      "AI automation and analytics",
-      "AI automation solutions",
-      "analytics automation",
-      "enterprise automation platform",
-      "intelligent automation",
-      "AI analytics solutions",
-      "financial services AI automation",
-      "healthcare analytics automation",
-      "manufacturing AI automation",
-      "retail analytics automation",
-      "predictive analytics platform",
-      "automated analytics"
-    ],
-    canonical: "https://innovoco.com/solutions/industries",
-  },
 };
 
 // Helper to get metadata by page key

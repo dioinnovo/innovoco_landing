@@ -1589,25 +1589,6 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-
-          {/* CTA to Industry Solutions Hub */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-center mt-12"
-          >
-            <Link href="/solutions/industries">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-[#0A58D0] text-[#0A58D0] hover:bg-[#0A58D0] hover:text-white transition-all duration-300 rounded-full px-8 h-14 text-base font-medium"
-              >
-                Explore All Industry Solutions
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </motion.div>
         </div>
       </AnimatedSection>
 

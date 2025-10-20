@@ -3,7 +3,8 @@
 import { ServiceSection } from '@/components/services/ServiceSection';
 import { UseCaseCard, UseCaseGrid } from './UseCaseCard';
 import { MetricCard, MetricGrid } from './MetricCard';
-import { TechnologyStack, financialTechnologies } from './TechnologyStack';
+import { TechnologyIntegration } from './TechnologyIntegration';
+import { financialTechnologies } from './TechnologyStack';
 import { TrendingUp, Shield, DollarSign, Activity, AlertTriangle, TrendingDown, BarChart3, Lock } from 'lucide-react';
 
 export function FinancialSection() {
@@ -67,57 +68,29 @@ export function FinancialSection() {
               icon={AlertTriangle}
               title="Real-Time Payment Fraud"
               metric="Sub-100ms scoring"
-              description="Transaction scoring for credit card, ACH, and wire fraud prevention"
+              description="Transaction scoring for credit card, ACH, and wire fraud prevention. Machine learning models analyze payment patterns, merchant categories, geographic anomalies, and behavioral biometrics in real-time with 95%+ detection rate."
               gradient="bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]"
-              expandable
-              details="Machine learning models analyze payment patterns, merchant categories, geographic anomalies, and behavioral biometrics in real-time."
-              benefits={[
-                "95%+ fraud detection rate with low false positives",
-                "Sub-100ms transaction scoring",
-                "Continuous model retraining as fraud tactics evolve"
-              ]}
             />
             <UseCaseCard
               icon={Shield}
               title="Account Takeover Detection"
               metric="Behavioral biometrics"
-              description="Identify compromised accounts through behavioral anomaly detection"
+              description="Identify compromised accounts through behavioral anomaly detection. Analyzes login patterns, device fingerprints, and transaction behaviors in real-time. Reduces customer friction from false alerts."
               gradient="bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]"
-              expandable
-              details="Behavioral biometrics and anomaly detection identify compromised accounts by analyzing login patterns, device fingerprints, and transaction behaviors."
-              benefits={[
-                "Real-time detection of account compromises",
-                "Device fingerprinting and behavioral analysis",
-                "Reduced customer friction from false alerts"
-              ]}
             />
             <UseCaseCard
               icon={BarChart3}
               title="AML Transaction Monitoring"
               metric="High-quality SARs"
-              description="Rule-based + ML hybrid systems generating Suspicious Activity Reports"
+              description="Rule-based + ML hybrid systems generating Suspicious Activity Reports. Detects structuring, smurfing, and money laundering patterns across checking accounts, wire transfers, and cryptocurrency exchanges."
               gradient="bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]"
-              expandable
-              details="Transaction monitoring systems detect structuring, smurfing, and money laundering patterns across checking accounts, wire transfers, and cryptocurrency exchanges."
-              benefits={[
-                "BSA and FinCEN compliance",
-                "Hybrid rule-based and ML detection",
-                "Automated SAR generation for compliance teams"
-              ]}
             />
             <UseCaseCard
               icon={TrendingDown}
               title="Cryptocurrency Fraud"
               metric="Blockchain analytics"
-              description="Detect wash trading, pump-and-dump schemes, and ransomware payments"
+              description="Detect wash trading, pump-and-dump schemes, and ransomware payments. Blockchain analytics with real-time monitoring and pattern detection for crypto-specific fraud with exchange platform integration."
               gradient="bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]"
-              expandable
-              details="Blockchain analytics detecting wash trading, pump-and-dump schemes, ransomware payments, and other cryptocurrency fraud patterns."
-              benefits={[
-                "Real-time blockchain transaction monitoring",
-                "Pattern detection for crypto-specific fraud",
-                "Integration with exchange platforms"
-              ]}
             />
           </UseCaseGrid>
         </div>
@@ -249,11 +222,11 @@ export function FinancialSection() {
         </div>
 
         {/* Technology Integrations */}
-        <TechnologyStack
+        <TechnologyIntegration
           title="Financial Services Technology Integrations"
           description="Deep integration with core banking systems, data platforms, and regulatory compliance frameworks"
           technologies={financialTechnologies}
-          columns={5}
+          gradient="from-[#D1FAE5] to-[#6EE7B7]"
         />
       </ServiceSection>
     </div>

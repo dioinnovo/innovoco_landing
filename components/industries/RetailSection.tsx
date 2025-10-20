@@ -3,7 +3,8 @@
 import { ServiceSection } from '@/components/services/ServiceSection';
 import { UseCaseCard, UseCaseGrid } from './UseCaseCard';
 import { MetricCard, MetricGrid } from './MetricCard';
-import { TechnologyStack, retailTechnologies } from './TechnologyStack';
+import { TechnologyIntegration } from './TechnologyIntegration';
+import { retailTechnologies } from './TechnologyStack';
 import { ShoppingCart, Users, Target, TrendingUp, Package, DollarSign, Activity, Eye } from 'lucide-react';
 
 export function RetailSection() {
@@ -72,57 +73,29 @@ export function RetailSection() {
               icon={Target}
               title="Product Recommendations"
               metric="15-25% conversion lift"
-              description="Collaborative filtering + deep learning for personalized product suggestions"
+              description="Collaborative filtering + deep learning for personalized product suggestions. Recommendation engines analyze browsing history, purchase behavior, and similar customer patterns to serve personalized product lists with 15-25% conversion lift on recommended items, real-time recommendation APIs for web and mobile, and 10-30% of e-commerce revenue from recommendations."
               gradient="bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]"
-              expandable
-              details="Recommendation engines analyze browsing history, purchase behavior, and similar customer patterns to serve personalized product lists."
-              benefits={[
-                "15-25% conversion lift on recommended items",
-                "Real-time recommendation APIs for web and mobile",
-                "10-30% of e-commerce revenue from recommendations"
-              ]}
             />
             <UseCaseCard
               icon={Users}
               title="Customer Segmentation"
               metric="RFM + behavioral clustering"
-              description="Targeted marketing campaigns based on customer behavior and value"
+              description="Targeted marketing campaigns based on customer behavior and value. RFM (Recency, Frequency, Monetary) analysis combined with behavioral clustering enables precise customer segmentation with targeted email and ad campaigns, customer lifetime value optimization, and improved marketing ROI."
               gradient="bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]"
-              expandable
-              details="RFM (Recency, Frequency, Monetary) analysis combined with behavioral clustering enables precise customer segmentation."
-              benefits={[
-                "Targeted email and ad campaigns",
-                "Customer lifetime value optimization",
-                "Improved marketing ROI"
-              ]}
             />
             <UseCaseCard
               icon={TrendingUp}
               title="Churn Prediction"
               metric="Proactive retention"
-              description="ML models identifying at-risk customers for retention campaigns"
+              description="ML models identifying at-risk customers for retention campaigns. Predictive models identify customers likely to churn based on purchase frequency decline, engagement metrics, and behavioral signals with proactive retention campaigns, reduced customer churn rates, and optimized retention offer targeting."
               gradient="bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]"
-              expandable
-              details="Predictive models identify customers likely to churn based on purchase frequency decline, engagement metrics, and behavioral signals."
-              benefits={[
-                "Proactive retention campaigns",
-                "Reduced customer churn rates",
-                "Optimized retention offer targeting"
-              ]}
             />
             <UseCaseCard
               icon={Activity}
               title="Next Best Action"
               metric="Real-time decisioning"
-              description="Optimal offer, channel, and timing recommendations per customer"
+              description="Optimal offer, channel, and timing recommendations per customer. Real-time decisioning engines recommend the optimal offer, communication channel, and timing for each customer interaction with increased campaign response rates, optimized customer journey orchestration, and higher marketing effectiveness."
               gradient="bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]"
-              expandable
-              details="Real-time decisioning engines recommend the optimal offer, communication channel, and timing for each customer interaction."
-              benefits={[
-                "Increased campaign response rates",
-                "Optimized customer journey orchestration",
-                "Higher marketing effectiveness"
-              ]}
             />
           </UseCaseGrid>
         </div>
@@ -255,11 +228,11 @@ export function RetailSection() {
         </div>
 
         {/* Technology Integrations */}
-        <TechnologyStack
+        <TechnologyIntegration
           title="Retail Technology Integrations"
           description="Integration with leading retail platforms, e-commerce systems, customer data platforms, and analytics tools"
           technologies={retailTechnologies}
-          columns={5}
+          gradient="from-[#DBEAFE] to-[#93C5FD]"
         />
       </ServiceSection>
     </div>

@@ -55,7 +55,7 @@ export function DataEngineeringPageClient() {
         { name: "Data Engineering & Modernization", url: "https://innovoco.com/services/data-engineering-modernization" }
       ])} />
 
-      <ServicePageLayout breadcrumbs={breadcrumbs}>
+      <ServicePageLayout breadcrumbs={breadcrumbs} customLogo="/images/logos/innovoco-data-hires.png">
         <ServiceHero
           badge="10+ Years Building Enterprise Data Platforms"
           title="Data Engineering & Modernization"

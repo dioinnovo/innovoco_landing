@@ -3,7 +3,7 @@
 import { ServiceSection } from '@/components/services/ServiceSection';
 import { UseCaseCard, UseCaseGrid } from './UseCaseCard';
 import { MetricCard, MetricGrid } from './MetricCard';
-import { TechnologyStack } from './TechnologyStack';
+import { TechnologyIntegration } from './TechnologyIntegration';
 import { HardHat, Camera, FileText, Wrench, Target, Shield, Zap, Settings } from 'lucide-react';
 
 const constructionTechnologies = [
@@ -80,29 +80,15 @@ export function ConstructionSection() {
               icon={Camera}
               title="Roof Damage Detection"
               metric="99.7% accuracy"
-              description="Computer vision identifies hail damage, missing shingles, and structural issues from drone imagery"
+              description="Computer vision identifies hail damage, missing shingles, and structural issues from drone imagery. AI models trained on millions of roof images detect damage patterns with 50% faster inspections and reduced safety risks."
               gradient="bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A]"
-              expandable
-              details="AI models trained on millions of roof images detect damage patterns, missing materials, and structural defects automatically."
-              benefits={[
-                "50% faster inspections with drone automation",
-                "99.7% detection accuracy vs. manual inspection",
-                "Reduced safety risks—no roof climbing required"
-              ]}
             />
             <UseCaseCard
               icon={Target}
               title="Property Condition Assessment"
               metric="Automated scoring"
-              description="AI-powered property condition scoring for insurance underwriting and risk assessment"
+              description="AI-powered property condition scoring for insurance underwriting and risk assessment. Computer vision analyzes exterior photos to assess property condition, age, and maintenance level—reducing inspection costs by 60%."
               gradient="bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A]"
-              expandable
-              details="Computer vision analyzes exterior photos to assess property condition, age, and maintenance level automatically."
-              benefits={[
-                "Consistent, objective condition scoring",
-                "Faster underwriting and risk assessment",
-                "Reduced inspection costs by 60%"
-              ]}
             />
           </UseCaseGrid>
         </div>
@@ -125,29 +111,15 @@ export function ConstructionSection() {
               icon={FileText}
               title="Inspection Report Automation"
               metric="30 min vs 3 hrs"
-              description="AI-generated reports with damage labeling, repair estimates, and compliance checks"
+              description="AI-generated reports with damage labeling, repair estimates, and compliance checks. Natural language generation creates professional reports automatically with 84% reduction in generation time and automated PDF delivery."
               gradient="bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A]"
-              expandable
-              details="Natural language generation creates professional reports automatically from inspection data and AI analysis."
-              benefits={[
-                "84% reduction in report generation time",
-                "Consistent formatting and quality",
-                "Automated PDF generation and delivery"
-              ]}
             />
             <UseCaseCard
               icon={Shield}
               title="Compliance Documentation"
               metric="Audit-ready"
-              description="Automated documentation for building codes, safety standards, and regulatory compliance"
+              description="Automated documentation for building codes, safety standards, and regulatory compliance. AI ensures all required documentation, photos, and certifications are included with automatic compliance checklist validation."
               gradient="bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A]"
-              expandable
-              details="AI ensures all required documentation, photos, and certifications are included for regulatory compliance."
-              benefits={[
-                "Automatic compliance checklist validation",
-                "Audit trail for all inspections",
-                "Reduced compliance violations"
-              ]}
             />
           </UseCaseGrid>
         </div>
@@ -171,39 +143,25 @@ export function ConstructionSection() {
               icon={Wrench}
               title="HVAC Failure Prediction"
               metric="70% fewer breakdowns"
-              description="IoT sensors predict compressor, motor, and system failures weeks in advance"
+              description="IoT sensors predict compressor, motor, and system failures weeks in advance. Machine learning analyzes sensor data to detect anomaly patterns with 70% reduction in emergency breakdowns and 40% energy savings."
               gradient="bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A]"
-              expandable
-              details="Machine learning analyzes sensor data to detect anomaly patterns indicating impending failures."
-              benefits={[
-                "70% reduction in emergency breakdowns",
-                "40% energy savings through optimization",
-                "25% maintenance cost reduction"
-              ]}
             />
             <UseCaseCard
               icon={Settings}
               title="Lifecycle Management"
               metric="Extended lifespan"
-              description="Optimize maintenance schedules and replacement planning based on equipment condition"
+              description="Optimize maintenance schedules and replacement planning based on equipment condition. AI predicts optimal replacement timing and maintenance intervals with 20% longer equipment lifespan and optimized capital expenditure planning."
               gradient="bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A]"
-              expandable
-              details="AI predicts optimal replacement timing and maintenance intervals based on usage patterns and condition."
-              benefits={[
-                "20% longer equipment lifespan",
-                "Optimized capital expenditure planning",
-                "Reduced downtime and service calls"
-              ]}
             />
           </UseCaseGrid>
         </div>
 
         {/* Technology Integrations */}
-        <TechnologyStack
+        <TechnologyIntegration
           title="Construction Technology Integrations"
           description="Seamless integration with industry-leading platforms and hardware"
           technologies={constructionTechnologies}
-          columns={5}
+          gradient="from-[#FEF3C7] to-[#FDE68A]"
         />
       </ServiceSection>
     </div>
