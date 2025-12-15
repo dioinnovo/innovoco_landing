@@ -4,12 +4,25 @@
  * Large featured article card for hero section
  */
 
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Calendar, Clock, User, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, User, ArrowRight, FileText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { BlogArticlePreview, BLOG_CATEGORIES } from '@/lib/types/blog';
 import { cn } from '@/lib/utils';
+
+// Category gradient backgrounds for fallback
+const CATEGORY_GRADIENTS: Record<string, string> = {
+  'ai-ml': 'from-blue-600 to-indigo-700',
+  'data-engineering': 'from-emerald-600 to-teal-700',
+  'analytics-bi': 'from-purple-600 to-violet-700',
+  'digital-transformation': 'from-orange-500 to-red-600',
+  'case-studies': 'from-cyan-600 to-blue-700',
+  'industry-insights': 'from-amber-500 to-orange-600',
+};
 
 interface BlogCardFeaturedProps {
   article: BlogArticlePreview;
@@ -17,7 +30,10 @@ interface BlogCardFeaturedProps {
 }
 
 export function BlogCardFeatured({ article, className }: BlogCardFeaturedProps) {
+  const [imageError, setImageError] = useState(false);
   const categoryInfo = BLOG_CATEGORIES[article.category];
+  const gradientClass = CATEGORY_GRADIENTS[article.category] || 'from-gray-600 to-gray-800';
+  const hasValidImage = article.featuredImage && !article.featuredImage.startsWith('/images/blog/');
 
   return (
     <Link
@@ -28,17 +44,31 @@ export function BlogCardFeatured({ article, className }: BlogCardFeaturedProps) 
         className
       )}
     >
-      {/* Image */}
-      <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[320px] overflow-hidden">
-        <Image
-          src={article.featuredImage}
-          alt={article.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Image or Gradient Fallback */}
+      <div className="relative aspect-16/10 md:aspect-auto md:min-h-[320px] overflow-hidden">
+        {hasValidImage && !imageError ? (
+          <>
+            <Image
+              src={article.featuredImage}
+              alt={article.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+              onError={() => setImageError(true)}
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </>
+        ) : (
+          <div className={cn(
+            'absolute inset-0 bg-linear-to-br',
+            gradientClass,
+            'flex items-center justify-center'
+          )}>
+            <FileText className="w-24 h-24 text-white/20" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        )}
       </div>
 
       {/* Content */}

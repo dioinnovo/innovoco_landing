@@ -4,12 +4,25 @@
  * Standard blog article card for listing pages
  */
 
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Calendar, Clock, User } from 'lucide-react';
+import { Calendar, Clock, User, FileText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { BlogArticlePreview, BLOG_CATEGORIES } from '@/lib/types/blog';
 import { cn } from '@/lib/utils';
+
+// Category gradient backgrounds for fallback
+const CATEGORY_GRADIENTS: Record<string, string> = {
+  'ai-ml': 'from-blue-600 to-indigo-700',
+  'data-engineering': 'from-emerald-600 to-teal-700',
+  'analytics-bi': 'from-purple-600 to-violet-700',
+  'digital-transformation': 'from-orange-500 to-red-600',
+  'case-studies': 'from-cyan-600 to-blue-700',
+  'industry-insights': 'from-amber-500 to-orange-600',
+};
 
 interface BlogCardProps {
   article: BlogArticlePreview;
@@ -17,7 +30,10 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ article, className }: BlogCardProps) {
+  const [imageError, setImageError] = useState(false);
   const categoryInfo = BLOG_CATEGORIES[article.category];
+  const gradientClass = CATEGORY_GRADIENTS[article.category] || 'from-gray-600 to-gray-800';
+  const hasValidImage = article.featuredImage && !article.featuredImage.startsWith('/images/blog/');
 
   return (
     <Link
@@ -28,20 +44,34 @@ export function BlogCard({ article, className }: BlogCardProps) {
         className
       )}
     >
-      {/* Image */}
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <Image
-          src={article.featuredImage}
-          alt={article.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Image or Gradient Fallback */}
+      <div className="relative aspect-16/10 overflow-hidden">
+        {hasValidImage && !imageError ? (
+          <>
+            <Image
+              src={article.featuredImage}
+              alt={article.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={() => setImageError(true)}
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </>
+        ) : (
+          <div className={cn(
+            'absolute inset-0 bg-linear-to-br',
+            gradientClass,
+            'flex items-center justify-center'
+          )}>
+            <FileText className="w-16 h-16 text-white/30" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        )}
       </div>
 
       {/* Content */}
-      <div className="flex flex-col flex-grow p-5 sm:p-6">
+      <div className="flex flex-col grow p-5 sm:p-6">
         {/* Category Badge */}
         <Badge
           variant="secondary"
@@ -56,7 +86,7 @@ export function BlogCard({ article, className }: BlogCardProps) {
         </h3>
 
         {/* Excerpt */}
-        <p className="text-[#525252] text-sm leading-relaxed line-clamp-2 mb-4 flex-grow">
+        <p className="text-[#525252] text-sm leading-relaxed line-clamp-2 mb-4 grow">
           {article.excerpt}
         </p>
 

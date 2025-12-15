@@ -12,6 +12,7 @@ export { BlogAuthorCard } from './blog-author-card';
 export { BlogArticleContent } from './blog-article-content';
 export { BlogRelatedArticles } from './blog-related-articles';
 export { BlogPagination } from './blog-pagination';
+export { BlogFeaturedImage } from './blog-featured-image';
 export {
   BlogCardSkeleton,
   BlogCardFeaturedSkeleton,

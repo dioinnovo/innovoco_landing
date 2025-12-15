@@ -7,16 +7,16 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import { getArticleBySlug, getRelatedArticles, getAllSlugs } from '@/lib/services/sharepoint';
 import { isGraphConfigured } from '@/lib/services/graph-auth';
-import { BLOG_CATEGORIES, BlogArticle } from '@/lib/types/blog';
+import { BLOG_CATEGORIES, BlogArticle, BlogCategory } from '@/lib/types/blog';
 import { Badge } from '@/components/ui/badge';
 import {
   BlogAuthorCard,
   BlogArticleContent,
   BlogRelatedArticles,
+  BlogFeaturedImage,
 } from '@/components/blog';
 
 export const revalidate = 300; // Revalidate every 5 minutes
@@ -280,16 +280,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </h1>
 
             {/* Featured Image */}
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg mb-8">
-              <Image
-                src={article.featuredImage}
-                alt={article.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 896px"
-                priority
-              />
-            </div>
+            <BlogFeaturedImage
+              src={article.featuredImage}
+              alt={article.title}
+              category={article.category as BlogCategory}
+              priority
+              className="mb-8"
+            />
 
             {/* Author */}
             <BlogAuthorCard author={article.author} variant="full" />
