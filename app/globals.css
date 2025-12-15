@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 /* Smooth scrolling behavior and scroll padding for sticky navbar */
 html {
@@ -70,9 +69,15 @@ html {
   --gradient-card: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
 }
 
-* {
-  margin: 0;
-  padding: 0;
+/*
+ * Note: Tailwind v4 includes its own CSS reset via @import "tailwindcss"
+ * The previous universal reset (* { margin: 0; padding: 0; }) was overriding
+ * Tailwind utility classes like mx-auto. Only box-sizing is kept as it's
+ * generally safe and doesn't conflict with Tailwind utilities.
+ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -321,7 +326,7 @@ body {
   }
 
   /* Hide non-printable elements */
-  .print\\:hidden {
+  .print\:hidden {
     display: none !important;
   }
 
@@ -330,44 +335,44 @@ body {
     size: A4;
     margin: 15mm;
   }
-  
+
   @page landscape {
     size: A4 landscape;
     margin: 10mm 5mm;
   }
 
   /* Avoid page breaks inside elements */
-  .print\\:break-inside-avoid {
+  .print\:break-inside-avoid {
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
   /* Force page break before element */
-  .print\\:break-before-page {
+  .print\:break-before-page {
     break-before: page;
     page-break-before: always;
   }
 
   /* Landscape page */
-  .print\\:landscape {
+  .print\:landscape {
     page: landscape;
   }
 
   /* Landscape section specific styles */
-  .print\\:landscape {
+  .print\:landscape {
     width: 100% !important;
     max-width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 
-  .print\\:landscape table {
+  .print\:landscape table {
     width: 100% !important;
     font-size: 0.7rem !important;
   }
 
-  .print\\:landscape th,
-  .print\\:landscape td {
+  .print\:landscape th,
+  .print\:landscape td {
     padding: 0.25rem 0.4rem !important;
     font-size: 0.7rem !important;
     line-height: 1.2 !important;
@@ -432,7 +437,7 @@ body {
   }
   
   /* Force Strategic Foundations to fit on one page */
-  section:has(h2:contains("Strategic Foundations")) {
+  .strategic-foundations-section {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
     max-height: 100vh !important;
