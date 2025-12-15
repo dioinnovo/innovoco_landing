@@ -7,7 +7,19 @@
 import { Resend } from 'resend';
 import { generateLeadReportEmail, generateLeadWelcomeEmail, type LeadData } from './lead-notification';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy-initialize Resend client to avoid build-time errors when API key is not set
+let resend: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not configured');
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+}
 
 /**
  * Send lead qualification notification to sales team
@@ -30,7 +42,7 @@ export async function sendLeadNotification(leadData: LeadData): Promise<{
 
     console.log(`📧 Sending lead report to sales team: ${salesRecipient}`);
 
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResendClient().emails.send({
       from: `Innovoco Lead Alerts <${fromEmail}>`,
       to: [salesRecipient],
       subject: salesEmail.subject,
@@ -58,7 +70,7 @@ export async function sendLeadNotification(leadData: LeadData): Promise<{
 
       console.log(`📧 Sending welcome email to lead: ${leadData.email}`);
 
-      const { data, error } = await resend.emails.send({
+      const { data, error } = await getResendClient().emails.send({
         from: `Innovoco AI Team <${fromEmail}>`,
         to: [leadData.email],
         subject: welcomeEmail.subject,
@@ -101,7 +113,7 @@ export async function sendSalesNotificationOnly(leadData: LeadData): Promise<boo
 
     console.log(`📧 Sending lead report to sales team: ${salesRecipient}`);
 
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResendClient().emails.send({
       from: `Innovoco Lead Alerts <${fromEmail}>`,
       to: [salesRecipient],
       subject: salesEmail.subject,
@@ -137,7 +149,7 @@ export async function sendWelcomeEmailOnly(leadData: LeadData): Promise<boolean>
 
     console.log(`📧 Sending welcome email to lead: ${leadData.email}`);
 
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResendClient().emails.send({
       from: `Innovoco AI Team <${fromEmail}>`,
       to: [leadData.email],
       subject: welcomeEmail.subject,

@@ -4,7 +4,19 @@ import { Resend } from 'resend';
 import { z } from 'zod';
 import { contactFormSchema, type ContactFormData } from '@/lib/validations/contact';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy-initialize Resend client to avoid build-time errors when API key is not set
+let resend: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not configured');
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+}
 
 export type ContactFormState = {
   success: boolean;
@@ -93,7 +105,7 @@ This email was sent from the Innovoco website contact form.
     `;
 
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResendClient().emails.send({
       from: 'Innovoco Contact Form <onboarding@resend.dev>', // You'll need to verify your domain with Resend
       to: ['dio.delahoz@innovoco.com'],
       subject: `New Contact Form Submission from ${validatedData.name} - ${validatedData.company}`,
