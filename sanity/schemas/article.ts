@@ -166,7 +166,7 @@ export const article = defineType({
       title: 'Feature this Article',
       type: 'boolean',
       group: 'settings',
-      description: 'Featured articles appear prominently at the top of the blog page',
+      description: 'Turn ON to display this article in the hero section at the top of the blog. You can feature multiple articles - the most recent featured article becomes the main hero, others appear below. If no articles are featured, the latest published article is shown.',
       initialValue: false,
     }),
     defineField({

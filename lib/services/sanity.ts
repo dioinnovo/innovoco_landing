@@ -375,24 +375,59 @@ export async function getArticleBySlugPreview(slug: string): Promise<BlogArticle
 }
 
 /**
- * Get featured articles (always returns the latest published articles)
- * The featured flag in Sanity is now just for display badges, not for filtering
+ * Get featured articles for the blog hero section
+ *
+ * Logic (based on UX best practices):
+ * 1. First, get articles explicitly marked as "featured" in Sanity (sorted by publish date)
+ * 2. If no articles are marked featured, fall back to the latest published articles
+ *
+ * This gives editors full control while ensuring there's always content to display.
+ * Common pattern: 1 hero featured + 2-3 supporting featured articles
  */
 export async function getFeaturedArticles(limit: number = 3): Promise<BlogArticlePreview[]> {
   if (!isSanityConfigured()) {
     return [];
   }
 
-  // Always get the latest published articles, regardless of featured flag
-  // The latest article will be displayed as the "hero" featured article
-  const query = `
+  // First, try to get explicitly featured articles
+  const featuredQuery = `
+    *[_type == "article" && isPublished == true && featured == true] | order(publishDate desc) [0...${limit}] {
+      ${PREVIEW_FIELDS}
+    }
+  `;
+
+  const featuredArticles = await client.fetch<SanityArticle[]>(featuredQuery);
+
+  // If we have enough featured articles, return them
+  if (featuredArticles.length >= limit) {
+    return featuredArticles.map(transformToPreview);
+  }
+
+  // If we have some but not enough, supplement with latest non-featured articles
+  if (featuredArticles.length > 0) {
+    const remaining = limit - featuredArticles.length;
+    const featuredIds = featuredArticles.map(a => a._id);
+
+    const supplementQuery = `
+      *[_type == "article" && isPublished == true && featured != true && !(_id in $featuredIds)] | order(publishDate desc) [0...${remaining}] {
+        ${PREVIEW_FIELDS}
+      }
+    `;
+
+    const supplementArticles = await client.fetch<SanityArticle[]>(supplementQuery, { featuredIds });
+
+    return [...featuredArticles, ...supplementArticles].map(transformToPreview);
+  }
+
+  // Fallback: No articles are marked featured, use latest published articles
+  const latestQuery = `
     *[_type == "article" && isPublished == true] | order(publishDate desc) [0...${limit}] {
       ${PREVIEW_FIELDS}
     }
   `;
 
-  const articles = await client.fetch<SanityArticle[]>(query);
-  return articles.map(transformToPreview);
+  const latestArticles = await client.fetch<SanityArticle[]>(latestQuery);
+  return latestArticles.map(transformToPreview);
 }
 
 /**

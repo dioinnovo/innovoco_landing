@@ -52,8 +52,8 @@ export function Footer({ onContactClick }: FooterProps) {
         {/* Newsletter Section - Full Width */}
         <div className="mb-12 pb-12 border-b border-gray-800">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-white mb-2">Stay Updated</h3>
-            <p className="text-gray-400 mb-6">Get the latest insights on AI transformation and enterprise automation</p>
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">Stay Updated</h3>
+            <p className="text-gray-400 mb-6 text-base lg:text-lg">Get the latest insights on AI transformation and enterprise automation</p>
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
               <Input 
                 type="email"
