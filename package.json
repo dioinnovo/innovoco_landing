@@ -55,7 +55,7 @@
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.561.0",
     "marked": "^17.0.1",
-    "next": "15.3.3",
+    "next": "15.3.8",
     "next-auth": "^5.0.0-beta.30",
     "next-sanity": "^11.6.11",
     "ogl": "^1.0.11",
