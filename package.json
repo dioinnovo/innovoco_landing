@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "dev:webpack": "next dev --turbopack=false",
+    "dev": "NEXT_TURBOPACK=0 next dev",
+    "dev:turbo": "next dev --turbo",
     "build": "unset NODE_ENV && next build --turbopack",
     "build:webpack": "unset NODE_ENV && next build",
     "start": "next start",
@@ -45,6 +45,7 @@
     "@types/file-saver": "^2.0.7",
     "@types/plotly.js": "^3.0.8",
     "@vercel/analytics": "^1.6.1",
+    "@vercel/speed-insights": "^1.3.1",
     "ai": "^5.0.113",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",

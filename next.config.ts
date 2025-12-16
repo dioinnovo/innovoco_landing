@@ -14,10 +14,26 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  // Transpile problematic ESM packages
-  transpilePackages: ['isomorphic-dompurify'],
+  // Mark packages that should be external (not bundled) to avoid ESM issues
+  serverExternalPackages: ['jsdom', 'parse5', 'isomorphic-dompurify', 'dompurify'],
   experimental: {
     scrollRestoration: true,
+  },
+  // Configure webpack to handle ESM modules properly
+  webpack: (config, { isServer }) => {
+    // Handle ESM packages in server-side
+    if (isServer) {
+      config.externals = config.externals || [];
+      // Make problematic packages external on the server
+      if (Array.isArray(config.externals)) {
+        config.externals.push({
+          'isomorphic-dompurify': 'commonjs isomorphic-dompurify',
+          'jsdom': 'commonjs jsdom',
+          'parse5': 'commonjs parse5',
+        });
+      }
+    }
+    return config;
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -27,6 +43,12 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
   },
   headers: async () => {
     return [

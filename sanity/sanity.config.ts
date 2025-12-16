@@ -10,6 +10,7 @@ import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { codeInput } from '@sanity/code-input';
 import { schemaTypes } from './schemas';
+import { previewDocumentNode } from './plugins/previewPane';
 
 // Get project ID from environment or use placeholder
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '0tib7egx';
@@ -25,7 +26,9 @@ export default defineConfig({
   dataset,
 
   plugins: [
-    structureTool(),
+    structureTool({
+      defaultDocumentNode: previewDocumentNode,
+    }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
     codeInput(),
   ],

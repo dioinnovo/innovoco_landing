@@ -9,11 +9,6 @@
  */
 
 import { defineField, defineType } from 'sanity';
-import { createCharacterCountInput } from '../components/CharacterCountInput';
-
-// Create character count inputs with specific limits
-const ExcerptInput = createCharacterCountInput(200);
-const MetaDescriptionInput = createCharacterCountInput(160);
 
 export const article = defineType({
   name: 'article',
@@ -56,11 +51,8 @@ export const article = defineType({
       type: 'text',
       group: 'content',
       rows: 3,
-      description: 'Short summary shown on blog cards and in search results',
-      validation: (Rule) => Rule.required().max(200).error('Preview text is required (max 200 characters)'),
-      components: {
-        input: ExcerptInput,
-      },
+      description: 'Short summary shown on blog cards and in search results (max 200 characters)',
+      validation: (Rule) => Rule.required().max(200).warning('Keep under 200 characters for best display'),
     }),
     defineField({
       name: 'content',
@@ -154,11 +146,8 @@ export const article = defineType({
       type: 'text',
       group: 'seo',
       rows: 2,
-      description: 'SEO description shown in Google search results. Leave blank to use Preview Text.',
+      description: 'SEO description shown in Google search results (max 160 characters). Leave blank to use Preview Text.',
       validation: (Rule) => Rule.max(160).warning('Keep under 160 characters for best SEO'),
-      components: {
-        input: MetaDescriptionInput,
-      },
     }),
 
     // ============================================

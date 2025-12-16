@@ -375,15 +375,18 @@ export async function getArticleBySlugPreview(slug: string): Promise<BlogArticle
 }
 
 /**
- * Get featured articles
+ * Get featured articles (always returns the latest published articles)
+ * The featured flag in Sanity is now just for display badges, not for filtering
  */
 export async function getFeaturedArticles(limit: number = 3): Promise<BlogArticlePreview[]> {
   if (!isSanityConfigured()) {
     return [];
   }
 
+  // Always get the latest published articles, regardless of featured flag
+  // The latest article will be displayed as the "hero" featured article
   const query = `
-    *[_type == "article" && featured == true && isPublished == true] | order(publishDate desc) [0...${limit}] {
+    *[_type == "article" && isPublished == true] | order(publishDate desc) [0...${limit}] {
       ${PREVIEW_FIELDS}
     }
   `;

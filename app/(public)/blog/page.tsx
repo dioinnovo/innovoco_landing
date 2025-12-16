@@ -51,7 +51,7 @@ const PLACEHOLDER_ARTICLES = [
     excerpt:
       'Explore the emerging AI trends that will shape enterprise technology in the coming year, from generative AI to autonomous agents.',
     featuredImage: '/images/blog/ai-future.jpg',
-    author: { id: '1', name: 'Diego de la Hoz', email: 'diego@innovoco.com' },
+    author: { id: '1', name: 'Dio de la Hoz', email: 'dio.delahoz@innovoco.com' },
     category: 'ai-ml' as BlogCategory,
     tags: ['AI', 'Enterprise', 'Trends'],
     publishDate: new Date().toISOString(),
@@ -65,7 +65,7 @@ const PLACEHOLDER_ARTICLES = [
     excerpt:
       'Learn best practices for designing and implementing data pipelines that can handle enterprise-scale workloads.',
     featuredImage: '/images/blog/data-pipelines.jpg',
-    author: { id: '1', name: 'Diego de la Hoz', email: 'diego@innovoco.com' },
+    author: { id: '1', name: 'Dio de la Hoz', email: 'dio.delahoz@innovoco.com' },
     category: 'data-engineering' as BlogCategory,
     tags: ['Data', 'Engineering', 'Pipelines'],
     publishDate: new Date(Date.now() - 86400000).toISOString(),
@@ -79,7 +79,7 @@ const PLACEHOLDER_ARTICLES = [
     excerpt:
       'Discover how AI is revolutionizing business intelligence and enabling faster, more accurate decision-making.',
     featuredImage: '/images/blog/analytics.jpg',
-    author: { id: '1', name: 'Diego de la Hoz', email: 'diego@innovoco.com' },
+    author: { id: '1', name: 'Dio de la Hoz', email: 'dio.delahoz@innovoco.com' },
     category: 'analytics-bi' as BlogCategory,
     tags: ['Analytics', 'BI', 'AI'],
     publishDate: new Date(Date.now() - 172800000).toISOString(),
@@ -142,23 +142,58 @@ async function BlogContent({ searchParams }: BlogPageProps) {
     const { articles, pagination } = articlesResponse;
     const featured = featuredArticles[0];
 
-    // No articles found
+    // No articles found - show placeholder content
     if (articles.length === 0 && !featured) {
+      const filteredPlaceholders = category
+        ? PLACEHOLDER_ARTICLES.filter((a) => a.category === category)
+        : PLACEHOLDER_ARTICLES;
+
+      const placeholderFeatured = PLACEHOLDER_ARTICLES.find((a) => a.featured);
+
+      // Show message if filtering by category with no placeholders
+      if (filteredPlaceholders.length === 0) {
+        return (
+          <>
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
+              <BlogCategories activeCategory={category || 'all'} />
+            </div>
+
+            <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 text-center">
+              <h2 className="text-2xl font-semibold text-[#0B0F19] mb-4">
+                No articles found
+              </h2>
+              <p className="text-[#525252]">
+                {`No articles in the "${BLOG_CATEGORIES[category!]?.label}" category yet.`}
+              </p>
+            </div>
+          </>
+        );
+      }
+
+      // Show placeholder articles when Sanity has no published content
       return (
         <>
+          {/* Categories */}
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
             <BlogCategories activeCategory={category || 'all'} />
           </div>
 
-          <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 text-center">
-            <h2 className="text-2xl font-semibold text-[#0B0F19] mb-4">
-              No articles found
-            </h2>
-            <p className="text-[#525252]">
-              {category
-                ? `No articles in the "${BLOG_CATEGORIES[category]?.label}" category yet.`
-                : 'No articles have been published yet. Check back soon!'}
-            </p>
+          {/* Featured Article */}
+          {placeholderFeatured && page === 1 && !category && (
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
+              <BlogCardFeatured article={placeholderFeatured} />
+            </div>
+          )}
+
+          {/* Articles Grid */}
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {filteredPlaceholders
+                .filter((a) => !a.featured || category)
+                .map((article) => (
+                  <BlogCard key={article.id} article={article} />
+                ))}
+            </div>
           </div>
         </>
       );
@@ -180,17 +215,24 @@ async function BlogContent({ searchParams }: BlogPageProps) {
 
         {/* Articles Grid */}
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
-          {articles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {articles.map((article) => (
-                <BlogCard key={article.id} article={article} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-center text-[#525252] py-8">
-              No more articles to display.
-            </p>
-          )}
+          {(() => {
+            // Filter out the featured article from grid when showing on page 1 without category
+            const gridArticles = featured && page === 1 && !category
+              ? articles.filter((a) => a.id !== featured.id)
+              : articles;
+
+            return gridArticles.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {gridArticles.map((article) => (
+                  <BlogCard key={article.id} article={article} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-[#525252] py-8">
+                No more articles to display.
+              </p>
+            );
+          })()}
         </div>
 
         {/* Pagination */}

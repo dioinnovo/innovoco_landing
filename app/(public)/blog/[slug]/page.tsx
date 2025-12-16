@@ -75,14 +75,15 @@ const PLACEHOLDER_MORE_ARTICLES: BlogArticlePreview[] = [
   },
 ];
 
-// Placeholder article for demo mode
-const PLACEHOLDER_ARTICLE: BlogArticle = {
-  id: '1',
-  title: 'The Future of Enterprise AI: Trends to Watch in 2025',
-  slug: 'future-enterprise-ai-2025',
-  excerpt:
-    'Explore the emerging AI trends that will shape enterprise technology in the coming year.',
-  content: `
+// Placeholder articles for demo mode (matching blog listing page)
+const PLACEHOLDER_ARTICLES: BlogArticle[] = [
+  {
+    id: '1',
+    title: 'The Future of Enterprise AI: Trends to Watch in 2025',
+    slug: 'future-enterprise-ai-2025',
+    excerpt:
+      'Explore the emerging AI trends that will shape enterprise technology in the coming year.',
+    content: `
 <h2>Introduction</h2>
 <p>Artificial Intelligence continues to reshape the enterprise landscape at an unprecedented pace. As we look toward 2025, several key trends are emerging that will define how businesses leverage AI for competitive advantage.</p>
 
@@ -120,43 +121,162 @@ await agent.execute('quarterly-review');</code></pre>
 <p>The enterprises that thrive in 2025 will be those that embrace AI not as a standalone technology, but as a transformative force integrated throughout their operations. The key is starting now with a clear strategy and governance framework.</p>
 <hr />
 <p><em>Want to learn more about implementing AI in your enterprise? <a href="/contact">Contact our team</a> for a consultation.</em></p>
-  `,
-  featuredImage: '/images/blog/ai-future.jpg',
-  author: {
-    id: '1',
-    name: 'Diego de la Hoz',
-    email: 'diego@innovoco.com',
-    title: 'CEO & Founder',
+    `,
+    featuredImage: '/images/blog/ai-future.jpg',
+    author: {
+      id: '1',
+      name: 'Dio de la Hoz',
+      email: 'dio.delahoz@innovoco.com',
+      title: 'Head of AI',
+    },
+    category: 'ai-ml',
+    tags: ['AI', 'Enterprise', 'Trends', '2025'],
+    publishDate: new Date().toISOString(),
+    status: 'published',
+    readTimeMinutes: 8,
+    metaDescription:
+      'Explore the emerging AI trends that will shape enterprise technology in 2025, from generative AI to autonomous agents.',
+    featured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
-  category: 'ai-ml',
-  tags: ['AI', 'Enterprise', 'Trends', '2025'],
-  publishDate: new Date().toISOString(),
-  status: 'published',
-  readTimeMinutes: 8,
-  metaDescription:
-    'Explore the emerging AI trends that will shape enterprise technology in 2025, from generative AI to autonomous agents.',
-  featured: true,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-};
+  {
+    id: '2',
+    title: 'Building Scalable Data Pipelines with Modern Tools',
+    slug: 'scalable-data-pipelines',
+    excerpt:
+      'Learn best practices for designing and implementing data pipelines that can handle enterprise-scale workloads.',
+    content: `
+<h2>Introduction</h2>
+<p>Data pipelines are the backbone of modern data infrastructure. As organizations deal with ever-increasing volumes of data, the need for scalable, reliable pipelines has never been greater.</p>
+
+<h2>Key Principles of Scalable Data Pipelines</h2>
+<p>When designing data pipelines for enterprise workloads, consider these fundamental principles:</p>
+<ul>
+<li><strong>Idempotency</strong>: Ensure operations can be safely retried without side effects</li>
+<li><strong>Incremental Processing</strong>: Process only new or changed data when possible</li>
+<li><strong>Schema Evolution</strong>: Design for change with flexible schemas</li>
+<li><strong>Observability</strong>: Build in monitoring and alerting from the start</li>
+</ul>
+
+<h2>Modern Tools and Technologies</h2>
+<p>The data engineering landscape has evolved significantly. Here are the tools leading the way:</p>
+<ul>
+<li><strong>Apache Spark</strong>: Still the gold standard for large-scale batch processing</li>
+<li><strong>dbt</strong>: Transforming how teams manage data transformations</li>
+<li><strong>Apache Kafka</strong>: Real-time streaming at enterprise scale</li>
+<li><strong>Airflow/Dagster</strong>: Orchestrating complex workflows</li>
+</ul>
+
+<h2>Best Practices</h2>
+<p>Follow these practices to ensure pipeline reliability:</p>
+<ol>
+<li>Implement comprehensive data quality checks</li>
+<li>Use version control for all pipeline code</li>
+<li>Design for failure with proper retry logic</li>
+<li>Document data lineage and dependencies</li>
+</ol>
+
+<h2>Conclusion</h2>
+<p>Building scalable data pipelines requires careful planning and the right tooling. By following these principles and leveraging modern technologies, you can create infrastructure that grows with your organization's needs.</p>
+    `,
+    featuredImage: '/images/blog/data-pipelines.jpg',
+    author: {
+      id: '1',
+      name: 'Dio de la Hoz',
+      email: 'dio.delahoz@innovoco.com',
+      title: 'Head of AI',
+    },
+    category: 'data-engineering',
+    tags: ['Data', 'Engineering', 'Pipelines'],
+    publishDate: new Date(Date.now() - 86400000).toISOString(),
+    status: 'published',
+    readTimeMinutes: 12,
+    metaDescription:
+      'Best practices for designing and implementing data pipelines that scale with enterprise workloads.',
+    featured: false,
+    createdAt: new Date(Date.now() - 86400000).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000).toISOString(),
+  },
+  {
+    id: '3',
+    title: 'Transforming Business Intelligence with AI-Powered Analytics',
+    slug: 'ai-powered-analytics',
+    excerpt:
+      'Discover how AI is revolutionizing business intelligence and enabling faster, more accurate decision-making.',
+    content: `
+<h2>The Evolution of Business Intelligence</h2>
+<p>Business Intelligence has come a long way from static reports and dashboards. Today, AI is transforming how organizations derive insights from their data.</p>
+
+<h2>AI-Powered Capabilities</h2>
+<p>Modern BI platforms leverage AI in several key ways:</p>
+<ul>
+<li><strong>Natural Language Queries</strong>: Ask questions in plain English and get instant answers</li>
+<li><strong>Automated Insights</strong>: AI surfaces anomalies and trends automatically</li>
+<li><strong>Predictive Analytics</strong>: Forecast future outcomes based on historical patterns</li>
+<li><strong>Smart Recommendations</strong>: Get actionable suggestions based on your data</li>
+</ul>
+
+<h2>Implementation Strategies</h2>
+<p>To successfully implement AI-powered analytics:</p>
+<ol>
+<li>Start with clean, well-organized data</li>
+<li>Define clear business questions you want to answer</li>
+<li>Choose tools that integrate with your existing stack</li>
+<li>Train users on new AI-powered features</li>
+</ol>
+
+<h2>Real-World Impact</h2>
+<blockquote>"Companies using AI-powered analytics see 30% faster decision-making and 25% improvement in forecast accuracy."</blockquote>
+
+<h2>Conclusion</h2>
+<p>AI is not replacing traditional BI—it's enhancing it. Organizations that embrace AI-powered analytics gain a significant competitive advantage in today's data-driven world.</p>
+    `,
+    featuredImage: '/images/blog/analytics.jpg',
+    author: {
+      id: '1',
+      name: 'Dio de la Hoz',
+      email: 'dio.delahoz@innovoco.com',
+      title: 'Head of AI',
+    },
+    category: 'analytics-bi',
+    tags: ['Analytics', 'BI', 'AI'],
+    publishDate: new Date(Date.now() - 172800000).toISOString(),
+    status: 'published',
+    readTimeMinutes: 6,
+    metaDescription:
+      'How AI is revolutionizing business intelligence and enabling faster, more accurate decision-making.',
+    featured: false,
+    createdAt: new Date(Date.now() - 172800000).toISOString(),
+    updatedAt: new Date(Date.now() - 172800000).toISOString(),
+  },
+];
+
+// Helper to find placeholder article by slug
+function getPlaceholderArticle(slug: string): BlogArticle | undefined {
+  return PLACEHOLDER_ARTICLES.find((a) => a.slug === slug);
+}
 
 export async function generateMetadata({
   params,
 }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
 
+  // Check for placeholder article first (works even when Sanity is configured but empty)
+  const placeholderArticle = getPlaceholderArticle(slug);
+
   // Check if Sanity is configured
   if (!isSanityConfigured()) {
-    if (slug === PLACEHOLDER_ARTICLE.slug) {
+    if (placeholderArticle) {
       return {
-        title: `${PLACEHOLDER_ARTICLE.title} | Innovoco Blog`,
-        description: PLACEHOLDER_ARTICLE.metaDescription || PLACEHOLDER_ARTICLE.excerpt,
+        title: `${placeholderArticle.title} | Innovoco Blog`,
+        description: placeholderArticle.metaDescription || placeholderArticle.excerpt,
         openGraph: {
-          title: PLACEHOLDER_ARTICLE.title,
-          description: PLACEHOLDER_ARTICLE.excerpt,
+          title: placeholderArticle.title,
+          description: placeholderArticle.excerpt,
           type: 'article',
-          publishedTime: PLACEHOLDER_ARTICLE.publishDate,
-          authors: [PLACEHOLDER_ARTICLE.author.name],
+          publishedTime: placeholderArticle.publishDate,
+          authors: [placeholderArticle.author.name],
         },
       };
     }
@@ -169,6 +289,20 @@ export async function generateMetadata({
     const article = await getArticleBySlug(slug);
 
     if (!article) {
+      // Try placeholder if Sanity doesn't have it
+      if (placeholderArticle) {
+        return {
+          title: `${placeholderArticle.title} | Innovoco Blog`,
+          description: placeholderArticle.metaDescription || placeholderArticle.excerpt,
+          openGraph: {
+            title: placeholderArticle.title,
+            description: placeholderArticle.excerpt,
+            type: 'article',
+            publishedTime: placeholderArticle.publishDate,
+            authors: [placeholderArticle.author.name],
+          },
+        };
+      }
       return {
         title: 'Article Not Found | Innovoco Blog',
       };
@@ -193,6 +327,13 @@ export async function generateMetadata({
       },
     };
   } catch {
+    // Try placeholder on error
+    if (placeholderArticle) {
+      return {
+        title: `${placeholderArticle.title} | Innovoco Blog`,
+        description: placeholderArticle.metaDescription || placeholderArticle.excerpt,
+      };
+    }
     return {
       title: 'Article | Innovoco Blog',
     };
@@ -200,15 +341,20 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
+  // Always include placeholder slugs
+  const placeholderSlugs = PLACEHOLDER_ARTICLES.map((a) => ({ slug: a.slug }));
+
   if (!isSanityConfigured()) {
-    return [{ slug: PLACEHOLDER_ARTICLE.slug }];
+    return placeholderSlugs;
   }
 
   try {
     const slugs = await getAllSlugs();
-    return slugs.map((slug) => ({ slug }));
+    const sanitySlugs = slugs.map((slug) => ({ slug }));
+    // Combine Sanity slugs with placeholders (placeholders as fallback)
+    return [...sanitySlugs, ...placeholderSlugs];
   } catch {
-    return [];
+    return placeholderSlugs;
   }
 }
 
@@ -219,12 +365,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   let article: BlogArticle | null = null;
   let moreArticles: BlogArticlePreview[] = [];
 
+  // Check for placeholder article
+  const placeholderArticle = getPlaceholderArticle(slug);
+
   // Check if Sanity is configured
   if (!isSanityConfigured()) {
-    // Demo mode
-    if (slug === PLACEHOLDER_ARTICLE.slug) {
-      article = PLACEHOLDER_ARTICLE;
-      moreArticles = PLACEHOLDER_MORE_ARTICLES;
+    // Demo mode - only use placeholders
+    if (placeholderArticle) {
+      article = placeholderArticle;
+      // Get other placeholder articles for "More Articles" section
+      moreArticles = PLACEHOLDER_MORE_ARTICLES.filter((a) => a.slug !== slug).slice(0, 3);
     } else {
       notFound();
     }
@@ -234,6 +384,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       article = isPreviewMode
         ? await getArticleBySlugPreview(slug)
         : await getArticleBySlug(slug);
+
+      // If not found in Sanity, try placeholder
+      if (!article && placeholderArticle) {
+        article = placeholderArticle;
+      }
 
       if (!article) {
         notFound();
@@ -246,13 +401,21 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       // If we don't have enough real articles, supplement with placeholders
       if (realArticles.length < 3) {
         const neededPlaceholders = 3 - realArticles.length;
-        moreArticles = [...realArticles, ...PLACEHOLDER_MORE_ARTICLES.slice(0, neededPlaceholders)];
+        // Filter out current article from placeholders too
+        const availablePlaceholders = PLACEHOLDER_MORE_ARTICLES.filter((a) => a.slug !== slug);
+        moreArticles = [...realArticles, ...availablePlaceholders.slice(0, neededPlaceholders)];
       } else {
         moreArticles = realArticles;
       }
     } catch (error) {
       console.error('Error fetching article:', error);
-      notFound();
+      // Try placeholder as fallback
+      if (placeholderArticle) {
+        article = placeholderArticle;
+        moreArticles = PLACEHOLDER_MORE_ARTICLES.filter((a) => a.slug !== slug).slice(0, 3);
+      } else {
+        notFound();
+      }
     }
   }
 
