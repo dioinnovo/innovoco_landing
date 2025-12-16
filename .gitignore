@@ -46,6 +46,7 @@ next-env.d.ts
 
 # Sanity
 .sanity/
+/public/studio/static/
 
 # Playwright
 /test-results/

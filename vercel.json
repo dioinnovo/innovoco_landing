@@ -1,5 +1,5 @@
 {
-  "buildCommand": "bun run build",
+  "buildCommand": "npx sanity manifest extract --path public/studio/static && npx sanity schema deploy && bun run build",
   "cleanUrls": true,
   "headers": [
     {
