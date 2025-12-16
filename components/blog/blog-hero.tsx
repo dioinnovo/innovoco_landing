@@ -20,7 +20,7 @@ export function BlogHero({
   return (
     <section
       className={cn(
-        'relative py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-[#F8FAFC] via-[#F1F5F9] to-[#E0F2FE]',
+        'relative py-16 sm:py-20 lg:py-24 bg-linear-to-br from-[#F8FAFC] via-[#F1F5F9] to-[#E0F2FE]',
         className
       )}
     >

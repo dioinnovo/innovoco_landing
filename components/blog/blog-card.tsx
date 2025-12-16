@@ -19,9 +19,9 @@ const CATEGORY_GRADIENTS: Record<string, string> = {
   'ai-ml': 'from-blue-600 to-indigo-700',
   'data-engineering': 'from-emerald-600 to-teal-700',
   'analytics-bi': 'from-purple-600 to-violet-700',
-  'digital-transformation': 'from-orange-500 to-red-600',
-  'case-studies': 'from-cyan-600 to-blue-700',
   'industry-insights': 'from-amber-500 to-orange-600',
+  'company-news': 'from-rose-500 to-pink-600',
+  'case-studies': 'from-cyan-600 to-blue-700',
 };
 
 interface BlogCardProps {

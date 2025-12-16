@@ -6,19 +6,18 @@
  */
 
 import { NextResponse } from 'next/server';
-import { getCategories } from '@/lib/services/sharepoint';
-import { isGraphConfigured } from '@/lib/services/graph-auth';
+import { getCategories, isSanityConfigured } from '@/lib/services/sanity';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 300; // Cache for 5 minutes
 
 export async function GET() {
-  // Check if Graph API is configured
-  if (!isGraphConfigured()) {
+  // Check if Sanity is configured
+  if (!isSanityConfigured()) {
     return NextResponse.json(
       {
         error: 'Blog service not configured',
-        message: 'SharePoint integration is not set up. Please contact administrator.',
+        message: 'Sanity CMS is not set up. Please configure NEXT_PUBLIC_SANITY_PROJECT_ID.',
       },
       { status: 503 }
     );

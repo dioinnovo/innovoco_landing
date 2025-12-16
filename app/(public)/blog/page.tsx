@@ -6,8 +6,7 @@
 
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { getArticles, getFeaturedArticles } from '@/lib/services/sharepoint';
-import { isGraphConfigured } from '@/lib/services/graph-auth';
+import { getArticles, getFeaturedArticles, isSanityConfigured } from '@/lib/services/sanity';
 import { BlogCategory, BLOG_CATEGORIES } from '@/lib/types/blog';
 import {
   BlogHero,
@@ -18,6 +17,8 @@ import {
   BlogGridSkeleton,
   BlogCardFeaturedSkeleton,
 } from '@/components/blog';
+import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
 import { AlertCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -92,8 +93,8 @@ async function BlogContent({ searchParams }: BlogPageProps) {
   const page = parseInt(params.page || '1', 10);
   const category = params.category as BlogCategory | undefined;
 
-  // Check if SharePoint is configured
-  const isConfigured = isGraphConfigured();
+  // Check if Sanity is configured
+  const isConfigured = isSanityConfigured();
 
   if (!isConfigured) {
     // Show placeholder content when not configured
@@ -105,20 +106,6 @@ async function BlogContent({ searchParams }: BlogPageProps) {
 
     return (
       <>
-        {/* Configuration Notice */}
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-            <div>
-              <p className="text-amber-800 font-medium">Demo Mode</p>
-              <p className="text-amber-700 text-sm">
-                SharePoint integration is not configured. Showing placeholder content.
-                Connect to SharePoint to display your actual blog articles.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Categories */}
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
           <BlogCategories activeCategory={category || 'all'} />
@@ -146,7 +133,7 @@ async function BlogContent({ searchParams }: BlogPageProps) {
   }
 
   try {
-    // Fetch articles from SharePoint
+    // Fetch articles from Sanity
     const [articlesResponse, featuredArticles] = await Promise.all([
       getArticles({ page, limit: 9, category }),
       page === 1 && !category ? getFeaturedArticles(1) : Promise.resolve([]),
@@ -261,16 +248,20 @@ function BlogContentLoading() {
 
 export default function BlogPage(props: BlogPageProps) {
   return (
-    <div className="min-h-screen bg-linear-to-b from-white to-gray-50">
-      {/* Hero */}
-      <BlogHero />
+    <>
+      <Header />
+      <div className="min-h-screen bg-linear-to-b from-white to-gray-50">
+        {/* Hero */}
+        <BlogHero />
 
-      {/* Content */}
-      <div className="py-12">
-        <Suspense fallback={<BlogContentLoading />}>
-          <BlogContent {...props} />
-        </Suspense>
+        {/* Content */}
+        <div className="py-12">
+          <Suspense fallback={<BlogContentLoading />}>
+            <BlogContent {...props} />
+          </Suspense>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
