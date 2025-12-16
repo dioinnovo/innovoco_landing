@@ -1,6 +1,8 @@
 import { auth } from "@/auth"
 import { NextResponse } from "next/server"
 
+// Next.js 16+ uses proxy.ts instead of middleware.ts
+// The function is now named 'proxy' instead of 'middleware'
 export default auth((req) => {
   const response = NextResponse.next()
 

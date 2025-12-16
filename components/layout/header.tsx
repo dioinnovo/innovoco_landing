@@ -60,8 +60,8 @@ export function Header({ onContactClick, isLandingPage = false, activeSection = 
             <Image
               src={logoSrc}
               alt="Innovoco Logo"
-              width={120}
-              height={39}
+              width={180}
+              height={32}
               className="h-7 md:h-9 w-auto transition-transform duration-300 ease-in-out group-hover:scale-105"
               priority
             />

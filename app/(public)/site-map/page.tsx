@@ -1,6 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
+
+// Force dynamic rendering to avoid SSG issues with client components
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Sitemap - Innovoco',
@@ -64,7 +69,9 @@ export default function SitemapPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#F1F5F9] py-16">
+    <>
+      <Header />
+      <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#F1F5F9] py-16">
       <div className="container mx-auto max-w-6xl px-4">
         <Link href="/" className="inline-flex items-center gap-2 text-[#0A58D0] hover:text-[#084BB3] mb-8">
           <ArrowLeft className="h-4 w-4" />
@@ -112,6 +119,8 @@ export default function SitemapPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }

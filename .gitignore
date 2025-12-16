@@ -43,3 +43,13 @@ next-env.d.ts
 
 # LangGraph API
 .langgraph_api
+
+# Sanity
+.sanity/
+
+# Playwright
+/test-results/
+/playwright-report/
+
+# Build artifacts
+/dist/

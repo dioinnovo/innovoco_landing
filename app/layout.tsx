@@ -4,6 +4,9 @@ import { Providers } from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
+// Force dynamic rendering globally to avoid SSG issues with client component providers
+export const dynamic = 'force-dynamic';
+
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
