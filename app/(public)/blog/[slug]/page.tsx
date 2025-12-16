@@ -6,6 +6,8 @@
  * - Large title with featured image below
  * - Inline author/date/read time metadata
  * - Clean content typography
+ *
+ * Only shows articles from Sanity CMS - no placeholder content.
  */
 
 import { Metadata } from 'next';
@@ -14,12 +16,13 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, Clock, Tag } from 'lucide-react';
-import { getArticleBySlug, getArticleBySlugPreview, getRelatedArticles, getArticles, getAllSlugs, isSanityConfigured } from '@/lib/services/sanity';
+import { getArticleBySlug, getArticleBySlugPreview, getArticles, getAllSlugs, isSanityConfigured } from '@/lib/services/sanity';
 import { BLOG_CATEGORIES, BlogArticle, BlogArticlePreview } from '@/lib/types/blog';
 import { Badge } from '@/components/ui/badge';
 import {
   BlogArticleContent,
   BlogCard,
+  SocialShareButtons,
 } from '@/components/blog';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
@@ -32,254 +35,13 @@ interface ArticlePageProps {
   }>;
 }
 
-// Placeholder articles for "More Articles" section
-const PLACEHOLDER_MORE_ARTICLES: BlogArticlePreview[] = [
-  {
-    id: 'placeholder-1',
-    title: 'How AI Coding Assistants Are Transforming Enterprise Development',
-    slug: 'ai-coding-assistants-enterprise',
-    excerpt: 'Discover how AI-powered coding tools are boosting developer productivity by 40% across Fortune 500 companies.',
-    featuredImage: '',
-    author: { id: '1', name: 'Innovoco Team', email: 'team@innovoco.com' },
-    category: 'ai-ml',
-    tags: ['AI', 'Development', 'Productivity'],
-    publishDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-    status: 'published',
-    readTimeMinutes: 6,
-  },
-  {
-    id: 'placeholder-2',
-    title: 'Building a Data-Driven Culture: Lessons from Industry Leaders',
-    slug: 'data-driven-culture-lessons',
-    excerpt: 'Learn the key strategies that helped top enterprises successfully transition to data-driven decision making.',
-    featuredImage: '',
-    author: { id: '1', name: 'Innovoco Team', email: 'team@innovoco.com' },
-    category: 'analytics-bi',
-    tags: ['Data', 'Culture', 'Leadership'],
-    publishDate: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-    status: 'published',
-    readTimeMinutes: 8,
-  },
-  {
-    id: 'placeholder-3',
-    title: 'Cloud Migration Strategies for Legacy Systems',
-    slug: 'cloud-migration-legacy-systems',
-    excerpt: 'A comprehensive guide to modernizing legacy infrastructure while minimizing business disruption.',
-    featuredImage: '',
-    author: { id: '1', name: 'Innovoco Team', email: 'team@innovoco.com' },
-    category: 'data-engineering',
-    tags: ['Cloud', 'Migration', 'Infrastructure'],
-    publishDate: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
-    status: 'published',
-    readTimeMinutes: 10,
-  },
-];
-
-// Placeholder articles for demo mode (matching blog listing page)
-const PLACEHOLDER_ARTICLES: BlogArticle[] = [
-  {
-    id: '1',
-    title: 'The Future of Enterprise AI: Trends to Watch in 2025',
-    slug: 'future-enterprise-ai-2025',
-    excerpt:
-      'Explore the emerging AI trends that will shape enterprise technology in the coming year.',
-    content: `
-<h2>Introduction</h2>
-<p>Artificial Intelligence continues to reshape the enterprise landscape at an unprecedented pace. As we look toward 2025, several key trends are emerging that will define how businesses leverage AI for competitive advantage.</p>
-
-<h2>1. Generative AI Goes Enterprise</h2>
-<p>While 2024 saw the explosion of consumer-facing generative AI tools, 2025 will be the year of enterprise adoption. Organizations are moving beyond experimentation to implement generative AI in core business processes:</p>
-<ul>
-<li><strong>Document processing</strong>: Automated analysis and generation of contracts, reports, and correspondence</li>
-<li><strong>Code generation</strong>: AI-assisted development that accelerates software delivery</li>
-<li><strong>Customer service</strong>: Intelligent chatbots that handle complex queries with human-like understanding</li>
-</ul>
-
-<h2>2. AI Agents and Autonomous Systems</h2>
-<p>The next frontier in enterprise AI is the development of autonomous agents capable of executing multi-step tasks with minimal human intervention:</p>
-<pre><code class="language-typescript">// Example: AI Agent orchestration
-const agent = new EnterpriseAgent({
-  capabilities: ['research', 'analysis', 'reporting'],
-  constraints: ['budget-aware', 'compliance-checked'],
-  goals: ['optimize-operations', 'reduce-costs']
-});
-
-await agent.execute('quarterly-review');</code></pre>
-
-<h2>3. Responsible AI and Governance</h2>
-<p>As AI becomes more embedded in decision-making, enterprises are prioritizing:</p>
-<blockquote>"The question is no longer whether to adopt AI, but how to adopt it responsibly." - Industry Expert</blockquote>
-<p>Key governance frameworks include:</p>
-<ul>
-<li>Explainability requirements</li>
-<li>Bias detection and mitigation</li>
-<li>Privacy-preserving techniques</li>
-<li>Audit trails for AI decisions</li>
-</ul>
-
-<h2>Conclusion</h2>
-<p>The enterprises that thrive in 2025 will be those that embrace AI not as a standalone technology, but as a transformative force integrated throughout their operations. The key is starting now with a clear strategy and governance framework.</p>
-<hr />
-<p><em>Want to learn more about implementing AI in your enterprise? <a href="/contact">Contact our team</a> for a consultation.</em></p>
-    `,
-    featuredImage: '/images/blog/ai-future.jpg',
-    author: {
-      id: '1',
-      name: 'Dio de la Hoz',
-      email: 'dio.delahoz@innovoco.com',
-      title: 'Head of AI',
-    },
-    category: 'ai-ml',
-    tags: ['AI', 'Enterprise', 'Trends', '2025'],
-    publishDate: new Date().toISOString(),
-    status: 'published',
-    readTimeMinutes: 8,
-    metaDescription:
-      'Explore the emerging AI trends that will shape enterprise technology in 2025, from generative AI to autonomous agents.',
-    featured: true,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: '2',
-    title: 'Building Scalable Data Pipelines with Modern Tools',
-    slug: 'scalable-data-pipelines',
-    excerpt:
-      'Learn best practices for designing and implementing data pipelines that can handle enterprise-scale workloads.',
-    content: `
-<h2>Introduction</h2>
-<p>Data pipelines are the backbone of modern data infrastructure. As organizations deal with ever-increasing volumes of data, the need for scalable, reliable pipelines has never been greater.</p>
-
-<h2>Key Principles of Scalable Data Pipelines</h2>
-<p>When designing data pipelines for enterprise workloads, consider these fundamental principles:</p>
-<ul>
-<li><strong>Idempotency</strong>: Ensure operations can be safely retried without side effects</li>
-<li><strong>Incremental Processing</strong>: Process only new or changed data when possible</li>
-<li><strong>Schema Evolution</strong>: Design for change with flexible schemas</li>
-<li><strong>Observability</strong>: Build in monitoring and alerting from the start</li>
-</ul>
-
-<h2>Modern Tools and Technologies</h2>
-<p>The data engineering landscape has evolved significantly. Here are the tools leading the way:</p>
-<ul>
-<li><strong>Apache Spark</strong>: Still the gold standard for large-scale batch processing</li>
-<li><strong>dbt</strong>: Transforming how teams manage data transformations</li>
-<li><strong>Apache Kafka</strong>: Real-time streaming at enterprise scale</li>
-<li><strong>Airflow/Dagster</strong>: Orchestrating complex workflows</li>
-</ul>
-
-<h2>Best Practices</h2>
-<p>Follow these practices to ensure pipeline reliability:</p>
-<ol>
-<li>Implement comprehensive data quality checks</li>
-<li>Use version control for all pipeline code</li>
-<li>Design for failure with proper retry logic</li>
-<li>Document data lineage and dependencies</li>
-</ol>
-
-<h2>Conclusion</h2>
-<p>Building scalable data pipelines requires careful planning and the right tooling. By following these principles and leveraging modern technologies, you can create infrastructure that grows with your organization's needs.</p>
-    `,
-    featuredImage: '/images/blog/data-pipelines.jpg',
-    author: {
-      id: '1',
-      name: 'Dio de la Hoz',
-      email: 'dio.delahoz@innovoco.com',
-      title: 'Head of AI',
-    },
-    category: 'data-engineering',
-    tags: ['Data', 'Engineering', 'Pipelines'],
-    publishDate: new Date(Date.now() - 86400000).toISOString(),
-    status: 'published',
-    readTimeMinutes: 12,
-    metaDescription:
-      'Best practices for designing and implementing data pipelines that scale with enterprise workloads.',
-    featured: false,
-    createdAt: new Date(Date.now() - 86400000).toISOString(),
-    updatedAt: new Date(Date.now() - 86400000).toISOString(),
-  },
-  {
-    id: '3',
-    title: 'Transforming Business Intelligence with AI-Powered Analytics',
-    slug: 'ai-powered-analytics',
-    excerpt:
-      'Discover how AI is revolutionizing business intelligence and enabling faster, more accurate decision-making.',
-    content: `
-<h2>The Evolution of Business Intelligence</h2>
-<p>Business Intelligence has come a long way from static reports and dashboards. Today, AI is transforming how organizations derive insights from their data.</p>
-
-<h2>AI-Powered Capabilities</h2>
-<p>Modern BI platforms leverage AI in several key ways:</p>
-<ul>
-<li><strong>Natural Language Queries</strong>: Ask questions in plain English and get instant answers</li>
-<li><strong>Automated Insights</strong>: AI surfaces anomalies and trends automatically</li>
-<li><strong>Predictive Analytics</strong>: Forecast future outcomes based on historical patterns</li>
-<li><strong>Smart Recommendations</strong>: Get actionable suggestions based on your data</li>
-</ul>
-
-<h2>Implementation Strategies</h2>
-<p>To successfully implement AI-powered analytics:</p>
-<ol>
-<li>Start with clean, well-organized data</li>
-<li>Define clear business questions you want to answer</li>
-<li>Choose tools that integrate with your existing stack</li>
-<li>Train users on new AI-powered features</li>
-</ol>
-
-<h2>Real-World Impact</h2>
-<blockquote>"Companies using AI-powered analytics see 30% faster decision-making and 25% improvement in forecast accuracy."</blockquote>
-
-<h2>Conclusion</h2>
-<p>AI is not replacing traditional BI—it's enhancing it. Organizations that embrace AI-powered analytics gain a significant competitive advantage in today's data-driven world.</p>
-    `,
-    featuredImage: '/images/blog/analytics.jpg',
-    author: {
-      id: '1',
-      name: 'Dio de la Hoz',
-      email: 'dio.delahoz@innovoco.com',
-      title: 'Head of AI',
-    },
-    category: 'analytics-bi',
-    tags: ['Analytics', 'BI', 'AI'],
-    publishDate: new Date(Date.now() - 172800000).toISOString(),
-    status: 'published',
-    readTimeMinutes: 6,
-    metaDescription:
-      'How AI is revolutionizing business intelligence and enabling faster, more accurate decision-making.',
-    featured: false,
-    createdAt: new Date(Date.now() - 172800000).toISOString(),
-    updatedAt: new Date(Date.now() - 172800000).toISOString(),
-  },
-];
-
-// Helper to find placeholder article by slug
-function getPlaceholderArticle(slug: string): BlogArticle | undefined {
-  return PLACEHOLDER_ARTICLES.find((a) => a.slug === slug);
-}
-
 export async function generateMetadata({
   params,
 }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  // Check for placeholder article first (works even when Sanity is configured but empty)
-  const placeholderArticle = getPlaceholderArticle(slug);
-
   // Check if Sanity is configured
   if (!isSanityConfigured()) {
-    if (placeholderArticle) {
-      return {
-        title: `${placeholderArticle.title} | Innovoco Blog`,
-        description: placeholderArticle.metaDescription || placeholderArticle.excerpt,
-        openGraph: {
-          title: placeholderArticle.title,
-          description: placeholderArticle.excerpt,
-          type: 'article',
-          publishedTime: placeholderArticle.publishDate,
-          authors: [placeholderArticle.author.name],
-        },
-      };
-    }
     return {
       title: 'Article Not Found | Innovoco Blog',
     };
@@ -289,20 +51,6 @@ export async function generateMetadata({
     const article = await getArticleBySlug(slug);
 
     if (!article) {
-      // Try placeholder if Sanity doesn't have it
-      if (placeholderArticle) {
-        return {
-          title: `${placeholderArticle.title} | Innovoco Blog`,
-          description: placeholderArticle.metaDescription || placeholderArticle.excerpt,
-          openGraph: {
-            title: placeholderArticle.title,
-            description: placeholderArticle.excerpt,
-            type: 'article',
-            publishedTime: placeholderArticle.publishDate,
-            authors: [placeholderArticle.author.name],
-          },
-        };
-      }
       return {
         title: 'Article Not Found | Innovoco Blog',
       };
@@ -317,23 +65,16 @@ export async function generateMetadata({
         type: 'article',
         publishedTime: article.publishDate,
         authors: [article.author.name],
-        images: [article.featuredImage],
+        images: article.featuredImage ? [article.featuredImage] : [],
       },
       twitter: {
         card: 'summary_large_image',
         title: article.title,
         description: article.excerpt,
-        images: [article.featuredImage],
+        images: article.featuredImage ? [article.featuredImage] : [],
       },
     };
   } catch {
-    // Try placeholder on error
-    if (placeholderArticle) {
-      return {
-        title: `${placeholderArticle.title} | Innovoco Blog`,
-        description: placeholderArticle.metaDescription || placeholderArticle.excerpt,
-      };
-    }
     return {
       title: 'Article | Innovoco Blog',
     };
@@ -341,20 +82,15 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  // Always include placeholder slugs
-  const placeholderSlugs = PLACEHOLDER_ARTICLES.map((a) => ({ slug: a.slug }));
-
   if (!isSanityConfigured()) {
-    return placeholderSlugs;
+    return [];
   }
 
   try {
     const slugs = await getAllSlugs();
-    const sanitySlugs = slugs.map((slug) => ({ slug }));
-    // Combine Sanity slugs with placeholders (placeholders as fallback)
-    return [...sanitySlugs, ...placeholderSlugs];
+    return slugs.map((slug) => ({ slug }));
   } catch {
-    return placeholderSlugs;
+    return [];
   }
 }
 
@@ -362,61 +98,30 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
   const { isEnabled: isPreviewMode } = await draftMode();
 
+  // Check if Sanity is configured
+  if (!isSanityConfigured()) {
+    notFound();
+  }
+
   let article: BlogArticle | null = null;
   let moreArticles: BlogArticlePreview[] = [];
 
-  // Check for placeholder article
-  const placeholderArticle = getPlaceholderArticle(slug);
+  try {
+    // Use preview function when in draft mode, otherwise use regular function
+    article = isPreviewMode
+      ? await getArticleBySlugPreview(slug)
+      : await getArticleBySlug(slug);
 
-  // Check if Sanity is configured
-  if (!isSanityConfigured()) {
-    // Demo mode - only use placeholders
-    if (placeholderArticle) {
-      article = placeholderArticle;
-      // Get other placeholder articles for "More Articles" section
-      moreArticles = PLACEHOLDER_MORE_ARTICLES.filter((a) => a.slug !== slug).slice(0, 3);
-    } else {
+    if (!article) {
       notFound();
     }
-  } else {
-    try {
-      // Use preview function when in draft mode, otherwise use regular function
-      article = isPreviewMode
-        ? await getArticleBySlugPreview(slug)
-        : await getArticleBySlug(slug);
 
-      // If not found in Sanity, try placeholder
-      if (!article && placeholderArticle) {
-        article = placeholderArticle;
-      }
-
-      if (!article) {
-        notFound();
-      }
-
-      // Get more articles (excluding current article)
-      const articlesResponse = await getArticles({ limit: 4 });
-      const realArticles = articlesResponse.articles.filter(a => a.slug !== slug).slice(0, 3);
-
-      // If we don't have enough real articles, supplement with placeholders
-      if (realArticles.length < 3) {
-        const neededPlaceholders = 3 - realArticles.length;
-        // Filter out current article from placeholders too
-        const availablePlaceholders = PLACEHOLDER_MORE_ARTICLES.filter((a) => a.slug !== slug);
-        moreArticles = [...realArticles, ...availablePlaceholders.slice(0, neededPlaceholders)];
-      } else {
-        moreArticles = realArticles;
-      }
-    } catch (error) {
-      console.error('Error fetching article:', error);
-      // Try placeholder as fallback
-      if (placeholderArticle) {
-        article = placeholderArticle;
-        moreArticles = PLACEHOLDER_MORE_ARTICLES.filter((a) => a.slug !== slug).slice(0, 3);
-      } else {
-        notFound();
-      }
-    }
+    // Get more articles (excluding current article)
+    const articlesResponse = await getArticles({ limit: 4 });
+    moreArticles = articlesResponse.articles.filter(a => a.slug !== slug).slice(0, 3);
+  } catch (error) {
+    console.error('Error fetching article:', error);
+    notFound();
   }
 
   const categoryInfo = BLOG_CATEGORIES[article.category];
@@ -524,7 +229,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
 
             {/* Metadata Row - Author, Date, Read Time */}
-            <div className="flex flex-wrap items-center gap-4 mb-8 pb-8 border-b border-gray-100">
+            <div className="flex flex-wrap items-center gap-4 mb-6">
               {/* Author with Avatar */}
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center shrink-0">
@@ -564,6 +269,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <span>{article.readTimeMinutes} min read</span>
               </div>
             </div>
+
+            {/* Social Share Buttons */}
+            <div className="pb-8 mb-8 border-b border-gray-100">
+              <SocialShareButtons
+                url={`https://innovoco.com/blog/${slug}`}
+                title={article.title}
+                description={article.excerpt}
+              />
+            </div>
           </div>
         </header>
 
@@ -575,9 +289,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {article.tags.length > 0 && (
             <div className="flex flex-wrap items-center gap-3 mt-12 pt-8 border-t border-gray-200">
               <Tag className="w-4 h-4 text-gray-400" />
-              {article.tags.map((tag) => (
+              {/* Deduplicate tags to avoid duplicate key errors */}
+              {[...new Set(article.tags)].map((tag, index) => (
                 <Badge
-                  key={tag}
+                  key={`${tag}-${index}`}
                   variant="outline"
                   className="text-gray-600 border-gray-200 hover:bg-gray-50"
                 >

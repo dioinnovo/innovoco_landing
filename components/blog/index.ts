@@ -19,3 +19,4 @@ export {
   BlogArticleSkeleton,
   BlogGridSkeleton,
 } from './blog-skeleton';
+export { SocialShareButtons } from './social-share-buttons';
