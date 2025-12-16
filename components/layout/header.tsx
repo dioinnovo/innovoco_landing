@@ -30,8 +30,8 @@ export function Header({ onContactClick, isLandingPage = false, activeSection = 
     { label: "Analytics", section: "analytics" },
     { label: "Data", section: "data" },
     { label: "Industries", section: "industries" },
-    { label: "Blog", href: "/blog" },
     { label: "Team", section: "about" },
+    { label: "Blog", href: "/blog" },
   ];
 
   // Get href for nav item
