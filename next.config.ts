@@ -16,9 +16,7 @@ const nextConfig: NextConfig = {
   },
   // Mark packages that should be external (not bundled) to avoid ESM issues
   serverExternalPackages: ['jsdom', 'parse5', 'isomorphic-dompurify', 'dompurify'],
-  experimental: {
-    scrollRestoration: true,
-  },
+  experimental: {},
   // Configure webpack to handle ESM modules properly
   webpack: (config, { isServer }) => {
     // Handle ESM packages in server-side
@@ -33,6 +31,13 @@ const nextConfig: NextConfig = {
         });
       }
     }
+
+    // Exclude langgraph_env from being watched/compiled
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: [...(config.watchOptions?.ignored || []), '**/langgraph_env/**'],
+    };
+
     return config;
   },
   images: {
