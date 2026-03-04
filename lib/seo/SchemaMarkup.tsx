@@ -1,9 +1,7 @@
 "use client";
 
-import { WithContext } from 'schema-dts';
-
 interface SchemaMarkupProps {
-  schema: WithContext<any>;
+  schema: Record<string, unknown>;
 }
 
 export function SchemaMarkup({ schema }: SchemaMarkupProps) {
