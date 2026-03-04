@@ -34,14 +34,18 @@ const nextConfig: NextConfig = {
 
     // Exclude langgraph_env from being watched/compiled
     const existingIgnored = config.watchOptions?.ignored;
-    const ignoredArray = Array.isArray(existingIgnored)
-      ? existingIgnored
-      : existingIgnored
-        ? [existingIgnored]
-        : [];
+    const ignoredStrings: string[] = [];
+    if (Array.isArray(existingIgnored)) {
+      existingIgnored.forEach((item) => {
+        if (typeof item === 'string' && item.length > 0) ignoredStrings.push(item);
+      });
+    } else if (typeof existingIgnored === 'string' && existingIgnored.length > 0) {
+      ignoredStrings.push(existingIgnored);
+    }
+    ignoredStrings.push('**/langgraph_env/**');
     config.watchOptions = {
       ...config.watchOptions,
-      ignored: [...ignoredArray, '**/langgraph_env/**'],
+      ignored: ignoredStrings,
     };
 
     return config;
