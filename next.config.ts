@@ -33,9 +33,15 @@ const nextConfig: NextConfig = {
     }
 
     // Exclude langgraph_env from being watched/compiled
+    const existingIgnored = config.watchOptions?.ignored;
+    const ignoredArray = Array.isArray(existingIgnored)
+      ? existingIgnored
+      : existingIgnored
+        ? [existingIgnored]
+        : [];
     config.watchOptions = {
       ...config.watchOptions,
-      ignored: [...(config.watchOptions?.ignored || []), '**/langgraph_env/**'],
+      ignored: [...ignoredArray, '**/langgraph_env/**'],
     };
 
     return config;
