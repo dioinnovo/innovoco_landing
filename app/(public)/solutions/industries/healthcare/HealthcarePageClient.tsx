@@ -37,7 +37,7 @@ import { createServiceSchema, createBreadcrumbSchema } from "@/lib/seo/schema";
 
 /* ─── animations ─── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
