@@ -194,17 +194,17 @@ export default function BlogPage(props: BlogPageProps) {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-linear-to-b from-white to-gray-50">
-        {/* Hero */}
+      <main
+        id="main-content"
+        className="min-h-screen bg-linear-to-b from-white to-gray-50"
+      >
         <BlogHero />
-
-        {/* Content */}
         <div className="py-12">
           <Suspense fallback={<BlogContentLoading />}>
             <BlogContent {...props} />
           </Suspense>
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   );

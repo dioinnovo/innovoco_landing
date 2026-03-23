@@ -1,7 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ChevronRight, CheckCircle2, Lock, Zap, Award, MessageCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, ChevronDown, CheckCircle2, Lock, Zap, Award, MessageCircle } from "lucide-react";
+import ContactModal from "@/components/landing/ContactModal";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import { SchemaMarkup } from "@/lib/seo/SchemaMarkup";
 import { createServiceSchema, createBreadcrumbSchema } from "@/lib/seo/schema";
 import { useEffect, useState } from "react";
@@ -15,14 +18,6 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     transition: { duration: 0.5, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
-  }),
-};
-
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: (i: number = 0) => ({
-    opacity: 1,
-    transition: { duration: 0.5, delay: i * 0.1 },
   }),
 };
 
@@ -42,6 +37,8 @@ const scaleUp = {
 
 export function ManufacturingPageClient() {
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const openContact = () => setContactModalOpen(true);
 
   useEffect(() => {
     trackServicePageView("Manufacturing Industry Solutions");
@@ -68,7 +65,13 @@ export function ManufacturingPageClient() {
         ])}
       />
 
-      <main id="main-content" role="main" className="w-full">
+      <div className="min-h-screen bg-[var(--background)]">
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
+        <Header onContactClick={openContact} />
+
+        <main id="main-content" role="main" tabIndex={-1} className="w-full outline-none">
         {/* ─── HERO SECTION ─── */}
         <section
           className="relative w-full overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
@@ -158,13 +161,14 @@ export function ManufacturingPageClient() {
               custom={0.5}
               className="flex flex-col gap-4 sm:flex-row sm:items-center"
             >
-              <a
-                href="#contact"
+              <button
+                type="button"
+                onClick={openContact}
                 className="group inline-flex items-center justify-center gap-2 rounded-lg bg-amber-400 px-8 py-4 font-semibold text-slate-950 transition-all hover:bg-amber-300 hover:shadow-lg hover:shadow-amber-400/25 hover:scale-105"
               >
                 {manufacturingConfig.hero.primaryCTAText}
                 <ChevronRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
               <a
                 href="#capabilities"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 px-8 py-4 font-semibold text-slate-100 transition-all hover:border-amber-400/50 hover:bg-amber-400/5"
@@ -173,11 +177,6 @@ export function ManufacturingPageClient() {
                 <ChevronRight size={18} />
               </a>
             </motion.div>
-
-            {/* Skip to content */}
-            <a href="#main-content" className="sr-only focus:not-sr-only">
-              Skip to main content
-            </a>
           </div>
         </section>
 
@@ -475,13 +474,14 @@ export function ManufacturingPageClient() {
               <p className="mx-auto max-w-2xl text-lg text-slate-300">
                 Schedule a 60-minute consultation to identify high-ROI opportunities for your manufacturing facility.
               </p>
-              <a
-                href="#contact"
+              <button
+                type="button"
+                onClick={openContact}
                 className="group inline-flex items-center justify-center gap-2 rounded-lg bg-amber-400 px-8 py-4 font-semibold text-slate-950 transition-all hover:bg-amber-300 hover:shadow-lg hover:shadow-amber-400/25 hover:scale-105 mt-8"
               >
                 Start Your Assessment
                 <ChevronRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
             </motion.div>
           </div>
         </section>
@@ -522,26 +522,34 @@ export function ManufacturingPageClient() {
                   className="rounded-lg border border-slate-200 overflow-hidden"
                 >
                   <button
+                    type="button"
+                    aria-expanded={expandedFAQ === i}
                     onClick={() => setExpandedFAQ(expandedFAQ === i ? null : i)}
                     className="w-full flex items-center justify-between gap-4 bg-slate-50 p-6 text-left hover:bg-amber-50 transition-colors"
                   >
                     <h3 className="font-semibold text-slate-950 text-lg">{faq.question}</h3>
                     <div
-                      className={`flex-shrink-0 text-amber-600 transition-transform duration-300 ${expandedFAQ === i ? "rotate-180" : ""}`}
+                      className={`shrink-0 text-amber-600 transition-transform duration-300 ${expandedFAQ === i ? "rotate-180" : ""}`}
                     >
-                      <ChevronRight size={24} />
+                      <ChevronDown size={24} aria-hidden />
                     </div>
                   </button>
-                  {expandedFAQ === i && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="border-t border-slate-200 bg-white p-6"
-                    >
-                      <p className="text-slate-700 leading-relaxed">{faq.answer}</p>
-                    </motion.div>
-                  )}
+                  <AnimatePresence initial={false}>
+                    {expandedFAQ === i && (
+                      <motion.div
+                        key={`faq-answer-${i}`}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="overflow-hidden border-t border-slate-200 bg-white"
+                      >
+                        <div className="p-6">
+                          <p className="text-slate-700 leading-relaxed">{faq.answer}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
             </div>
@@ -565,7 +573,10 @@ export function ManufacturingPageClient() {
         </section>
 
         {/* ─── FINAL CTA SECTION ─── */}
-        <section className="relative w-full overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900 py-20 sm:py-28">
+        <section
+          id="contact"
+          className="relative w-full overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900 py-20 sm:py-28 scroll-mt-20"
+        >
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,191,36,0.03)_1px,transparent_1px),linear-gradient(rgba(251,191,36,0.03)_1px,transparent_1px)]" style={{ backgroundSize: "50px 50px" }} aria-hidden="true" />
           <div className="relative mx-auto max-w-6xl px-6">
             <motion.div
@@ -588,15 +599,23 @@ export function ManufacturingPageClient() {
               {manufacturingConfig.actionCTA.cards.map((card, i) => {
                 const IconComponent = card.icon;
                 return (
-                  <motion.a
+                  <motion.div
                     key={i}
-                    href="#contact"
+                    role="button"
+                    tabIndex={0}
+                    onClick={openContact}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        openContact();
+                      }
+                    }}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={scaleUp}
                     custom={i}
-                    className="group relative rounded-xl border border-white/10 bg-slate-800/60 p-8 hover:border-amber-400/40 hover:bg-slate-800 transition-all"
+                    className="group relative cursor-pointer rounded-xl border border-white/10 bg-slate-800/60 p-8 hover:border-amber-400/40 hover:bg-slate-800 transition-all"
                   >
                     {/* Top-right badge */}
                     <div className="absolute top-5 right-5 rounded-full bg-amber-400/15 px-3 py-1 border border-amber-400/25">
@@ -611,7 +630,7 @@ export function ManufacturingPageClient() {
                       {card.action}
                       <ChevronRight size={18} />
                     </div>
-                  </motion.a>
+                  </motion.div>
                 );
               })}
             </div>
@@ -628,7 +647,12 @@ export function ManufacturingPageClient() {
             </motion.p>
           </div>
         </section>
-      </main>
+        </main>
+
+        <Footer />
+      </div>
+
+      <ContactModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
     </>
   );
 }

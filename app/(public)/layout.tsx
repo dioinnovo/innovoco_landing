@@ -5,10 +5,8 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      {/* Public layout wrapper - sections handle their own content constraints */}
-      <main className="min-h-screen">
-        {children}
-      </main>
+      {/* Div (not main) so routes can declare a single <main id="main-content"> without nesting. */}
+      <div className="min-h-screen">{children}</div>
     </>
   );
 }
