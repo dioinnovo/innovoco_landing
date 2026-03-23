@@ -1,6 +1,8 @@
-import { Organization, Service, BreadcrumbList, WebSite, WithContext } from 'schema-dts';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-export const organizationSchema: WithContext<Organization> = {
+type WithContext<T> = T & { "@context": string };
+
+export const organizationSchema: WithContext<Record<string, any>> = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": "https://innovoco.com/#organization",
@@ -42,7 +44,7 @@ export const organizationSchema: WithContext<Organization> = {
   ]
 };
 
-export const websiteSchema: WithContext<WebSite> = {
+export const websiteSchema: WithContext<Record<string, any>> = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": "https://innovoco.com/#website",
@@ -68,7 +70,7 @@ export function createServiceSchema(service: {
   url: string;
   serviceType: string;
   price?: string;
-}): WithContext<Service> {
+}): WithContext<Record<string, any>> {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -106,7 +108,7 @@ export function createServiceSchema(service: {
   };
 }
 
-export function createBreadcrumbSchema(items: Array<{ name: string; url: string }>): WithContext<BreadcrumbList> {
+export function createBreadcrumbSchema(items: Array<{ name: string; url: string }>): WithContext<Record<string, any>> {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

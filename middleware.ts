@@ -1,8 +1,7 @@
 import { auth } from "@/auth"
 import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 
-// Next.js 16+ uses proxy.ts instead of middleware.ts
-// The function is now named 'proxy' instead of 'middleware'
 export default auth((req) => {
   const response = NextResponse.next()
 
@@ -24,7 +23,9 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    // Apply to all routes except static files and specific API routes
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    // Only run middleware on dashboard and auth routes, not on every request
+    '/dashboard/:path*',
+    '/auth/:path*',
+    '/api/auth/:path*',
   ],
 }
