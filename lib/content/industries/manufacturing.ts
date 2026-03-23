@@ -24,7 +24,7 @@ export const manufacturingConfig: IndustryConfig = {
       { metric: '15%', label: 'OEE Increase' }
     ],
     primaryCTAText: 'Schedule Manufacturing AI Assessment',
-    backgroundGradient: 'bg-gradient-to-br from-[#EDE9FE] via-[#FECACA] to-[#FED7AA]'
+    backgroundGradient: 'bg-gradient-to-br from-[#FEF3C7] via-[#FECACA] to-[#FED7AA]'
   },
 
   sectionCTAs: {
@@ -57,7 +57,7 @@ export const manufacturingConfig: IndustryConfig = {
     studies: [
       {
         icon: Settings,
-        iconGradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         title: 'Predictive Maintenance for Automotive Manufacturer',
         industry: 'Manufacturing | Automotive',
         challenge: 'Unplanned equipment failures causing $5M+ annual production losses. Average downtime of 48 hours per failure affecting delivery schedules.',
@@ -70,7 +70,7 @@ export const manufacturingConfig: IndustryConfig = {
       },
       {
         icon: Activity,
-        iconGradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         title: 'Computer Vision Quality Control',
         industry: 'Manufacturing | Electronics',
         challenge: 'Manual visual inspection missing 15% of defects. High false positive rate (30%) causing unnecessary waste and rework costs.',
@@ -83,7 +83,7 @@ export const manufacturingConfig: IndustryConfig = {
       },
       {
         icon: TrendingUp,
-        iconGradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         title: 'Supply Chain Demand Forecasting',
         industry: 'Manufacturing | Consumer Goods',
         challenge: 'Forecast error of 35% causing $8M inventory carrying costs and frequent stockouts affecting customer satisfaction.',
@@ -96,7 +96,7 @@ export const manufacturingConfig: IndustryConfig = {
       },
       {
         icon: Cog,
-        iconGradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         title: 'OEE Optimization for Pharmaceutical Manufacturing',
         industry: 'Manufacturing | Pharmaceutical',
         challenge: 'Overall Equipment Effectiveness (OEE) of 65% (below industry target of 85%). Production losses from availability, performance, and quality issues.',
@@ -158,7 +158,7 @@ export const manufacturingConfig: IndustryConfig = {
         icon: Settings,
         title: 'Industry 4.0 Expertise',
         description: 'Deep experience implementing smart manufacturing solutions with IoT, AI, and edge computing. We understand production environments, equipment interfaces, and operational constraints.',
-        gradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        gradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         metric: '100+ Manufacturing Implementations',
         highlights: [
           'OT/IT integration with secure network architecture',
@@ -171,7 +171,7 @@ export const manufacturingConfig: IndustryConfig = {
         icon: Shield,
         title: 'Industrial Cybersecurity',
         description: 'Comprehensive OT security following ISA/IEC 62443 standards. Network segmentation, encrypted communication, and continuous monitoring protect production systems.',
-        gradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        gradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         metric: 'ISA/IEC 62443 Compliant',
         highlights: [
           'Defense-in-depth OT security architecture',
@@ -184,7 +184,7 @@ export const manufacturingConfig: IndustryConfig = {
         icon: Activity,
         title: 'Predictive Maintenance Focus',
         description: 'Specialized in equipment health monitoring and failure prediction. Our solutions reduce unplanned downtime 30-50% while extending equipment life 10-15%.',
-        gradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        gradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         metric: '30-50% Downtime Reduction',
         highlights: [
           '85-95% accuracy in failure prediction',
@@ -197,7 +197,7 @@ export const manufacturingConfig: IndustryConfig = {
         icon: Award,
         title: 'Operational Excellence Results',
         description: 'Track record of measurable OEE improvements, quality gains, and cost reductions. We focus on production metrics that matter: throughput, yield, and total cost.',
-        gradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        gradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         metric: '15% Avg OEE Improvement',
         highlights: [
           '99%+ quality detection rates with computer vision',
@@ -218,7 +218,7 @@ export const manufacturingConfig: IndustryConfig = {
         title: 'Manufacturing AI Assessment',
         description: 'Free 60-minute consultation to evaluate your production systems and identify high-ROI opportunities for predictive maintenance and quality control AI.',
         tag: 'Complimentary',
-        gradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        gradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         action: 'Schedule Assessment'
       },
       {
@@ -226,7 +226,7 @@ export const manufacturingConfig: IndustryConfig = {
         title: 'OEE Improvement Calculator',
         description: 'Calculate potential ROI from AI-powered predictive maintenance, quality control, and supply chain optimization. Get custom projections based on your operations.',
         tag: 'Free Tool',
-        gradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        gradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         action: 'Get Calculator'
       },
       {
@@ -234,7 +234,7 @@ export const manufacturingConfig: IndustryConfig = {
         title: 'Industry 4.0 Workshop',
         description: 'Join our quarterly workshop on smart manufacturing trends: IoT integration, predictive maintenance strategies, and quality control automation.',
         tag: 'Register Now',
-        gradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+        gradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
         action: 'Register'
       }
     ],
