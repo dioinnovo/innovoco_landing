@@ -86,15 +86,15 @@ export function ManufacturingPageClient() {
 
           {/* Grid pattern */}
           <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,140,66,0.05)_1px,transparent_1px),linear-gradient(rgba(255,140,66,0.05)_1px,transparent_1px)]"
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,191,36,0.04)_1px,transparent_1px),linear-gradient(rgba(251,191,36,0.04)_1px,transparent_1px)]"
             style={{ backgroundSize: "50px 50px" }}
             aria-hidden="true"
           />
 
           <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32 lg:py-40">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-8 flex items-center gap-3">
-              <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-amber-500" />
-              <span className="text-sm font-semibold uppercase tracking-wider text-orange-400">
+              <div className="h-1 w-12 bg-amber-400" />
+              <span className="text-sm font-semibold uppercase tracking-wider text-amber-400">
                 {manufacturingConfig.hero.badge}
               </span>
             </motion.div>
@@ -142,9 +142,9 @@ export function ManufacturingPageClient() {
                   key={i}
                   variants={scaleUp}
                   custom={i}
-                  className="rounded-lg border border-orange-500/20 bg-orange-500/5 px-4 py-4"
+                  className="rounded-lg border border-amber-400/25 bg-amber-400/5 px-4 py-4"
                 >
-                  <div className="text-2xl font-bold text-orange-400">{indicator.metric}</div>
+                  <div className="text-2xl font-bold text-amber-400">{indicator.metric}</div>
                   <div className="text-xs font-semibold text-slate-400">{indicator.label}</div>
                 </motion.div>
               ))}
@@ -160,14 +160,14 @@ export function ManufacturingPageClient() {
             >
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 px-8 py-4 font-semibold text-white transition-all hover:shadow-lg hover:shadow-orange-500/25 hover:scale-105"
+                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-amber-400 px-8 py-4 font-semibold text-slate-950 transition-all hover:bg-amber-300 hover:shadow-lg hover:shadow-amber-400/25 hover:scale-105"
               >
                 {manufacturingConfig.hero.primaryCTAText}
                 <ChevronRight size={18} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#capabilities"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 px-8 py-4 font-semibold text-slate-100 transition-all hover:border-orange-500/50 hover:bg-orange-500/5"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 px-8 py-4 font-semibold text-slate-100 transition-all hover:border-amber-400/50 hover:bg-amber-400/5"
               >
                 Explore Capabilities
                 <ChevronRight size={18} />
@@ -196,9 +196,9 @@ export function ManufacturingPageClient() {
               variants={fadeUp}
               className="mb-16 text-center"
             >
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-2">
-                <Zap size={16} className="text-orange-600" />
-                <span className="text-sm font-semibold text-orange-700">Core Capabilities</span>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100 px-4 py-2">
+                <Zap size={16} className="text-amber-700" />
+                <span className="text-sm font-semibold text-amber-800">Core Capabilities</span>
               </div>
               <h2 className="mb-4 text-4xl font-bold text-slate-950 sm:text-5xl">
                 Industry 4.0 AI Solutions
@@ -225,19 +225,19 @@ export function ManufacturingPageClient() {
                   </p>
                   <ul className="space-y-3 mb-8">
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">30-50% reduction in unplanned downtime</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">20-25% maintenance cost savings</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">10-15% equipment lifespan extension</span>
                     </li>
                   </ul>
-                  <div className="rounded-lg bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 p-4">
+                  <div className="rounded-lg bg-amber-50 border border-amber-200 p-4">
                     <p className="text-sm text-slate-700">
                       <strong>ROI Timeline:</strong> 6-12 months | <strong>Avg Savings:</strong> $2-5M annually for mid-size manufacturers
                     </p>
@@ -282,19 +282,19 @@ export function ManufacturingPageClient() {
                   </p>
                   <ul className="space-y-3 mb-8">
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">99.5% defect detection accuracy</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">85% inspection time reduction</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">$2-3M annual quality cost savings</span>
                     </li>
                   </ul>
-                  <div className="rounded-lg bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 p-4">
+                  <div className="rounded-lg bg-amber-50 border border-amber-200 p-4">
                     <p className="text-sm text-slate-700">
                       <strong>ROI Timeline:</strong> 3-6 months | <strong>Implementation:</strong> 4-8 weeks
                     </p>
@@ -317,19 +317,19 @@ export function ManufacturingPageClient() {
                   </p>
                   <ul className="space-y-3 mb-8">
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">22% forecast error reduction</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">$4-5M inventory cost savings</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className="text-orange-500 mt-1 flex-shrink-0" />
+                      <CheckCircle2 size={20} className="text-amber-600 mt-1 flex-shrink-0" />
                       <span className="text-slate-700">40% stockout reduction</span>
                     </li>
                   </ul>
-                  <div className="rounded-lg bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 p-4">
+                  <div className="rounded-lg bg-amber-50 border border-amber-200 p-4">
                     <p className="text-sm text-slate-700">
                       <strong>ROI Timeline:</strong> 4-8 months | <strong>Avg Savings:</strong> $3-6M annually
                     </p>
@@ -362,21 +362,21 @@ export function ManufacturingPageClient() {
               className="grid gap-8 sm:grid-cols-3 text-center"
             >
               <div className="flex flex-col items-center gap-3">
-                <Lock size={32} className="text-orange-400" />
+                <Lock size={32} className="text-amber-400" />
                 <div>
                   <p className="font-bold text-white">ISA/IEC 62443 Compliant</p>
                   <p className="text-sm text-slate-400">Industrial cybersecurity standards</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <Award size={32} className="text-orange-400" />
+                <Award size={32} className="text-amber-400" />
                 <div>
                   <p className="font-bold text-white">100+ Implementations</p>
                   <p className="text-sm text-slate-400">Proven across discrete & process</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <Zap size={32} className="text-orange-400" />
+                <Zap size={32} className="text-amber-400" />
                 <div>
                   <p className="font-bold text-white">24/7 Monitoring</p>
                   <p className="text-sm text-slate-400">Production continuity guaranteed</p>
@@ -400,9 +400,9 @@ export function ManufacturingPageClient() {
               variants={fadeUp}
               className="mb-16 text-center"
             >
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-2">
-                <Award size={16} className="text-orange-600" />
-                <span className="text-sm font-semibold text-orange-700">{manufacturingConfig.caseStudies.badge}</span>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100 px-4 py-2">
+                <Award size={16} className="text-amber-700" />
+                <span className="text-sm font-semibold text-amber-800">{manufacturingConfig.caseStudies.badge}</span>
               </div>
               <h2 className="mb-4 text-4xl font-bold text-slate-950 sm:text-5xl">
                 {manufacturingConfig.caseStudies.title}
@@ -424,13 +424,13 @@ export function ManufacturingPageClient() {
                     viewport={{ once: true }}
                     variants={scaleUp}
                     custom={i}
-                    className="group rounded-xl border border-slate-200 bg-white p-8 transition-all hover:border-orange-200 hover:shadow-lg hover:shadow-orange-100"
+                    className="group rounded-xl border border-slate-200 bg-white p-8 transition-all hover:border-amber-200 hover:shadow-lg hover:shadow-amber-100/50"
                   >
                     <div className={`${study.iconGradient} mb-4 inline-flex w-12 h-12 items-center justify-center rounded-lg`}>
                       <IconComponent size={24} className="text-slate-950" />
                     </div>
                     <h3 className="mb-2 text-xl font-bold text-slate-950">{study.title}</h3>
-                    <p className="mb-4 text-sm font-semibold text-orange-600">{study.industry}</p>
+                    <p className="mb-4 text-sm font-semibold text-amber-700">{study.industry}</p>
                     <div className="mb-6 space-y-3">
                       <div>
                         <p className="text-sm font-semibold text-slate-700">Challenge</p>
@@ -445,7 +445,7 @@ export function ManufacturingPageClient() {
                       {study.results.map((result, j) => (
                         <div key={j} className="flex items-start gap-3">
                           <div>
-                            <p className="font-bold text-orange-600">{result.metric}</p>
+                            <p className="font-bold text-amber-700">{result.metric}</p>
                             <p className="text-xs text-slate-600">{result.label}</p>
                           </div>
                         </div>
@@ -459,8 +459,8 @@ export function ManufacturingPageClient() {
         </section>
 
         {/* ─── MID-PAGE CTA ─── */}
-        <section className="relative w-full overflow-hidden bg-gradient-to-r from-slate-950 via-orange-900/20 to-slate-950 py-20 sm:py-28">
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,140,66,0.05)_1px,transparent_1px),linear-gradient(rgba(255,140,66,0.05)_1px,transparent_1px)]" style={{ backgroundSize: "50px 50px" }} aria-hidden="true" />
+        <section className="relative w-full overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 py-20 sm:py-28">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,191,36,0.04)_1px,transparent_1px),linear-gradient(rgba(251,191,36,0.04)_1px,transparent_1px)]" style={{ backgroundSize: "50px 50px" }} aria-hidden="true" />
           <div className="relative mx-auto max-w-4xl px-6 text-center">
             <motion.div
               initial="hidden"
@@ -477,7 +477,7 @@ export function ManufacturingPageClient() {
               </p>
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 px-8 py-4 font-semibold text-white transition-all hover:shadow-lg hover:shadow-orange-500/25 hover:scale-105 mt-8"
+                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-amber-400 px-8 py-4 font-semibold text-slate-950 transition-all hover:bg-amber-300 hover:shadow-lg hover:shadow-amber-400/25 hover:scale-105 mt-8"
               >
                 Start Your Assessment
                 <ChevronRight size={18} className="transition-transform group-hover:translate-x-1" />
@@ -497,9 +497,9 @@ export function ManufacturingPageClient() {
               variants={fadeUp}
               className="mb-16 text-center"
             >
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-2">
-                <MessageCircle size={16} className="text-orange-600" />
-                <span className="text-sm font-semibold text-orange-700">FAQs</span>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100 px-4 py-2">
+                <MessageCircle size={16} className="text-amber-700" />
+                <span className="text-sm font-semibold text-amber-800">FAQs</span>
               </div>
               <h2 className="mb-4 text-4xl font-bold text-slate-950 sm:text-5xl">
                 {manufacturingConfig.faqs.title}
@@ -523,11 +523,11 @@ export function ManufacturingPageClient() {
                 >
                   <button
                     onClick={() => setExpandedFAQ(expandedFAQ === i ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 bg-slate-50 p-6 text-left hover:bg-orange-50 transition-colors"
+                    className="w-full flex items-center justify-between gap-4 bg-slate-50 p-6 text-left hover:bg-amber-50 transition-colors"
                   >
                     <h3 className="font-semibold text-slate-950 text-lg">{faq.question}</h3>
                     <div
-                      className={`flex-shrink-0 text-orange-500 transition-transform duration-300 ${expandedFAQ === i ? "rotate-180" : ""}`}
+                      className={`flex-shrink-0 text-amber-600 transition-transform duration-300 ${expandedFAQ === i ? "rotate-180" : ""}`}
                     >
                       <ChevronRight size={24} />
                     </div>
@@ -566,7 +566,7 @@ export function ManufacturingPageClient() {
 
         {/* ─── FINAL CTA SECTION ─── */}
         <section className="relative w-full overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900 py-20 sm:py-28">
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,140,66,0.03)_1px,transparent_1px),linear-gradient(rgba(255,140,66,0.03)_1px,transparent_1px)]" style={{ backgroundSize: "50px 50px" }} aria-hidden="true" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,191,36,0.03)_1px,transparent_1px),linear-gradient(rgba(251,191,36,0.03)_1px,transparent_1px)]" style={{ backgroundSize: "50px 50px" }} aria-hidden="true" />
           <div className="relative mx-auto max-w-6xl px-6">
             <motion.div
               initial="hidden"
@@ -596,17 +596,18 @@ export function ManufacturingPageClient() {
                     viewport={{ once: true }}
                     variants={scaleUp}
                     custom={i}
-                    className="group rounded-xl border border-orange-500/20 bg-gradient-to-br from-slate-800 to-slate-900 p-8 hover:border-orange-500/50 hover:bg-gradient-to-br hover:from-orange-950/50 hover:to-slate-900 transition-all"
+                    className="group relative rounded-xl border border-white/10 bg-slate-800/60 p-8 hover:border-amber-400/40 hover:bg-slate-800 transition-all"
                   >
-                    <div className={`${card.gradient} mb-4 inline-flex w-12 h-12 items-center justify-center rounded-lg`}>
+                    {/* Top-right badge */}
+                    <div className="absolute top-5 right-5 rounded-full bg-amber-400/15 px-3 py-1 border border-amber-400/25">
+                      <span className="text-xs font-semibold text-amber-300">{card.tag}</span>
+                    </div>
+                    <div className={`${card.gradient} mb-5 inline-flex w-12 h-12 items-center justify-center rounded-lg`}>
                       <IconComponent size={24} className="text-slate-950" />
                     </div>
-                    <div className="mb-2 inline-block rounded-full bg-orange-500/20 px-3 py-1">
-                      <span className="text-xs font-semibold text-orange-300">{card.tag}</span>
-                    </div>
-                    <h3 className="mb-2 text-lg font-bold text-white">{card.title}</h3>
-                    <p className="mb-6 text-sm text-slate-400">{card.description}</p>
-                    <div className="flex items-center gap-2 font-semibold text-orange-400 group-hover:gap-3 transition-all">
+                    <h3 className="mb-2 text-lg font-bold text-white pr-20">{card.title}</h3>
+                    <p className="mb-6 text-sm text-slate-400 leading-relaxed">{card.description}</p>
+                    <div className="flex items-center gap-2 font-semibold text-amber-400 group-hover:gap-3 transition-all">
                       {card.action}
                       <ChevronRight size={18} />
                     </div>
