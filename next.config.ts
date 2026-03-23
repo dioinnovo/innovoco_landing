@@ -33,10 +33,10 @@ const nextConfig: NextConfig = {
     }
 
     // Exclude langgraph_env from being watched/compiled
-    if (!config.watchOptions) {
-      config.watchOptions = {};
-    }
-    config.watchOptions.ignored = '**/langgraph_env/**';
+    config.watchOptions = {
+      ...(config.watchOptions || {}),
+      ignored: '**/langgraph_env/**',
+    };
 
     return config;
   },
