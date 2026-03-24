@@ -75,6 +75,16 @@ export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
     image: "/images/case-studies/outcomes/regulated-onboarding.jpg",
   },
   {
+    slug: "predictive-maintenance-manufacturing",
+    title: "Predictive maintenance",
+    outcome:
+      "IoT-driven failure prediction 7–14 days ahead cutting unplanned downtime 45% and saving $3.5M annually.",
+    industries: ["manufacturing-logistics", "energy-field"],
+    tags: ["Cost", "Speed"],
+    icon: "wrench",
+    image: "/images/case-studies/outcomes/predictive-maintenance-manufacturing.jpg",
+  },
+  {
     slug: "supply-chain-demand",
     title: "Supply chain & demand",
     outcome: "Forecast → reorder loops with SLA-aware vendors and proactive alerts.",
@@ -327,15 +337,5 @@ export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
     tags: ["CX", "Cost"],
     icon: "users",
     image: "/images/case-studies/outcomes/customer-360-identity-resolution.jpg",
-  },
-  {
-    slug: "predictive-maintenance-manufacturing",
-    title: "Predictive maintenance for manufacturing",
-    outcome:
-      "IoT-driven failure prediction 7–14 days ahead cutting unplanned downtime 45% and saving $3.5M annually.",
-    industries: ["manufacturing-logistics", "energy-field"],
-    tags: ["Cost", "Speed"],
-    icon: "wrench",
-    image: "/images/case-studies/outcomes/predictive-maintenance-manufacturing.jpg",
   },
 ];
