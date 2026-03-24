@@ -31,7 +31,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
-import { STORY_PROMPTS_BY_SLUG } from "./use-case-story-prompts.mjs";
+import { STORY_PROMPTS_BY_SLUG, buildPromptsFromNarrative } from "./use-case-story-prompts.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
@@ -117,8 +117,76 @@ async function main() {
   const runTechnical = !onlySet || onlySet.has("technical");
   const runImpact = !onlySet || onlySet.has("impact");
 
+  // Load narratives from use-case-study-details.ts for auto-prompt generation
+  let narrativeDetails = {};
+  try {
+    // Dynamic import of the TS content via tsx or direct JS fallback
+    const detailsPath = path.join(root, "lib", "content", "use-case-study-details.ts");
+    const detailsSrc = fs.readFileSync(detailsPath, "utf-8");
+    // Quick extraction: find all slug keys in the details record
+    const slugMatches = [...detailsSrc.matchAll(/"([a-z][\w-]*)"\s*:\s*\{/g)].map((m) => m[1]);
+
+    // For each slug, extract the narrative fields we need using regex
+    for (const slug of slugMatches) {
+      // Find the block for this slug (between its key and the next top-level key or end)
+      const startIdx = detailsSrc.indexOf(`"${slug}": {`);
+      if (startIdx === -1) continue;
+
+      // Simple extraction of phases, keyImplementations, technicalInnovation, impactMetrics, challenge
+      const extractString = (field) => {
+        const pattern = new RegExp(`${field}:\\s*(?:"([^"]*(?:\\\\.[^"]*)*)"|'([^']*(?:\\\\.[^']*)*)'|\`([^\`]*)\`)`, "s");
+        const sub = detailsSrc.slice(startIdx, startIdx + 8000);
+        const m = sub.match(pattern);
+        return m ? (m[1] || m[2] || m[3] || "").replace(/\\"/g, '"').replace(/\\n/g, " ") : "";
+      };
+
+      // Extract phases as array of {title, body}
+      const phasesBlock = detailsSrc.slice(startIdx, startIdx + 4000);
+      const phaseMatches = [...phasesBlock.matchAll(/title:\s*"([^"]*)"\s*,\s*body:\s*"([^"]*)"/gs)];
+      const phases = phaseMatches.map((m) => ({ title: m[1], body: m[2].replace(/\\"/g, '"') }));
+
+      // Extract keyImplementations
+      const implBlock = detailsSrc.slice(startIdx, startIdx + 6000);
+      const implMatches = [...implBlock.matchAll(/title:\s*"([^"]*)"\s*,\s*(?:detail):\s*"([^"]*)"/gs)];
+      const keyImplementations = implMatches.slice(phases.length).map((m) => ({
+        title: m[1],
+        detail: m[2].replace(/\\"/g, '"'),
+      }));
+
+      const technicalInnovation = extractString("technicalInnovation");
+      const challenge = extractString("challenge");
+
+      // Extract impactMetrics array
+      const metricsBlock = detailsSrc.slice(startIdx, startIdx + 8000);
+      const metricsStart = metricsBlock.indexOf("impactMetrics:");
+      const impactMetrics = [];
+      if (metricsStart !== -1) {
+        const metricsSlice = metricsBlock.slice(metricsStart, metricsStart + 2000);
+        const metricMatches = [...metricsSlice.matchAll(/"([^"]{20,})"/g)];
+        for (const m of metricMatches) impactMetrics.push(m[1].replace(/\\"/g, '"'));
+      }
+
+      if (phases.length > 0) {
+        narrativeDetails[slug] = { phases, keyImplementations, technicalInnovation, impactMetrics, challenge };
+      }
+    }
+    console.log(`Loaded ${Object.keys(narrativeDetails).length} narratives for auto-prompt generation.`);
+  } catch (err) {
+    console.warn(`Could not load narratives (auto-prompts disabled): ${err.message}`);
+  }
+
+  // Build effective prompts: manual overrides take priority, then auto-generated from narrative
+  /** @type {Record<string, import("./use-case-story-prompts.mjs").StoryPrompts>} */
+  const effectivePrompts = { ...STORY_PROMPTS_BY_SLUG };
+  for (const [slug, narrative] of Object.entries(narrativeDetails)) {
+    if (!effectivePrompts[slug] && narrative.phases.length > 0) {
+      effectivePrompts[slug] = buildPromptsFromNarrative(narrative);
+      console.log(`  Auto-generated prompts for: ${slug}`);
+    }
+  }
+
   const argvFilter = args.filter((a) => !a.startsWith("-"));
-  const slugs = Object.keys(STORY_PROMPTS_BY_SLUG);
+  const slugs = Object.keys(effectivePrompts);
   const slugsToRun = argvFilter.length > 0 ? slugs.filter((s) => argvFilter.includes(s)) : slugs;
 
   if (argvFilter.length > 0 && slugsToRun.length === 0) {
@@ -142,7 +210,7 @@ async function main() {
   let skipped = 0;
 
   for (const slug of slugsToRun) {
-    const data = STORY_PROMPTS_BY_SLUG[slug];
+    const data = effectivePrompts[slug];
     if (!data) continue;
 
     /** @type {{ outPath: string; prompt: string; aspect: string }[]} */

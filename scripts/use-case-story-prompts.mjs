@@ -1,6 +1,15 @@
 /**
  * Per-slug prompts for solution / story imagery (Gemini).
- * Each entry must stay distinct so generated files do not look interchangeable.
+ *
+ * TWO MODES:
+ *   1. **Manual override** — entries in STORY_PROMPTS_BY_SLUG get used as-is.
+ *   2. **Auto-generated** — for any slug NOT in the overrides, call
+ *      `buildPromptsFromNarrative(slug)` which reads the actual narrative
+ *      content from use-case-study-details.ts and builds prompts grounded
+ *      in the real page text.
+ *
+ * The auto-generated path ensures every image is semantically relevant to
+ * the text it accompanies — no more generic landscapes.
  */
 
 import { CINEMATIC_STYLE_ANCHOR } from "./ai-art-style-anchor.mjs";
@@ -9,9 +18,74 @@ export const SHARED_SOLUTION = `Premium editorial illustration for an enterprise
 ${CINEMATIC_STYLE_ANCHOR}
 Atmospheric depth with warm undertones (dawn light, soft fog, gentle uplight). Innovoco palette: luminous cobalt and royal blue, crimson and rose highlights where sun meets sky; fluid ribbons; optional subtle grid or light trails (abstract). Square 1:1 for phase tiles. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
 
-IMPORTANT — SEMANTIC GROUNDING: Each illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the topic. Pure landscapes or generic atmospheric scenes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, instruments, screens, flows) rendered as painterly silhouettes or luminous abstract forms that are clearly identifiable even in a romantic realism style. The viewer should be able to tell what DOMAIN this image belongs to at a glance — manufacturing, healthcare, energy, finance, etc. — without reading any text.`;
+IMPORTANT — SEMANTIC GROUNDING: Each illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the topic described below. Pure landscapes or generic atmospheric scenes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, instruments, screens, flows, documents) rendered as painterly silhouettes or luminous abstract forms that are clearly identifiable even in a romantic realism style. The viewer should be able to tell what DOMAIN and SPECIFIC TOPIC this image belongs to at a glance — without reading any text. Extract the key nouns and processes from the text below and render them as visual elements in the illustration.`;
+
+const SHARED_CHALLENGE = `Premium editorial illustration for an enterprise AI case study "challenge" section — convey FRICTION, bottlenecks, fragmentation, or risk as abstract metaphor (obstacles as weather, fog, distance, or crossed paths—not horror, doom, or neon dystopia).
+${CINEMATIC_STYLE_ANCHOR}
+Tension should still feel human and surmountable: soft storm light, mist obscuring a route, or cool-vs-warm air—not a void or apocalypse. Innovoco blues and crimson as sky vs horizon. Square 1:1. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
+
+IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms from the challenge text below. Extract the key objects, processes, and pain points and render them as visual elements — broken flows, stressed equipment, disconnected systems, scattered documents, etc. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.`;
 
 /** @typedef {{ phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
+
+/**
+ * Build prompts automatically from narrative content.
+ * Falls back to this when a slug has no manual override in STORY_PROMPTS_BY_SLUG.
+ *
+ * @param {{ phases: Array<{title: string; body: string}>; keyImplementations: Array<{title: string; detail: string}>; technicalInnovation: string; impactMetrics: string[] }} narrative
+ * @returns {StoryPrompts}
+ */
+export function buildPromptsFromNarrative(narrative) {
+  const phases = narrative.phases.map(
+    (p) => `${SHARED_SOLUTION}
+
+The following text describes what this phase covers. Use it as context to determine what visual elements to include:
+"${p.title}: ${p.body}"
+
+Illustrate the key concepts, objects, and processes mentioned in that text as stylized abstract forms in the romantic realism style.`
+  );
+
+  const implTitles = narrative.keyImplementations
+    .map((ki) => `• ${ki.title}: ${ki.detail}`)
+    .join("\n");
+  const implementations = `${SHARED_SOLUTION}
+
+The following text describes the key implementations this image accompanies. Use it as context to determine what visual elements to include:
+${implTitles}
+
+Illustrate the key systems, integrations, and workflows mentioned above as stylized abstract forms — showing how different elements connect and work together.`;
+
+  const technical = `${SHARED_SOLUTION}
+
+The following text describes the technical innovation this image accompanies. Use it as context:
+"${narrative.technicalInnovation}"
+
+Illustrate the core technical concepts mentioned above as stylized abstract forms. 4:3 aspect ratio.`;
+
+  const impactText = narrative.impactMetrics.join("\n");
+  const impact = `${SHARED_SOLUTION}
+
+The following text describes the business impact this image accompanies. Use it as context:
+${impactText}
+
+Illustrate the outcomes and improvements described above — show the "after" state where things work well. Mood: calm productive confidence, not celebration. 4:3 aspect ratio.`;
+
+  return { phases, implementations, technical, impact };
+}
+
+/**
+ * Build a challenge prompt from narrative content.
+ * @param {{ challenge: string }} narrative
+ * @returns {string}
+ */
+export function buildChallengePromptFromNarrative(narrative) {
+  return `${SHARED_CHALLENGE}
+
+The following text describes the challenge this image accompanies. Use it as context to determine what visual elements to include:
+"${narrative.challenge}"
+
+Illustrate the key pain points, broken processes, and obstacles mentioned in that text as stylized abstract forms showing friction, fragmentation, or risk.`;
+}
 
 /** @type {Record<string, StoryPrompts>} */
 export const STORY_PROMPTS_BY_SLUG = {

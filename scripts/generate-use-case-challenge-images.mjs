@@ -22,6 +22,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 import { CINEMATIC_STYLE_ANCHOR } from "./ai-art-style-anchor.mjs";
+import { buildChallengePromptFromNarrative } from "./use-case-story-prompts.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
@@ -151,14 +152,42 @@ async function main() {
   const outDir = path.join(root, "public", "images", "case-studies", "use-cases", "challenge");
   fs.mkdirSync(outDir, { recursive: true });
 
+  // Load narratives for auto-prompt generation (same parser as story script)
+  const effectiveJobs = [...JOBS];
+  const manualSlugs = new Set(JOBS.map((j) => j.slug));
+  try {
+    const detailsPath = path.join(root, "lib", "content", "use-case-study-details.ts");
+    const detailsSrc = fs.readFileSync(detailsPath, "utf-8");
+    const slugMatches = [...detailsSrc.matchAll(/"([a-z][\w-]*)"\s*:\s*\{/g)].map((m) => m[1]);
+    for (const slug of slugMatches) {
+      if (manualSlugs.has(slug)) continue;
+      const startIdx = detailsSrc.indexOf(`"${slug}": {`);
+      if (startIdx === -1) continue;
+      const pattern = /challenge:\s*"([^"]*(?:\\.[^"]*)*)"/s;
+      const sub = detailsSrc.slice(startIdx, startIdx + 3000);
+      const m = sub.match(pattern);
+      if (m) {
+        const challenge = m[1].replace(/\\"/g, '"').replace(/\\n/g, " ");
+        effectiveJobs.push({
+          slug,
+          prompt: buildChallengePromptFromNarrative({ challenge }),
+        });
+        console.log(`  Auto-generated challenge prompt for: ${slug}`);
+      }
+    }
+    console.log(`Total challenge jobs: ${effectiveJobs.length} (${JOBS.length} manual + ${effectiveJobs.length - JOBS.length} auto)`);
+  } catch (err) {
+    console.warn(`Could not load narratives (auto-prompts disabled): ${err.message}`);
+  }
+
   const args = process.argv.slice(2);
   const forceAll = args.includes("--all") || args.includes("--force");
   const argvFilter = args.filter((a) => !a.startsWith("-"));
   const jobsToRun =
-    argvFilter.length > 0 ? JOBS.filter((j) => argvFilter.includes(j.slug)) : JOBS;
+    argvFilter.length > 0 ? effectiveJobs.filter((j) => argvFilter.includes(j.slug)) : effectiveJobs;
 
   if (argvFilter.length > 0 && jobsToRun.length === 0) {
-    console.error(`No jobs matched. Valid slugs:\n${JOBS.map((j) => j.slug).join("\n")}`);
+    console.error(`No jobs matched. Valid slugs:\n${effectiveJobs.map((j) => j.slug).join("\n")}`);
     process.exit(1);
   }
 
