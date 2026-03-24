@@ -181,54 +181,60 @@ const details: Record<string, UseCaseStudyNarrative> = {
     ],
   },
   "supply-chain-demand": {
-    headline: "From forecast to replenishment—with guardrails",
-    subheadline: "Demand signals, vendor SLAs, and inventory actions in one orchestrated loop.",
+    headline: "See every link in the chain—before the weakest one breaks",
+    subheadline: "End-to-end supply chain visibility with AI-powered demand forecasting, route optimization, and automated replenishment.",
     contextItalic:
-      "Supply shocks and planner turnover make static spreadsheets a liability.",
+      "When a single delayed shipment can shut down a production line, spreadsheet-based planning is a liability.",
     challenge:
-      "Forecasts live in spreadsheets, while execution systems (ERP, WMS, TMS) lag reality. Alerts are noisy; buyers lack a single place to see risk, commitments, and alternatives.",
+      "A consumer goods manufacturer operating 12 distribution centers and a mixed fleet of 200+ vehicles was losing $8M annually to forecast errors, excess inventory, and inefficient logistics. Demand planning lived in spreadsheets disconnected from the ERP and warehouse systems. Route planning was manual—dispatchers assigned vehicles based on habit, not data. When EV fleet vehicles were added to meet sustainability targets, range anxiety and charging logistics added a new layer of complexity. Stockouts hit 14% of SKUs monthly, while excess inventory tied up $12M in working capital.",
     solutionIntro:
-      "We connect forecasting agents and rules to ERP and supplier portals, adding human approvals for large buys or sole-source changes. Playbooks encode thresholds, escalation paths, and logging for retrospectives.",
+      "We built a connected supply chain platform that unifies demand signals, inventory positions, supplier commitments, and fleet logistics into a single operational view. AI models forecast demand at the store/SKU level, trigger automated replenishment within policy bands, and optimize delivery routes—including energy-aware planning for the EV fleet that accounts for battery state, charging station availability, and delivery time windows.",
     phases: [
       {
-        title: "Phase 1 — Signal quality",
-        body: "Align on hierarchy, lead times, and KPIs. Backtest models against recent disruptions—not only smooth periods.",
+        title: "Phase 1 — Demand visibility and forecast accuracy",
+        body: "Connect POS, promotions calendar, weather, and economic signals into a unified forecasting model. Backtest against the past 18 months of disruptions—not just smooth periods. Establish automated safety stock policies by SKU class with human approval gates for large or sole-source purchase orders.",
       },
       {
-        title: "Phase 2 — Close the loop",
-        body: "Automate reorders within bands; surface exceptions with recommended actions and supplier context.",
+        title: "Phase 2 — Fleet logistics and replenishment automation",
+        body: "Optimize delivery routes across the mixed fleet—conventional and EV vehicles—accounting for load capacity, energy constraints, charging stop requirements, and delivery time windows. Automate replenishment orders within approved bands and surface exceptions with recommended actions and supplier alternatives.",
+      },
+      {
+        title: "Phase 3 — Closed-loop optimization",
+        body: "Feed delivery performance, actual vs. forecast accuracy, and supplier OTIF back into the models. Run scenario planning for demand spikes, port delays, or fleet disruptions. Structured post-mortems for every stockout and expedite to continuously improve.",
       },
     ],
     keyImplementations: [
       {
-        title: "Vendor SLA tracking",
-        detail: "Monitor OTIF, penalties, and alternate sources with proactive nudges.",
+        title: "Store/SKU-level demand forecasting",
+        detail: "AI models combine historical sales, promotions, seasonality, weather, and economic indicators—producing probabilistic forecasts that planners trust because they've been backtested against real disruptions.",
       },
       {
-        title: "Scenario planning",
-        detail: "What-if runs for demand spikes, port delays, or commodity moves.",
+        title: "Energy-aware fleet route optimization",
+        detail: "For the EV fleet: routes account for battery state, energy consumption per segment, charging station locations, and charging time—ensuring deliveries arrive on time without range anxiety or stranded vehicles.",
       },
       {
-        title: "Safety stock policies",
-        detail: "Codify service levels by SKU class; avoid one-size overrides.",
+        title: "Automated replenishment with human gates",
+        detail: "Reorders trigger automatically within approved policy bands. Orders above threshold, sole-source changes, or blackout period overrides require planner approval with full context on why the system recommends the action.",
       },
       {
-        title: "Human gates",
-        detail: "Require approval for overrides beyond policy or during blackouts.",
+        title: "Supplier performance tracking",
+        detail: "On-time-in-full rates, lead time variability, and quality scores tracked per supplier—with automatic escalation when SLAs slip and pre-qualified alternates surfaced before shortages become emergencies.",
       },
       {
-        title: "Post-mortems",
-        detail: "Structured logs for stockouts and expedites to feed model and process updates.",
+        title: "Scenario planning and post-mortems",
+        detail: "What-if simulations for demand spikes, port closures, or fleet reductions. Every stockout and expedite gets a structured post-mortem that feeds model and process improvements.",
       },
     ],
     technicalInnovation:
-      "Agent graphs coordinate data pulls, simulations, and write-backs with idempotent APIs—so partial failures do not double-order or leave systems inconsistent.",
+      "The platform connects demand planning, warehouse management, and fleet logistics through a single orchestration layer. For the EV fleet, the system models each vehicle's energy state across route segments—pruning infeasible routes before dispatchers see them and inserting optimal charging stops when needed. The result is a logistics plan that respects both business constraints (delivery windows, cost targets) and physical constraints (battery capacity, charging infrastructure) simultaneously.",
     impactMetrics: [
-      "Improved fill rates and reduced expedited freight on pilot lanes.",
-      "Planner time shifted from spreadsheet wrangling to exceptions and supplier collaboration.",
-      "Earlier visibility to shortages—days or weeks of lead time recovered.",
-      "Shared metrics for finance and ops on inventory risk.",
+      "Forecast error reduced 22% in the first quarter—demand models that account for promotions, weather, and disruptions instead of just historical averages.",
+      "$4.5M in inventory cost savings from right-sizing safety stock by SKU class—fewer overstocks, fewer stockouts, less tied-up capital.",
+      "Stockout rate dropped from 14% to under 5%—automated replenishment catches shortages days before they reach store shelves.",
+      "Fleet logistics costs reduced 15%—energy-aware routing for the EV fleet eliminated range-related delays and optimized charging stops across the network.",
     ],
+    impactClosing:
+      "Planners spend their time on exceptions and supplier strategy instead of spreadsheet wrangling—and the fleet runs on data, not dispatcher intuition.",
   },
   "field-services-iot-playbooks": {
     headline: "Dispatch, documentation, and close-out—connected",
