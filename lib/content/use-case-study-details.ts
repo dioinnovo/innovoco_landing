@@ -86,9 +86,9 @@ const details: Record<string, UseCaseStudyNarrative> = {
     contextItalic:
       "Customers expect instant, accurate answers; agents should handle exceptions—not password resets on repeat.",
     challenge:
-      "Legacy IVR trees and brittle bots frustrate users and inflate handle times. Generic LLM chat lacks CRM context, brand tone, and compliance controls, so teams hesitate to automate beyond FAQs.",
+      "Customers call in, wait through outdated phone menus, and get transferred multiple times before reaching someone who can help. Meanwhile, basic chatbots can only handle FAQs and fall apart the moment a question requires account context or policy knowledge. Support teams want to automate more, but every AI tool they evaluate either sounds robotic, gives wrong answers, or can't access the customer's actual records. The result: rising costs, frustrated customers, and agents buried in calls that should have been resolved automatically.",
     solutionIntro:
-      "We implement retrieval-augmented voice and chat on your stack—Azure Communication Services / Copilot patterns or Vertex—with CRM tickets, knowledge articles, and policy snippets in the retrieval boundary. Sentiment and intent drive routing; humans keep complex cases.",
+      "We built an AI assistant that actually knows your customers. It pulls from their account history, your product policies, and your brand guidelines to answer questions accurately across voice and chat. When a conversation gets complex, the system detects frustration or confusion and routes to a human agent with full context already on screen.",
     phases: [
       {
         title: "Phase 1 — Instrument and segment",
