@@ -57,7 +57,7 @@ const JOBS = [
   {
     id: "executive-analytics",
     filename: "executive-analytics.jpg",
-    theme: `executive data intelligence—abstract flowing ribbons of light suggesting natural-language queries over a data warehouse, floating geometric glass panels, depth and atmosphere, wide 4:3 composition.`,
+    theme: `AI-powered business intelligence — an executive asking a question and receiving instant visual answers. MUST INCLUDE: a stylized speech bubble or chat prompt form (representing plain-language questions), luminous bar charts and line graphs materializing as the answer, a structured data vault or warehouse cube as the governed source, and a direct fast-flowing path from question to chart (no queues or waiting). The mood is clarity and speed — question in, chart out. 4:3 composition.`,
   },
   {
     id: "customer-support",
