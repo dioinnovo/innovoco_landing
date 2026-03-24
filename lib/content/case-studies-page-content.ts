@@ -328,4 +328,14 @@ export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
     icon: "users",
     image: "/images/case-studies/outcomes/customer-360-identity-resolution.jpg",
   },
+  {
+    slug: "predictive-maintenance-manufacturing",
+    title: "Predictive maintenance for manufacturing",
+    outcome:
+      "IoT-driven failure prediction 7–14 days ahead cutting unplanned downtime 45% and saving $3.5M annually.",
+    industries: ["manufacturing-logistics", "energy-field"],
+    tags: ["Cost", "Speed"],
+    icon: "wrench",
+    image: "/images/case-studies/outcomes/predictive-maintenance-manufacturing.jpg",
+  },
 ];

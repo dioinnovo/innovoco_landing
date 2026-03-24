@@ -40,7 +40,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Zap,
     title: "Predictive Maintenance",
-    useCaseSlug: "field-services-iot-playbooks",
+    useCaseSlug: "predictive-maintenance-manufacturing",
     illustrationSrc:
       "/images/industries/manufacturing/solutions/predictive-maintenance.jpg",
     description:

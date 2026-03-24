@@ -1602,6 +1602,56 @@ const details: Record<string, UseCaseStudyNarrative> = {
     impactClosing:
       "The retailer sees one customer where they used to see three—marketing is more efficient, loyalty is more accurate, and compliance is automatic. The identity graph becomes the foundational layer that every downstream system trusts.",
   },
+
+  "predictive-maintenance-manufacturing": {
+    headline: "Predict equipment failures days before they happen—not hours after",
+    subheadline:
+      "IoT-driven health monitoring that tells maintenance teams what will fail, when, and what to do about it.",
+    contextItalic:
+      "Unplanned downtime is the most expensive problem in manufacturing—and most of it is preventable.",
+    challenge:
+      "An automotive manufacturer was losing $5M+ annually to unplanned equipment failures. Each failure averaged 48 hours of downtime, cascading into missed delivery schedules, overtime labor costs, and expedited shipping. Maintenance was calendar-based—replacing parts on schedule regardless of actual condition, which meant some components were replaced too early (wasting money) while others failed before their scheduled service (causing the very outages they were trying to prevent). The maintenance team had no visibility into which machines were actually at risk.",
+    solutionIntro:
+      "We deployed a condition-based monitoring system across critical production equipment. Sensors capture vibration, temperature, and acoustic signatures continuously. AI models analyze these signals against historical failure patterns and generate predictive alerts 7–14 days before expected failure—giving maintenance teams enough lead time to schedule repairs during planned downtime windows.",
+    phases: [
+      {
+        title: "Phase 1 — Instrument and baseline",
+        body: "Install sensors on the highest-impact equipment first (lines with the most downtime cost). Collect 8–12 weeks of baseline data to establish normal operating signatures. Integrate sensor feeds with the existing CMMS so work orders flow automatically when the system detects a developing issue.",
+      },
+      {
+        title: "Phase 2 — Predict and optimize",
+        body: "Train failure prediction models on the baseline data plus historical maintenance records. Set alert thresholds that balance early warning with false-positive tolerance. Expand to remaining equipment classes. Add remaining-useful-life estimates so planners can batch repairs into scheduled maintenance windows.",
+      },
+    ],
+    keyImplementations: [
+      {
+        title: "Multi-signal health scoring",
+        detail: "Vibration, thermal, and acoustic data fused into a single health score per asset—maintenance teams see a simple red/amber/green status, not raw sensor streams.",
+      },
+      {
+        title: "7–14 day failure prediction window",
+        detail: "Enough lead time to order parts, schedule crews, and plan production around the repair—not scramble after a breakdown.",
+      },
+      {
+        title: "CMMS integration",
+        detail: "Predictive alerts generate work orders automatically in the existing maintenance system. Technicians see what to inspect and what parts to bring—no separate dashboards.",
+      },
+      {
+        title: "Remaining useful life estimates",
+        detail: "Beyond pass/fail alerts, the system estimates how many operating hours remain—so planners batch repairs into scheduled windows instead of reacting to each alert individually.",
+      },
+    ],
+    technicalInnovation:
+      "The system learns each machine's unique operating fingerprint rather than relying on generic failure models. As it sees more data, predictions improve—accuracy compounds over time. The architecture handles intermittent connectivity common in factory environments and works alongside existing SCADA and historian infrastructure without replacing it.",
+    impactMetrics: [
+      "Unplanned downtime reduced 45% in the first year—most failures detected and addressed during planned maintenance windows.",
+      "$3.5M annual savings from avoided emergency repairs, overtime labor, and expedited shipping for late orders.",
+      "92% prediction accuracy within 6 months—the system correctly identified developing failures with enough lead time to act.",
+      "Parts inventory optimization followed naturally—knowing what will fail when means ordering the right parts at the right time, not overstocking everything.",
+    ],
+    impactClosing:
+      "Maintenance shifted from reactive firefighting to planned, predictable operations. The team spends time preventing problems instead of recovering from them—and the P&L reflects the difference.",
+  },
 };
 
 export function getUseCaseStudyDetail(slug: string): UseCaseStudyNarrative | undefined {
