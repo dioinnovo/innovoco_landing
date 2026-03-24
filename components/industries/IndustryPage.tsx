@@ -500,33 +500,20 @@ export function IndustryPage({
                 }}
               />
 
-              {(() => {
-                const mid = Math.ceil(faqsForAccordion.length / 2);
-                const leftCol = faqsForAccordion.slice(0, mid);
-                const rightCol = faqsForAccordion.slice(mid);
-                const renderItems = (items: typeof faqsForAccordion, offset: number) => (
-                  <Accordion type="multiple" className="space-y-3">
-                    {items.map((f, i) => (
-                      <AccordionItem
-                        key={offset + i}
-                        value={`${faqValuePrefix}-${offset + i}`}
-                        className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-6 transition-shadow hover:shadow-sm"
-                      >
-                        <AccordionTrigger className="py-5 text-left font-semibold text-[var(--foreground)] hover:no-underline hover:text-[color:var(--industry-faq-accent)]">
-                          {f.q}
-                        </AccordionTrigger>
-                        <AccordionContent className="pb-5 pt-1 text-sm leading-relaxed text-[#64748B]">{f.a}</AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                );
-                return (
-                  <div className="grid gap-6 lg:grid-cols-2">
-                    {renderItems(leftCol, 0)}
-                    {renderItems(rightCol, mid)}
-                  </div>
-                );
-              })()}
+              <Accordion type="single" collapsible className="mx-auto max-w-4xl space-y-3">
+                {faqsForAccordion.map((f, i) => (
+                  <AccordionItem
+                    key={i}
+                    value={`${faqValuePrefix}-${i}`}
+                    className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-6 transition-shadow hover:shadow-sm"
+                  >
+                    <AccordionTrigger className="py-5 text-left font-semibold text-[var(--foreground)] hover:no-underline hover:text-[color:var(--industry-faq-accent)]">
+                      {f.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-5 pt-1 text-sm leading-relaxed text-[#64748B]">{f.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
           </section>
 
