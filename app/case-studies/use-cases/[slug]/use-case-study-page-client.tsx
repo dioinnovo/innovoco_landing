@@ -159,23 +159,23 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
           />
         ) : null}
 
-        <section className="bg-[#f0f3f7] py-14 dark:bg-[#0B0F19] md:py-16">
-          <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
-            <h2 className="text-xl font-semibold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] md:text-2xl">
+        <section className="bg-[#f0f3f7] py-20 dark:bg-[#0B0F19] md:py-28">
+          <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+            <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] sm:text-4xl md:text-5xl">
               Explore this outcome on your stack
             </h2>
-            <p className="mt-3 text-pretty text-base leading-relaxed text-[#525252] dark:text-[#D1D5DB]">
+            <p className="mt-5 text-pretty text-lg leading-relaxed text-[#525252] dark:text-[#D1D5DB] md:text-xl">
               We map scope, guardrails, and rollout to your data boundaries and teams—practical next steps, not a
               generic slide deck.
             </p>
             <Button
               type="button"
               size="lg"
-              className="mt-8 rounded-full bg-[#00518e] px-8 hover:bg-[#00518e]/90 dark:bg-[#0A58D0]"
+              className="mt-10 rounded-full bg-[#00518e] px-10 py-7 text-lg font-semibold hover:bg-[#00518e]/90 dark:bg-[#0A58D0]"
               onClick={() => setContactOpen(true)}
             >
               Book a briefing
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-3 h-5 w-5" />
             </Button>
           </div>
         </section>

@@ -398,7 +398,7 @@ export function UseCaseTechnicalInnovationImpactSection({
       <div className="mx-auto max-w-6xl space-y-20 px-4 md:space-y-24">
         <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-16">
           <div className="order-2 md:order-1">
-            <h2 className={ateSolutionPhaseTitleClass}>Technical innovation</h2>
+            <h2 className={useCaseMajorSectionTitleClass}>Technical Innovation</h2>
             <p className="mt-6 text-base leading-relaxed text-[#525252] dark:text-[#D1D5DB] md:text-lg">
               {technicalInnovation}
             </p>
@@ -425,7 +425,7 @@ export function UseCaseTechnicalInnovationImpactSection({
             />
           </div>
           <div>
-            <h2 className={ateSolutionPhaseTitleClass}>Impact</h2>
+            <h2 className={useCaseMajorSectionTitleClass}>Impact</h2>
             <ul className="mt-8 space-y-4">
               {impactMetrics.map((line, mi) => (
                 <li
