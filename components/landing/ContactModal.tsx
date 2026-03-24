@@ -5,7 +5,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -94,6 +101,8 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                 transition={{ duration: 0.3 }}
                 className="flex flex-col items-center justify-center py-12 px-4 text-center"
               >
+                <DialogTitle className="sr-only">Message sent successfully</DialogTitle>
+                <DialogDescription className="sr-only">{submitResult.message}</DialogDescription>
                 {/* Animated Success Icon */}
                 <motion.div
                   initial={{ scale: 0 }}
@@ -225,6 +234,10 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                     <DialogTitle className="text-lg sm:text-xl font-bold text-[#0B0F19] text-center">
                       Book Your Consultation
                     </DialogTitle>
+                    <DialogDescription className="sr-only">
+                      Contact Innovoco to schedule a consultation. You can call the number shown or submit your name,
+                      email, company, role, and a short message. We typically respond within about one hour.
+                    </DialogDescription>
                   </div>
                 </DialogHeader>
 

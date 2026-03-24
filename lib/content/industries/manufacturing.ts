@@ -271,7 +271,7 @@ export const manufacturingConfig: IndustryConfig = {
       title: 'Retail & E-Commerce',
       description: 'Customer 360 analytics, AI personalization, and demand forecasting.',
       href: '/solutions/industries/retail',
-      gradient: 'bg-gradient-to-br from-[#3B82F6] to-[#2563EB]',
+      gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
       metrics: [
         { value: '28%', label: 'Revenue Increase' },
         { value: '15-25%', label: 'Conversion Lift' },
@@ -290,7 +290,7 @@ export const manufacturingConfig: IndustryConfig = {
     },
     {
       icon: Rocket,
-      iconGradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+      iconGradient: 'bg-gradient-to-br from-[#FFF7ED] to-[#FDBA74]',
       title: 'Enterprise AI Implementation',
       description: 'Deploy production-ready AI for predictive maintenance, quality control, and optimization.',
       href: '/services/ai-implementation'

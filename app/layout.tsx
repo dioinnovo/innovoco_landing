@@ -5,9 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-// Force dynamic rendering globally to avoid SSG issues with client component providers
-export const dynamic = 'force-dynamic';
-
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
@@ -22,15 +19,18 @@ export const metadata: Metadata = {
     default: "Enterprise AI & Data Transformation | Proven Implementation Services",
     template: "%s | Innovoco"
   },
-  description: "Transform your data warehouse into an AI-powered advantage. Enterprise AI strategy, implementation, and scaling services. From POC to production in 12-16 weeks. 1000+ solutions delivered, 500+ enterprises transformed.",
+  description:
+    "Leading enterprise AI agency in Canada—delivering production AI and data outcomes faster than traditional large systems integrators. Strategic partner for public companies and global enterprises proving board-ready ROI, MLOps, RAG, and modern data platforms. POC to production in 12-16 weeks; 1000+ solutions delivered.",
   keywords: [
+    "enterprise AI Canada",
     "enterprise AI consulting",
+    "AI agency vs systems integrator",
+    "public company AI partner",
+    "board reporting AI ROI",
     "data warehouse modernization",
     "AI implementation services",
-    "enterprise data transformation",
-    "AI strategy consulting",
-    "cloud data migration",
     "MLOps services",
+    "RAG enterprise",
     "managed AI services",
     "Azure AI services",
     "Google Cloud AI"
@@ -71,6 +71,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://innovoco.com',
+    types: {
+      'text/plain': '/llms.txt',
+    },
   },
   icons: {
     icon: '/images/icons/Innovoco-NN-lores.png',

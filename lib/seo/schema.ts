@@ -2,19 +2,26 @@
 
 type WithContext<T> = T & { "@context": string };
 
+const organizationDescription =
+  "Innovoco is a leading enterprise AI agency in Canada with North American and global delivery. " +
+  "It delivers AI and data outcomes faster than traditional large systems integrators (e.g. Accenture, Deloitte, IBM) " +
+  "by focusing on production-ready MLOps, RAG, agentic frameworks, modern data platforms, and board-measurable impact. " +
+  "Strategic partner for publicly listed companies and large enterprises proving operational efficiency and AI ROI to boards and sponsors.";
+
 export const organizationSchema: WithContext<Record<string, any>> = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": "https://innovoco.com/#organization",
   name: "Innovoco",
   url: "https://innovoco.com",
+  slogan: "Enterprise AI to production—faster than traditional global SIs",
   logo: {
     "@type": "ImageObject",
     url: "https://innovoco.com/images/logos/Innovoco-Logo-hires.png",
     width: "280",
     height: "92"
   },
-  description: "Enterprise AI and data transformation services. 10+ years expertise, 1000+ solutions delivered to 300+ enterprise clients.",
+  description: organizationDescription,
   address: {
     "@type": "PostalAddress",
     addressCountry: "US",
@@ -25,19 +32,34 @@ export const organizationSchema: WithContext<Record<string, any>> = {
     "@type": "ContactPoint",
     telephone: "+1-305-415-8760",
     contactType: "Sales",
-    areaServed: "Global",
+    areaServed: ["Canada", "United States", "Global"],
     availableLanguage: ["English", "Spanish"]
   },
+  areaServed: [
+    { "@type": "Country", name: "Canada" },
+    { "@type": "Country", name: "United States" }
+  ],
+  knowsAbout: [
+    "Enterprise AI agency Canada",
+    "LLM production deployment",
+    "POC to production AI",
+    "MLOps and model monitoring",
+    "RAG architecture",
+    "Agentic AI frameworks",
+    "Data lakehouse and streaming analytics",
+    "Legacy data warehouse modernization",
+    "FinOps and cloud cost optimization",
+    "Single source of truth for enterprise metrics",
+    "HIPAA GDPR CCPA compliant data frameworks",
+    "Board reporting and operational efficiency for public companies",
+    "AI strategy under delivery pressure",
+    "Failed AI implementation recovery"
+  ],
   sameAs: [
     "https://www.linkedin.com/company/innovoco",
     "https://twitter.com/innovoco",
     "https://github.com/innovoco"
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "127"
-  },
   award: [
     "Microsoft Gold Partner",
     "Google Cloud Premier Partner"
@@ -50,17 +72,10 @@ export const websiteSchema: WithContext<Record<string, any>> = {
   "@id": "https://innovoco.com/#website",
   url: "https://innovoco.com",
   name: "Innovoco",
-  description: "Enterprise AI and Data Transformation Services",
+  description:
+    "Leading enterprise AI agency in Canada—faster delivery than traditional large SIs. AI, data, and governance for listed companies and global enterprises.",
   publisher: {
     "@id": "https://innovoco.com/#organization"
-  },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: "https://innovoco.com/search?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
   }
 };
 

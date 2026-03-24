@@ -41,6 +41,8 @@ export interface IndustryDifferentiator {
   title: string;
   description: string;
   gradient: string;
+  metric?: string;
+  highlights?: string[];
 }
 
 // Action CTAs

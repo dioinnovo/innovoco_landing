@@ -4,6 +4,25 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
+  // Recompile next-auth with the app compiler so Webpack dev does not break SWC helper interop
+  // (fixes "_interop_require_wildcard._ is not a function" / invalid element type in browser).
+  transpilePackages: ["next-auth"],
+  // Next.js 16: explicit empty turbopack root config (see dev script)
+  turbopack: {},
+  async redirects() {
+    return [
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/sitemap",
+        destination: "/site-map",
+        permanent: true,
+      },
+    ];
+  },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -41,6 +60,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    qualities: [75, 90],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -55,45 +75,45 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Custom Cache-Control on /_next/static breaks Next.js dev (HMR). Apply only in production.
   headers: async () => {
+    if (process.env.NODE_ENV !== "production") {
+      return [];
+    }
     return [
       {
-        // All Next.js static assets with immutable cache
-        source: '/_next/static/(.*)',
+        source: "/_next/static/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
-        // Images and other static media
-        source: '/images/(.*)',
+        source: "/images/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
-        // Fonts
-        source: '/fonts/(.*)',
+        source: "/fonts/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
-        // All other static files (fallback)
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
           },
         ],
       },

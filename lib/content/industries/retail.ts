@@ -1,6 +1,17 @@
 import {
-  ShoppingCart, TrendingUp, Users, BarChart3, Target, Award, Shield,
-  Brain, Rocket, Database, HeartPulse, DollarSign, Factory, Package
+  ShoppingCart,
+  Users,
+  BarChart3,
+  Target,
+  Shield,
+  Brain,
+  Rocket,
+  Database,
+  HeartPulse,
+  DollarSign,
+  HardHat,
+  Sparkles,
+  LineChart,
 } from 'lucide-react';
 import { IndustryConfig } from './types';
 
@@ -24,7 +35,7 @@ export const retailConfig: IndustryConfig = {
       { metric: '35%', label: 'Recommendation CTR' }
     ],
     primaryCTAText: 'Schedule Retail AI Assessment',
-    backgroundGradient: 'bg-gradient-to-br from-[#DBEAFE] via-[#D1FAE5] to-[#DBEAFE]'
+    backgroundGradient: 'bg-gradient-to-br from-[#EEF2FF] via-[#EDE9FE] to-[#E0E7FF]'
   },
 
   sectionCTAs: {
@@ -54,26 +65,163 @@ export const retailConfig: IndustryConfig = {
     badge: 'Proven Results',
     title: 'Retail AI Success Stories',
     description: 'Real-world results from retailers who have transformed customer experience and revenue with AI personalization',
-    studies: []
+    studies: [
+      {
+        icon: Users,
+        iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        title: 'Customer 360 for Omnichannel Apparel',
+        industry: 'Retail | Fashion',
+        challenge: 'Fragmented customer data across e-commerce, stores, and marketplaces prevented unified targeting and inflated acquisition costs.',
+        solution: 'Built a real-time customer 360 with identity resolution, behavioral scoring, and activation APIs to marketing and store associates.',
+        results: [
+          { metric: '28%', label: 'Revenue lift', trend: 'up' },
+          { metric: '22%', label: 'Lower CAC', trend: 'down' },
+          { metric: '3.2x', label: 'Cross-channel ROAS' }
+        ]
+      },
+      {
+        icon: Sparkles,
+        iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        title: 'AI Personalization Engine',
+        industry: 'E-Commerce | Specialty',
+        challenge: 'Generic product grids produced low engagement; manual merchandising could not scale across 200K+ SKUs.',
+        solution: 'Deployed session-aware recommendation and ranking models with guardrails for inventory, margin, and diversity.',
+        results: [
+          { metric: '35%', label: 'Rec CTR' },
+          { metric: '18%', label: 'AOV increase', trend: 'up' },
+          { metric: '12%', label: 'Return rate ↓', trend: 'down' }
+        ]
+      },
+      {
+        icon: LineChart,
+        iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        title: 'Demand Forecasting at Scale',
+        industry: 'Retail | Grocery',
+        challenge: 'Store-level forecasts missed promotions and weather spikes, driving spoilage and lost sales on high-velocity categories.',
+        solution: 'ML forecasting pipeline combining POS, promotions, calendar, and external signals with automated replenishment integration.',
+        results: [
+          { metric: '24%', label: 'Forecast error ↓', trend: 'down' },
+          { metric: '$6M', label: 'Inventory savings' },
+          { metric: '9%', label: 'Fewer stockouts', trend: 'down' }
+        ]
+      },
+      {
+        icon: Target,
+        iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        title: 'Dynamic Pricing & Promotions',
+        industry: 'Retail | Electronics',
+        challenge: 'Static pricing left margin on the table while competitors adjusted daily; promotion planning was spreadsheet-driven.',
+        solution: 'Implemented elasticity-aware pricing with competitive signals and controlled guardrails by category and channel.',
+        results: [
+          { metric: '4.1%', label: 'Margin lift' },
+          { metric: '31%', label: 'Faster price cycles' },
+          { metric: '100%', label: 'Audit trail' }
+        ]
+      }
+    ]
   },
 
   faqs: {
     title: 'Retail AI Automation FAQs',
     description: 'Common questions about implementing AI for retail and e-commerce',
-    questions: []
+    questions: [
+      {
+        question: 'How do you build a customer 360 across web, stores, and marketplaces?',
+        answer: 'We unify identifiers (email, loyalty ID, device, order keys), resolve identities with probabilistic and deterministic rules, and stream events into a governed profile store. Activation goes to CDP destinations, personalization APIs, and analytics—with GDPR/CCPA consent and retention policies enforced by design.'
+      },
+      {
+        question: 'Can personalization respect inventory and margin constraints?',
+        answer: 'Yes. Models are trained with business constraints: stock availability, margin floors, category rules, and brand guidelines. Ranking layers blend relevance with commercial objectives so recommendations stay profitable and fulfillable.'
+      },
+      {
+        question: 'What platforms do you integrate with?',
+        answer: 'Common integrations include Salesforce Commerce Cloud, Shopify Plus, Adobe Commerce, BigCommerce, SAP Commerce, Snowflake, Databricks, Segment, Braze, Iterable, and major POS/OMS systems. We use APIs, CDC, and batch feeds depending on latency needs.'
+      },
+      {
+        question: 'How long until we see ROI from retail AI?',
+        answer: 'Customer 360 and activation pilots often show lift within 8–12 weeks. Personalization at scale typically reaches steady-state ROI in 3–6 months. Forecasting ROI depends on replenishment cadence but frequently appears within one inventory cycle.'
+      },
+      {
+        question: 'How do you protect shopper privacy?',
+        answer: 'We implement data minimization, consent management, pseudonymization, encryption in transit and at rest, and role-based access. Pipelines support deletion requests and regional residency. PCI scope is reduced via tokenized payment data where applicable.'
+      },
+      {
+        question: 'Do you offer ongoing model monitoring?',
+        answer: 'Yes. We monitor data drift, conversion lift, segment fairness, and guardrail violations. Dashboards tie model metrics to commercial KPIs with scheduled retraining and rollback paths.'
+      }
+    ]
   },
 
   differentiators: {
     title: 'Why Choose Innovoco for Retail AI',
     description: 'Proven expertise in customer 360 analytics and personalization',
     columns: 2,
-    items: []
+    items: [
+      {
+        icon: Users,
+        title: 'Omnichannel Customer 360',
+        description: 'Identity resolution, real-time profiles, and activation across marketing, commerce, and stores—without duplicate silos.',
+        gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        metric: '500+ retail profiles unified',
+        highlights: []
+      },
+      {
+        icon: Shield,
+        title: 'Privacy-First Architecture',
+        description: 'GDPR/CCPA-ready pipelines with consent, lineage, and least-privilege access for every downstream consumer.',
+        gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        metric: 'SOC 2 aligned delivery',
+        highlights: []
+      },
+      {
+        icon: Sparkles,
+        title: 'Personalization at Scale',
+        description: 'Session-aware ranking, content affinity, and guardrailed merchandising rules tuned to your catalog and margin goals.',
+        gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        metric: '35% avg rec CTR lift',
+        highlights: []
+      },
+      {
+        icon: LineChart,
+        title: 'Forecasting & Pricing',
+        description: 'Demand signals, promotion calendars, and elasticity models that connect to replenishment and price execution systems.',
+        gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        metric: '20–30% forecast error reduction',
+        highlights: []
+      }
+    ]
   },
 
   actionCTA: {
     title: 'Ready to Transform Retail with AI?',
     subtitle: 'Choose your next step toward revenue growth',
-    cards: []
+    footerText: 'Transform omnichannel retail with customer 360, personalization, and forecasting. Contact Innovoco for a tailored roadmap.',
+    cards: [
+      {
+        icon: Users,
+        title: 'Retail Data & CDP Assessment',
+        description: '60-minute working session to map sources, identity resolution gaps, and activation use cases for your stack.',
+        tag: 'Complimentary',
+        gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        action: 'Book assessment'
+      },
+      {
+        icon: BarChart3,
+        title: 'Personalization ROI Model',
+        description: 'Scenario modeling for recommendation lift, AOV, and retention based on your traffic and category mix.',
+        tag: 'Free tool',
+        gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        action: 'Request model'
+      },
+      {
+        icon: ShoppingCart,
+        title: 'Commerce AI Office Hours',
+        description: 'Monthly session on ranking, search, and generative commerce patterns with solution architects.',
+        tag: 'Live',
+        gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        action: 'Register'
+      }
+    ]
   },
 
   relatedIndustries: [
@@ -82,7 +230,7 @@ export const retailConfig: IndustryConfig = {
       title: 'Healthcare',
       description: 'HIPAA-compliant AI automation',
       href: '/solutions/industries/healthcare',
-      gradient: 'bg-gradient-to-br from-[#DC2626] to-[#B91C1C]'
+      gradient: 'bg-gradient-to-br from-[#D1FAE5] to-[#059669]'
     },
     {
       icon: DollarSign,
@@ -92,25 +240,25 @@ export const retailConfig: IndustryConfig = {
       gradient: 'bg-gradient-to-br from-[#10B981] to-[#059669]'
     },
     {
-      icon: Factory,
-      title: 'Manufacturing',
-      description: 'Predictive maintenance and quality control',
-      href: '/solutions/industries/manufacturing',
-      gradient: 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]'
+      icon: HardHat,
+      title: 'Construction',
+      description: 'Inspection automation and field intelligence',
+      href: '/solutions/industries/construction',
+      gradient: 'bg-gradient-to-br from-[#CA8A04] to-[#A16207]'
     }
   ],
 
   relatedServices: [
     {
       icon: Brain,
-      iconGradient: 'bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]',
+      iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#A5B4FC]',
       title: 'AI Strategy & Consulting',
       description: 'Retail AI roadmap with customer 360, personalization, and omnichannel strategies.',
       href: '/services/ai-strategy-consulting'
     },
     {
       icon: Rocket,
-      iconGradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
+      iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#A5B4FC]',
       title: 'Enterprise AI Implementation',
       description: 'Deploy recommendation engines, demand forecasting, and personalization at scale.',
       href: '/services/ai-implementation'

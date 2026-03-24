@@ -30,5 +30,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: 'https://innovoco.com/sitemap.xml',
+    host: 'https://innovoco.com',
   };
 }

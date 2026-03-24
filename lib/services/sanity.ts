@@ -464,6 +464,26 @@ export async function getAllSlugs(): Promise<string[]> {
   return client.fetch<string[]>(query);
 }
 
+/** Slugs and last modified times for sitemap.xml */
+export async function getPublishedArticlesForSitemap(): Promise<
+  { slug: string; lastModified: Date }[]
+> {
+  if (!isSanityConfigured()) {
+    return [];
+  }
+
+  const query = `*[_type == "article" && isPublished == true]{
+    "slug": slug.current,
+    "lastModified": coalesce(_updatedAt, publishDate)
+  }`;
+
+  const rows = await client.fetch<{ slug: string; lastModified: string }[]>(query);
+  return rows.map((row) => ({
+    slug: row.slug,
+    lastModified: new Date(row.lastModified),
+  }));
+}
+
 /**
  * Get categories with article counts
  */

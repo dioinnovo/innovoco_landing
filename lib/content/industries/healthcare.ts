@@ -280,7 +280,7 @@ export const healthcareConfig: IndustryConfig = {
       title: 'Retail & E-Commerce',
       description: 'Customer 360 analytics, AI personalization, demand forecasting, and dynamic pricing automation.',
       href: '/solutions/industries/retail',
-      gradient: 'bg-gradient-to-br from-[#3B82F6] to-[#2563EB]',
+      gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
       metrics: [
         { value: '28%', label: 'Avg Revenue Increase' },
         { value: '15-25%', label: 'Conversion Lift' },

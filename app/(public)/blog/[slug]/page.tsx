@@ -56,22 +56,29 @@ export async function generateMetadata({
       };
     }
 
+    const canonical = `https://innovoco.com/blog/${slug}`;
+    const ogImages = article.featuredImage ? [article.featuredImage] : [];
+
     return {
       title: `${article.title} | Innovoco Blog`,
       description: article.metaDescription || article.excerpt,
+      alternates: {
+        canonical,
+      },
       openGraph: {
         title: article.title,
         description: article.excerpt,
         type: 'article',
+        url: canonical,
         publishedTime: article.publishDate,
         authors: [article.author.name],
-        images: article.featuredImage ? [article.featuredImage] : [],
+        images: ogImages,
       },
       twitter: {
         card: 'summary_large_image',
         title: article.title,
         description: article.excerpt,
-        images: article.featuredImage ? [article.featuredImage] : [],
+        images: ogImages,
       },
     };
   } catch {
@@ -127,17 +134,29 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const categoryInfo = BLOG_CATEGORIES[article.category];
 
   // JSON-LD structured data
+  const articleUrl = `https://innovoco.com/blog/${slug}`;
+  const imageUrl = article.featuredImage
+    ? article.featuredImage.startsWith('http')
+      ? article.featuredImage
+      : `https://innovoco.com${article.featuredImage.startsWith('/') ? '' : '/'}${article.featuredImage}`
+    : undefined;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
-    image: article.featuredImage,
+    ...(imageUrl ? { image: [imageUrl] } : {}),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': articleUrl,
+    },
     author: {
       '@type': 'Person',
       name: article.author.name,
     },
     publisher: {
       '@type': 'Organization',
+      '@id': 'https://innovoco.com/#organization',
       name: 'Innovoco',
       logo: {
         '@type': 'ImageObject',

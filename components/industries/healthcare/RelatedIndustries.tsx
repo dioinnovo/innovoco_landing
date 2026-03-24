@@ -141,7 +141,7 @@ export function RelatedIndustries() {
     },
     {
       icon: ShoppingCart,
-      iconGradient: "bg-gradient-to-br from-[#3B82F6] to-[#2563EB]",
+      iconGradient: "bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]",
       title: "Retail & E-Commerce",
       description: "Customer 360 analytics, AI personalization, demand forecasting, and dynamic pricing automation.",
       metrics: [

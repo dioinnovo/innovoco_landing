@@ -29,7 +29,7 @@ const relatedIndustries = [
   },
   {
     icon: ShoppingCart,
-    iconGradient: "bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]",
+    iconGradient: "bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]",
     title: "Retail & E-Commerce",
     description: "Customer 360 analytics and AI personalization",
     href: "/solutions/industries/retail"

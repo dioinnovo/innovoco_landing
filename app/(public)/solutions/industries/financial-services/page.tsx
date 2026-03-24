@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import { FinancialServicesPageClient } from './FinancialServicesPageClient';
 
 export const metadata: Metadata = {
-  title: 'AI for Financial Services | Fraud Detection, Risk Analytics & Compliance',
+  title: 'AI for Financial Services | Fraud, Risk, Compliance & Private Equity',
   description:
-    'Enterprise AI solutions for banks and financial institutions. Real-time fraud detection (<100ms scoring, 95%+ accuracy), credit risk modeling, AML transaction monitoring, and algorithmic trading analytics. SOC 2 & PCI-DSS compliant. $50M+ in fraud savings delivered.',
+    'Enterprise AI for banks, institutions, and sponsors. Real-time fraud detection (<100ms scoring, 95%+ accuracy), credit risk, AML monitoring, markets analytics, and private equity deal flow, diligence, and portfolio intelligence. SOC 2 & PCI-DSS aligned. $50M+ in fraud savings delivered.',
   keywords: [
     'financial services AI',
     'fraud detection AI',
@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     'AML transaction monitoring',
     'credit risk modeling',
     'algorithmic trading AI',
+    'private equity AI',
+    'deal diligence AI',
+    'sponsor analytics AI',
     'banking automation',
     'regulatory compliance AI',
     'SOC 2 AI solutions',
@@ -25,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI for Financial Services | Innovoco',
     description:
-      'Transform financial operations with real-time fraud detection, risk analytics, and AI-powered compliance. $50M+ fraud savings. SOC 2 & PCI-DSS compliant.',
+      'Fraud detection, risk analytics, compliance, and sponsor-side deal and portfolio AI. $50M+ fraud savings. SOC 2 & PCI-DSS aligned.',
     url: 'https://innovoco.com/solutions/industries/financial-services',
     type: 'website',
     images: [
@@ -39,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI for Financial Services | Fraud Detection & Risk Analytics',
+    title: 'AI for Financial Services | Fraud, Risk & Sponsor Intelligence',
     description:
-      'Enterprise AI solutions for banks: real-time fraud detection, credit risk modeling, AML monitoring. SOC 2 & PCI-DSS compliant. $50M+ fraud savings.',
+      'Enterprise AI for banks and sponsors: fraud detection, credit risk, AML, markets, and PE deal flow & portfolio analytics. SOC 2 & PCI-DSS aligned. $50M+ fraud savings.',
     images: ['/images/industries/financial-services-hero.jpg'],
   },
   alternates: {

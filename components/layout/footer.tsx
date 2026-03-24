@@ -239,7 +239,7 @@ export function Footer({ onContactClick }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href="/sitemap" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
+                <Link href="/site-map" className="text-sm text-gray-400 hover:text-[#93C5FD] transition-colors duration-200 block">
                   Sitemap
                 </Link>
               </li>

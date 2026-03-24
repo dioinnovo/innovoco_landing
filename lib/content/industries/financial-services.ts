@@ -1,16 +1,16 @@
 import {
   DollarSign, Shield, TrendingUp, Activity, AlertTriangle,
   BarChart3, Lock, Brain, Rocket, Database, HeartPulse,
-  Factory, ShoppingCart, HardHat
+  Factory, ShoppingCart, HardHat, GitBranch
 } from 'lucide-react';
 import { IndustryConfig } from './types';
 
 export const financialServicesConfig: IndustryConfig = {
   // SEO & Metadata
   metadata: {
-    title: 'Financial Services AI | Fraud Detection & Risk Analytics',
-    description: 'Real-time fraud detection AI, risk analytics, and regulatory compliance solutions for banks and financial institutions. $50M+ in fraud savings delivered.',
-    keywords: 'financial services AI, fraud detection, risk analytics, banking automation, regulatory compliance, algorithmic trading',
+    title: 'Financial Services AI | Fraud, Risk & Private Equity Intelligence',
+    description: 'Real-time fraud detection AI, risk analytics, regulatory compliance, and private equity deal flow and portfolio intelligence for banks, institutions, and sponsors. $50M+ in fraud savings delivered.',
+    keywords: 'financial services AI, fraud detection, risk analytics, banking automation, regulatory compliance, algorithmic trading, private equity AI, deal diligence AI, sponsor analytics',
     url: 'https://innovoco.com/solutions/industries/financial-services',
   },
 
@@ -18,8 +18,8 @@ export const financialServicesConfig: IndustryConfig = {
   hero: {
     badge: '$50M+ Fraud Savings Delivered',
     title: 'Financial Services AI Automation & Analytics',
-    subtitle: 'Real-Time Fraud Detection, Risk Analytics & Regulatory Compliance',
-    description: 'Transform financial operations with real-time fraud detection automation, advanced risk analytics, and AI-powered compliance solutions. From detecting fraudulent transactions in <100ms to reducing false positives by 80%, our solutions deliver measurable ROI while maintaining regulatory compliance.',
+    subtitle: 'Fraud, Risk, Compliance & Sponsor-Side Deal Intelligence',
+    description: 'Transform financial operations with real-time fraud detection, advanced risk analytics, AI-powered compliance, and governed workflows for private equity deal flow, diligence, and portfolio metrics. From sub-100ms transaction scoring to structured IC-ready outputs, we deliver measurable ROI with regulatory and confidentiality expectations in mind.',
     trustIndicators: [
       { metric: '$50M+', label: 'Fraud Savings Delivered' },
       { metric: '95%+', label: 'Fraud Detection Rate' },
@@ -58,7 +58,7 @@ export const financialServicesConfig: IndustryConfig = {
   caseStudies: {
     badge: 'Proven Results',
     title: 'Financial Services AI Success Stories',
-    description: 'Real-world results from banks and financial institutions who\'ve transformed fraud detection and risk analytics with AI',
+    description: 'Real-world results from banks, markets participants, and sponsors who\'ve transformed fraud detection, risk analytics, and investment workflows with AI',
     studies: [
       {
         icon: AlertTriangle,
@@ -111,6 +111,19 @@ export const financialServicesConfig: IndustryConfig = {
           { metric: '$350K', label: 'Annual Cost Savings' },
           { metric: '100%', label: 'BSA/FinCEN Compliant' }
         ]
+      },
+      {
+        icon: GitBranch,
+        iconGradient: 'bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]',
+        title: 'Deal Flow & Diligence for a Middle-Market Sponsor',
+        industry: 'Financial Services | Private Equity',
+        challenge: 'High volumes of teasers, CIMs, and dataroom documents; analysts spent excessive time reconciling financial and operating metrics across targets and portfolio companies with inconsistent reporting.',
+        solution: 'Custom AI workflows for screening and summarization, structured extraction from diligence materials, and portfolio dashboards that normalize KPIs for investment committee and operating partner review.',
+        results: [
+          { metric: 'Structured', label: 'IC-ready diligence outputs' },
+          { metric: 'Unified', label: 'Cross-portco KPI views' },
+          { metric: 'Governed', label: 'Confidentiality & access controls' }
+        ]
       }
     ]
   },
@@ -151,6 +164,14 @@ export const financialServicesConfig: IndustryConfig = {
       {
         question: 'Do you provide ongoing model monitoring and retraining for financial AI?',
         answer: 'Yes, continuous monitoring and retraining are critical for financial AI. Our managed AI services include 24/7 monitoring of model performance (accuracy, precision, recall, AUC), real-time alerting for model drift or data quality issues, and automated retraining pipelines when performance thresholds are breached. For fraud detection, we monitor fraud pattern evolution and retrain models as attack tactics change. For credit models, we track economic conditions and update models for changing risk profiles. For algorithmic trading, we monitor market regime changes and strategy performance. We provide monthly performance reports, quarterly business reviews, SR 11-7 compliant documentation, and SLA-backed support ensuring your AI continues delivering value as financial markets and fraud tactics evolve.'
+      },
+      {
+        question: 'Do you work with private equity firms and sponsors?',
+        answer: 'Yes. We design governed AI for investment teams and operating partners: deal screening, diligence document workflows, knowledge search across materials, and portfolio operating views. Architectures respect mandate boundaries and confidentiality, support least-privilege access and audit logging, and align with vendor due diligence and internal model risk expectations—while keeping humans in the loop for investment decisions.'
+      },
+      {
+        question: 'What private equity use cases do sponsors prioritize first?',
+        answer: 'Most sponsors begin with document-heavy workflows—summarizing CIMs, supporting dataroom Q&A, and preparing consistent materials for investment committee review. Next we often add pipeline prioritization, sector research assistance, and normalized operating metrics across portfolio companies. We emphasize governance: no commingling of deal data across funds without explicit controls, documented model behavior, and clear escalation paths for material findings.'
       }
     ]
   },
@@ -212,6 +233,19 @@ export const financialServicesConfig: IndustryConfig = {
           'BSA/FinCEN AML and OFAC sanctions screening',
           'SEC/FINRA compliance for algorithmic trading systems'
         ]
+      },
+      {
+        icon: GitBranch,
+        title: 'Private Equity & Sponsors',
+        description: 'Support for GPs and sponsor platforms across deal flow, diligence efficiency, and portfolio analytics—with confidentiality, access control, and auditability suitable for internal risk teams and LP scrutiny.',
+        gradient: 'bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]',
+        metric: 'Deals + portcos',
+        highlights: [
+          'Screening and summarization tuned to sponsor workflows',
+          'Structured diligence outputs for IC and operating partners',
+          'Portfolio KPI normalization across disparate portco reporting',
+          'Mandate-aware data boundaries and least-privilege access'
+        ]
       }
     ]
   },
@@ -240,7 +274,7 @@ export const financialServicesConfig: IndustryConfig = {
       {
         icon: BarChart3,
         title: 'Financial Services AI Webinar',
-        description: 'Join our quarterly webinar showcasing latest AI innovations for financial services: fraud detection, credit risk modeling, and algorithmic trading.',
+        description: 'Join our quarterly webinar showcasing latest AI for financial services: fraud detection, credit risk, markets—and sponsor deal flow and portfolio analytics.',
         tag: 'Register Now',
         gradient: 'bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]',
         action: 'Register for Webinar'
@@ -280,7 +314,7 @@ export const financialServicesConfig: IndustryConfig = {
       title: 'Retail & E-Commerce',
       description: 'Customer 360 analytics, AI personalization, demand forecasting, and dynamic pricing automation.',
       href: '/solutions/industries/retail',
-      gradient: 'bg-gradient-to-br from-[#3B82F6] to-[#2563EB]',
+      gradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
       metrics: [
         { value: '28%', label: 'Avg Revenue Increase' },
         { value: '15-25%', label: 'Conversion Lift' },
@@ -302,7 +336,7 @@ export const financialServicesConfig: IndustryConfig = {
       icon: Rocket,
       iconGradient: 'bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]',
       title: 'Enterprise AI Implementation',
-      description: 'Deploy compliant AI solutions for banking, insurance, and financial services.',
+      description: 'Deploy compliant AI for banking, insurance, sponsors, and broader financial services.',
       href: '/services/ai-implementation'
     },
     {

@@ -22,17 +22,31 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { AlertCircle, FileText } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Blog - Innovoco',
-  description:
-    'Insights and best practices on enterprise AI, data engineering, and digital transformation.',
-  openGraph: {
+const blogCanonical = 'https://innovoco.com/blog';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
     title: 'Blog - Innovoco',
     description:
-      'Expert perspectives on enterprise AI, data engineering, and digital transformation.',
-    type: 'website',
-  },
-};
+      'Insights and best practices on enterprise AI, data engineering, and digital transformation.',
+    alternates: {
+      canonical: blogCanonical,
+    },
+    openGraph: {
+      title: 'Blog - Innovoco',
+      description:
+        'Expert perspectives on enterprise AI, data engineering, and digital transformation.',
+      type: 'website',
+      url: blogCanonical,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Blog - Innovoco',
+      description:
+        'Expert perspectives on enterprise AI, data engineering, and digital transformation.',
+    },
+  };
+}
 
 export const revalidate = 60; // Revalidate every 60 seconds
 

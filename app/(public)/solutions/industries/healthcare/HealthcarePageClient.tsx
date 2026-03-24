@@ -27,6 +27,10 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import {
+  IndustryGetStartedCard,
+  industryGetStartedGridClassName,
+} from "@/components/industries/IndustryGetStartedCard";
 import Link from "next/link";
 import Image from "next/image";
 import ContactModal from "@/components/landing/ContactModal";
@@ -779,7 +783,7 @@ export function HealthcarePageClient() {
                   Choose your next step toward AI-powered healthcare operations
                 </p>
               </div>
-              <div className="grid gap-6 md:grid-cols-3">
+              <div className={industryGetStartedGridClassName}>
                 {[
                   {
                     icon: Shield,
@@ -808,28 +812,18 @@ export function HealthcarePageClient() {
                 ].map((card, idx) => {
                   const Icon = card.icon;
                   return (
-                    <div
+                    <IndustryGetStartedCard
                       key={idx}
-                      onClick={openContact}
-                      className="group cursor-pointer flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 transition-all duration-300 hover:shadow-lg hover:border-[#059669]/30"
-                    >
-                      <span className="mb-4 inline-block w-fit rounded-full bg-[#059669]/10 px-3 py-1 text-xs font-semibold text-[#059669]">
-                        {card.tag}
-                      </span>
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#059669]/10 group-hover:bg-[#059669]/15 transition-colors">
-                        <Icon className="h-6 w-6 text-[#059669]" />
-                      </div>
-                      <h3 className="text-lg font-bold text-[var(--foreground)]">
-                        {card.title}
-                      </h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B]">
-                        {card.description}
-                      </p>
-                      <div className="mt-6 flex items-center text-sm font-semibold text-[#059669] group-hover:text-[#047857] transition-colors">
-                        {card.cta}
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </div>
-                    </div>
+                      theme="healthcare"
+                      icon={Icon}
+                      tag={card.tag}
+                      title={card.title}
+                      description={card.description}
+                      action={card.cta}
+                      onAction={openContact}
+                      buttonBackground="#059669"
+                      buttonForeground="#ffffff"
+                    />
                   );
                 })}
               </div>

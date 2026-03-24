@@ -25,6 +25,7 @@ import {
   Eye,
   FileCheck,
   Scale,
+  GitBranch,
 } from "lucide-react";
 import {
   Accordion,
@@ -32,6 +33,10 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import {
+  IndustryGetStartedCard,
+  industryGetStartedGridClassName,
+} from "@/components/industries/IndustryGetStartedCard";
 import Link from "next/link";
 import Image from "next/image";
 import ContactModal from "@/components/landing/ContactModal";
@@ -103,6 +108,17 @@ const capabilities = [
       { label: "Signal Latency", value: "<5 min" },
     ],
   },
+  {
+    icon: GitBranch,
+    title: "Private Equity & Sponsor Intelligence",
+    description:
+      "AI-assisted deal sourcing and pipeline prioritization, structured review of CIMs and dataroom materials, and portfolio-level operating metrics so investment and operating partners see performance consistently across businesses—within access controls and audit trails fit for sponsors.",
+    stats: [
+      { label: "Diligence outputs", value: "Structured" },
+      { label: "Pipeline focus", value: "Prioritized" },
+      { label: "Portco analytics", value: "Repeatable" },
+    ],
+  },
 ];
 
 const caseStudies = [
@@ -158,6 +174,19 @@ const caseStudies = [
       { metric: "100%", label: "BSA/FinCEN Compliant" },
     ],
   },
+  {
+    tag: "Private Equity",
+    title: "Deal Flow & Diligence Acceleration",
+    challenge:
+      "Middle-market sponsor facing high volumes of teasers, CIMs, and dataroom documents. Teams lost time reconciling financial and operating metrics across targets and portfolio companies with inconsistent reporting.",
+    solution:
+      "Custom AI workflows for screening and summarization, structured extraction from diligence materials, and portfolio dashboards that normalize KPIs for investment committee and operating partner review.",
+    results: [
+      { metric: "Structured", label: "IC-ready diligence packs" },
+      { metric: "Unified", label: "Cross-portco KPI views" },
+      { metric: "Governed", label: "Confidentiality & access" },
+    ],
+  },
 ];
 
 const differentiators = [
@@ -188,6 +217,13 @@ const differentiators = [
     description:
       "Navigate complex regulations including BSA, GLBA, ECOA, Fair Lending, SR 11-7 model governance, and SEC/FINRA requirements for algorithmic trading.",
     metric: "10+ Years Experience",
+  },
+  {
+    icon: GitBranch,
+    title: "Private Equity & Sponsors",
+    description:
+      "Support for GPs and sponsor platforms: deal flow, diligence efficiency, and portfolio analytics—with confidentiality, least-privilege access, and documentation suitable for internal risk and LP scrutiny.",
+    metric: "Deals + portcos",
   },
 ];
 
@@ -224,6 +260,14 @@ const faqs = [
   {
     q: "How do you validate AI models for regulatory compliance (SR 11-7)?",
     a: "We follow Federal Reserve SR 11-7 guidance throughout the AI lifecycle, including comprehensive documentation, independent model validation, bias and fair lending compliance testing, automated performance monitoring with drift alerting, and quarterly reviews. We provide all documentation required for regulatory examinations and internal audit reviews.",
+  },
+  {
+    q: "Do you work with private equity firms and sponsors?",
+    a: "Yes. We build governed AI workflows for investment teams and operating partners—deal screening, diligence support, knowledge search across materials, and portfolio operating views—without mixing confidential data across mandates. Deployments align with your security standards, vendor due diligence, and model risk expectations.",
+  },
+  {
+    q: "What PE use cases do sponsors typically prioritize first?",
+    a: "Most sponsors start with high-friction document workflows (CIMs, dataroom Q&A support, management presentation summaries) and portfolio reporting consistency. From there we expand to pipeline prioritization, sector research assistance, and operating metrics aligned across portcos—always with human review for investment decisions.",
   },
 ];
 
@@ -263,7 +307,7 @@ export function FinancialServicesPageClient() {
         schema={createServiceSchema({
           name: "Financial Services AI Automation & Analytics Solutions",
           description:
-            "Real-time fraud detection AI, risk analytics, and regulatory compliance solutions for banks and financial institutions.",
+            "Real-time fraud detection AI, risk analytics, regulatory compliance, and private equity deal and portfolio intelligence for banks, institutions, and sponsors.",
           url: "https://innovoco.com/solutions/industries/financial-services",
           serviceType: "Financial Services AI Solutions",
         })}
@@ -313,7 +357,7 @@ export function FinancialServicesPageClient() {
                 <motion.div variants={fadeUp} custom={0}>
                   <span className="inline-flex items-center gap-2 rounded-full border border-[#1E3A5F] bg-[#0F2035] px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#5BC0EB]">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#5BC0EB] animate-pulse" />
-                    Trusted by Financial Institutions
+                    Banks, Markets & Sponsors
                   </span>
                 </motion.div>
 
@@ -333,9 +377,10 @@ export function FinancialServicesPageClient() {
                   custom={2}
                   className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-[#94A3B8] md:text-xl"
                 >
-                  Real-time fraud detection, risk analytics, and regulatory
-                  compliance solutions that help banks and financial institutions
-                  move faster, work smarter, and achieve better outcomes.
+                  Real-time fraud detection, risk analytics, regulatory
+                  compliance, and sponsor-side deal and portfolio intelligence—so
+                  banks, institutions, and private equity teams move faster with
+                  governed AI.
                 </motion.p>
 
                 {/* CTA */}
@@ -416,9 +461,9 @@ export function FinancialServicesPageClient() {
                   custom={2}
                   className="mx-auto mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-[#64748B]"
                 >
-                  Purpose-built AI capabilities that address the unique
-                  challenges of fraud, risk, compliance, and trading across
-                  financial services.
+                  Purpose-built AI capabilities for fraud, risk, compliance,
+                  markets—and private equity deal flow, diligence, and
+                  portfolio performance.
                 </motion.p>
               </motion.div>
 
@@ -765,7 +810,7 @@ export function FinancialServicesPageClient() {
                   Choose your next step toward AI-powered financial operations
                 </p>
               </div>
-              <div className="grid gap-6 md:grid-cols-3">
+              <div className={industryGetStartedGridClassName}>
                 {[
                   {
                     icon: Shield,
@@ -794,28 +839,18 @@ export function FinancialServicesPageClient() {
                 ].map((card, idx) => {
                   const Icon = card.icon;
                   return (
-                    <div
+                    <IndustryGetStartedCard
                       key={idx}
-                      onClick={openContact}
-                      className="group cursor-pointer flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 transition-all duration-300 hover:shadow-lg hover:border-[#0284c7]/30"
-                    >
-                      <span className="mb-4 inline-block w-fit rounded-full bg-[#0284c7]/10 px-3 py-1 text-xs font-semibold text-[#0284c7]">
-                        {card.tag}
-                      </span>
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#0284c7]/10 group-hover:bg-[#0284c7]/15 transition-colors">
-                        <Icon className="h-6 w-6 text-[#0284c7]" />
-                      </div>
-                      <h3 className="text-lg font-bold text-[var(--foreground)]">
-                        {card.title}
-                      </h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B]">
-                        {card.description}
-                      </p>
-                      <div className="mt-6 flex items-center text-sm font-semibold text-[#0284c7] group-hover:text-[#0369a1] transition-colors">
-                        {card.cta}
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </div>
-                    </div>
+                      theme="financial"
+                      icon={Icon}
+                      tag={card.tag}
+                      title={card.title}
+                      description={card.description}
+                      action={card.cta}
+                      onAction={openContact}
+                      buttonBackground="#0284c7"
+                      buttonForeground="#ffffff"
+                    />
                   );
                 })}
               </div>
