@@ -114,6 +114,11 @@ const JOBS = [
     filename: "global-payroll.jpg",
     theme: `global workforce and payroll compliance—abstract meridian arcs suggesting time zones, soft coin-circle shapes without currency symbols, navy and gold accents, 4:3.`,
   },
+  {
+    id: "predictive-maintenance-manufacturing",
+    filename: "predictive-maintenance-manufacturing.jpg",
+    theme: `predictive maintenance and equipment health—abstract industrial gear forms with pulsing health signals, vibration waveforms settling into recognized patterns, amber warmth on steel, reliability as solid foundation, 4:3.`,
+  },
 ].map((job, index) => ({
   ...job,
   prompt: `${SHARED}

@@ -181,4 +181,18 @@ Theme — Payroll engine + HCM + finance — tri-system harmony, validation laye
     impact: `${SHARED_SOLUTION}
 Theme — Impact: rework, penalties, cycle stress — fewer breaks as sealed seams, confidence as gold-navy calm.`,
   },
+  "predictive-maintenance-manufacturing": {
+    phases: [
+      `${SHARED_SOLUTION}
+Theme — Phase 1: Instrument and baseline — vibration waveforms settling into recognized patterns, sensor nodes attaching to massive abstract machinery as warm amber lights, baseline rhythm establishing as steady pulse bands.`,
+      `${SHARED_SOLUTION}
+Theme — Phase 2: Predict and optimize — emerging fault signatures as subtle amber threads diverging from the baseline pulse, predictive window as a clear corridor of light between present and future, work order routing as organized flow.`,
+    ],
+    implementations: `${SHARED_SOLUTION}
+Theme — Multi-signal health scoring, CMMS integration, remaining-useful-life — fused sensor streams converging into a single health beacon, traffic-light simplicity from complex signals, maintenance calendar as harmonious time bands.`,
+    technical: `${SHARED_SOLUTION}
+Theme — Per-machine fingerprint, compounding accuracy — individual machines as unique light signatures, learning patterns that sharpen over time as focusing lenses, factory floor abstraction with warm industrial amber and steel blue. 4:3 aspect.`,
+    impact: `${SHARED_SOLUTION}
+Theme — Impact: downtime reduction, cost savings, parts optimization — calm production flow as unbroken horizontal bands, savings as ascending gold gradients, reliability as solid geometric foundation. 4:3 aspect.`,
+  },
 };

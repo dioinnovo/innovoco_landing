@@ -97,6 +97,11 @@ Theme: capacity strain before the cliff — rising demand curves as soft waves, 
     prompt: `${SHARED}
 Theme: global payroll complexity — meridian arcs in conflict, jurisdiction friction as intersecting grids (no flags), calculation anxiety as subtle vibration, navy and gold tension.`,
   },
+  {
+    slug: "predictive-maintenance-manufacturing",
+    prompt: `${SHARED}
+Theme: equipment failure looming — massive industrial gear silhouettes with hairline fractures glowing amber, vibration waves radiating as concentric distortions, clock pressure as fading light bands, reliability crumbling as abstract structural drift, warm amber tension against steel blue.`,
+  },
 ];
 
 async function generateImage(prompt) {
