@@ -14,9 +14,6 @@ import {
   RelatedResourceCardsSection,
 } from "./related-resource-card";
 
-/** Shared style: Technical innovation, Impact (and similar); solution block uses its own title scale */
-const useCaseSectionHeadingClass =
-  "text-2xl font-semibold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] md:text-3xl";
 
 function phaseObjectPosition(i: number): StoryImageObjectPosition {
   const cycle: StoryImageObjectPosition[] = ["left", "center", "right", "top"];
@@ -401,7 +398,7 @@ export function UseCaseTechnicalInnovationImpactSection({
       <div className="mx-auto max-w-6xl space-y-20 px-4 md:space-y-24">
         <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-16">
           <div className="order-2 md:order-1">
-            <h2 className={useCaseSectionHeadingClass}>Technical innovation</h2>
+            <h2 className={ateSolutionPhaseTitleClass}>Technical innovation</h2>
             <p className="mt-6 text-base leading-relaxed text-[#525252] dark:text-[#D1D5DB] md:text-lg">
               {technicalInnovation}
             </p>
@@ -428,7 +425,7 @@ export function UseCaseTechnicalInnovationImpactSection({
             />
           </div>
           <div>
-            <h2 className={useCaseSectionHeadingClass}>Impact</h2>
+            <h2 className={ateSolutionPhaseTitleClass}>Impact</h2>
             <ul className="mt-8 space-y-4">
               {impactMetrics.map((line, mi) => (
                 <li
