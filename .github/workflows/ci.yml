@@ -1,4 +1,4 @@
-# Fails the PR if lint, TypeScript, or production build breaks — same gates as Vercel `bun run build`.
+# Fails the PR if lint, TypeScript, or production build breaks — same gates as Vercel.
 name: CI
 
 on:
@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Full gate (npm run check + next build — ESLint, tsc, Next TS step; ignoreBuildErrors must stay false)
+      - name: Full gate (pnpm run check + next build — ESLint, tsc, Next TS step; ignoreBuildErrors must stay false)
         run: pnpm run build
         env:
           NEXT_TELEMETRY_DISABLED: "1"

@@ -1,0 +1,15 @@
+pre-push:
+  parallel: true
+  jobs:
+    - name: lint
+      run: pnpm eslint . --max-warnings 0
+
+    - name: typecheck
+      run: pnpm tsc --noEmit
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint-staged
+      glob: "*.{js,ts,jsx,tsx}"
+      run: pnpm eslint --max-warnings 0 -- {staged_files}
