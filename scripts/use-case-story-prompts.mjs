@@ -20,7 +20,7 @@ Atmospheric depth with warm undertones (dawn light, soft fog, gentle uplight). I
 
 IMPORTANT — SEMANTIC GROUNDING: Each illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the topic described below. Pure landscapes or generic atmospheric scenes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, instruments, screens, flows, documents) rendered as painterly silhouettes or luminous abstract forms that are clearly identifiable even in a romantic realism style. The viewer should be able to tell what DOMAIN and SPECIFIC TOPIC this image belongs to at a glance — without reading any text.
 
-CRITICAL — INTERPRET BUSINESS TERMS AS TECHNOLOGY CONCEPTS, NOT LITERALLY: Business jargon must be rendered as abstract technology forms. For example: "IVR tree" means a phone menu routing diagram (NOT a literal tree with leaves); "voice" means microphone/sound waveforms (NOT a human mouth); "waves" in a business context means data flows or signals (NOT ocean waves); "pipeline" means a data processing flow (NOT plumbing pipes); "branch" means a decision path (NOT a tree branch). Always interpret terms in their BUSINESS/TECHNOLOGY context.`;
+CREATIVE GUIDELINE: When business terms appear in the text, interpret them in their technology context first — but feel free to use creative visual metaphors. For example, "IVR tree" is a phone menu routing concept (a branching decision path), and "pipeline" is a data flow concept (which could be rendered as abstract plumbing, flowing tubes, or connected stages — use whatever visual metaphor works best artistically). The goal is creative interpretation that communicates the concept, not rigid literal rendering.`;
 
 const SHARED_CHALLENGE = `Premium editorial illustration for an enterprise AI case study "challenge" section — convey FRICTION, bottlenecks, fragmentation, or risk as abstract metaphor (obstacles as weather, fog, distance, or crossed paths—not horror, doom, or neon dystopia).
 ${CINEMATIC_STYLE_ANCHOR}
@@ -28,7 +28,7 @@ Tension should still feel human and surmountable: soft storm light, mist obscuri
 
 IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms from the challenge text below. Extract the key objects, processes, and pain points and render them as visual elements — broken flows, stressed equipment, disconnected systems, scattered documents, etc. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.
 
-CRITICAL — INTERPRET BUSINESS TERMS AS TECHNOLOGY CONCEPTS, NOT LITERALLY: "IVR tree" = phone menu routing diagram (NOT a literal tree); "voice" = microphone/waveforms (NOT a mouth); "pipeline" = data flow (NOT plumbing); "branch" = decision path (NOT tree branch). Always interpret in BUSINESS/TECHNOLOGY context.`;
+CREATIVE GUIDELINE: Interpret business terms in their technology context — but use creative visual metaphors freely. The goal is communicating the concept artistically, not rigid literal rendering.`;
 
 /** @typedef {{ phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
 
