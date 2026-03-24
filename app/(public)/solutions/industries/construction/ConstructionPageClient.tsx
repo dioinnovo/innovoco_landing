@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  IndustryBloombergPage,
+  IndustryPage,
   type IndustryCapability,
   type IndustryComplianceItem,
-} from "@/components/industries/IndustryBloombergPage";
+} from "@/components/industries/IndustryPage";
 import {
   Camera,
   FileCheck,
@@ -33,14 +33,11 @@ const tokens = {
   ctaShadowColor: "234, 179, 8",
 };
 
-const classes = {
-  relatedCardHoverBorder: "hover:border-[#ca8a04]/30",
-};
-
 const capabilities: IndustryCapability[] = [
   {
     icon: Camera,
     title: "Visual Inspections & Estimating",
+    useCaseSlug: "visual-inspections-property-cv",
     illustrationSrc: "/images/industries/construction/solutions/visual-inspections-estimating.jpg",
     description:
       "Computer vision for roofs, siding, and interiors with severity scoring, measurement assists, and adjuster-ready outputs. Works on phone capture or drone orthomosaics.",
@@ -53,6 +50,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: FileCheck,
     title: "Automated Field Reports",
+    useCaseSlug: "field-services-iot-playbooks",
     illustrationSrc: "/images/industries/construction/solutions/automated-field-reports.jpg",
     description:
       "Voice and photo capture structured into daily logs, safety checklists, and owner updates—synced to Procore, CMMS, or your ERP with full audit history.",
@@ -64,14 +62,28 @@ const capabilities: IndustryCapability[] = [
   },
   {
     icon: Activity,
-    title: "Equipment & HVAC Predictive Maintenance",
+    title: "Materials Traceability & Configurable BOM",
+    useCaseSlug: "configurable-bom-product-design",
     illustrationSrc: "/images/industries/construction/solutions/equipment-hvac-predictive.jpg",
     description:
-      "IoT ingestion, anomaly detection, and technician routing for chillers, fleets, and generators—integrated with inventory and SLA clocks.",
+      "Graph-resolved bills of materials for configurable building products—doors, frames, MEP assemblies—with constraint-based pruning, cost scoring, and built-in RoHS/fire-safety compliance traceability.",
     stats: [
-      { label: "Emergency calls", value: "27% ↓" },
-      { label: "Parts spend", value: "18% ↓" },
-      { label: "Uptime", value: "+3 pts" },
+      { label: "Config time", value: "60s" },
+      { label: "Invalid BOMs", value: "~0%" },
+      { label: "Compliance", value: "Auto" },
+    ],
+  },
+  {
+    icon: Truck,
+    title: "Fleet & Materials Logistics",
+    useCaseSlug: "supply-chain-demand",
+    illustrationSrc: "/images/industries/construction/solutions/equipment-hvac-predictive.jpg",
+    description:
+      "Real-time GPS, job progress signals, and materials demand into one dispatch view—reducing idle time, fuel waste, and missed delivery windows across crews and suppliers.",
+    stats: [
+      { label: "Fuel reduction", value: "12%" },
+      { label: "More jobs/crew", value: "9%" },
+      { label: "Annual savings", value: "$1.1M" },
     ],
   },
 ];
@@ -87,10 +99,9 @@ const complianceItems: IndustryComplianceItem[] = [
 
 export function ConstructionPageClient() {
   return (
-    <IndustryBloombergPage
+    <IndustryPage
       config={constructionConfig}
       tokens={tokens}
-      classes={classes}
       heroImageSrc="/images/industries/construction-hero.jpg"
       headlineAccent="Construction"
       headlineRest="& Home Services AI Solutions"

@@ -6,6 +6,9 @@
  *   node scripts/generate-industry-solution-images.mjs manufacturing retail   # subset by id prefix
  *
  * Requires GEMINI_API_KEY in .env.local
+ *
+ * After replacing JPEGs in place: bump `INDUSTRY_SOLUTION_IMAGES_REVISION` in
+ * `lib/industry-solution-image-cache.ts` so `next/image` and browsers fetch new bytes.
  */
 
 import fs from "node:fs";
@@ -31,12 +34,12 @@ const JOBS = [
   {
     id: "mfg-pm",
     out: "public/images/industries/manufacturing/solutions/predictive-maintenance.jpg",
-    prompt: `Photorealistic 4:3 documentary photograph: factory floor, maintenance technician or engineer in standard safety gear checking a motor or pump with a handheld vibration tool—ordinary industrial setting, fluorescent and window light. Honest preventive maintenance moment.${GROUNDED}`,
+    prompt: `Photorealistic 4:3 documentary photograph: manufacturing reliability engineer or maintenance planner at a desk with two monitors showing abstract line charts, bar charts, and gauge-style readouts (no readable text, labels, or logos)—clearly a condition-monitoring or predictive analytics dashboard for rotating equipment. Optional small inset of vibration spectrum or trend plot as abstract graphics only. Ordinary office or plant engineering room with daylight or overhead office light; credible Industry 4.0 analytics workflow, not a generic wrench-on-pump shot.${GROUNDED}`,
   },
   {
     id: "mfg-vision",
     out: "public/images/industries/manufacturing/solutions/vision-quality-control.jpg",
-    prompt: `Photorealistic 4:3 documentary photograph: quality station on a production line—inspector or operator examining a part under bright bench lighting, simple magnifier or fixed camera arm visible, real factory background. No fake AI graphics on screen.${GROUNDED}`,
+    prompt: `Photorealistic 4:3 documentary photograph: industrial automated optical inspection on a factory line—overhead or gantry-mounted machine-vision cameras, coaxial or ring LED illumination, metal or PCB assembly on conveyor or fixturing. Emphasize real machine vision hardware (lenses, camera housings, calibration plate optional) in a warehouse or plant setting; suggest object detection / AOI context without adding fake on-screen bounding boxes or sci-fi HUD. No handheld phone inspection.${GROUNDED}`,
   },
   {
     id: "mfg-sc",

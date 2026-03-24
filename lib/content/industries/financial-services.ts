@@ -254,6 +254,14 @@ export const financialServicesConfig: IndustryConfig = {
   actionCTA: {
     title: 'Ready to Transform Financial Services with AI?',
     subtitle: 'Choose your next step to get started with SOC 2 and PCI-DSS compliant AI automation',
+    prioritization: {
+      headline: 'Fraud Detection, Risk Analytics, Compliance AI —',
+      headlineAccent: 'Which One Protects Your Book First?',
+      subline: 'One workshop. Every initiative ranked by ROI.',
+      strategic: 'Enterprise fraud prevention, credit risk modeling, and regulatory automation built for SOC 2 and PCI-DSS.',
+      quickWins: 'Deploy transaction monitoring or KYC automation in 90 days. Measurable fraud reduction this quarter.',
+      bgImage: '/images/industries/financial-services/cta-prioritization-bg.jpg',
+    },
     cards: [
       {
         icon: Shield,

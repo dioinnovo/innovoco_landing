@@ -58,6 +58,7 @@ export const manufacturingConfig: IndustryConfig = {
       {
         icon: Settings,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
+        imageSrc: '/images/industries/manufacturing/solutions/predictive-maintenance.jpg',
         title: 'Predictive Maintenance for Automotive Manufacturer',
         industry: 'Manufacturing | Automotive',
         challenge: 'Unplanned equipment failures causing $5M+ annual production losses. Average downtime of 48 hours per failure affecting delivery schedules.',
@@ -71,6 +72,7 @@ export const manufacturingConfig: IndustryConfig = {
       {
         icon: Activity,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
+        imageSrc: '/images/industries/manufacturing/solutions/vision-quality-control.jpg',
         title: 'Computer Vision Quality Control',
         industry: 'Manufacturing | Electronics',
         challenge: 'Manual visual inspection missing 15% of defects. High false positive rate (30%) causing unnecessary waste and rework costs.',
@@ -84,6 +86,7 @@ export const manufacturingConfig: IndustryConfig = {
       {
         icon: TrendingUp,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
+        imageSrc: '/images/industries/manufacturing/solutions/supply-chain-optimization.jpg',
         title: 'Supply Chain Demand Forecasting',
         industry: 'Manufacturing | Consumer Goods',
         challenge: 'Forecast error of 35% causing $8M inventory carrying costs and frequent stockouts affecting customer satisfaction.',
@@ -97,6 +100,7 @@ export const manufacturingConfig: IndustryConfig = {
       {
         icon: Cog,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#FBBF24]',
+        imageSrc: '/images/industries/manufacturing-hero.jpg',
         title: 'OEE Optimization for Pharmaceutical Manufacturing',
         industry: 'Manufacturing | Pharmaceutical',
         challenge: 'Overall Equipment Effectiveness (OEE) of 65% (below industry target of 85%). Production losses from availability, performance, and quality issues.',
@@ -212,6 +216,14 @@ export const manufacturingConfig: IndustryConfig = {
   actionCTA: {
     title: 'Ready to Transform Manufacturing with AI?',
     subtitle: 'Choose your next step toward Industry 4.0 excellence',
+    prioritization: {
+      headline: 'Predictive Maintenance, Quality Vision, Supply Chain AI —',
+      headlineAccent: 'Which One Moves Your OEE First?',
+      subline: 'One workshop. Every initiative ranked by ROI.',
+      strategic: 'Plant-wide AI for defect detection, demand forecasting, and predictive maintenance at scale.',
+      quickWins: 'Deploy vision QC or anomaly detection on one line in 90 days. Measurable yield gains this quarter.',
+      bgImage: '/images/industries/manufacturing/cta-prioritization-bg.jpg',
+    },
     cards: [
       {
         icon: Settings,

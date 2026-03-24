@@ -72,6 +72,7 @@ export const energyUtilitiesConfig: IndustryConfig = {
       {
         icon: Gauge,
         iconGradient: "bg-gradient-to-br from-[#e0f2fe] to-[#0284c7]",
+        imageSrc: "/images/industries/energy-utilities/solutions/load-renewable-forecasting.jpg",
         title: "Short-term load & renewable forecasting",
         industry: "IOU | RTO footprint",
         challenge:
@@ -87,6 +88,7 @@ export const energyUtilitiesConfig: IndustryConfig = {
       {
         icon: Zap,
         iconGradient: "bg-gradient-to-br from-[#e0f2fe] to-[#0284c7]",
+        imageSrc: "/images/industries/energy-utilities/solutions/grid-generation-asset-health.jpg",
         title: "Substation & line asset health",
         industry: "Transmission | Regional",
         challenge:
@@ -102,6 +104,7 @@ export const energyUtilitiesConfig: IndustryConfig = {
       {
         icon: Sun,
         iconGradient: "bg-gradient-to-br from-[#e0f2fe] to-[#0284c7]",
+        imageSrc: "/images/industries/energy-utilities/solutions/der-visibility-operations.jpg",
         title: "DER visibility & hosting analysis",
         industry: "Municipal | Growing solar",
         challenge:
@@ -117,6 +120,7 @@ export const energyUtilitiesConfig: IndustryConfig = {
       {
         icon: Wind,
         iconGradient: "bg-gradient-to-br from-[#e0f2fe] to-[#0284c7]",
+        imageSrc: "/images/industries/energy-utilities-hero-v2.jpg",
         title: "Outage prediction & crew routing",
         industry: "Distribution | Storm-prone",
         challenge:
@@ -218,6 +222,14 @@ export const energyUtilitiesConfig: IndustryConfig = {
     subtitle: "Choose your next step toward reliable, efficient operations",
     footerText:
       "Innovoco helps utilities and energy companies deploy forecasting, asset health, and operations AI with the security and rigor the sector demands.",
+    prioritization: {
+      headline: 'Load Forecasting, Asset Health, DER Visibility —',
+      headlineAccent: 'Which One Strengthens Your Grid First?',
+      subline: 'One workshop. Every initiative ranked by ROI.',
+      strategic: 'Enterprise forecasting, predictive asset management, and grid optimization built for regulatory rigor.',
+      quickWins: 'Deploy demand forecasting or anomaly detection in 90 days. Measurable reliability gains this quarter.',
+      bgImage: '/images/industries/energy-utilities/cta-prioritization-bg.jpg',
+    },
     cards: [
       {
         icon: Gauge,

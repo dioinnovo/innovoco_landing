@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   ArrowRight,
   BarChart3,
   Shield,
-  CheckCircle,
   Users,
-  Rocket,
+  Target,
+  Zap,
   Headphones,
   Truck,
   Wrench,
@@ -19,6 +20,13 @@ import {
   BookOpen,
   Stethoscope,
   Globe2,
+  Camera,
+  Factory,
+  Activity,
+  Search,
+  GitBranch,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,6 +42,9 @@ import {
 import { cn } from "@/lib/utils";
 
 const NAV_ALL = "all-solutions";
+
+/** Max use case cards per page (library grid). */
+const USE_CASES_PAGE_SIZE = 12;
 
 /** Inner hero frame art — `pnpm run generate:case-studies-hero-frame` */
 const CASE_STUDIES_HERO_FRAMED_ART =
@@ -52,6 +63,12 @@ const outcomeIcons = {
   book: BookOpen,
   stethoscope: Stethoscope,
   globe: Globe2,
+  camera: Camera,
+  factory: Factory,
+  zap: Zap,
+  activity: Activity,
+  search: Search,
+  "git-branch": GitBranch,
 } as const;
 
 function formatPageDate() {
@@ -63,6 +80,10 @@ function formatPageDate() {
 }
 
 export default function CaseStudiesPageClient() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [activeSubnav, setActiveSubnav] = useState<string>(NAV_ALL);
   /** Industry filter for the use-case card grid (null = show all). */
@@ -87,6 +108,46 @@ export default function CaseStudiesPageClient() {
       u.industries.includes(selectedIndustryId)
     );
   }, [selectedIndustryId]);
+
+  const totalFiltered = filteredUseCases.length;
+  const totalPages = Math.max(1, Math.ceil(totalFiltered / USE_CASES_PAGE_SIZE));
+  const rawPage = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
+  const currentPage = Math.min(rawPage, totalPages);
+
+  /** Slice for the current results page. */
+  const paginatedUseCases = useMemo(() => {
+    const start = (currentPage - 1) * USE_CASES_PAGE_SIZE;
+    return filteredUseCases.slice(start, start + USE_CASES_PAGE_SIZE);
+  }, [filteredUseCases, currentPage]);
+
+  const rangeStart = totalFiltered === 0 ? 0 : (currentPage - 1) * USE_CASES_PAGE_SIZE + 1;
+  const rangeEnd = Math.min(currentPage * USE_CASES_PAGE_SIZE, totalFiltered);
+
+  /** Clamp invalid `?page=` when the filter changes or total shrinks. */
+  useEffect(() => {
+    if (rawPage === currentPage) return;
+    const next = new URLSearchParams(searchParams.toString());
+    if (currentPage <= 1) next.delete("page");
+    else next.set("page", String(currentPage));
+    const qs = next.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [rawPage, currentPage, pathname, router, searchParams]);
+
+  const goToPage = useCallback(
+    (page: number) => {
+      const p = Math.min(Math.max(1, page), totalPages);
+      const next = new URLSearchParams(searchParams.toString());
+      if (p <= 1) next.delete("page");
+      else next.set("page", String(p));
+      const qs = next.toString();
+      router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      document.getElementById("business-outcomes")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    },
+    [pathname, router, searchParams, totalPages]
+  );
 
   useEffect(() => {
     setHeroUpdatedAt(formatPageDate());
@@ -118,11 +179,13 @@ export default function CaseStudiesPageClient() {
 
   function selectIndustry(id: CaseStudyIndustryId) {
     setSelectedIndustryId(id);
+    router.replace(pathname, { scroll: false });
     scrollToOutcomes();
   }
 
   function clearIndustryFilter() {
     setSelectedIndustryId(null);
+    router.replace(pathname, { scroll: false });
     scrollToOutcomes();
   }
 
@@ -293,7 +356,7 @@ export default function CaseStudiesPageClient() {
               Business outcomes from production AI & automation
             </h2>
             <p className="mt-3 text-sm md:text-base text-[#525252] dark:text-[#D1D5DB]">
-              Twelve outcome-led patterns—open any card for challenge, phased delivery, implementations, and impact metrics. Same library, less duplication on one scroll.
+              Outcome-led patterns—open any card for challenge, phased delivery, implementations, and impact metrics. Up to {USE_CASES_PAGE_SIZE} cards per page for a cleaner, easier-to-scan library.
             </p>
             <p
               className="mt-3 text-sm text-[#525252] dark:text-[#D1D5DB]"
@@ -325,7 +388,7 @@ export default function CaseStudiesPageClient() {
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {filteredUseCases.map((u) => {
+            {paginatedUseCases.map((u) => {
               const Icon = outcomeIcons[u.icon];
               return (
                 <Link
@@ -376,89 +439,190 @@ export default function CaseStudiesPageClient() {
               );
             })}
           </div>
+
+          {totalFiltered > 0 ? (
+            <nav
+              className="mt-10 flex flex-col items-stretch gap-4 border-t border-[#eceef0] pt-8 dark:border-[#1f2937] sm:flex-row sm:items-center sm:justify-between print:hidden"
+              aria-label="Use case library pagination"
+            >
+              <p
+                id="case-studies-pagination-summary"
+                className="text-center text-sm text-[#525252] dark:text-[#D1D5DB] sm:text-left"
+                aria-live="polite"
+              >
+                Showing{" "}
+                <span className="font-semibold tabular-nums text-[#0B0F19] dark:text-[#F9FAFB]">
+                  {rangeStart}
+                </span>
+                –
+                <span className="font-semibold tabular-nums text-[#0B0F19] dark:text-[#F9FAFB]">
+                  {rangeEnd}
+                </span>{" "}
+                of{" "}
+                <span className="font-semibold tabular-nums text-[#0B0F19] dark:text-[#F9FAFB]">
+                  {totalFiltered}
+                </span>
+                {totalPages > 1 ? (
+                  <>
+                    {" "}
+                    <span className="text-[#6b7280] dark:text-[#9ca3af]">
+                      (page {currentPage} of {totalPages})
+                    </span>
+                  </>
+                ) : null}
+              </p>
+
+              {totalPages > 1 ? (
+                <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-end">
+                  <div className="flex w-full items-center justify-center gap-2 sm:w-auto">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer gap-1"
+                      onClick={() => goToPage(currentPage - 1)}
+                      disabled={currentPage <= 1}
+                      aria-label="Go to previous page of use cases"
+                    >
+                      <ChevronLeft className="h-4 w-4 shrink-0" aria-hidden />
+                      Previous
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer gap-1"
+                      onClick={() => goToPage(currentPage + 1)}
+                      disabled={currentPage >= totalPages}
+                      aria-label="Go to next page of use cases"
+                    >
+                      Next
+                      <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
+                    </Button>
+                  </div>
+
+                  {totalPages <= 9 ? (
+                    <ul
+                      className="flex flex-wrap items-center justify-center gap-1.5"
+                      role="list"
+                      aria-labelledby="case-studies-pagination-summary"
+                    >
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                        <li key={p}>
+                          <button
+                            type="button"
+                            onClick={() => goToPage(p)}
+                            aria-label={`Go to page ${p}`}
+                            aria-current={p === currentPage ? "page" : undefined}
+                            className={cn(
+                              "flex min-h-9 min-w-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium transition-colors",
+                              p === currentPage
+                                ? "border-[#00518e] bg-[#00518e] text-white dark:border-[#93C5FD] dark:bg-[#93C5FD] dark:text-[#0B0F19]"
+                                : "border-[#e0e3e5] bg-white text-[#414752] hover:bg-[#f3f4f6] dark:border-[#374151] dark:bg-[#1f2937] dark:text-[#e5e7eb] dark:hover:bg-[#374151]"
+                            )}
+                          >
+                            {p}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ) : null}
+            </nav>
+          ) : null}
         </div>
       </section>
 
-      {/* Executive CTA */}
+      {/* Executive CTA — AI Prioritization Workshop */}
       <section
         id="executive-next-steps"
-        className="relative border-t-2 border-[#0A58D0]/20 bg-gradient-to-br from-[#0A58D0]/5 via-[#8B5CF6]/5 to-[#DC2626]/5 dark:from-[#0A58D0]/10 dark:via-[#8B5CF6]/10 dark:to-[#DC2626]/10 print:bg-white print:border-0 print:break-before-page"
+        className="relative overflow-hidden print:bg-white print:border-0 print:break-before-page"
       >
-        <div className="container mx-auto max-w-6xl px-4 py-10 md:py-16 print:py-6">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 text-sm font-medium text-[#8B5CF6] dark:text-[#A78BFA] mb-4">
-              <Rocket className="h-4 w-4" />
-              <span>Executive Action Plan</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0B0F19] dark:text-[#F9FAFB] mb-4">
-              Your Path to AI Excellence
-            </h2>
-            <p className="text-lg text-[#525252] dark:text-[#D1D5DB] max-w-3xl mx-auto">
-              Transform your enterprise with our proven framework. Join industry leaders who've accelerated their AI journey with Innovoco.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-10">
-            <div className="bg-white dark:bg-[#1F2937] rounded-[22px] p-6 border border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm">
-              <h3 className="text-lg font-semibold text-[#0B0F19] dark:text-[#F9FAFB] mb-4 flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-[#10B981]" />
-                Strategic Implementation
-              </h3>
-              <ul className="space-y-3 text-[#525252] dark:text-[#D1D5DB] text-sm">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#0A58D0] mt-1">•</span>
-                  <span>Adopt two cloud pillars (Azure or Vertex) per client ecosystem</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#0A58D0] mt-1">•</span>
-                  <span>Use LangGraph for framework‑agnostic, long‑running orchestration</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#0A58D0] mt-1">•</span>
-                  <span>Offer hybrid/self‑host deployments for privacy‑sensitive accounts</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-white dark:bg-[#1F2937] rounded-[22px] p-6 border border-[#E5E7EB]/30 dark:border-[#374151]/30 shadow-sm">
-              <h3 className="text-lg font-semibold text-[#0B0F19] dark:text-[#F9FAFB] mb-4 flex items-center gap-2">
-                <Rocket className="h-5 w-5 text-[#8B5CF6]" />
-                Quick-Start Accelerators
-              </h3>
-              <ul className="space-y-3 text-[#525252] dark:text-[#D1D5DB] text-sm">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#0A58D0] mt-1">•</span>
-                  <span>Bundle observability (Foundry/Vertex/LangSmith) and evals by default</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#0A58D0] mt-1">•</span>
-                  <span>Package 8 enterprise workflows as quick‑start accelerators</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#0A58D0] mt-1">•</span>
-                  <span>Enterprise-ready templates with compliance built-in</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="text-center">
-            <div className="inline-block">
-              <Button 
-                onClick={() => setContactModalOpen(true)}
-                size="lg" 
-                className="group cursor-pointer bg-gradient-to-r from-[#0A58D0] to-[#8B5CF6] hover:from-[#0A58D0]/90 hover:to-[#8B5CF6]/90 text-white rounded-full px-12 py-8 text-xl md:text-2xl font-bold transition-all duration-300 shadow-[0_8px_30px_rgba(10,88,208,0.5)] hover:shadow-[0_12px_40px_rgba(10,88,208,0.7)] hover:scale-110 transform min-h-[80px] print:hidden">
-                Schedule Executive Briefing
-                <ArrowRight className="ml-4 h-6 w-6 md:h-7 md:w-7 group-hover:translate-x-2 transition-transform duration-300" />
-              </Button>
-              <div className="hidden print:block print:bg-blue-100 print:text-blue-900 print:px-6 print:py-4 print:rounded-lg print:text-center">
-                <p className="print:text-lg print:font-semibold">Schedule Executive Briefing</p>
-                <p className="print:text-sm print:mt-2">Contact: sales@innovoco.com | www.innovoco.com</p>
+        {/* Background image layer */}
+        <Image
+          src="/images/case-studies/cta-prioritization-bg.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          quality={85}
+          aria-hidden="true"
+        />
+        {/* Dark overlay for text legibility */}
+        <div
+          className="absolute inset-0 bg-linear-to-b from-[#0B0F19]/45 via-[#0B0F19]/35 to-[#0B0F19]/50"
+          aria-hidden="true"
+        />
+        {/* Subtle brand accent glow */}
+        <div
+          className="absolute inset-0 bg-linear-to-r from-[#0A58D0]/15 via-transparent to-[#DC2626]/10"
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 mx-auto max-w-4xl px-4 py-20 md:py-28 text-center print:py-8">
+          {/* Headline — their pain */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+            AI Initiatives Are Piling Up.
+            <br />
+            <span className="bg-linear-to-r from-sky-300 via-blue-200 to-rose-300 bg-clip-text text-transparent">
+              Which Ones Actually Move Your P&L?
+            </span>
+          </h2>
+
+          {/* Subline — the relief */}
+          <p className="mt-6 text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
+            One workshop. Every initiative ranked by ROI.
+          </p>
+
+          {/* Two outcome cards */}
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-2xl mx-auto">
+            {/* Strategic Implementation */}
+            <div className="group rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition-colors hover:bg-white/15">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/20">
+                <Target className="h-5 w-5 text-sky-400" />
               </div>
-              <p className="mt-4 text-sm md:text-base text-[#6B7280] dark:text-[#9CA3AF] font-medium print:text-gray-700">
-                30-minute strategic consultation • No obligation
+              <h3 className="text-base font-semibold text-white">
+                Strategic Roadmap
+              </h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-300">
+                Long-term, high-impact initiatives your board can back with confidence.
               </p>
             </div>
+
+            {/* Quick Wins Accelerator */}
+            <div className="group rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition-colors hover:bg-white/15">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/20">
+                <Zap className="h-5 w-5 text-amber-400" />
+              </div>
+              <h3 className="text-base font-semibold text-white">
+                Quick Wins
+              </h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-300">
+                Ship in 90 days. Measurable P&L impact you can report this quarter.
+              </p>
+            </div>
+          </div>
+
+          {/* CTA button */}
+          <div className="mt-10 print:hidden">
+            <Button
+              onClick={() => setContactModalOpen(true)}
+              size="lg"
+              className="group cursor-pointer rounded-full bg-white px-10 py-7 text-lg font-semibold text-[#0B0F19] shadow-[0_8px_32px_rgba(255,255,255,0.2)] transition-all duration-300 hover:bg-neutral-100 hover:scale-105 hover:shadow-[0_12px_44px_rgba(255,255,255,0.3)]"
+            >
+              Schedule Your AI Briefing
+              <ArrowRight className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" />
+            </Button>
+          </div>
+          <p className="mt-4 text-sm text-white/60 font-medium drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)] print:hidden">
+            60 min · Free · No obligation
+          </p>
+
+          {/* Print fallback */}
+          <div className="hidden print:block print:bg-blue-100 print:text-blue-900 print:px-6 print:py-4 print:rounded-lg print:text-center print:mt-6">
+            <p className="print:text-lg print:font-semibold">Schedule Your AI Briefing</p>
+            <p className="print:text-sm print:mt-2">Contact: sales@innovoco.com | www.innovoco.com</p>
           </div>
         </div>
       </section>

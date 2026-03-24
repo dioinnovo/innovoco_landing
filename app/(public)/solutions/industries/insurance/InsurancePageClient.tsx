@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  IndustryBloombergPage,
+  IndustryPage,
   type IndustryCapability,
   type IndustryComplianceItem,
-} from "@/components/industries/IndustryBloombergPage";
+} from "@/components/industries/IndustryPage";
 import {
   FileText,
   Camera,
@@ -35,14 +35,11 @@ const tokens = {
   ctaShadowColor: "124, 58, 237",
 };
 
-const classes = {
-  relatedCardHoverBorder: "hover:border-violet-500/35",
-};
-
 const capabilities: IndustryCapability[] = [
   {
     icon: FileText,
     title: "Intelligent FNOL & document AI",
+    useCaseSlug: "fnol-document-intelligence",
     illustrationSrc: "/images/industries/insurance/solutions/fnol-document-ai.jpg",
     description:
       "Structure loss notices from email, voice, PDFs, and portals—extract parties, coverages, and damage cues with confidence scoring for straight-through or adjuster review.",
@@ -55,6 +52,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Camera,
     title: "Damage assessment & field packages",
+    useCaseSlug: "damage-assessment-field-capture",
     illustrationSrc: "/images/industries/insurance/solutions/damage-assessment-field.jpg",
     description:
       "Computer vision and guided capture for property claims—consistent photo sets, severity tagging, and draft estimates or carrier packages for public adjusters and carrier field teams.",
@@ -67,6 +65,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Search,
     title: "Fraud, SIU & link analytics",
+    useCaseSlug: "fraud-siu-link-analytics",
     illustrationSrc: "/images/industries/insurance/solutions/fraud-siu-analytics.jpg",
     description:
       "Entity resolution and graph-style signals across vendors, claimants, and history—prioritize investigations with explainable tiers and playbook-driven referrals.",
@@ -74,6 +73,19 @@ const capabilities: IndustryCapability[] = [
       { label: "False referrals", value: "20–35% ↓" },
       { label: "Investigator lift", value: "Measurable" },
       { label: "Audit trail", value: "Full" },
+    ],
+  },
+  {
+    icon: Scale,
+    title: "Litigation & regulatory readiness",
+    useCaseSlug: "reporting-audit-packs",
+    illustrationSrc: "/images/industries/insurance/solutions/fraud-siu-analytics.jpg",
+    description:
+      "Immutable decision logs, model cards, and human-override capture at every claim milestone—so every decision path is reproducible when regulators or litigators ask.",
+    stats: [
+      { label: "Prep time", value: "60% ↓" },
+      { label: "Traceability", value: "100%" },
+      { label: "Audit gaps", value: "0 critical" },
     ],
   },
 ];
@@ -89,10 +101,9 @@ const complianceItems: IndustryComplianceItem[] = [
 
 export function InsurancePageClient() {
   return (
-    <IndustryBloombergPage
+    <IndustryPage
       config={insuranceConfig}
       tokens={tokens}
-      classes={classes}
       heroImageSrc={industryHero.insurance.src}
       headlineAccent="Insurance"
       headlineRest="& Public Adjusters AI Solutions"

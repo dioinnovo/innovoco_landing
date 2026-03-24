@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
@@ -58,11 +60,17 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    // Next.js 16: local `next/image` src must match a pattern. Include all of `public/`:
+    // `/images/**` plus root-level assets (e.g. /google-cloud-premier-partner-1.webp).
+    // Omit `search` on patterns so `?v=*` cache bust still works under /images/industries/.
+    localPatterns: [{ pathname: "/images/**" }, { pathname: "/*" }],
     qualities: [75, 90],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year
+    // Prod: long-lived optimizer cache (CDN-friendly). Dev: no minimum TTL so replaced files
+    // in `public/` show up without clearing `.next/cache/images` (headers() is already dev-only).
+    minimumCacheTTL: isProd ? 31536000 : 0,
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -75,7 +83,7 @@ const nextConfig: NextConfig = {
   },
   // Custom Cache-Control on /_next/static breaks Next.js dev (HMR). Apply only in production.
   headers: async () => {
-    if (process.env.NODE_ENV !== "production") {
+    if (!isProd) {
       return [];
     }
     return [
@@ -94,6 +102,16 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // Same path can be overwritten when regenerating marketing JPEGs — avoid immutable.
+      {
+        source: "/images/industries/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
           },
         ],
       },

@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { withIndustrySolutionImageCacheBust } from "@/lib/industry-solution-image-cache";
 
 export type IndustryCapability = {
   icon: LucideIcon;
@@ -12,6 +13,8 @@ export type IndustryCapability = {
   description: string;
   stats: { label: string; value: string }[];
   illustrationSrc?: string;
+  /** Slug linking to /case-studies/use-cases/[slug] */
+  useCaseSlug: string;
 };
 
 const fadeUp = {
@@ -28,23 +31,22 @@ export type IndustrySolutionsSectionProps = {
   capabilities: IndustryCapability[];
   capabilitiesTitle: string;
   capabilitiesSubtitle: string;
-  onContact: () => void;
 };
 
 /**
  * Shared “Our Solutions” block: alternating text + optional illustration,
  * metrics as dl under the description (same layout on all industry pages).
+ * Each capability links to its dedicated use case page.
  */
 export function IndustrySolutionsSection({
   accent,
   capabilities,
   capabilitiesTitle,
   capabilitiesSubtitle,
-  onContact,
 }: IndustrySolutionsSectionProps) {
   return (
     <section id="capabilities" className="bg-[var(--background)] py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -131,15 +133,14 @@ export function IndustrySolutionsSection({
                     </dl>
                   </motion.div>
                   <motion.div variants={fadeUp} custom={3}>
-                    <Button
-                      variant="ghost"
-                      onClick={onContact}
-                      className="group px-0 font-semibold hover:bg-transparent"
+                    <Link
+                      href={`/case-studies/use-cases/${cap.useCaseSlug}`}
+                      className="group inline-flex items-center font-semibold transition-colors"
                       style={{ color: accent }}
                     >
                       Learn more
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
+                    </Link>
                   </motion.div>
                 </div>
 
@@ -151,7 +152,9 @@ export function IndustrySolutionsSection({
                   >
                     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--muted)] shadow-md">
                       <Image
-                        src={cap.illustrationSrc!}
+                        src={withIndustrySolutionImageCacheBust(
+                          cap.illustrationSrc!,
+                        )}
                         alt={cap.title}
                         fill
                         className="object-cover"

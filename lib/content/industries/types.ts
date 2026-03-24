@@ -18,6 +18,8 @@ export interface IndustryHeroConfig {
 export interface IndustryCaseStudy {
   icon: LucideIcon;
   iconGradient: string;
+  /** Optional hero image for Proven Results cards (Bloomberg industry pages). */
+  imageSrc?: string;
   title: string;
   industry: string;
   challenge: string;
@@ -71,6 +73,8 @@ export interface RelatedIndustry {
   icon: LucideIcon;
   /** Optional stat line for related-industry cards */
   metrics?: Array<{ value: string; label: string }>;
+  /** Override card image (default: `/images/industries/related-cards/{slug}.jpg` from href) */
+  image?: string;
 }
 
 export interface RelatedService {
@@ -97,13 +101,13 @@ export interface IndustryConfig {
   // Section CTAs (strategic placement throughout page)
   sectionCTAs: {
     afterMainContent: SectionCTAConfig;
-    afterCaseStudies: SectionCTAConfig;
+    afterCaseStudies?: SectionCTAConfig;
     afterFAQs: SectionCTAConfig;
     afterDifferentiators: SectionCTAConfig;
   };
 
-  // Case Studies Section
-  caseStudies: {
+  // Case Studies Section (deprecated — being replaced by use case page links from solutions)
+  caseStudies?: {
     badge: string;
     title: string;
     description: string;
@@ -131,6 +135,21 @@ export interface IndustryConfig {
     subtitle: string;
     cards: IndustryActionCard[];
     footerText?: string;
+    /** Prioritization CTA — industry-contextualized version of the workshop hook. */
+    prioritization?: {
+      /** Pain headline, e.g. "AI Initiatives Are Piling Up." */
+      headline: string;
+      /** Gradient accent line, e.g. "Which Ones Actually Move Your P&L?" */
+      headlineAccent: string;
+      /** One-liner relief, e.g. "One workshop. Every initiative ranked by ROI." */
+      subline: string;
+      /** Left card — strategic roadmap descriptor */
+      strategic: string;
+      /** Right card — quick wins descriptor */
+      quickWins: string;
+      /** Optional industry-specific background image path (default: shared CTA bg) */
+      bgImage?: string;
+    };
   };
 
   // Related Content

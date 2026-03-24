@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  IndustryBloombergPage,
+  IndustryPage,
   type IndustryCapability,
   type IndustryComplianceItem,
-} from "@/components/industries/IndustryBloombergPage";
+} from "@/components/industries/IndustryPage";
 import {
   Gauge,
   Zap,
@@ -14,6 +14,7 @@ import {
   Radio,
   Cpu,
   Activity,
+  CloudLightning,
 } from "lucide-react";
 import { energyUtilitiesConfig } from "@/lib/content/industries/energy-utilities";
 import { industryHero } from "@/lib/industry-hero-urls";
@@ -35,14 +36,11 @@ const tokens = {
   ctaShadowColor: "14, 165, 233",
 };
 
-const classes = {
-  relatedCardHoverBorder: "hover:border-sky-500/35",
-};
-
 const capabilities: IndustryCapability[] = [
   {
     icon: Gauge,
     title: "Load, price & renewable forecasting",
+    useCaseSlug: "load-renewable-forecasting",
     illustrationSrc: "/images/industries/energy-utilities/solutions/load-renewable-forecasting.jpg",
     description:
       "Probabilistic short- and medium-term models with weather, DER, and behavioral signals—published to trading, operations, and planning with confidence intervals.",
@@ -55,6 +53,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Zap,
     title: "Grid & generation asset health",
+    useCaseSlug: "grid-asset-health-monitoring",
     illustrationSrc: "/images/industries/energy-utilities/solutions/grid-generation-asset-health.jpg",
     description:
       "Anomaly detection and health scores across substations, lines, and rotating equipment—prioritize inspections and replacements using CMMS, SCADA, and inspection history.",
@@ -67,6 +66,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Sun,
     title: "DER visibility & operations assists",
+    useCaseSlug: "der-visibility-operations",
     illustrationSrc: "/images/industries/energy-utilities/solutions/der-visibility-operations.jpg",
     description:
       "Hosting analysis, inverter telemetry fusion, and control-room assists for voltage, congestion, and restoration—designed for transparency and operator override.",
@@ -74,6 +74,19 @@ const capabilities: IndustryCapability[] = [
       { label: "Study time", value: "50–70% ↓" },
       { label: "Scenarios", value: "Heat, cloud, peak" },
       { label: "Audit", value: "Logged overrides" },
+    ],
+  },
+  {
+    icon: CloudLightning,
+    title: "Outage prediction & crew routing",
+    useCaseSlug: "field-services-iot-playbooks",
+    illustrationSrc: "/images/industries/energy-utilities/solutions/der-visibility-operations.jpg",
+    description:
+      "Risk layers from vegetation surveys, inspection tickets, and weather models to pre-position crews before storms hit—and route them dynamically once outages are confirmed.",
+    stats: [
+      { label: "CMI reduction", value: "18%" },
+      { label: "Truck-hours saved", value: "12%" },
+      { label: "Storm mode", value: "Live dashboards" },
     ],
   },
 ];
@@ -89,10 +102,9 @@ const complianceItems: IndustryComplianceItem[] = [
 
 export function EnergyUtilitiesPageClient() {
   return (
-    <IndustryBloombergPage
+    <IndustryPage
       config={energyUtilitiesConfig}
       tokens={tokens}
-      classes={classes}
       heroImageSrc={industryHero.energyUtilities.src}
       headlineAccent="Energy"
       headlineRest="& Utilities AI Solutions"

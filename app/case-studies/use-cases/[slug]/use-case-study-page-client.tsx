@@ -17,6 +17,12 @@ import {
   Truck,
   Users,
   Wrench,
+  Camera,
+  Factory,
+  Zap,
+  Activity,
+  Search,
+  GitBranch,
 } from "lucide-react";
 import type { BusinessOutcomeUseCase } from "@/lib/content/case-studies-page-content";
 import type { UseCaseStudyNarrative } from "@/lib/content/use-case-study-details";
@@ -50,6 +56,12 @@ const outcomeIcons = {
   book: BookOpen,
   stethoscope: Stethoscope,
   globe: Globe2,
+  camera: Camera,
+  factory: Factory,
+  zap: Zap,
+  activity: Activity,
+  search: Search,
+  "git-branch": GitBranch,
 } as const;
 
 type Props = {

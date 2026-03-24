@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  IndustryBloombergPage,
+  IndustryPage,
   type IndustryCapability,
   type IndustryComplianceItem,
-} from "@/components/industries/IndustryBloombergPage";
-import { Users, Sparkles, LineChart, Shield, Lock, CreditCard, Globe } from "lucide-react";
+} from "@/components/industries/IndustryPage";
+import { Users, Sparkles, LineChart, Shield, Lock, CreditCard, Globe, Headphones } from "lucide-react";
 import { retailConfig } from "@/lib/content/industries/retail";
 
 /** Indigo retail brand — visually separate from Financial Services (#0A58D0 sky blue). */
@@ -26,14 +26,11 @@ const tokens = {
   ctaShadowColor: "99, 102, 241",
 };
 
-const classes = {
-  relatedCardHoverBorder: "hover:border-[#6366f1]/30",
-};
-
 const capabilities: IndustryCapability[] = [
   {
     icon: Users,
     title: "Customer 360 & Identity Resolution",
+    useCaseSlug: "customer-360-identity-resolution",
     illustrationSrc: "/images/industries/retail/solutions/customer-360-identity.jpg",
     description:
       "Unify web, stores, marketplaces, and support into one profile with consent-aware activation. Power segmentation, journeys, and associate tools without duplicate silos.",
@@ -45,19 +42,21 @@ const capabilities: IndustryCapability[] = [
   },
   {
     icon: Sparkles,
-    title: "AI Personalization & Search",
+    title: "Real-Time Recommendation Engine",
+    useCaseSlug: "marketing-personalization",
     illustrationSrc: "/images/industries/retail/solutions/ai-personalization-search.jpg",
     description:
-      "Session-aware recommendations, content affinity, and ranking tuned to margin, inventory, and diversity rules—deployed via API to commerce and email.",
+      "Session-aware product recommendations that adapt in real time to browsing behavior, purchase history, and inventory—driving higher conversion, larger baskets, and better margins.",
     stats: [
       { label: "Rec CTR lift", value: "35%" },
       { label: "AOV impact", value: "+18%" },
-      { label: "Guardrails", value: "Live" },
+      { label: "Return rate", value: "12% ↓" },
     ],
   },
   {
     icon: LineChart,
     title: "Demand Forecasting & Pricing",
+    useCaseSlug: "supply-chain-demand",
     illustrationSrc: "/images/industries/retail/solutions/demand-forecasting-pricing.jpg",
     description:
       "Probabilistic forecasts at store/SKU grain with promotions, seasonality, and weather. Connect to replenishment and dynamic price engines with audit trails.",
@@ -65,6 +64,19 @@ const capabilities: IndustryCapability[] = [
       { label: "Forecast error", value: "20–30% ↓" },
       { label: "Stockout reduction", value: "9–14%" },
       { label: "Margin lift", value: "3–5%" },
+    ],
+  },
+  {
+    icon: Headphones,
+    title: "Customer Support & Voice AI",
+    useCaseSlug: "customer-support-voice",
+    illustrationSrc: "/images/industries/retail/solutions/demand-forecasting-pricing.jpg",
+    description:
+      "AI-powered triage, sentiment-aware routing, and CRM-grounded answers across chat, voice, and social—so agents handle exceptions while routine inquiries resolve themselves.",
+    stats: [
+      { label: "First-contact resolution", value: "40% ↑" },
+      { label: "Handle time", value: "35% ↓" },
+      { label: "CSAT", value: "4.6★" },
     ],
   },
 ];
@@ -80,10 +92,9 @@ const complianceItems: IndustryComplianceItem[] = [
 
 export function RetailPageClient() {
   return (
-    <IndustryBloombergPage
+    <IndustryPage
       config={retailConfig}
       tokens={tokens}
-      classes={classes}
       heroImageSrc="/images/industries/retail-hero.jpg"
       headlineAccent="Retail"
       headlineRest="& E-Commerce AI Automation Solutions"

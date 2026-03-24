@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -10,6 +9,10 @@ import type { UseCaseStudyImplementation, UseCaseStudyPhase } from "@/lib/conten
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { StoryImage, type StoryImageObjectPosition } from "./story-image";
+import {
+  RelatedResourceCardLink,
+  RelatedResourceCardsSection,
+} from "./related-resource-card";
 
 /** Shared style: Technical innovation, Impact (and similar); solution block uses its own title scale */
 const useCaseSectionHeadingClass =
@@ -458,57 +461,23 @@ export function UseCaseRelatedSection({ related, iconFor }: RelatedProps) {
   if (related.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden border-t border-[#eceef0] py-16 dark:border-[#1f2937] md:py-24">
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-amber-50/90 via-orange-50/50 to-rose-100/70 dark:from-[#1a1008]/80 dark:via-[#0f172a]/90 dark:to-[#1e1b4b]/60"
-        aria-hidden
-      />
-      <div className="relative mx-auto max-w-6xl px-4">
-        <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] md:text-4xl lg:text-5xl">
-          More case studies
-        </h2>
-        <p className="mt-3 max-w-2xl text-base text-[#525252] dark:text-[#D1D5DB]">
-          Explore adjacent patterns from the same production playbook.
-        </p>
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {related.map((u) => {
-            const RIcon = iconFor(u.icon);
-            return (
-              <Link
-                key={u.slug}
-                href={`/case-studies/use-cases/${u.slug}`}
-                className={cn(
-                  "group flex flex-col overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white shadow-md transition-[box-shadow,transform] duration-300 dark:border-white/10 dark:bg-[#1F2937]",
-                  "hover:-translate-y-1 hover:shadow-xl"
-                )}
-              >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#e8ecf2] dark:bg-[#111827]">
-                  <Image
-                    src={u.image}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    sizes="(max-width: 640px) 100vw, 33vw"
-                  />
-                  <div className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/95 text-[#00518e] shadow-sm dark:bg-[#1f2937]/95 dark:text-[#93C5FD]">
-                    <RIcon className="h-4 w-4" aria-hidden />
-                  </div>
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="text-lg font-semibold text-[#0B0F19] dark:text-[#F9FAFB]">{u.title}</p>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#525252] dark:text-[#D1D5DB]">
-                    {u.outcome}
-                  </p>
-                  <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#0B0F19] px-4 py-2 text-sm font-medium text-[#0B0F19] transition-colors group-hover:bg-[#0B0F19] group-hover:text-white dark:border-[#e5e7eb] dark:text-[#e5e7eb] dark:group-hover:bg-white dark:group-hover:text-[#0B0F19]">
-                    Read more
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+    <RelatedResourceCardsSection
+      heading="More case studies"
+      description="Explore adjacent patterns from the same production playbook."
+    >
+      {related.map((u) => {
+        const RIcon = iconFor(u.icon);
+        return (
+          <RelatedResourceCardLink
+            key={u.slug}
+            href={`/case-studies/use-cases/${u.slug}`}
+            imageSrc={u.image}
+            title={u.title}
+            description={u.outcome}
+            icon={RIcon}
+          />
+        );
+      })}
+    </RelatedResourceCardsSection>
   );
 }

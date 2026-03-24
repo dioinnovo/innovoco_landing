@@ -8,7 +8,7 @@ export const useCaseDefaultTestimonials: Record<
   { body: string; attribution?: string }
 > = {
   "executive-self-serve-analytics": {
-    body: "We finally stopped treating every leadership question as a ticket queue. Answers are grounded in the warehouse we already trust—and we can show auditors the full trail.",
+    body: "Our VPs ask in plain language and get charts back while the meeting is still live. We are not bypassing governance—every answer ties to the warehouse and we can show the full trail.",
     attribution: "— Data & analytics leadership, Fortune 500 (anonymized)",
   },
   "customer-support-voice": {

@@ -66,6 +66,10 @@ import {
   ClipboardList,
 } from "lucide-react";
 
+/** Glassmorphism for final CTA value cards over the photographic background. */
+const LANDING_FINAL_CTA_GLASS_CARD =
+  "flex items-center justify-center sm:justify-start gap-3 rounded-2xl border border-white/55 bg-white/80 p-3 sm:p-4 shadow-[0_8px_32px_rgba(15,23,42,0.07),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-xl backdrop-saturate-150 ring-1 ring-inset ring-white/25 supports-backdrop-filter:bg-white/20 transition-all duration-300 hover:border-white/70 hover:bg-white/88 hover:shadow-[0_12px_40px_rgba(10,88,208,0.12)] hover:supports-backdrop-filter:bg-white/35 max-w-[280px] sm:max-w-none mx-auto w-full";
+
 export function LandingPageClient() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -1778,25 +1782,48 @@ export function LandingPageClient() {
         </div>
       </AnimatedSection>
 
-      {/* Final CTA Section */}
-      <section id="demo" className="py-20 px-6 bg-gradient-to-br from-[#DBEAFE] via-[#FECACA]/50 to-[#93C5FD]">
-        <AnimatedDiv className="container mx-auto text-center" delay={0.2}>
+      {/* Final CTA Section — background: `pnpm run generate:landing-cta-bg` (Gemini, same family as industry CTA art) */}
+      <section id="demo" className="relative overflow-hidden py-20 px-6">
+        <Image
+          src="/images/landing/final-cta-bg.jpg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+          priority
+        />
+        {/* Scrim (~original strength): white / sky / rose opacity stops for legibility over CTA art */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/82 via-[#DBEAFE]/54 to-[#FECACA]/44"
+          aria-hidden
+        />
+        <AnimatedDiv className="relative z-10 container mx-auto text-center" delay={0.2}>
           <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 text-sm font-semibold tracking-wide uppercase bg-white/90 backdrop-blur-sm rounded-full border-2 border-[#0A58D0]/30 shadow-lg">
             <Rocket className="h-4 w-4 text-[#0A58D0]" />
-            <span className="bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] bg-clip-text text-transparent">Start Your AI Journey Today</span>
+            <span className="bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] bg-clip-text text-transparent">
+              Executive AI prioritization
+            </span>
           </div>
-          
-          <h2 className="text-5xl font-bold mb-6 text-[#0B0F19]">
-            Ready to Lead Your Industry's AI Transformation?
+
+          {/*
+            Copy aligns with IndustryConfig.actionCTA.prioritization + case-studies Executive CTA:
+            pain → P&L focus → one workshop, initiatives ranked by ROI.
+          */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-balance text-[#0B0F19] max-w-4xl mx-auto leading-[1.15] tracking-tight">
+            AI Initiatives Are Piling Up.
+            <br />
+            <span className="bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] bg-clip-text text-transparent">
+              Which Ones Actually Move Your P&amp;L?
+            </span>
           </h2>
-          
-          <p className="text-xl text-[#525252] mb-12 max-w-3xl mx-auto">
-            Let's discuss how we can transform your data infrastructure into a competitive advantage.
+
+          <p className="text-lg sm:text-xl text-[#525252] mb-12 max-w-3xl mx-auto leading-relaxed text-pretty">
+            One workshop. Every initiative ranked by ROI.
           </p>
 
           {/* Value Propositions - Compact Display */}
           <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3 sm:gap-4 max-w-sm sm:max-w-3xl mx-auto mb-8 px-4 sm:px-0">
-            <div className="flex items-center justify-center sm:justify-start gap-3 bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] sm:max-w-none mx-auto w-full">
+            <div className={LANDING_FINAL_CTA_GLASS_CARD}>
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex-shrink-0 overflow-hidden">
                 <Image 
                   src="/fluent-chat-icon.png" 
@@ -1808,14 +1835,14 @@ export function LandingPageClient() {
                 />
               </div>
               <div className="text-center sm:text-left">
-                <h4 className="font-bold text-[#0B0F19] text-sm">Free Consultation</h4>
+                <h4 className="font-bold text-[#0B0F19] text-sm">Executive briefing</h4>
                 <p className="text-xs text-[#525252] mt-0.5">
-                  No-obligation discussion
+                  ROI map of your initiative list. No obligation.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-center sm:justify-start gap-3 bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] sm:max-w-none mx-auto w-full">
+            <div className={LANDING_FINAL_CTA_GLASS_CARD}>
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex-shrink-0 overflow-hidden">
                 <Image
                   src="/fluent-rocket-icon.png"
@@ -1827,14 +1854,14 @@ export function LandingPageClient() {
                 />
               </div>
               <div className="text-center sm:text-left">
-                <h4 className="font-bold text-[#0B0F19] text-sm">30-Day POC</h4>
+                <h4 className="font-bold text-[#0B0F19] text-sm">90-day proof</h4>
                 <p className="text-xs text-[#525252] mt-0.5">
-                  See real results quickly
+                  Quick win with measurable P&amp;L you can report
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-center sm:justify-start gap-3 bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] sm:max-w-none mx-auto w-full">
+            <div className={LANDING_FINAL_CTA_GLASS_CARD}>
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex-shrink-0 overflow-hidden">
                 <Image 
                   src="/zero-risk-shield.png"
@@ -1845,9 +1872,9 @@ export function LandingPageClient() {
                 />
               </div>
               <div className="text-center sm:text-left">
-                <h4 className="font-bold text-[#0B0F19] text-sm">Zero Risk</h4>
+                <h4 className="font-bold text-[#0B0F19] text-sm">Zero risk</h4>
                 <p className="text-xs text-[#525252] mt-0.5">
-                  No commitment required
+                  Clarity first. No commitment to proceed.
                 </p>
               </div>
             </div>
@@ -1860,10 +1887,13 @@ export function LandingPageClient() {
               size="lg" 
               className="bg-gradient-to-r from-[#0A58D0] to-[#3B82F6] hover:from-[#0A58D0]/90 hover:to-[#3B82F6]/90 text-white shadow-[0_8px_30px_rgba(10,88,208,0.5)] hover:shadow-[0_12px_40px_rgba(10,88,208,0.7)] transition-all duration-300 px-14 py-8 text-xl font-bold rounded-full transform hover:scale-110 min-h-[80px]"
             >
-              Book My Consultation
+              Schedule Your AI Briefing
               <ArrowRight className="ml-3 h-6 w-6" />
             </Button>
           </div>
+          <p className="mt-4 text-sm font-semibold text-[#1e293b]">
+            60 min · Free · No obligation
+          </p>
         </AnimatedDiv>
       </section>
 

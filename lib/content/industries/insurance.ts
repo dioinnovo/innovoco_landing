@@ -71,6 +71,7 @@ export const insuranceConfig: IndustryConfig = {
       {
         icon: FileText,
         iconGradient: "bg-gradient-to-br from-[#f5f3ff] to-[#7c3aed]",
+        imageSrc: "/images/industries/insurance/solutions/fnol-document-ai.jpg",
         title: "FNOL intake & routing at scale",
         industry: "P&C | Regional carrier",
         challenge:
@@ -86,6 +87,7 @@ export const insuranceConfig: IndustryConfig = {
       {
         icon: Camera,
         iconGradient: "bg-gradient-to-br from-[#f5f3ff] to-[#7c3aed]",
+        imageSrc: "/images/industries/insurance/solutions/damage-assessment-field.jpg",
         title: "Public adjuster field intelligence",
         industry: "Adjusting | Multi-state firm",
         challenge:
@@ -101,6 +103,7 @@ export const insuranceConfig: IndustryConfig = {
       {
         icon: Search,
         iconGradient: "bg-gradient-to-br from-[#f5f3ff] to-[#7c3aed]",
+        imageSrc: "/images/industries/insurance/solutions/fraud-siu-analytics.jpg",
         title: "SIU referral quality",
         industry: "P&C | National TPA",
         challenge:
@@ -116,6 +119,7 @@ export const insuranceConfig: IndustryConfig = {
       {
         icon: Scale,
         iconGradient: "bg-gradient-to-br from-[#f5f3ff] to-[#7c3aed]",
+        imageSrc: "/images/industries/insurance-hero-v2.jpg",
         title: "Litigation & regulatory readiness",
         industry: "Carrier | Specialty lines",
         challenge:
@@ -217,6 +221,14 @@ export const insuranceConfig: IndustryConfig = {
     subtitle: "Choose your next step toward faster, defensible claims handling",
     footerText:
       "Innovoco helps carriers, TPAs, MGAs, and public adjusters deploy AI that fits existing cores, compliance, and field realities.",
+    prioritization: {
+      headline: 'Claims Automation, Fraud Detection, Underwriting AI —',
+      headlineAccent: 'Which One Moves Your Loss Ratio First?',
+      subline: 'One workshop. Every initiative ranked by ROI.',
+      strategic: 'End-to-end claims intelligence, fraud analytics, and underwriting models built for compliance.',
+      quickWins: 'Deploy FNOL triage or field capture automation in 90 days. Measurable cycle-time reduction this quarter.',
+      bgImage: '/images/industries/insurance/cta-prioritization-bg.jpg',
+    },
     cards: [
       {
         icon: FileText,

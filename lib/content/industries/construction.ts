@@ -69,6 +69,7 @@ export const constructionConfig: IndustryConfig = {
       {
         icon: Camera,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#CA8A04]',
+        imageSrc: '/images/industries/construction/solutions/visual-inspections-estimating.jpg',
         title: 'Roof & Exterior Computer Vision',
         industry: 'Home Services | Roofing',
         challenge: 'Manual photo review slowed estimates and missed subtle hail damage, driving rework and disputes.',
@@ -82,6 +83,7 @@ export const constructionConfig: IndustryConfig = {
       {
         icon: FileCheck,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#CA8A04]',
+        imageSrc: '/images/industries/construction/solutions/automated-field-reports.jpg',
         title: 'Automated Field Reports',
         industry: 'Construction | GC',
         challenge: 'Superintendents spent nights writing daily reports; data was inconsistent across jobsites.',
@@ -95,6 +97,7 @@ export const constructionConfig: IndustryConfig = {
       {
         icon: Activity,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#CA8A04]',
+        imageSrc: '/images/industries/construction/solutions/equipment-hvac-predictive.jpg',
         title: 'HVAC Predictive Maintenance',
         industry: 'Facilities | Multi-site',
         challenge: 'Truck rolls for preventable failures eroded margins; no unified telemetry across brands.',
@@ -108,6 +111,7 @@ export const constructionConfig: IndustryConfig = {
       {
         icon: Truck,
         iconGradient: 'bg-gradient-to-br from-[#FEF3C7] to-[#CA8A04]',
+        imageSrc: '/images/industries/construction-hero.jpg',
         title: 'Fleet & Jobsite Logistics',
         industry: 'Construction | Civil',
         challenge: 'Dispatch relied on radios and spreadsheets; idle time and fuel waste grew with multi-crew jobs.',
@@ -196,6 +200,14 @@ export const constructionConfig: IndustryConfig = {
     title: 'Ready to Transform Construction with AI?',
     subtitle: 'Choose your next step toward operational excellence',
     footerText: 'Modernize inspections, reporting, and maintenance with AI built for the field. Contact Innovoco for a customized rollout plan.',
+    prioritization: {
+      headline: 'Vision AI, Predictive Maintenance, Report Automation —',
+      headlineAccent: 'Which One Hits Your Margin First?',
+      subline: 'One workshop. Every initiative ranked by ROI.',
+      strategic: 'Enterprise inspection, IoT maintenance, and reporting systems that scale across every jobsite.',
+      quickWins: 'Deploy photo QA or automated field reports in 90 days. Measurable cost reduction this quarter.',
+      bgImage: '/images/industries/construction/cta-prioritization-bg.jpg',
+    },
     cards: [
       {
         icon: Camera,

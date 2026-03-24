@@ -220,6 +220,14 @@ export const healthcareConfig: IndustryConfig = {
   actionCTA: {
     title: 'Ready to Transform Healthcare with AI?',
     subtitle: 'Choose your next step to get started with HIPAA-compliant AI automation and analytics',
+    prioritization: {
+      headline: 'Clinical Decision Support, Capacity AI, Patient Ops',
+      headlineAccent: 'Which One Impacts Your Outcomes First?',
+      subline: 'One workshop. Every initiative ranked by ROI.',
+      strategic: 'HIPAA-compliant AI for readmission prediction, clinical workflows, and population health at enterprise scale.',
+      quickWins: 'Deploy triage automation or scheduling optimization in 90 days. Measurable outcome improvement this quarter.',
+      bgImage: '/images/industries/healthcare/cta-prioritization-bg.jpg',
+    },
     cards: [
       {
         icon: Shield,

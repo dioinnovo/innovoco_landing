@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  IndustryBloombergPage,
+  IndustryPage,
   type IndustryCapability,
   type IndustryComplianceItem,
-} from "@/components/industries/IndustryBloombergPage";
+} from "@/components/industries/IndustryPage";
 import {
   Zap,
   Award,
@@ -15,6 +15,7 @@ import {
   Factory,
   FileCheck,
   Radio,
+  Settings,
 } from "lucide-react";
 import { manufacturingConfig } from "@/lib/content/industries/manufacturing";
 
@@ -35,14 +36,11 @@ const tokens = {
   ctaShadowColor: "245, 158, 11",
 };
 
-const classes = {
-  relatedCardHoverBorder: "hover:border-[#d97706]/30",
-};
-
 const capabilities: IndustryCapability[] = [
   {
     icon: Zap,
     title: "Predictive Maintenance",
+    useCaseSlug: "field-services-iot-playbooks",
     illustrationSrc:
       "/images/industries/manufacturing/solutions/predictive-maintenance.jpg",
     description:
@@ -56,6 +54,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Award,
     title: "Computer Vision Quality Control",
+    useCaseSlug: "cv-quality-control-manufacturing",
     illustrationSrc:
       "/images/industries/manufacturing/solutions/vision-quality-control.jpg",
     description:
@@ -69,6 +68,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Activity,
     title: "Supply Chain Optimization",
+    useCaseSlug: "supply-chain-demand",
     illustrationSrc:
       "/images/industries/manufacturing/solutions/supply-chain-optimization.jpg",
     description:
@@ -77,6 +77,20 @@ const capabilities: IndustryCapability[] = [
       { label: "Forecast error", value: "22% ↓" },
       { label: "Inventory savings", value: "$4–5M" },
       { label: "Stockout reduction", value: "40%" },
+    ],
+  },
+  {
+    icon: Settings,
+    title: "Configurable BOM & Engineering Traceability",
+    useCaseSlug: "configurable-bom-product-design",
+    illustrationSrc:
+      "/images/industries/manufacturing/solutions/supply-chain-optimization.jpg",
+    description:
+      "Resolve thousands of product variants in seconds—not hours of spreadsheet cross-referencing. Constraint-based configuration with built-in compliance traceability for RoHS, REACH, and safety standards.",
+    stats: [
+      { label: "Config time", value: "<60s" },
+      { label: "Invalid configs", value: "~0%" },
+      { label: "Compliance", value: "Auto-traced" },
     ],
   },
 ];
@@ -92,10 +106,9 @@ const complianceItems: IndustryComplianceItem[] = [
 
 export function ManufacturingPageClient() {
   return (
-    <IndustryBloombergPage
+    <IndustryPage
       config={manufacturingConfig}
       tokens={tokens}
-      classes={classes}
       heroImageSrc="/images/industries/manufacturing-hero.jpg"
       headlineAccent="Manufacturing"
       headlineRest="AI Automation & Analytics Solutions"

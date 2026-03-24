@@ -69,6 +69,7 @@ export const retailConfig: IndustryConfig = {
       {
         icon: Users,
         iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        imageSrc: '/images/industries/retail/solutions/customer-360-identity.jpg',
         title: 'Customer 360 for Omnichannel Apparel',
         industry: 'Retail | Fashion',
         challenge: 'Fragmented customer data across e-commerce, stores, and marketplaces prevented unified targeting and inflated acquisition costs.',
@@ -82,6 +83,7 @@ export const retailConfig: IndustryConfig = {
       {
         icon: Sparkles,
         iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        imageSrc: '/images/industries/retail/solutions/ai-personalization-search.jpg',
         title: 'AI Personalization Engine',
         industry: 'E-Commerce | Specialty',
         challenge: 'Generic product grids produced low engagement; manual merchandising could not scale across 200K+ SKUs.',
@@ -95,6 +97,7 @@ export const retailConfig: IndustryConfig = {
       {
         icon: LineChart,
         iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        imageSrc: '/images/industries/retail/solutions/demand-forecasting-pricing.jpg',
         title: 'Demand Forecasting at Scale',
         industry: 'Retail | Grocery',
         challenge: 'Store-level forecasts missed promotions and weather spikes, driving spoilage and lost sales on high-velocity categories.',
@@ -108,6 +111,7 @@ export const retailConfig: IndustryConfig = {
       {
         icon: Target,
         iconGradient: 'bg-gradient-to-br from-[#EEF2FF] to-[#6366F1]',
+        imageSrc: '/images/industries/retail-hero.jpg',
         title: 'Dynamic Pricing & Promotions',
         industry: 'Retail | Electronics',
         challenge: 'Static pricing left margin on the table while competitors adjusted daily; promotion planning was spreadsheet-driven.',
@@ -196,6 +200,14 @@ export const retailConfig: IndustryConfig = {
     title: 'Ready to Transform Retail with AI?',
     subtitle: 'Choose your next step toward revenue growth',
     footerText: 'Transform omnichannel retail with customer 360, personalization, and forecasting. Contact Innovoco for a tailored roadmap.',
+    prioritization: {
+      headline: 'Personalization, Demand Forecasting, Customer 360.',
+      headlineAccent: 'Which One Lifts Your Revenue First?',
+      subline: 'One workshop. Every initiative ranked by ROI.',
+      strategic: 'Omnichannel personalization, CDP unification, and demand intelligence at enterprise scale.',
+      quickWins: 'Deploy recommendation engines or inventory optimization in 90 days. Measurable revenue lift this quarter.',
+      bgImage: '/images/industries/retail/cta-prioritization-bg.jpg',
+    },
     cards: [
       {
         icon: Users,
