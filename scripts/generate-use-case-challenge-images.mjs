@@ -41,11 +41,7 @@ IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable dom
 
 const JOBS = [
   // "executive-self-serve-analytics" — removed; auto-generated from narrative content
-  {
-    slug: "customer-support-voice",
-    prompt: `${SHARED}
-Theme: customer support strain — tangled pathways, brittle automation as fragile threads, rising call pressure as abstract waves, empathy vs overload as color tension, no faces.`,
-  },
+  // "customer-support-voice" — removed; auto-generated from narrative content
   {
     slug: "regulated-onboarding-kyc-aml",
     prompt: `${SHARED}

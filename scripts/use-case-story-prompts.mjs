@@ -193,20 +193,7 @@ ${mustInclude}`;
 /** @type {Record<string, StoryPrompts>} */
 export const STORY_PROMPTS_BY_SLUG = {
   // "executive-self-serve-analytics" — removed manual override; auto-generated from narrative content
-  "customer-support-voice": {
-    phases: [
-      `${SHARED_SOLUTION}
-Theme — Phase 1: Instrument and segment — mined intents as categorized aurora bands, policy boundaries as smooth enclosures, intent maps as flowing topology.`,
-      `${SHARED_SOLUTION}
-Theme — Phase 2: Automate with guardrails — assisted resolution streams, human review as warm halos on edge cases, containment as protective arcs.`,
-    ],
-    implementations: `${SHARED_SOLUTION}
-Theme — CRM grounding, escalation, QA sampling — customer record gravity wells, safe handoff bridges, quality loops as circular light.`,
-    technical: `${SHARED_SOLUTION}
-Theme — Voice + digital orchestration — waveform ribbons merging with structured CRM geometry, latency-aware routing as sleek diverging channels.`,
-    impact: `${SHARED_SOLUTION}
-Theme — Impact: CSAT, containment, compliance — uplift curves, steadier service temperature, fewer escalations as calmer color balance.`,
-  },
+  // "customer-support-voice" — removed manual override; auto-generated from narrative content
   "regulated-onboarding-kyc-aml": {
     phases: [
       `${SHARED_SOLUTION}
