@@ -34,7 +34,9 @@ const MODEL = "gemini-3.1-flash-image-preview";
 
 const SHARED = `Premium editorial illustration for an enterprise AI case study "challenge" section — convey FRICTION, bottlenecks, fragmentation, or risk as abstract metaphor only (obstacles as weather, fog, distance, or crossed paths—not horror, doom, or neon dystopia).
 ${CINEMATIC_STYLE_ANCHOR}
-Tension should still feel human and surmountable: soft storm light, mist obscuring a route, or cool-vs-warm air—not a void or apocalypse. Innovoco blues and crimson as sky vs horizon, not flat UI slabs. Optional faint grid or glass ribbons. Square 1:1. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.`;
+Tension should still feel human and surmountable: soft storm light, mist obscuring a route, or cool-vs-warm air—not a void or apocalypse. Innovoco blues and crimson as sky vs horizon, not flat UI slabs. Optional faint grid or glass ribbons. Square 1:1. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
+
+IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the industry and challenge topic. Pure landscapes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, documents, flows) rendered as painterly silhouettes integrated into the atmospheric scene. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.`;
 
 const JOBS = [
   {
@@ -100,7 +102,7 @@ Theme: global payroll complexity — meridian arcs in conflict, jurisdiction fri
   {
     slug: "predictive-maintenance-manufacturing",
     prompt: `${SHARED}
-Theme: equipment failure looming — massive industrial gear silhouettes with hairline fractures glowing amber, vibration waves radiating as concentric distortions, clock pressure as fading light bands, reliability crumbling as abstract structural drift, warm amber tension against steel blue.`,
+Theme: equipment failure looming on a factory floor. MUST INCLUDE: massive interlocking gear and press silhouettes showing visible stress — hairline fracture lines glowing amber/red at stress points, vibration distortion waves radiating outward from a failing bearing or shaft. A faded clock or countdown element suggesting time running out. Scattered, disconnected maintenance tools (wrench silhouettes, clipboards) suggesting reactive chaos. The production line is interrupted — a gap in the conveyor flow. Steel blue machinery going amber-red at failure points. Atmospheric factory mist. Tension, but surmountable.`,
   },
 ];
 

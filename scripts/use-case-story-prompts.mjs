@@ -7,7 +7,9 @@ import { CINEMATIC_STYLE_ANCHOR } from "./ai-art-style-anchor.mjs";
 
 export const SHARED_SOLUTION = `Premium editorial illustration for an enterprise AI case study — SOLUTION and forward progress (not problems); mood is hopeful, motivating, and clear-eyed, not cold or ominous.
 ${CINEMATIC_STYLE_ANCHOR}
-Atmospheric depth with warm undertones (dawn light, soft fog, gentle uplight). Innovoco palette: luminous cobalt and royal blue, crimson and rose highlights where sun meets sky; fluid ribbons; optional subtle grid or light trails (abstract). Square 1:1 for phase tiles. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.`;
+Atmospheric depth with warm undertones (dawn light, soft fog, gentle uplight). Innovoco palette: luminous cobalt and royal blue, crimson and rose highlights where sun meets sky; fluid ribbons; optional subtle grid or light trails (abstract). Square 1:1 for phase tiles. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
+
+IMPORTANT — SEMANTIC GROUNDING: Each illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the topic. Pure landscapes or generic atmospheric scenes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, instruments, screens, flows) rendered as painterly silhouettes or luminous abstract forms that are clearly identifiable even in a romantic realism style. The viewer should be able to tell what DOMAIN this image belongs to at a glance — manufacturing, healthcare, energy, finance, etc. — without reading any text.`;
 
 /** @typedef {{ phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
 
@@ -184,15 +186,15 @@ Theme — Impact: rework, penalties, cycle stress — fewer breaks as sealed sea
   "predictive-maintenance-manufacturing": {
     phases: [
       `${SHARED_SOLUTION}
-Theme — Phase 1: Instrument and baseline — vibration waveforms settling into recognized patterns, sensor nodes attaching to massive abstract machinery as warm amber lights, baseline rhythm establishing as steady pulse bands.`,
+Theme — Phase 1: Instrument and baseline. MUST INCLUDE: stylized industrial machinery silhouettes (large gears, presses, conveyor rollers) with small glowing sensor nodes attached at key points emitting soft amber pulse rings. Vibration waveforms rendered as luminous oscillating lines running along the machine surfaces. The machines sit in atmospheric factory-floor mist. A subtle heartbeat-monitor-style baseline rhythm band runs across the lower third, showing the "normal" signature being learned. Steel blue machinery, warm amber sensor glow.`,
       `${SHARED_SOLUTION}
-Theme — Phase 2: Predict and optimize — emerging fault signatures as subtle amber threads diverging from the baseline pulse, predictive window as a clear corridor of light between present and future, work order routing as organized flow.`,
+Theme — Phase 2: Predict and optimize. MUST INCLUDE: the same machinery silhouettes but now one machine shows an amber-to-red warning glow emanating from a developing fault point — a subtle fracture-line of light diverging from the healthy baseline. A transparent calendar or timeline band floats in the mid-ground showing a 7-14 day prediction window as a luminous corridor. Work order cards or maintenance tickets rendered as small organized luminous rectangles flowing toward a wrench-shaped form. Hopeful mood — the problem is caught early.`,
     ],
     implementations: `${SHARED_SOLUTION}
-Theme — Multi-signal health scoring, CMMS integration, remaining-useful-life — fused sensor streams converging into a single health beacon, traffic-light simplicity from complex signals, maintenance calendar as harmonious time bands.`,
+Theme — Multi-signal health scoring and CMMS integration. MUST INCLUDE: three distinct signal streams (vibration wave, thermal gradient band, acoustic waveform) converging into a single unified health-score beacon — like a traffic light rendered as a luminous orb transitioning from green to amber. A stylized maintenance management dashboard silhouette (abstract screen form with status indicators) floats nearby. A clock or timeline showing remaining-useful-life as a diminishing but measurable band. Factory equipment silhouettes in the background grounded in atmospheric mist.`,
     technical: `${SHARED_SOLUTION}
-Theme — Per-machine fingerprint, compounding accuracy — individual machines as unique light signatures, learning patterns that sharpen over time as focusing lenses, factory floor abstraction with warm industrial amber and steel blue. 4:3 aspect.`,
+Theme — Per-machine learning fingerprint. MUST INCLUDE: multiple machine silhouettes each with a unique luminous signature pattern above them (different waveform shapes, like fingerprints of light). Over time arrows or progressive focus effects show these signatures becoming sharper and more defined — accuracy improving. A factory floor layout abstracted as an organized grid with machines as nodes. Warm industrial amber and steel blue palette. 4:3 aspect ratio.`,
     impact: `${SHARED_SOLUTION}
-Theme — Impact: downtime reduction, cost savings, parts optimization — calm production flow as unbroken horizontal bands, savings as ascending gold gradients, reliability as solid geometric foundation. 4:3 aspect.`,
+Theme — Impact: downtime eliminated, costs saved, reliability achieved. MUST INCLUDE: a production line silhouette running smoothly as an unbroken horizontal flow of amber light — no gaps or interruptions. Ascending gold gradient suggesting cost savings. A shield or foundation form suggesting reliability. Contrasted with a faded/ghosted broken production line in the background showing the "before" state. The overall mood is calm, productive confidence. 4:3 aspect ratio.`,
   },
 };
