@@ -472,7 +472,7 @@ export function IndustryPage({
             className="border-t border-[var(--border)] bg-[var(--muted)] py-20 md:py-28"
             style={{ "--industry-faq-accent": tokens.accent } as CSSProperties}
           >
-            <div className="mx-auto max-w-3xl px-4">
+            <div className="mx-auto max-w-6xl px-4">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -500,7 +500,7 @@ export function IndustryPage({
                 }}
               />
 
-              <Accordion type="single" collapsible className="space-y-3">
+              <Accordion type="single" collapsible className="columns-1 gap-4 space-y-4 lg:columns-2 [&>*]:break-inside-avoid">
                 {faqsForAccordion.map((f, i) => (
                   <AccordionItem
                     key={i}
