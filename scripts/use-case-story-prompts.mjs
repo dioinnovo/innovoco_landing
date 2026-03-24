@@ -34,7 +34,7 @@ IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable dom
  * @param {string} text
  * @returns {string[]}
  */
-function extractVisualEntities(text) {
+export function extractVisualEntities(text) {
   // Common business/tech nouns that have clear visual representations
   const visualMap = {
     // Data & Analytics

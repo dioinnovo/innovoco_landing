@@ -18,6 +18,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 import { CINEMATIC_STYLE_ANCHOR } from "./ai-art-style-anchor.mjs";
+import { extractVisualEntities } from "./use-case-story-prompts.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
@@ -53,77 +54,52 @@ const CONTRAST_RECIPES = [
   "CONTRAST RECIPE (this card): STRUCTURED GRID — subtle beams or steps; keep ambient warmth (sky glow or sage mist) so it feels human, not cold control-room.",
 ];
 
-const JOBS = [
-  {
-    id: "executive-analytics",
-    filename: "executive-analytics.jpg",
-    theme: `AI-powered business intelligence — an executive asking a question and receiving instant visual answers. MUST INCLUDE: a stylized speech bubble or chat prompt form (representing plain-language questions), luminous bar charts and line graphs materializing as the answer, a structured data vault or warehouse cube as the governed source, and a direct fast-flowing path from question to chart (no queues or waiting). The mood is clarity and speed — question in, chart out. 4:3 composition.`,
-  },
-  {
-    id: "customer-support",
-    filename: "customer-support.jpg",
-    theme: `customer experience and voice support—abstract sound waves merging with soft chat bubbles as pure shapes, headset suggested as minimal line art only, warm helpful mood, 4:3.`,
-  },
-  {
-    id: "regulated-onboarding",
-    filename: "regulated-onboarding.jpg",
-    theme: `trust and compliance for financial onboarding—abstract shield motif, layered parchment-like textures without letters, vault-door curves as abstract geometry, serious but modern, 4:3.`,
-  },
-  {
-    id: "supply-chain",
-    filename: "supply-chain.jpg",
-    theme: `supply chain and logistics—abstract network nodes and routes, cargo motion as streaks of color, warehouse depth as blurred architectural forms, no trucks with logos, 4:3.`,
-  },
-  {
-    id: "field-services",
-    filename: "field-services.jpg",
-    theme: `field operations and IoT—abstract sensor pulses, gear-like circles as pure shapes, maintenance energy as copper and teal light, industrial poetry not literal workers, 4:3.`,
-  },
-  {
-    id: "finance-reconciliation",
-    filename: "finance-reconciliation.jpg",
-    theme: `finance and reconciliation—abstract balance scales as minimalist sculpture, ledger rhythm as horizontal bands of tone (no numbers), emerald and slate mood, 4:3.`,
-  },
-  {
-    id: "hr-onboarding",
-    filename: "hr-onboarding.jpg",
-    theme: `people operations and onboarding—abstract connected silhouettes as blurred shapes only, growth arcs, welcoming gradient sunrise feel, inclusive and calm, 4:3.`,
-  },
-  {
-    id: "marketing-personalization",
-    filename: "marketing-personalization.jpg",
-    theme: `marketing personalization—abstract mosaic of color tiles suggesting segments, megaphone as pure geometric form, dynamic but elegant, 4:3.`,
-  },
-  {
-    id: "reporting-audit",
-    filename: "reporting-audit.jpg",
-    theme: `reporting and audit readiness—abstract stacked translucent layers suggesting documents without text, seal of quality as circular glow, authoritative calm, 4:3.`,
-  },
-  {
-    id: "knowledge-copilot",
-    filename: "knowledge-copilot.jpg",
-    theme: `enterprise knowledge and governed RAG—abstract open book as pure geometry, threads of light connecting floating document shards (no text), trust and discoverability, teal and indigo, 4:3.`,
-  },
-  {
-    id: "healthcare-ops",
-    filename: "healthcare-ops.jpg",
-    theme: `healthcare operations and care delivery rhythm—abstract pulse line as soft wave, cross shapes suggesting care without medical logos, calm clinical blues and mint, 4:3.`,
-  },
-  {
-    id: "global-payroll",
-    filename: "global-payroll.jpg",
-    theme: `global workforce and payroll compliance—abstract meridian arcs suggesting time zones, soft coin-circle shapes without currency symbols, navy and gold accents, 4:3.`,
-  },
-  {
-    id: "predictive-maintenance-manufacturing",
-    filename: "predictive-maintenance-manufacturing.jpg",
-    theme: `predictive maintenance and equipment health—abstract industrial gear forms with pulsing health signals, vibration waveforms settling into recognized patterns, amber warmth on steel, reliability as solid foundation, 4:3.`,
-  },
-].map((job, index) => ({
+/**
+ * Build outcome card theme from title + outcome text by extracting visual entities.
+ * @param {string} title
+ * @param {string} outcome
+ * @returns {string}
+ */
+function buildThemeFromContent(title, outcome) {
+  const combined = `${title}. ${outcome}`;
+  const entities = extractVisualEntities(combined);
+  const mustInclude = entities.length > 0
+    ? `MUST INCLUDE as stylized abstract forms:\n${entities.map(e => `- ${e}`).join("\n")}\nDo NOT add text labels. Render as recognizable painterly silhouettes integrated into the atmospheric scene.`
+    : "";
+  return `${title} — ${outcome}\n\n${mustInclude}\n\n4:3 composition.`;
+}
+
+/**
+ * Load use case entries from case-studies-page-content.ts and build JOBS automatically.
+ * Reads the content registry and extracts visual entities from title + outcome.
+ */
+function loadJobsFromContent() {
+  const contentPath = path.join(root, "lib", "content", "case-studies-page-content.ts");
+  const src = fs.readFileSync(contentPath, "utf-8");
+
+  const entries = [];
+  const re = /slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"[\s\S]*?outcome:\s*\n?\s*"([^"]+)"[\s\S]*?image:\s*"([^"]+)"/g;
+  let m;
+  while ((m = re.exec(src)) !== null) {
+    const [, slug, title, outcome, imagePath] = m;
+    const filename = imagePath.split("/").pop();
+    entries.push({
+      id: slug,
+      filename,
+      theme: buildThemeFromContent(title, outcome),
+    });
+  }
+  return entries;
+}
+
+const autoJobs = loadJobsFromContent();
+console.log(`Loaded ${autoJobs.length} outcome card jobs from content registry.`);
+
+const JOBS = autoJobs.map((job, index) => ({
   ...job,
   prompt: `${SHARED}
 
-${CONTRAST_RECIPES[index] ?? CONTRAST_RECIPES[index % CONTRAST_RECIPES.length]}
+${CONTRAST_RECIPES[index % CONTRAST_RECIPES.length]}
 
 Theme: ${job.theme}`,
 }));
