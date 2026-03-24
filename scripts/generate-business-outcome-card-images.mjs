@@ -39,19 +39,25 @@ Color palette: Use the Innovoco brand range (cobalt, sapphire, indigo, violet, r
  * Intentionally rotate: temperature dominance, composition, density, symmetry, and motion axis.
  * Wording avoids "void" / "dark base" so the model does not default to grim palettes.
  */
+/**
+ * Composition recipes — focus on LAYOUT and MOOD, not color dominance.
+ * No single color should overtake the entire image. Brand colors (cobalt, crimson, violet, amber)
+ * should appear as accents and highlights, never as a monochrome wash.
+ * The subject matter and domain should drive the primary palette.
+ */
 const CONTRAST_RECIPES = [
-  "CONTRAST RECIPE (this card): COOL-DOMINANT — cobalt and sapphire occupy ~70% of the frame; crimson only as horizon flare or warm edge accents. Keep a touch of warmth (peach sky or soft green hint) so it still feels inviting. Vertical stratification; focal weight in upper third.",
-  "CONTRAST RECIPE (this card): WARM-DOMINANT — rose, coral, and crimson atmosphere forward; blues only as cool sky rim or distant air. Welcoming diffusion; horizontal calm. Must read warmer than the purely blue cards.",
-  "CONTRAST RECIPE (this card): SPLIT FIELD — readable left-vs-right: cooler blue volume on one side, warmer red–violet on the other, soft blend at the seam. Landscape-like depth, not flat UI.",
-  "CONTRAST RECIPE (this card): MINIMAL AIR — at least half the frame soft sky, mist, or pale atmosphere; one bold abstract form low or off-center. Airy negative space; NOT black empty void.",
-  "CONTRAST RECIPE (this card): DENSE LAYERS — many overlapping translucent planes, rich depth, panoramic fullness; still lit like golden hour or foggy morning, not oppressive night.",
-  "CONTRAST RECIPE (this card): DIAGONAL THRUST — strongest motion along a clear diagonal (e.g. top-left → bottom-right); asymmetric, uplifting energy.",
-  "CONTRAST RECIPE (this card): CORNER SPARK — one concentrated crimson–amber cluster in a corner; remainder soft blue depth and misty recession, not pitch darkness.",
-  "CONTRAST RECIPE (this card): HORIZON BAND — wide luminous band across the middle third (dawn/dusk); soft twilight above and below—abstract landscape rhythm without literal scenery.",
-  "CONTRAST RECIPE (this card): SIDEWARD FAN — energy radiates from one vertical edge inward; directional, hopeful, not radial from a black center.",
-  "CONTRAST RECIPE (this card): FROSTED LIGHT — matte glass panels over a soft warm gradient (cream, blush, or pale gold); low saturation except one sharp red or rose line. Crisp but not clinical.",
-  "CONTRAST RECIPE (this card): ORGANIC FLOW — curves and liquid ribbons dominate; almost no straight lines or grids. Landscape-inspired, soft, biological.",
-  "CONTRAST RECIPE (this card): STRUCTURED GRID — subtle beams or steps; keep ambient warmth (sky glow or sage mist) so it feels human, not cold control-room.",
+  "COMPOSITION: Vertical stratification — focal weight in the upper third, depth receding downward. Use a balanced mix of warm and cool tones.",
+  "COMPOSITION: Horizontal calm — wide, panoramic feel with subjects spread across the frame. Natural, balanced color palette driven by the subject matter.",
+  "COMPOSITION: Split field — distinct left and right zones with a soft blend at center. Each side can have different color temperature but neither should dominate entirely.",
+  "COMPOSITION: Generous negative space — at least half the frame is atmospheric (sky, mist, light). One clear focal subject. Airy and open.",
+  "COMPOSITION: Rich layered depth — overlapping translucent planes, panoramic fullness. Lit like golden hour or foggy morning. Multiple depth levels.",
+  "COMPOSITION: Diagonal energy — strongest motion along a clear diagonal. Asymmetric, uplifting momentum.",
+  "COMPOSITION: Corner focus — one concentrated bright area in a corner drawing the eye. Remainder is softer and more atmospheric.",
+  "COMPOSITION: Central band — a luminous horizontal band across the middle third. Softer above and below. Dawn or dusk feeling.",
+  "COMPOSITION: Directional flow — energy radiates from one edge inward. Clear direction and movement.",
+  "COMPOSITION: Soft and crisp — matte, frosted quality with low saturation overall but one or two sharp accent colors. Elegant restraint.",
+  "COMPOSITION: Organic curves — flowing forms dominate. Almost no straight lines or rigid grids. Soft, biological, natural.",
+  "COMPOSITION: Architectural structure — subtle geometric framework (beams, platforms, pathways). Organized but warm, not cold or clinical.",
 ];
 
 /**
