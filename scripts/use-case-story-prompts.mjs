@@ -14,21 +14,15 @@
 
 import { CINEMATIC_STYLE_ANCHOR } from "./ai-art-style-anchor.mjs";
 
-export const SHARED_SOLUTION = `Premium editorial illustration for an enterprise AI case study — SOLUTION and forward progress (not problems); mood is hopeful, motivating, and clear-eyed, not cold or ominous.
+export const SHARED_SOLUTION = `Premium editorial illustration for an enterprise AI case study — SOLUTION and forward progress; mood is hopeful, motivating, and sublime.
 ${CINEMATIC_STYLE_ANCHOR}
-Atmospheric depth with warm undertones (dawn light, soft fog, gentle uplight). Innovoco palette: luminous cobalt and royal blue, crimson and rose highlights where sun meets sky; fluid ribbons; optional subtle grid or light trails (abstract). Square 1:1 for phase tiles. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
 
-IMPORTANT — SEMANTIC GROUNDING: Each illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the topic described below. Pure landscapes or generic atmospheric scenes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, instruments, screens, flows, documents) rendered as painterly silhouettes or luminous abstract forms that are clearly identifiable even in a romantic realism style. The viewer should be able to tell what DOMAIN and SPECIFIC TOPIC this image belongs to at a glance — without reading any text.
+This image is a REPRESENTATION OF THE CONTEXT THROUGH AN ARTISTIC LENS. Read the text provided below, identify the industry, service, and domain, then create an artistic interpretation that captures what it's about. The viewer should feel the domain — not through literal depiction of people at desks, but through the spirit, atmosphere, and symbolic forms that evoke that world. Square 1:1 for phase tiles.`;
 
-CREATIVE GUIDELINE: When business terms appear in the text, interpret them in their technology context first — but feel free to use creative visual metaphors. For example, "IVR tree" is a phone menu routing concept (a branching decision path), and "pipeline" is a data flow concept (which could be rendered as abstract plumbing, flowing tubes, or connected stages — use whatever visual metaphor works best artistically). The goal is creative interpretation that communicates the concept, not rigid literal rendering.`;
-
-const SHARED_CHALLENGE = `Premium editorial illustration for an enterprise AI case study "challenge" section — convey FRICTION, bottlenecks, fragmentation, or risk as abstract metaphor (obstacles as weather, fog, distance, or crossed paths—not horror, doom, or neon dystopia).
+const SHARED_CHALLENGE = `Premium editorial illustration for an enterprise AI case study "challenge" section — convey FRICTION, bottlenecks, fragmentation, or risk through artistic metaphor. Tension should feel human and surmountable — not horror or doom.
 ${CINEMATIC_STYLE_ANCHOR}
-Tension should still feel human and surmountable: soft storm light, mist obscuring a route, or cool-vs-warm air—not a void or apocalypse. Innovoco blues and crimson as sky vs horizon. Square 1:1. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
 
-IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms from the challenge text below. Extract the key objects, processes, and pain points and render them as visual elements — broken flows, stressed equipment, disconnected systems, scattered documents, etc. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.
-
-CREATIVE GUIDELINE: Interpret business terms in their technology context — but use creative visual metaphors freely. The goal is communicating the concept artistically, not rigid literal rendering.`;
+This image is a REPRESENTATION OF THE CHALLENGE THROUGH AN ARTISTIC LENS. Read the text provided below, identify the industry, service, and domain, then create an artistic interpretation that captures the friction, obstacles, and pain described. The viewer should feel the struggle — not through literal depiction, but through atmosphere, broken forms, and tension in the composition. Square 1:1.`;
 
 /** @typedef {{ phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
 

@@ -67,7 +67,7 @@ const CONTRAST_RECIPES = [
 function buildThemeFromContent(title, outcome) {
   return `This image represents: "${title} — ${outcome}"
 
-First, identify the industry, service, or domain described in that text. Then create an illustration grounded in that domain — include recognizable elements that someone in that field would instantly connect with. For example: customer support → headsets, chat interfaces, call routing; manufacturing → factory floors, equipment, production lines; healthcare → clinical settings, patient care; finance → trading screens, vaults, transactions. Use the domain context from the text to drive the visual. 4:3 composition. No text labels.`;
+This is a REPRESENTATION OF THIS SOLUTION THROUGH AN ARTISTIC LENS. Read the text, identify the industry and domain, then create an artistic interpretation that captures what it's about. The viewer should feel the domain — not through literal depiction of people at desks, but through the spirit, atmosphere, and symbolic forms that evoke that world. 4:3 composition.`;
 }
 
 /**
