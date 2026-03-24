@@ -33,10 +33,10 @@ const JOBS = [
   {
     id: "retail",
     filename: "retail-hero.jpg",
-    prompt: `Photorealistic ultrawide 16:9 editorial hero image for a premium retail and e-commerce AI consulting website.
-Scene: modern flagship store interior at dusk with soft cool blue accent lighting on fixtures, subtle abstract holographic data particles suggesting personalization (no UI, no charts with text), diverse shoppers in soft motion blur, shallow depth of field, cinematic advertising photography.
-Mood: trustworthy, innovative, calm luxury.
-Hard constraints: no readable text, no logos, no brand names, no watermarks, no people's faces in sharp focus. Suitable for dark navy text overlay at top.`,
+    prompt: `Photorealistic ultrawide 16:9 editorial photograph for a retail and e-commerce consulting website.
+Scene: real flagship or department store interior at dusk—warm practical lighting on fixtures, real shoppers in soft motion blur, merchandise and aisles in focus, documentary retail photography feel. No sci-fi, no holograms, no floating UI.
+Mood: trustworthy, calm, premium but believable.
+Hard constraints: no readable text, no logos, no brand names, no watermarks, no faces in sharp focus. Suitable for dark navy text overlay.`,
   },
   {
     id: "construction",

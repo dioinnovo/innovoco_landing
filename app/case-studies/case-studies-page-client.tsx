@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -22,25 +22,18 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { PrintPDFButton } from "@/components/case-studies/print-pdf-button";
 import { BackgroundGradientGlow } from "@/components/ui/background-gradient-glow";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import ContactModal from "@/components/landing/ContactModal";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import type { CaseStudiesSubnav } from "@/lib/content/case-studies-page-content";
+import type { CaseStudyIndustryId } from "@/lib/content/case-studies-page-content";
 import {
   businessOutcomeUseCases,
-  caseStudiesFaq,
+  caseStudyIndustries,
 } from "@/lib/content/case-studies-page-content";
 import { cn } from "@/lib/utils";
 
-type CaseStudiesPageClientProps = { subnav: CaseStudiesSubnav };
+const NAV_ALL = "all-solutions";
 
 /** Inner hero frame art — `pnpm run generate:case-studies-hero-frame` */
 const CASE_STUDIES_HERO_FRAMED_ART =
@@ -69,31 +62,69 @@ function formatPageDate() {
   });
 }
 
-export default function CaseStudiesPageClient({ subnav }: CaseStudiesPageClientProps) {
+export default function CaseStudiesPageClient() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
-  const [activeSubnav, setActiveSubnav] = useState<string>("business-outcomes");
+  const [activeSubnav, setActiveSubnav] = useState<string>(NAV_ALL);
+  /** Industry filter for the use-case card grid (null = show all). */
+  const [selectedIndustryId, setSelectedIndustryId] =
+    useState<CaseStudyIndustryId | null>(null);
   /** Avoid SSR/client `new Date()` mismatch (timezone, midnight). */
   const [heroUpdatedAt, setHeroUpdatedAt] = useState<string | null>(null);
+
+  const industryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const ind of caseStudyIndustries) {
+      counts[ind.id] = businessOutcomeUseCases.filter((u) =>
+        u.industries.includes(ind.id)
+      ).length;
+    }
+    return counts;
+  }, []);
+
+  const filteredUseCases = useMemo(() => {
+    if (selectedIndustryId == null) return businessOutcomeUseCases;
+    return businessOutcomeUseCases.filter((u) =>
+      u.industries.includes(selectedIndustryId)
+    );
+  }, [selectedIndustryId]);
 
   useEffect(() => {
     setHeroUpdatedAt(formatPageDate());
   }, []);
 
   useEffect(() => {
-    const ids = subnav.map((s) => s.id);
     const onScroll = () => {
       const y = window.scrollY + 140;
-      let current = ids[0];
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= y) current = id;
+      const outcomesEl = document.getElementById("business-outcomes");
+      if (!outcomesEl) return;
+
+      if (outcomesEl.offsetTop <= y) {
+        setActiveSubnav(selectedIndustryId ?? NAV_ALL);
+        return;
       }
-      setActiveSubnav(current);
+      setActiveSubnav(NAV_ALL);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, [subnav]);
+  }, [selectedIndustryId]);
+
+  function scrollToOutcomes() {
+    document.getElementById("business-outcomes")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  function selectIndustry(id: CaseStudyIndustryId) {
+    setSelectedIndustryId(id);
+    scrollToOutcomes();
+  }
+
+  function clearIndustryFilter() {
+    setSelectedIndustryId(null);
+    scrollToOutcomes();
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground print:bg-white print:text-black overflow-x-hidden">
@@ -122,12 +153,11 @@ export default function CaseStudiesPageClient({ subnav }: CaseStudiesPageClientP
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="rounded-full border-white/40 bg-white/95 text-[#0B0F19] shadow-sm hover:bg-white dark:border-white/30 dark:bg-white/10 dark:text-white dark:backdrop-blur-md dark:hover:bg-white/15"
+                  className="cursor-pointer rounded-full border-white/50 bg-white/95 text-[#0B0F19] shadow-sm hover:border-white hover:bg-white hover:text-[#0B0F19] dark:border-white/35 dark:bg-white/10 dark:text-white dark:backdrop-blur-md dark:hover:border-white dark:hover:bg-white/95 dark:hover:text-[#0B0F19]"
                   onClick={() => setContactModalOpen(true)}
                 >
                   Book executive briefing
                 </Button>
-                <PrintPDFButton />
               </div>
             </div>
 
@@ -193,26 +223,57 @@ export default function CaseStudiesPageClient({ subnav }: CaseStudiesPageClientP
           </div>
       </section>
 
-      {/* In-page navigation (content only — site chrome is global Header) */}
+      {/* Industry filters — sticky below global header */}
       <nav
-        aria-label="On this page"
-        className="print:hidden sticky top-16 md:top-20 z-30 border-b border-[#e0e3e5] bg-[#f8f9fb]/90 backdrop-blur-md backdrop-saturate-150"
+        aria-label="Filter use cases by industry"
+        className="print:hidden sticky top-16 md:top-20 z-30 border-b border-[#e0e3e5] bg-[#f8f9fb]/90 backdrop-blur-md backdrop-saturate-150 dark:border-[#374151] dark:bg-[#0B0F19]/90"
       >
-        <div className="max-w-6xl mx-auto px-4 py-2 overflow-x-auto">
-          <div className="flex min-w-min gap-1.5 pb-1">
-            {subnav.map((item) => (
-              <Link
-                key={item.id}
-                href={`#${item.id}`}
+        <div className="mx-auto max-w-6xl px-4 py-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6b7280] dark:text-[#9ca3af]">
+            Find solutions by industry
+          </p>
+          <div
+            className="mt-2 flex w-full min-w-0 gap-1.5 overflow-x-auto pb-1 pt-0.5 [-ms-overflow-style:none] [scrollbar-width:none] md:flex-wrap md:overflow-visible [&::-webkit-scrollbar]:hidden"
+            role="toolbar"
+            aria-label="Industry filters"
+          >
+            <button
+              type="button"
+              onClick={clearIndustryFilter}
+              aria-pressed={selectedIndustryId === null}
+              className={cn(
+                "cursor-pointer shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors md:text-sm",
+                selectedIndustryId === null && activeSubnav === NAV_ALL
+                  ? "border-transparent bg-[#00518e] text-white shadow-sm dark:bg-[#93C5FD] dark:text-[#0B0F19]"
+                  : "border border-[#e0e3e5]/80 bg-white/80 text-[#414752] hover:bg-white hover:text-[#0B0F19] dark:border-[#374151] dark:bg-[#1f2937]/90 dark:text-[#e5e7eb] dark:hover:bg-[#374151]"
+              )}
+            >
+              All
+            </button>
+            {caseStudyIndustries.map((ind) => (
+              <button
+                key={ind.id}
+                type="button"
+                onClick={() => selectIndustry(ind.id)}
+                aria-pressed={selectedIndustryId === ind.id}
+                title={`${industryCounts[ind.id] ?? 0} use case patterns`}
                 className={cn(
-                  "shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors md:text-sm",
-                  activeSubnav === item.id
-                    ? "bg-[#00518e] text-white shadow-sm"
-                    : "bg-white/80 text-[#414752] hover:bg-white hover:text-[#0B0F19] border border-[#e0e3e5]/80"
+                  "cursor-pointer shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors md:text-sm",
+                  selectedIndustryId === ind.id
+                    ? "border-transparent bg-[#00518e] text-white shadow-sm dark:bg-[#93C5FD] dark:text-[#0B0F19]"
+                    : "border border-[#e0e3e5]/80 bg-white/80 text-[#414752] hover:bg-white hover:text-[#0B0F19] dark:border-[#374151] dark:bg-[#1f2937]/90 dark:text-[#e5e7eb] dark:hover:bg-[#374151]"
                 )}
               >
-                {item.label}
-              </Link>
+                <span className="whitespace-nowrap">{ind.label}</span>
+                <span
+                  className={cn(
+                    "ml-1.5 tabular-nums text-[10px] opacity-80",
+                    selectedIndustryId === ind.id ? "text-white/90 dark:text-[#0B0F19]/80" : ""
+                  )}
+                >
+                  ({industryCounts[ind.id] ?? 0})
+                </span>
+              </button>
             ))}
           </div>
         </div>
@@ -234,15 +295,43 @@ export default function CaseStudiesPageClient({ subnav }: CaseStudiesPageClientP
             <p className="mt-3 text-sm md:text-base text-[#525252] dark:text-[#D1D5DB]">
               Twelve outcome-led patterns—open any card for challenge, phased delivery, implementations, and impact metrics. Same library, less duplication on one scroll.
             </p>
+            <p
+              className="mt-3 text-sm text-[#525252] dark:text-[#D1D5DB]"
+              aria-live="polite"
+            >
+              {selectedIndustryId != null ? (
+                <>
+                  Showing{" "}
+                  <span className="font-semibold tabular-nums text-[#0B0F19] dark:text-[#F9FAFB]">
+                    {filteredUseCases.length}
+                  </span>{" "}
+                  pattern
+                  {filteredUseCases.length === 1 ? "" : "s"} for{" "}
+                  <span className="font-medium text-[#0B0F19] dark:text-[#F9FAFB]">
+                    {caseStudyIndustries.find((i) => i.id === selectedIndustryId)?.label}
+                  </span>
+                  .{" "}
+                  <button
+                    type="button"
+                    onClick={clearIndustryFilter}
+                    className="cursor-pointer font-semibold text-[#00518e] underline decoration-[#00518e]/40 underline-offset-2 hover:decoration-[#00518e] dark:text-[#93C5FD] dark:decoration-[#93C5FD]/40"
+                  >
+                    Clear filter
+                  </button>
+                </>
+              ) : (
+                <>Use the industry bar above to narrow the library to what applies to your operating model.</>
+              )}
+            </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {businessOutcomeUseCases.map((u) => {
+            {filteredUseCases.map((u) => {
               const Icon = outcomeIcons[u.icon];
               return (
                 <Link
                   key={u.slug}
                   href={`/case-studies/use-cases/${u.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#eceef0]/90 bg-white shadow-[0_1px_3px_rgba(25,28,30,0.06)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(25,28,30,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00518e] focus-visible:ring-offset-2 dark:border-[#374151] dark:bg-[#1F2937] dark:focus-visible:ring-[#93C5FD] print:break-inside-avoid"
+                  className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#eceef0]/90 bg-white shadow-[0_1px_3px_rgba(25,28,30,0.06)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(25,28,30,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00518e] focus-visible:ring-offset-2 dark:border-[#374151] dark:bg-[#1F2937] dark:focus-visible:ring-[#93C5FD] print:break-inside-avoid"
                 >
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#e8ecf2] dark:bg-[#111827]">
                     <Image
@@ -287,36 +376,6 @@ export default function CaseStudiesPageClient({ subnav }: CaseStudiesPageClientP
               );
             })}
           </div>
-        </div>
-      </section>
-
-      <section
-        id="faq-use-cases"
-        className="py-8 md:py-16 bg-[#f8f9fb] dark:bg-[#0B0F19] border-t border-[#eceef0] dark:border-[#1f2937] print:py-4 print:bg-white print:break-before-page"
-      >
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#0B0F19] dark:text-[#F9FAFB] mb-2">
-            Frequently asked questions
-          </h2>
-          <p className="text-sm text-[#525252] dark:text-[#D1D5DB] mb-8">
-            Security, deployment, and how we keep humans in control for high‑risk decisions.
-          </p>
-          <Accordion type="single" collapsible className="w-full space-y-2">
-            {caseStudiesFaq.map((item, i) => (
-              <AccordionItem
-                key={item.q}
-                value={`faq-${i}`}
-                className="rounded-xl border border-[#eceef0] dark:border-[#374151] bg-white dark:bg-[#1F2937] px-4"
-              >
-                <AccordionTrigger className="text-left text-[#0B0F19] dark:text-[#F9FAFB] hover:no-underline py-4">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-[#525252] dark:text-[#D1D5DB] pb-4 leading-relaxed">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
         </div>
       </section>
 
@@ -388,7 +447,7 @@ export default function CaseStudiesPageClient({ subnav }: CaseStudiesPageClientP
               <Button 
                 onClick={() => setContactModalOpen(true)}
                 size="lg" 
-                className="group bg-gradient-to-r from-[#0A58D0] to-[#8B5CF6] hover:from-[#0A58D0]/90 hover:to-[#8B5CF6]/90 text-white rounded-full px-12 py-8 text-xl md:text-2xl font-bold transition-all duration-300 shadow-[0_8px_30px_rgba(10,88,208,0.5)] hover:shadow-[0_12px_40px_rgba(10,88,208,0.7)] hover:scale-110 transform min-h-[80px] print:hidden">
+                className="group cursor-pointer bg-gradient-to-r from-[#0A58D0] to-[#8B5CF6] hover:from-[#0A58D0]/90 hover:to-[#8B5CF6]/90 text-white rounded-full px-12 py-8 text-xl md:text-2xl font-bold transition-all duration-300 shadow-[0_8px_30px_rgba(10,88,208,0.5)] hover:shadow-[0_12px_40px_rgba(10,88,208,0.7)] hover:scale-110 transform min-h-[80px] print:hidden">
                 Schedule Executive Briefing
                 <ArrowRight className="ml-4 h-6 w-6 md:h-7 md:w-7 group-hover:translate-x-2 transition-transform duration-300" />
               </Button>
