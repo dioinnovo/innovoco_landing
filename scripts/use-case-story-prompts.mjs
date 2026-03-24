@@ -18,13 +18,17 @@ export const SHARED_SOLUTION = `Premium editorial illustration for an enterprise
 ${CINEMATIC_STYLE_ANCHOR}
 Atmospheric depth with warm undertones (dawn light, soft fog, gentle uplight). Innovoco palette: luminous cobalt and royal blue, crimson and rose highlights where sun meets sky; fluid ribbons; optional subtle grid or light trails (abstract). Square 1:1 for phase tiles. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
 
-IMPORTANT — SEMANTIC GROUNDING: Each illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the topic described below. Pure landscapes or generic atmospheric scenes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, instruments, screens, flows, documents) rendered as painterly silhouettes or luminous abstract forms that are clearly identifiable even in a romantic realism style. The viewer should be able to tell what DOMAIN and SPECIFIC TOPIC this image belongs to at a glance — without reading any text. Extract the key nouns and processes from the text below and render them as visual elements in the illustration.`;
+IMPORTANT — SEMANTIC GROUNDING: Each illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the topic described below. Pure landscapes or generic atmospheric scenes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, instruments, screens, flows, documents) rendered as painterly silhouettes or luminous abstract forms that are clearly identifiable even in a romantic realism style. The viewer should be able to tell what DOMAIN and SPECIFIC TOPIC this image belongs to at a glance — without reading any text.
+
+CRITICAL — INTERPRET BUSINESS TERMS AS TECHNOLOGY CONCEPTS, NOT LITERALLY: Business jargon must be rendered as abstract technology forms. For example: "IVR tree" means a phone menu routing diagram (NOT a literal tree with leaves); "voice" means microphone/sound waveforms (NOT a human mouth); "waves" in a business context means data flows or signals (NOT ocean waves); "pipeline" means a data processing flow (NOT plumbing pipes); "branch" means a decision path (NOT a tree branch). Always interpret terms in their BUSINESS/TECHNOLOGY context.`;
 
 const SHARED_CHALLENGE = `Premium editorial illustration for an enterprise AI case study "challenge" section — convey FRICTION, bottlenecks, fragmentation, or risk as abstract metaphor (obstacles as weather, fog, distance, or crossed paths—not horror, doom, or neon dystopia).
 ${CINEMATIC_STYLE_ANCHOR}
 Tension should still feel human and surmountable: soft storm light, mist obscuring a route, or cool-vs-warm air—not a void or apocalypse. Innovoco blues and crimson as sky vs horizon. Square 1:1. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots, no brand names.
 
-IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms from the challenge text below. Extract the key objects, processes, and pain points and render them as visual elements — broken flows, stressed equipment, disconnected systems, scattered documents, etc. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.`;
+IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms from the challenge text below. Extract the key objects, processes, and pain points and render them as visual elements — broken flows, stressed equipment, disconnected systems, scattered documents, etc. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.
+
+CRITICAL — INTERPRET BUSINESS TERMS AS TECHNOLOGY CONCEPTS, NOT LITERALLY: "IVR tree" = phone menu routing diagram (NOT a literal tree); "voice" = microphone/waveforms (NOT a mouth); "pipeline" = data flow (NOT plumbing); "branch" = decision path (NOT tree branch). Always interpret in BUSINESS/TECHNOLOGY context.`;
 
 /** @typedef {{ phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
 
@@ -35,40 +39,84 @@ IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable dom
  * @returns {string[]}
  */
 export function extractVisualEntities(text) {
-  // Common business/tech nouns that have clear visual representations
-  const visualMap = {
+  // Multi-word phrases checked first (order matters — longer matches before shorter)
+  const phraseMap = [
+    // Customer Support & CX
+    ["call center", "call center as a hub with multiple communication channels radiating outward"],
+    ["customer support", "customer support as a helpdesk station with headset and communication channels"],
+    ["customer service", "customer service as a helpdesk station with headset and communication channels"],
+    ["chat bot", "chatbot as an AI assistant interface with speech bubbles"],
+    ["voice ai", "voice AI as a stylized microphone with sound waveforms transforming into structured data"],
+    ["voice assistant", "voice assistant as a microphone converting speech into organized responses"],
+    ["ivr", "IVR phone menu as a branching decision path (NOT a literal tree — an abstract routing diagram)"],
+    ["sentiment", "sentiment analysis as an emotion spectrum gauge shifting from red to green"],
+    ["handle time", "handle time as a clock with conversation flow around it"],
+    ["crm", "CRM system as a customer profile hub with connected records"],
+    ["knowledge base", "knowledge base as an organized library of interconnected articles"],
+    ["self-serve", "self-service portal as a user-facing interface with instant answers"],
+    // Supply Chain
+    ["supply chain", "supply chain as connected nodes from supplier to warehouse to delivery"],
+    ["safety stock", "safety stock as a protective inventory buffer layer"],
+    ["demand forecast", "demand forecast as a forward-looking trend line with confidence bands"],
+    // Manufacturing
+    ["quality control", "quality inspection checkpoint on a production line"],
+    ["production line", "production line as a flowing horizontal manufacturing process"],
+    ["bill of material", "bill of materials as a hierarchical parts tree"],
+    ["predictive maintenance", "predictive maintenance as equipment with health monitoring sensors"],
+    // Energy
+    ["power grid", "electrical grid as connected transmission lines and substations"],
+    ["load forecast", "load forecast as a demand curve with predicted peaks"],
+    ["renewable energy", "renewable energy as wind turbine and solar panel silhouettes"],
+    // Insurance
+    ["claims processing", "claims processing as documents flowing through review stages"],
+    ["fraud detection", "fraud detection as a network graph revealing suspicious connections"],
+    ["field capture", "field capture as a mobile device photographing and categorizing evidence"],
+    // Healthcare
+    ["clinical decision", "clinical decision support as a medical dashboard with patient indicators"],
+    ["patient care", "patient care as a care pathway with connected treatment stages"],
+    ["early warning", "early warning system as an alert beacon detecting signals before crisis"],
+    // Financial
+    ["credit risk", "credit risk as a scoring scale weighing multiple data signals"],
+    ["real-time fraud", "real-time fraud scoring as a transaction stream with instant pass/flag decisions"],
+    ["trading signal", "trading signal as a market pulse with sentiment indicators"],
+    ["due diligence", "due diligence as structured document review with extraction highlights"],
+  ];
+
+  // Single-word entities (only match if not already covered by phrases above)
+  const wordMap = {
     // Data & Analytics
     dashboard: "stylized dashboard screen with charts and indicators",
     chart: "abstract chart or graph visualization",
     report: "document or report form as luminous rectangle",
     metric: "metric indicator or gauge",
-    data: "data streams as flowing luminous ribbons",
     dataset: "dataset as organized glowing cube or grid",
     database: "database as cylindrical vault form",
     warehouse: "data warehouse as large structured vault",
     // Business objects
     spreadsheet: "spreadsheet grid with cells",
     invoice: "document form as floating rectangle",
-    ticket: "ticket or request card as small floating rectangle",
+    ticket: "support ticket as a small card flowing through a processing queue",
     document: "document as luminous floating page",
-    contract: "contract as sealed document with ribbon",
+    // Customer support
+    headset: "customer service headset as a communication symbol",
+    chatbot: "chatbot as an AI conversation interface",
+    escalation: "escalation as an upward routing path to a senior reviewer",
+    routing: "routing as branching paths directing items to the right destination",
+    triage: "triage as a sorting gate directing incoming items by priority",
     // People & Roles
-    leader: "executive silhouette at command position",
+    agent: "support agent silhouette at a workstation with headset",
     analyst: "analyst silhouette at workstation",
     patient: "patient silhouette in care setting",
     technician: "technician silhouette with tools",
     adjuster: "field worker silhouette with clipboard",
-    investigator: "investigator examining connections",
     // Systems & Infrastructure
     sensor: "sensor node emitting pulse rings",
     camera: "camera or lens form capturing light",
     pipeline: "pipeline as flowing connected tubes",
     workflow: "workflow as connected process steps",
     integration: "integration as interlocking puzzle forms",
-    api: "API as connecting bridge between systems",
     // Security & Compliance
     shield: "shield form suggesting protection",
-    lock: "lock or key form suggesting security",
     audit: "audit trail as illuminated chain of records",
     compliance: "compliance checkpoint as gate with checkmark",
     guardrail: "guardrail as protective barrier of light",
@@ -78,40 +126,45 @@ export function extractVisualEntities(text) {
     conveyor: "conveyor belt or production line",
     gear: "interlocking gear forms",
     turbine: "turbine or rotating equipment",
-    transformer: "electrical transformer silhouette",
     vehicle: "vehicle or fleet silhouette",
     // Medical
-    "ehr": "medical records screen",
-    imaging: "medical scan or X-ray form",
-    stethoscope: "stethoscope as curving line",
+    ehr: "electronic health records screen",
+    imaging: "medical scan or imaging form",
     // Financial
     transaction: "transaction as flowing currency path",
-    account: "account as secure container",
     portfolio: "portfolio as stacked asset layers",
-    fraud: "fraud as red-flagged suspicious connection",
-    // Abstract concepts with visual forms
+    fraud: "fraud as red-flagged suspicious connection in a network",
+    // Abstract concepts
     forecast: "forecast as forward-looking light beam with uncertainty bands",
     prediction: "prediction as emerging light pattern",
     alert: "alert as amber warning beacon",
-    risk: "risk as unstable or cracking form",
     approval: "approval as green checkpoint gate",
-    escalation: "escalation as upward routing path",
     evaluation: "evaluation as testing checkpoint with pass/fail indicators",
-    role: "role as access boundary ring",
-    permission: "permission as key or access badge",
-    severity: "severity as graduated color scale",
     score: "score as gauge or rating indicator",
-    model: "AI model as glowing processing core",
     threshold: "threshold as boundary line between zones",
   };
 
   const found = [];
   const lower = text.toLowerCase();
-  for (const [keyword, visual] of Object.entries(visualMap)) {
+
+  // Check multi-word phrases first (higher specificity)
+  const matchedPhrases = new Set();
+  for (const [phrase, visual] of phraseMap) {
+    if (lower.includes(phrase)) {
+      found.push(visual);
+      // Mark individual words from matched phrases to avoid double-matching
+      for (const word of phrase.split(" ")) matchedPhrases.add(word);
+    }
+  }
+
+  // Then single words, skipping any already covered by phrase matches
+  for (const [keyword, visual] of Object.entries(wordMap)) {
+    if (matchedPhrases.has(keyword)) continue;
     if (lower.includes(keyword)) {
       found.push(visual);
     }
   }
+
   // Limit to 6 most relevant to avoid prompt overload
   return found.slice(0, 6);
 }
