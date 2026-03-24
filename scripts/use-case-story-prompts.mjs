@@ -29,46 +29,146 @@ IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable dom
 /** @typedef {{ phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
 
 /**
+ * Extract concrete nouns and visual entities from text.
+ * Returns a list of items that can be rendered as visual elements.
+ * @param {string} text
+ * @returns {string[]}
+ */
+function extractVisualEntities(text) {
+  // Common business/tech nouns that have clear visual representations
+  const visualMap = {
+    // Data & Analytics
+    dashboard: "stylized dashboard screen with charts and indicators",
+    chart: "abstract chart or graph visualization",
+    report: "document or report form as luminous rectangle",
+    metric: "metric indicator or gauge",
+    data: "data streams as flowing luminous ribbons",
+    dataset: "dataset as organized glowing cube or grid",
+    database: "database as cylindrical vault form",
+    warehouse: "data warehouse as large structured vault",
+    // Business objects
+    spreadsheet: "spreadsheet grid with cells",
+    invoice: "document form as floating rectangle",
+    ticket: "ticket or request card as small floating rectangle",
+    document: "document as luminous floating page",
+    contract: "contract as sealed document with ribbon",
+    // People & Roles
+    leader: "executive silhouette at command position",
+    analyst: "analyst silhouette at workstation",
+    patient: "patient silhouette in care setting",
+    technician: "technician silhouette with tools",
+    adjuster: "field worker silhouette with clipboard",
+    investigator: "investigator examining connections",
+    // Systems & Infrastructure
+    sensor: "sensor node emitting pulse rings",
+    camera: "camera or lens form capturing light",
+    pipeline: "pipeline as flowing connected tubes",
+    workflow: "workflow as connected process steps",
+    integration: "integration as interlocking puzzle forms",
+    api: "API as connecting bridge between systems",
+    // Security & Compliance
+    shield: "shield form suggesting protection",
+    lock: "lock or key form suggesting security",
+    audit: "audit trail as illuminated chain of records",
+    compliance: "compliance checkpoint as gate with checkmark",
+    guardrail: "guardrail as protective barrier of light",
+    // Equipment & Industry
+    machine: "industrial machine silhouette",
+    equipment: "equipment form with operational indicators",
+    conveyor: "conveyor belt or production line",
+    gear: "interlocking gear forms",
+    turbine: "turbine or rotating equipment",
+    transformer: "electrical transformer silhouette",
+    vehicle: "vehicle or fleet silhouette",
+    // Medical
+    "ehr": "medical records screen",
+    imaging: "medical scan or X-ray form",
+    stethoscope: "stethoscope as curving line",
+    // Financial
+    transaction: "transaction as flowing currency path",
+    account: "account as secure container",
+    portfolio: "portfolio as stacked asset layers",
+    fraud: "fraud as red-flagged suspicious connection",
+    // Abstract concepts with visual forms
+    forecast: "forecast as forward-looking light beam with uncertainty bands",
+    prediction: "prediction as emerging light pattern",
+    alert: "alert as amber warning beacon",
+    risk: "risk as unstable or cracking form",
+    approval: "approval as green checkpoint gate",
+    escalation: "escalation as upward routing path",
+    evaluation: "evaluation as testing checkpoint with pass/fail indicators",
+    role: "role as access boundary ring",
+    permission: "permission as key or access badge",
+    severity: "severity as graduated color scale",
+    score: "score as gauge or rating indicator",
+    model: "AI model as glowing processing core",
+    threshold: "threshold as boundary line between zones",
+  };
+
+  const found = [];
+  const lower = text.toLowerCase();
+  for (const [keyword, visual] of Object.entries(visualMap)) {
+    if (lower.includes(keyword)) {
+      found.push(visual);
+    }
+  }
+  // Limit to 6 most relevant to avoid prompt overload
+  return found.slice(0, 6);
+}
+
+/**
  * Build prompts automatically from narrative content.
- * Falls back to this when a slug has no manual override in STORY_PROMPTS_BY_SLUG.
+ * Extracts visual entities from the text and creates explicit MUST INCLUDE directives.
  *
  * @param {{ phases: Array<{title: string; body: string}>; keyImplementations: Array<{title: string; detail: string}>; technicalInnovation: string; impactMetrics: string[] }} narrative
  * @returns {StoryPrompts}
  */
 export function buildPromptsFromNarrative(narrative) {
-  const phases = narrative.phases.map(
-    (p) => `${SHARED_SOLUTION}
+  const phases = narrative.phases.map((p) => {
+    const entities = extractVisualEntities(`${p.title} ${p.body}`);
+    const mustInclude = entities.length > 0
+      ? `\n\nMUST INCLUDE as stylized abstract forms in the scene:\n${entities.map(e => `- ${e}`).join("\n")}\n\nDo NOT add text labels. Render these as recognizable painterly silhouettes and luminous forms integrated into the atmospheric landscape.`
+      : "";
+    return `${SHARED_SOLUTION}
 
-The following text describes what this phase covers. Use it as context to determine what visual elements to include:
+CONTEXT — this image accompanies the following phase description:
 "${p.title}: ${p.body}"
+${mustInclude}`;
+  });
 
-Illustrate the key concepts, objects, and processes mentioned in that text as stylized abstract forms in the romantic realism style.`
-  );
-
-  const implTitles = narrative.keyImplementations
-    .map((ki) => `• ${ki.title}: ${ki.detail}`)
-    .join("\n");
+  const implText = narrative.keyImplementations
+    .map((ki) => `${ki.title}: ${ki.detail}`)
+    .join(". ");
+  const implEntities = extractVisualEntities(implText);
+  const implMustInclude = implEntities.length > 0
+    ? `\n\nMUST INCLUDE as stylized abstract forms:\n${implEntities.map(e => `- ${e}`).join("\n")}\n\nShow how these elements connect and work together as an integrated system. No text labels.`
+    : "";
   const implementations = `${SHARED_SOLUTION}
 
-The following text describes the key implementations this image accompanies. Use it as context to determine what visual elements to include:
-${implTitles}
+CONTEXT — this image accompanies these key implementations:
+${narrative.keyImplementations.map(ki => `- ${ki.title}`).join("\n")}
+${implMustInclude}`;
 
-Illustrate the key systems, integrations, and workflows mentioned above as stylized abstract forms — showing how different elements connect and work together.`;
-
+  const techEntities = extractVisualEntities(narrative.technicalInnovation);
+  const techMustInclude = techEntities.length > 0
+    ? `\n\nMUST INCLUDE as stylized abstract forms:\n${techEntities.map(e => `- ${e}`).join("\n")}\n\nNo text labels. 4:3 aspect ratio.`
+    : "\n\n4:3 aspect ratio.";
   const technical = `${SHARED_SOLUTION}
 
-The following text describes the technical innovation this image accompanies. Use it as context:
+CONTEXT — this image accompanies the technical innovation section:
 "${narrative.technicalInnovation}"
+${techMustInclude}`;
 
-Illustrate the core technical concepts mentioned above as stylized abstract forms. 4:3 aspect ratio.`;
-
-  const impactText = narrative.impactMetrics.join("\n");
+  const impactText = narrative.impactMetrics.join(". ");
+  const impactEntities = extractVisualEntities(impactText);
+  const impactMustInclude = impactEntities.length > 0
+    ? `\n\nMUST INCLUDE as stylized abstract forms showing the "after" state:\n${impactEntities.map(e => `- ${e}`).join("\n")}\n\nMood: calm productive confidence. No text labels. 4:3 aspect ratio.`
+    : "\n\nMood: calm productive confidence. 4:3 aspect ratio.";
   const impact = `${SHARED_SOLUTION}
 
-The following text describes the business impact this image accompanies. Use it as context:
-${impactText}
-
-Illustrate the outcomes and improvements described above — show the "after" state where things work well. Mood: calm productive confidence, not celebration. 4:3 aspect ratio.`;
+CONTEXT — this image accompanies these business impact results:
+${narrative.impactMetrics.map(m => `- ${m}`).join("\n")}
+${impactMustInclude}`;
 
   return { phases, implementations, technical, impact };
 }
@@ -79,12 +179,15 @@ Illustrate the outcomes and improvements described above — show the "after" st
  * @returns {string}
  */
 export function buildChallengePromptFromNarrative(narrative) {
+  const entities = extractVisualEntities(narrative.challenge);
+  const mustInclude = entities.length > 0
+    ? `\n\nMUST INCLUDE as stylized abstract forms showing friction or failure:\n${entities.map(e => `- ${e} (broken, stressed, or disconnected)`).join("\n")}\n\nNo text labels. Show these as recognizable but troubled forms — the "before" state.`
+    : "";
   return `${SHARED_CHALLENGE}
 
-The following text describes the challenge this image accompanies. Use it as context to determine what visual elements to include:
+CONTEXT — this image accompanies the following challenge description:
 "${narrative.challenge}"
-
-Illustrate the key pain points, broken processes, and obstacles mentioned in that text as stylized abstract forms showing friction, fragmentation, or risk.`;
+${mustInclude}`;
 }
 
 /** @type {Record<string, StoryPrompts>} */
