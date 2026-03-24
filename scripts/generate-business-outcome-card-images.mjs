@@ -18,7 +18,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 import { CINEMATIC_STYLE_ANCHOR } from "./ai-art-style-anchor.mjs";
-import { extractVisualEntities } from "./use-case-story-prompts.mjs";
+// Entity extraction removed — model interprets text context directly
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
@@ -55,18 +55,13 @@ const CONTRAST_RECIPES = [
 ];
 
 /**
- * Build outcome card theme from title + outcome text by extracting visual entities.
- * @param {string} title
- * @param {string} outcome
- * @returns {string}
+ * Build outcome card theme from title + outcome text.
+ * The model reads the text and interprets it visually — no entity extraction.
  */
 function buildThemeFromContent(title, outcome) {
-  const combined = `${title}. ${outcome}`;
-  const entities = extractVisualEntities(combined);
-  const mustInclude = entities.length > 0
-    ? `MUST INCLUDE as stylized abstract forms:\n${entities.map(e => `- ${e}`).join("\n")}\nDo NOT add text labels. Render as recognizable painterly silhouettes integrated into the atmospheric scene.`
-    : "";
-  return `${title} — ${outcome}\n\n${mustInclude}\n\n4:3 composition.`;
+  return `This image represents: "${title} — ${outcome}"
+
+Read that description and create a visual interpretation that captures the essence of this solution. 4:3 composition. No text labels.`;
 }
 
 /**

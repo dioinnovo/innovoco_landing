@@ -177,51 +177,35 @@ export function extractVisualEntities(text) {
  * @returns {StoryPrompts}
  */
 export function buildPromptsFromNarrative(narrative) {
-  const phases = narrative.phases.map((p) => {
-    const entities = extractVisualEntities(`${p.title} ${p.body}`);
-    const mustInclude = entities.length > 0
-      ? `\n\nMUST INCLUDE as stylized abstract forms in the scene:\n${entities.map(e => `- ${e}`).join("\n")}\n\nDo NOT add text labels. Render these as recognizable painterly silhouettes and luminous forms integrated into the atmospheric landscape.`
-      : "";
-    return `${SHARED_SOLUTION}
+  const phases = narrative.phases.map(
+    (p) => `${SHARED_SOLUTION}
 
-CONTEXT — this image accompanies the following phase description:
+This image accompanies the following text. Read it and create a visual interpretation:
 "${p.title}: ${p.body}"
-${mustInclude}`;
-  });
 
-  const implText = narrative.keyImplementations
-    .map((ki) => `${ki.title}: ${ki.detail}`)
-    .join(". ");
-  const implEntities = extractVisualEntities(implText);
-  const implMustInclude = implEntities.length > 0
-    ? `\n\nMUST INCLUDE as stylized abstract forms:\n${implEntities.map(e => `- ${e}`).join("\n")}\n\nShow how these elements connect and work together as an integrated system. No text labels.`
-    : "";
+Illustrate the essence of what this phase describes. No text labels.`
+  );
+
   const implementations = `${SHARED_SOLUTION}
 
-CONTEXT — this image accompanies these key implementations:
-${narrative.keyImplementations.map(ki => `- ${ki.title}`).join("\n")}
-${implMustInclude}`;
+This image accompanies these key implementations. Read them and create a visual interpretation:
+${narrative.keyImplementations.map((ki) => `- ${ki.title}`).join("\n")}
 
-  const techEntities = extractVisualEntities(narrative.technicalInnovation);
-  const techMustInclude = techEntities.length > 0
-    ? `\n\nMUST INCLUDE as stylized abstract forms:\n${techEntities.map(e => `- ${e}`).join("\n")}\n\nNo text labels. 4:3 aspect ratio.`
-    : "\n\n4:3 aspect ratio.";
+Illustrate how these elements connect and work together. No text labels.`;
+
   const technical = `${SHARED_SOLUTION}
 
-CONTEXT — this image accompanies the technical innovation section:
+This image accompanies the following technical description. Read it and create a visual interpretation:
 "${narrative.technicalInnovation}"
-${techMustInclude}`;
 
-  const impactText = narrative.impactMetrics.join(". ");
-  const impactEntities = extractVisualEntities(impactText);
-  const impactMustInclude = impactEntities.length > 0
-    ? `\n\nMUST INCLUDE as stylized abstract forms showing the "after" state:\n${impactEntities.map(e => `- ${e}`).join("\n")}\n\nMood: calm productive confidence. No text labels. 4:3 aspect ratio.`
-    : "\n\nMood: calm productive confidence. 4:3 aspect ratio.";
+4:3 aspect ratio. No text labels.`;
+
   const impact = `${SHARED_SOLUTION}
 
-CONTEXT — this image accompanies these business impact results:
-${narrative.impactMetrics.map(m => `- ${m}`).join("\n")}
-${impactMustInclude}`;
+This image accompanies these business results — the value delivered to the client. Read them and create a visual interpretation:
+${narrative.impactMetrics.map((m) => `- ${m}`).join("\n")}
+
+Mood: achievement, milestone reached, business value delivered. A subtle sense of accomplishment and forward momentum — not celebration confetti, but the quiet confidence of results that speak for themselves. Think: summit reached, horizon clear, metrics ascending. 4:3 aspect ratio. No text labels.`;
 
   return { phases, implementations, technical, impact };
 }
@@ -232,15 +216,12 @@ ${impactMustInclude}`;
  * @returns {string}
  */
 export function buildChallengePromptFromNarrative(narrative) {
-  const entities = extractVisualEntities(narrative.challenge);
-  const mustInclude = entities.length > 0
-    ? `\n\nMUST INCLUDE as stylized abstract forms showing friction or failure:\n${entities.map(e => `- ${e} (broken, stressed, or disconnected)`).join("\n")}\n\nNo text labels. Show these as recognizable but troubled forms — the "before" state.`
-    : "";
   return `${SHARED_CHALLENGE}
 
-CONTEXT — this image accompanies the following challenge description:
+This image accompanies the following challenge description. Read it and create a visual interpretation showing the friction and obstacles described:
 "${narrative.challenge}"
-${mustInclude}`;
+
+No text labels.`;
 }
 
 /** @type {Record<string, StoryPrompts>} */
