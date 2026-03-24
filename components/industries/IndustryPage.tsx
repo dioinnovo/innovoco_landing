@@ -367,55 +367,6 @@ export function IndustryPage({
             </div>
           </section>
 
-          <section
-            className="border-t border-[var(--border)] bg-[var(--muted)] py-20 md:py-28"
-            style={{ "--industry-faq-accent": tokens.accent } as CSSProperties}
-          >
-            <div className="mx-auto max-w-3xl px-4">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-                className="mb-12 text-center"
-              >
-                <motion.h2 variants={fadeUp} className="text-3xl font-bold text-[var(--foreground)] md:text-4xl">
-                  {config.faqs.title}
-                </motion.h2>
-                <motion.p variants={fadeUp} custom={1} className="mx-auto mt-3 max-w-xl text-pretty text-lg text-[#64748B]">
-                  {config.faqs.description}
-                </motion.p>
-              </motion.div>
-
-              <SchemaMarkup
-                schema={{
-                  "@context": "https://schema.org",
-                  "@type": "FAQPage",
-                  mainEntity: faqsForAccordion.map((f) => ({
-                    "@type": "Question",
-                    name: f.q,
-                    acceptedAnswer: { "@type": "Answer", text: f.a },
-                  })),
-                }}
-              />
-
-              <Accordion type="single" collapsible className="space-y-3">
-                {faqsForAccordion.map((f, i) => (
-                  <AccordionItem
-                    key={i}
-                    value={`${faqValuePrefix}-${i}`}
-                    className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-6 transition-shadow hover:shadow-sm"
-                  >
-                    <AccordionTrigger className="py-5 text-left font-semibold text-[var(--foreground)] hover:no-underline hover:text-[color:var(--industry-faq-accent)]">
-                      {f.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-5 pt-1 text-sm leading-relaxed text-[#64748B]">{f.a}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          </section>
-
           {/* Prioritization Workshop CTA */}
           {config.actionCTA.prioritization ? (
             <section className="relative overflow-hidden">
@@ -516,6 +467,55 @@ export function IndustryPage({
               </div>
             </section>
           )}
+
+          <section
+            className="border-t border-[var(--border)] bg-[var(--muted)] py-20 md:py-28"
+            style={{ "--industry-faq-accent": tokens.accent } as CSSProperties}
+          >
+            <div className="mx-auto max-w-3xl px-4">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="mb-12 text-center"
+              >
+                <motion.h2 variants={fadeUp} className="text-3xl font-bold text-[var(--foreground)] md:text-4xl">
+                  {config.faqs.title}
+                </motion.h2>
+                <motion.p variants={fadeUp} custom={1} className="mx-auto mt-3 max-w-xl text-pretty text-lg text-[#64748B]">
+                  {config.faqs.description}
+                </motion.p>
+              </motion.div>
+
+              <SchemaMarkup
+                schema={{
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faqsForAccordion.map((f) => ({
+                    "@type": "Question",
+                    name: f.q,
+                    acceptedAnswer: { "@type": "Answer", text: f.a },
+                  })),
+                }}
+              />
+
+              <Accordion type="single" collapsible className="space-y-3">
+                {faqsForAccordion.map((f, i) => (
+                  <AccordionItem
+                    key={i}
+                    value={`${faqValuePrefix}-${i}`}
+                    className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-6 transition-shadow hover:shadow-sm"
+                  >
+                    <AccordionTrigger className="py-5 text-left font-semibold text-[var(--foreground)] hover:no-underline hover:text-[color:var(--industry-faq-accent)]">
+                      {f.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-5 pt-1 text-sm leading-relaxed text-[#64748B]">{f.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </section>
 
           <RelatedResourceCardsSection
             heading="Explore Other Industries"
