@@ -21,7 +21,8 @@
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "check": "eslint . --max-warnings 0 && tsc --noEmit",
+    "deps": "knip --include unlisted",
+    "check": "knip --include unlisted && eslint . --max-warnings 0 && tsc --noEmit",
     "ci": "pnpm run build",
     "prepare": "lefthook install"
   },
@@ -113,6 +114,7 @@
     "cssnano": "^7.1.2",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.1",
+    "knip": "^6.0.4",
     "lefthook": "^2.1.4",
     "postcss": "^8.5.6",
     "sanity": "^4.21.1",

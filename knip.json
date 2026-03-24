@@ -1,0 +1,18 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "lib/**/*.{ts,tsx}",
+    "hooks/**/*.{ts,tsx}",
+    "sanity/**/*.{ts,tsx}"
+  ],
+  "project": ["**/*.{ts,tsx}"],
+  "ignore": [
+    "langgraph_env/**",
+    "nextjs-app/**",
+    "scripts/**",
+    "dist/**",
+    "test-voice-lead-flow.ts"
+  ]
+}

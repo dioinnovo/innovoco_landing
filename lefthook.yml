@@ -1,6 +1,9 @@
 pre-push:
   parallel: true
   jobs:
+    - name: deps
+      run: pnpm run deps
+
     - name: lint
       run: pnpm eslint . --max-warnings 0
 
