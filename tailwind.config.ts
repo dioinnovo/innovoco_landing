@@ -46,6 +46,7 @@ const config: Config = {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "hero-aurora": "heroAuroraDrift 7s ease-in-out infinite alternate",
       },
       animationDuration: {
         '3000': '3000ms',
@@ -86,6 +87,15 @@ const config: Config = {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
+        },
+        /** Landing hero soft gradients: pan + breathe (see BackgroundGradientGlow aurora layers). */
+        heroAuroraDrift: {
+          "0%": {
+            transform: "translate(0%, 0%) scale(1.02)",
+          },
+          "100%": {
+            transform: "translate(-12%, -10%) scale(1.18)",
+          },
         },
       },
       boxShadow: {

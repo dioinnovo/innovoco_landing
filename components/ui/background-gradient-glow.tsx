@@ -51,24 +51,30 @@ export type BackgroundGradientGlowProps = {
   variant?: "aurora" | "aurora-brand" | "brand";
 };
 
-function AuroraGradientLayers({ className }: { className?: string }) {
+/** Oversized layer + parent clip so the gradient can drift without layout shift. */
+function AuroraAnimatedSurface({
+  className,
+  background,
+}: {
+  className?: string;
+  background: string;
+}) {
   return (
-    <div
-      className={cn("absolute inset-0 overflow-hidden", className)}
-      style={{ background: AURORA_BACKGROUND }}
-      aria-hidden
-    />
+    <div className={cn("absolute inset-0 overflow-hidden", className)} aria-hidden>
+      <div
+        className="absolute -left-[24%] -top-[24%] h-[148%] w-[148%] animate-hero-aurora motion-reduce:animate-none will-change-transform [backface-visibility:hidden]"
+        style={{ background }}
+      />
+    </div>
   );
 }
 
+function AuroraGradientLayers({ className }: { className?: string }) {
+  return <AuroraAnimatedSurface className={className} background={AURORA_BACKGROUND} />;
+}
+
 function AuroraBrandGradientLayers({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn("absolute inset-0 overflow-hidden", className)}
-      style={{ background: AURORA_BRAND_BACKGROUND }}
-      aria-hidden
-    />
-  );
+  return <AuroraAnimatedSurface className={className} background={AURORA_BRAND_BACKGROUND} />;
 }
 
 function BrandGradientLayers({ className }: { className?: string }) {
