@@ -37,6 +37,7 @@ import {
   IndustryGetStartedCard,
   industryGetStartedGridClassName,
 } from "@/components/industries/IndustryGetStartedCard";
+import { IndustrySolutionsSection } from "@/components/industries/IndustrySolutionsSection";
 import Link from "next/link";
 import Image from "next/image";
 import ContactModal from "@/components/landing/ContactModal";
@@ -68,6 +69,7 @@ const capabilities = [
   {
     icon: AlertTriangle,
     title: "Real-Time Fraud Detection",
+    illustrationSrc: "/images/industries/financial-services/solutions/real-time-fraud-detection.jpg",
     description:
       "ML-powered transaction scoring analyzing payment patterns, merchant categories, geographic anomalies, and behavioral biometrics in under 100ms. Continuously retrained as fraud tactics evolve.",
     stats: [
@@ -79,6 +81,7 @@ const capabilities = [
   {
     icon: Shield,
     title: "AML Transaction Monitoring",
+    illustrationSrc: "/images/industries/financial-services/solutions/aml-transaction-monitoring.jpg",
     description:
       "Hybrid rule-based and machine learning systems detecting structuring, smurfing, and money laundering patterns. Automated high-quality SAR generation for BSA/FinCEN compliance.",
     stats: [
@@ -90,6 +93,7 @@ const capabilities = [
   {
     icon: BarChart3,
     title: "Credit Risk Modeling",
+    illustrationSrc: "/images/industries/financial-services/solutions/credit-risk-modeling.jpg",
     description:
       "Alternative credit risk models incorporating utility payments, rent history, cash flow analysis, and employment data. Fair Lending compliant with ECOA disparate impact testing.",
     stats: [
@@ -101,6 +105,7 @@ const capabilities = [
   {
     icon: Activity,
     title: "Algorithmic Trading & Sentiment",
+    illustrationSrc: "/images/industries/financial-services/solutions/algorithmic-trading-sentiment.jpg",
     description:
       "NLP-powered sentiment analysis processing 10K+ daily news articles, earnings call transcripts, and social media signals. Real-time integration with trading algorithms.",
     stats: [
@@ -112,6 +117,7 @@ const capabilities = [
   {
     icon: GitBranch,
     title: "Private Equity & Sponsor Intelligence",
+    illustrationSrc: "/images/industries/financial-services/solutions/private-equity-sponsor-intelligence.jpg",
     description:
       "AI-assisted deal sourcing and pipeline prioritization, structured review of CIMs and dataroom materials, and portfolio-level operating metrics so investment and operating partners see performance consistently across businesses—within access controls and audit trails fit for sponsors.",
     stats: [
@@ -432,114 +438,13 @@ export function FinancialServicesPageClient() {
             </div>
           </section>
 
-          {/* ═══════════════════ CAPABILITIES ═══════════════════ */}
-          <section
-            id="capabilities"
-            className="bg-[var(--background)] py-20 md:py-28"
-          >
-            <div className="mx-auto max-w-7xl px-4">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-                className="mb-16 text-center"
-              >
-                <motion.p
-                  variants={fadeUp}
-                  className="text-sm font-semibold uppercase tracking-widest text-[#0284c7]"
-                >
-                  Our Solutions
-                </motion.p>
-                <motion.h2
-                  variants={fadeUp}
-                  custom={1}
-                  className="mt-3 text-balance text-3xl font-bold text-[var(--foreground)] md:text-4xl lg:text-5xl"
-                >
-                  AI Solutions Engineered for Finance
-                </motion.h2>
-                <motion.p
-                  variants={fadeUp}
-                  custom={2}
-                  className="mx-auto mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-[#64748B]"
-                >
-                  Purpose-built AI capabilities for fraud, risk, compliance,
-                  markets—and private equity deal flow, diligence, and
-                  portfolio performance.
-                </motion.p>
-              </motion.div>
-
-              <div className="space-y-16 md:space-y-24">
-                {capabilities.map((cap, idx) => {
-                  const Icon = cap.icon;
-                  const isReversed = idx % 2 === 1;
-                  return (
-                    <motion.div
-                      key={idx}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-60px" }}
-                      variants={{
-                        visible: { transition: { staggerChildren: 0.08 } },
-                      }}
-                      className={`flex flex-col items-center gap-10 lg:gap-16 ${
-                        isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                      }`}
-                    >
-                      {/* Text side */}
-                      <div className="flex-1 space-y-5">
-                        <motion.div variants={fadeUp} className="flex items-center gap-3">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#0284c7]/10">
-                            <Icon className="h-5 w-5 text-[#0284c7]" />
-                          </div>
-                          <h3 className="text-2xl font-bold text-[var(--foreground)] md:text-3xl">
-                            {cap.title}
-                          </h3>
-                        </motion.div>
-                        <motion.p
-                          variants={fadeUp}
-                          custom={1}
-                          className="max-w-xl text-base leading-relaxed text-[#64748B] md:text-lg"
-                        >
-                          {cap.description}
-                        </motion.p>
-                        <motion.div variants={fadeUp} custom={2}>
-                          <Button
-                            variant="ghost"
-                            onClick={openContact}
-                            className="group px-0 text-[#0284c7] hover:text-[#0369a1] hover:bg-transparent font-semibold"
-                          >
-                            Learn more
-                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </Button>
-                        </motion.div>
-                      </div>
-
-                      {/* Stats card */}
-                      <motion.div
-                        variants={fadeUp}
-                        custom={2}
-                        className="w-full max-w-md flex-shrink-0 lg:w-[380px]"
-                      >
-                        <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 shadow-sm">
-                          <div className="space-y-6">
-                            {cap.stats.map((s, si) => (
-                              <div key={si} className="flex items-center justify-between">
-                                <span className="text-sm text-[#64748B]">{s.label}</span>
-                                <span className="text-xl font-bold text-[var(--foreground)]">
-                                  {s.value}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
+          <IndustrySolutionsSection
+            accent="#0284c7"
+            capabilities={capabilities}
+            capabilitiesTitle="AI Solutions Engineered for Finance"
+            capabilitiesSubtitle="Purpose-built AI capabilities for fraud, risk, compliance, markets—and private equity deal flow, diligence, and portfolio performance."
+            onContact={openContact}
+          />
 
           {/* ═══════════════════ COMPLIANCE STRIP ═══════════════════ */}
           <section className="border-y border-[var(--border)] bg-[var(--muted)] py-12">

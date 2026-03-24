@@ -43,6 +43,8 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Zap,
     title: "Predictive Maintenance",
+    illustrationSrc:
+      "/images/industries/manufacturing/solutions/predictive-maintenance.jpg",
     description:
       "AI-powered equipment health monitoring predicts failures 7–14 days in advance with 85–95% accuracy. IoT sensors track vibration, temperature, and acoustic signatures for proactive maintenance scheduling.",
     stats: [
@@ -54,6 +56,8 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Award,
     title: "Computer Vision Quality Control",
+    illustrationSrc:
+      "/images/industries/manufacturing/solutions/vision-quality-control.jpg",
     description:
       "Deep learning detects surface defects, placement errors, and soldering issues at 10× manual speed with 99%+ defect detection and minimal false positives.",
     stats: [
@@ -65,6 +69,8 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Activity,
     title: "Supply Chain Optimization",
+    illustrationSrc:
+      "/images/industries/manufacturing/solutions/supply-chain-optimization.jpg",
     description:
       "Unify procurement, production, and logistics data for end-to-end visibility—trace multi-tier dependencies, spot bottlenecks and delays sooner, and pair that view with ML forecasting, replenishment, and supplier signals to cut inventory and stockouts.",
     stats: [

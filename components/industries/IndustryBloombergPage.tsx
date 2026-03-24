@@ -25,13 +25,12 @@ import {
   IndustryGetStartedCard,
   industryGetStartedGridClassName,
 } from "@/components/industries/IndustryGetStartedCard";
+import {
+  IndustrySolutionsSection,
+  type IndustryCapability,
+} from "@/components/industries/IndustrySolutionsSection";
 
-export type IndustryCapability = {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  stats: { label: string; value: string }[];
-};
+export type { IndustryCapability };
 
 export type IndustryComplianceItem = {
   icon: LucideIcon;
@@ -266,105 +265,13 @@ export function IndustryBloombergPage({
             </div>
           </section>
 
-          <section id="capabilities" className="bg-[var(--background)] py-20 md:py-28">
-            <div className="mx-auto max-w-7xl px-4">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-                className="mb-16 text-center"
-              >
-                <motion.p
-                  variants={fadeUp}
-                  className="text-sm font-semibold uppercase tracking-widest"
-                  style={{ color: tokens.accent }}
-                >
-                  Our Solutions
-                </motion.p>
-                <motion.h2
-                  variants={fadeUp}
-                  custom={1}
-                  className="mt-3 text-balance text-3xl font-bold text-[var(--foreground)] md:text-4xl lg:text-5xl"
-                >
-                  {capabilitiesTitle}
-                </motion.h2>
-                <motion.p
-                  variants={fadeUp}
-                  custom={2}
-                  className="mx-auto mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-[#64748B]"
-                >
-                  {capabilitiesSubtitle}
-                </motion.p>
-              </motion.div>
-
-              <div className="space-y-16 md:space-y-24">
-                {capabilities.map((cap, idx) => {
-                  const Icon = cap.icon;
-                  const isReversed = idx % 2 === 1;
-                  return (
-                    <motion.div
-                      key={idx}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-60px" }}
-                      variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-                      className={`flex flex-col items-center gap-10 lg:gap-16 ${
-                        isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                      }`}
-                    >
-                      <div className="flex-1 space-y-5">
-                        <motion.div variants={fadeUp} className="flex items-center gap-3">
-                          <div
-                            className="flex h-11 w-11 items-center justify-center rounded-lg"
-                            style={{ backgroundColor: `${tokens.accent}1a` }}
-                          >
-                            <Icon className="h-5 w-5" style={{ color: tokens.accent }} />
-                          </div>
-                          <h3 className="text-2xl font-bold text-[var(--foreground)] md:text-3xl">{cap.title}</h3>
-                        </motion.div>
-                        <motion.p
-                          variants={fadeUp}
-                          custom={1}
-                          className="max-w-xl text-base leading-relaxed text-[#64748B] md:text-lg"
-                        >
-                          {cap.description}
-                        </motion.p>
-                        <motion.div variants={fadeUp} custom={2}>
-                          <Button
-                            variant="ghost"
-                            onClick={openContact}
-                            className="group px-0 font-semibold hover:bg-transparent"
-                            style={{ color: tokens.accent }}
-                          >
-                            Learn more
-                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </Button>
-                        </motion.div>
-                      </div>
-
-                      <motion.div
-                        variants={fadeUp}
-                        custom={2}
-                        className="w-full max-w-md shrink-0 lg:w-[380px]"
-                      >
-                        <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 shadow-sm">
-                          <div className="space-y-6">
-                            {cap.stats.map((s, si) => (
-                              <div key={si} className="flex items-center justify-between gap-4">
-                                <span className="text-sm text-[#64748B]">{s.label}</span>
-                                <span className="text-xl font-bold text-[var(--foreground)]">{s.value}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
+          <IndustrySolutionsSection
+            accent={tokens.accent}
+            capabilities={capabilities}
+            capabilitiesTitle={capabilitiesTitle}
+            capabilitiesSubtitle={capabilitiesSubtitle}
+            onContact={openContact}
+          />
 
           <section className="border-y border-[var(--border)] bg-[var(--muted)] py-12">
             <div className="mx-auto max-w-7xl px-4">

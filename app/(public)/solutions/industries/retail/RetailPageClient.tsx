@@ -34,6 +34,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Users,
     title: "Customer 360 & Identity Resolution",
+    illustrationSrc: "/images/industries/retail/solutions/customer-360-identity.jpg",
     description:
       "Unify web, stores, marketplaces, and support into one profile with consent-aware activation. Power segmentation, journeys, and associate tools without duplicate silos.",
     stats: [
@@ -45,6 +46,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Sparkles,
     title: "AI Personalization & Search",
+    illustrationSrc: "/images/industries/retail/solutions/ai-personalization-search.jpg",
     description:
       "Session-aware recommendations, content affinity, and ranking tuned to margin, inventory, and diversity rules—deployed via API to commerce and email.",
     stats: [
@@ -56,6 +58,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: LineChart,
     title: "Demand Forecasting & Pricing",
+    illustrationSrc: "/images/industries/retail/solutions/demand-forecasting-pricing.jpg",
     description:
       "Probabilistic forecasts at store/SKU grain with promotions, seasonality, and weather. Connect to replenishment and dynamic price engines with audit trails.",
     stats: [

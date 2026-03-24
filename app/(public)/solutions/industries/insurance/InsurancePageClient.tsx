@@ -43,6 +43,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: FileText,
     title: "Intelligent FNOL & document AI",
+    illustrationSrc: "/images/industries/insurance/solutions/fnol-document-ai.jpg",
     description:
       "Structure loss notices from email, voice, PDFs, and portals—extract parties, coverages, and damage cues with confidence scoring for straight-through or adjuster review.",
     stats: [
@@ -54,6 +55,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Camera,
     title: "Damage assessment & field packages",
+    illustrationSrc: "/images/industries/insurance/solutions/damage-assessment-field.jpg",
     description:
       "Computer vision and guided capture for property claims—consistent photo sets, severity tagging, and draft estimates or carrier packages for public adjusters and carrier field teams.",
     stats: [
@@ -65,6 +67,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Search,
     title: "Fraud, SIU & link analytics",
+    illustrationSrc: "/images/industries/insurance/solutions/fraud-siu-analytics.jpg",
     description:
       "Entity resolution and graph-style signals across vendors, claimants, and history—prioritize investigations with explainable tiers and playbook-driven referrals.",
     stats: [

@@ -31,6 +31,7 @@ import {
   IndustryGetStartedCard,
   industryGetStartedGridClassName,
 } from "@/components/industries/IndustryGetStartedCard";
+import { IndustrySolutionsSection } from "@/components/industries/IndustrySolutionsSection";
 import Link from "next/link";
 import Image from "next/image";
 import ContactModal from "@/components/landing/ContactModal";
@@ -62,6 +63,7 @@ const capabilities = [
   {
     icon: Brain,
     title: "Clinical Decision Support",
+    illustrationSrc: "/images/industries/healthcare/solutions/clinical-decision-support.jpg",
     description:
       "AI-powered clinical decision support systems that analyze patient histories, lab results, medical imaging, and clinical notes in real time. Integrated with EHR systems like Epic, Cerner, and Allscripts to provide drug interaction alerts, sepsis risk detection, and clinical deterioration warnings at the point of care.",
     stats: [
@@ -73,6 +75,7 @@ const capabilities = [
   {
     icon: Activity,
     title: "Medical Imaging AI",
+    illustrationSrc: "/images/industries/healthcare/solutions/medical-imaging-ai.jpg",
     description:
       "Computer vision models trained on NIH ChestX-ray14 and MIMIC datasets that detect tumors, fractures, and abnormalities in X-rays, CT scans, and MRIs. Prioritizes urgent cases for radiologist review, reducing turnaround times and diagnostic errors while handling 500+ daily imaging studies.",
     stats: [
@@ -84,6 +87,7 @@ const capabilities = [
   {
     icon: Target,
     title: "Population Health Management",
+    illustrationSrc: "/images/industries/healthcare/solutions/population-health-management.jpg",
     description:
       "Predictive analytics platform integrated with multiple EHRs for chronic disease risk scoring, gap-in-care identification, and automated outreach for preventive services. Identifies high-risk patients likely to be readmitted, develop chronic conditions, or become high utilizers of emergency services.",
     stats: [
@@ -95,6 +99,7 @@ const capabilities = [
   {
     icon: AlertTriangle,
     title: "Sepsis Early Warning System",
+    illustrationSrc: "/images/industries/healthcare/solutions/sepsis-early-warning.jpg",
     description:
       "Real-time sepsis detection using EHR data streams including vital signs, lab results, and clinical notes. ML models alert clinicians 6-12 hours before clinical manifestation, enabling early antibiotic administration and dramatically reducing mortality in critical care settings.",
     stats: [
@@ -396,122 +401,13 @@ export function HealthcarePageClient() {
             </div>
           </section>
 
-          {/* ═══════════════════ CAPABILITIES ═══════════════════ */}
-          <section
-            id="capabilities"
-            className="bg-[var(--background)] py-20 md:py-28"
-          >
-            <div className="mx-auto max-w-7xl px-4">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-                className="mb-16 text-center"
-              >
-                <motion.p
-                  variants={fadeUp}
-                  className="text-sm font-semibold uppercase tracking-widest text-[#059669]"
-                >
-                  Our Solutions
-                </motion.p>
-                <motion.h2
-                  variants={fadeUp}
-                  custom={1}
-                  className="mt-3 text-balance text-3xl font-bold text-[var(--foreground)] md:text-4xl lg:text-5xl"
-                >
-                  AI Solutions Engineered for Healthcare
-                </motion.h2>
-                <motion.p
-                  variants={fadeUp}
-                  custom={2}
-                  className="mx-auto mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-[#64748B]"
-                >
-                  Purpose-built AI capabilities that address the unique
-                  challenges of clinical care, diagnostics, compliance, and
-                  population health management.
-                </motion.p>
-              </motion.div>
-
-              <div className="space-y-16 md:space-y-24">
-                {capabilities.map((cap, idx) => {
-                  const Icon = cap.icon;
-                  const isReversed = idx % 2 === 1;
-                  return (
-                    <motion.div
-                      key={idx}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-60px" }}
-                      variants={{
-                        visible: { transition: { staggerChildren: 0.08 } },
-                      }}
-                      className={`flex flex-col items-center gap-10 lg:gap-16 ${
-                        isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                      }`}
-                    >
-                      {/* Text side */}
-                      <div className="flex-1 space-y-5">
-                        <motion.div
-                          variants={fadeUp}
-                          className="flex items-center gap-3"
-                        >
-                          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#059669]/10">
-                            <Icon className="h-5 w-5 text-[#059669]" />
-                          </div>
-                          <h3 className="text-2xl font-bold text-[var(--foreground)] md:text-3xl">
-                            {cap.title}
-                          </h3>
-                        </motion.div>
-                        <motion.p
-                          variants={fadeUp}
-                          custom={1}
-                          className="max-w-xl text-base leading-relaxed text-[#64748B] md:text-lg"
-                        >
-                          {cap.description}
-                        </motion.p>
-                        <motion.div variants={fadeUp} custom={2}>
-                          <Button
-                            variant="ghost"
-                            onClick={openContact}
-                            className="group px-0 text-[#059669] hover:text-[#047857] hover:bg-transparent font-semibold"
-                          >
-                            Learn more
-                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </Button>
-                        </motion.div>
-                      </div>
-
-                      {/* Stats card */}
-                      <motion.div
-                        variants={fadeUp}
-                        custom={2}
-                        className="w-full max-w-md flex-shrink-0 lg:w-[380px]"
-                      >
-                        <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 shadow-sm">
-                          <div className="space-y-6">
-                            {cap.stats.map((s, si) => (
-                              <div
-                                key={si}
-                                className="flex items-center justify-between"
-                              >
-                                <span className="text-sm text-[#64748B]">
-                                  {s.label}
-                                </span>
-                                <span className="text-xl font-bold text-[var(--foreground)]">
-                                  {s.value}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
+          <IndustrySolutionsSection
+            accent="#059669"
+            capabilities={capabilities}
+            capabilitiesTitle="AI Solutions Engineered for Healthcare"
+            capabilitiesSubtitle="Purpose-built AI capabilities that address the unique challenges of clinical care, diagnostics, compliance, and population health management."
+            onContact={openContact}
+          />
 
           {/* ═══════════════════ COMPLIANCE STRIP ═══════════════════ */}
           <section className="border-y border-[var(--border)] bg-[var(--muted)] py-12">

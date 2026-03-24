@@ -43,6 +43,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Gauge,
     title: "Load, price & renewable forecasting",
+    illustrationSrc: "/images/industries/energy-utilities/solutions/load-renewable-forecasting.jpg",
     description:
       "Probabilistic short- and medium-term models with weather, DER, and behavioral signals—published to trading, operations, and planning with confidence intervals.",
     stats: [
@@ -54,6 +55,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Zap,
     title: "Grid & generation asset health",
+    illustrationSrc: "/images/industries/energy-utilities/solutions/grid-generation-asset-health.jpg",
     description:
       "Anomaly detection and health scores across substations, lines, and rotating equipment—prioritize inspections and replacements using CMMS, SCADA, and inspection history.",
     stats: [
@@ -65,6 +67,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Sun,
     title: "DER visibility & operations assists",
+    illustrationSrc: "/images/industries/energy-utilities/solutions/der-visibility-operations.jpg",
     description:
       "Hosting analysis, inverter telemetry fusion, and control-room assists for voltage, congestion, and restoration—designed for transparency and operator override.",
     stats: [

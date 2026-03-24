@@ -41,6 +41,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Camera,
     title: "Visual Inspections & Estimating",
+    illustrationSrc: "/images/industries/construction/solutions/visual-inspections-estimating.jpg",
     description:
       "Computer vision for roofs, siding, and interiors with severity scoring, measurement assists, and adjuster-ready outputs. Works on phone capture or drone orthomosaics.",
     stats: [
@@ -52,6 +53,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: FileCheck,
     title: "Automated Field Reports",
+    illustrationSrc: "/images/industries/construction/solutions/automated-field-reports.jpg",
     description:
       "Voice and photo capture structured into daily logs, safety checklists, and owner updates—synced to Procore, CMMS, or your ERP with full audit history.",
     stats: [
@@ -63,6 +65,7 @@ const capabilities: IndustryCapability[] = [
   {
     icon: Activity,
     title: "Equipment & HVAC Predictive Maintenance",
+    illustrationSrc: "/images/industries/construction/solutions/equipment-hvac-predictive.jpg",
     description:
       "IoT ingestion, anomaly detection, and technician routing for chillers, fleets, and generators—integrated with inventory and SLA clocks.",
     stats: [
