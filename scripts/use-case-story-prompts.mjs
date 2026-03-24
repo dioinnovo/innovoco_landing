@@ -89,20 +89,7 @@ Illustrate the key pain points, broken processes, and obstacles mentioned in tha
 
 /** @type {Record<string, StoryPrompts>} */
 export const STORY_PROMPTS_BY_SLUG = {
-  "executive-self-serve-analytics": {
-    phases: [
-      `${SHARED_SOLUTION}
-Theme — Phase 1: Model guardrails — layered semantic planes sliding into alignment, role boundaries as soft translucent rings, eval gates as calm checkpoints of light.`,
-      `${SHARED_SOLUTION}
-Theme — Phase 2: Pilot then broaden — ripples expanding from a steering cohort core, telemetry as fine light trails, measured expansion without sprawl.`,
-    ],
-    implementations: `${SHARED_SOLUTION}
-Theme — Key implementations: entitlements, citations, audit logs — braided threads of trust connecting vault-like forms, traceability as continuous filaments.`,
-    technical: `${SHARED_SOLUTION}
-Theme — Technical innovation: RAG, metadata, optional graphs — stacked reasoning terraces, retrieval beams meeting structured bases, orchestration as graceful bridges.`,
-    impact: `${SHARED_SOLUTION}
-Theme — Impact: fewer tickets, faster answers, audit readiness — ascending calm gradients, balanced metrics as harmonious vertical rhythm, relief from queue pressure.`,
-  },
+  // "executive-self-serve-analytics" — removed manual override; auto-generated from narrative content
   "customer-support-voice": {
     phases: [
       `${SHARED_SOLUTION}

@@ -49,8 +49,8 @@ export type BusinessOutcomeUseCase = {
 export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
   {
     slug: "executive-self-serve-analytics",
-    title: "Executive & self-serve analytics",
-    outcome: "Plain-language to SQL: citations, entitlements, audit trails.",
+    title: "AI-Powered Business Intelligence",
+    outcome: "Ask questions in plain language, get governed answers with charts — no analysts, no ticket queue.",
     industries: ["financial-services", "technology", "cross-enterprise"],
     tags: ["Speed", "Compliance"],
     icon: "chart",

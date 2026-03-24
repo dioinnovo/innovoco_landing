@@ -27,9 +27,9 @@ const details: Record<string, UseCaseStudyNarrative> = {
     subheadline:
       "Ask in plain English; get charts and governed warehouse answers—faster than a ticket queue.",
     contextItalic:
-      "Executives used to email IT or analysts and wait days for a new cut of revenue, pipeline, or margin. Static dashboards help—until the question changes. Today, leading platforms treat “talk to your data” as the default: natural language becomes SQL (or a governed semantic query) so leaders move from hunch to chart without a ticket queue.",
+      "Every new board question means a ticket to analytics and days of waiting.",
     challenge:
-      "Every board meeting spawns new questions. Without a safe self-serve path, leaders either wait on overloaded analysts or export spreadsheets and guess. Traditional “self-serve BI” often stops at pre-built reports; anything custom still means SQL skills or a request queue. Meanwhile, consumer-style chat over data fails audits: no row-level security, no proof of which tables fed an answer, no trail for regulators. So teams throttle access—and strategic decisions slow down while the business keeps moving.",
+      "Every board meeting spawns new questions. Without a safe self-serve path, leaders either wait on overloaded analysts or export spreadsheets and guess. Traditional self-serve BI often stops at pre-built reports; anything custom still means SQL skills or a request queue. Meanwhile, consumer-style chat over data fails audits: no row-level security, no proof of which tables fed an answer, no trail for regulators. So teams throttle access and strategic decisions slow down while the business keeps moving.",
     solutionIntro:
       "We implement governed conversational analytics: a data analyst–style experience where executives ask in everyday language and receive answers, tables, and visuals grounded in the warehouse and semantic models your CFO already trusts. Under the hood that is natural-language-to-SQL (or a curated semantic layer)—the same pattern major clouds emphasize for enterprise BI: express intent in plain language, get runnable queries against approved data, with identity and policy enforced by the platform. On Azure or Google Cloud we wire tenant-native sign-in, dataset boundaries, and full query logging so every response is entitlement-scoped, traceable, and reproducible.",
     phases: [
@@ -46,7 +46,7 @@ const details: Record<string, UseCaseStudyNarrative> = {
       {
         title: "Entitlements-aware retrieval",
         detail:
-          "People only see data their role allows—same rules as the warehouse. We never “open the vault” for convenience.",
+          "People only see data their role allows—same rules as the warehouse. We never open the vault for convenience.",
       },
       {
         title: "Citation-ready responses",
@@ -72,7 +72,7 @@ const details: Record<string, UseCaseStudyNarrative> = {
     technicalInnovation:
       "We pair cloud analytics runtimes (Fabric-style semantic models, BigQuery, or your warehouse of record) with retrieval over curated metadata and, when one pass is not enough, orchestration for multi-step reasoning. Continuous evaluation and shadow traffic mirror how enterprises ship Copilot-style experiences: measure quality before you widen the audience.",
     impactMetrics: [
-      "40–70% fewer recurring “quick data request” tickets within two quarters on typical enterprise pilots—time shifts from queue management to strategy.",
+      "40-70% fewer recurring quick data request tickets within two quarters on typical enterprise pilots. Time shifts from queue management to strategy.",
       "Minutes from question to chart for governed asks, versus multi-day email threads with IT or analytics.",
       "Audit-ready logs and reproducible prompts when leadership or regulators ask how a number was produced.",
       "One set of trusted metrics across decks—less conflicting definitions when everyone pulls from the same governed answers.",

@@ -40,11 +40,7 @@ Tension should still feel human and surmountable: soft storm light, mist obscuri
 IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the industry and challenge topic. Pure landscapes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, documents, flows) rendered as painterly silhouettes integrated into the atmospheric scene. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.`;
 
 const JOBS = [
-  {
-    slug: "executive-self-serve-analytics",
-    prompt: `${SHARED}
-Theme: analytics bottleneck — queues and waiting, static dashboards vs hunger for answers, diverging light paths that meet a barrier, glass panels slightly misaligned, cerebral tension (still atmospheric, not grim).`,
-  },
+  // "executive-self-serve-analytics" — removed; auto-generated from narrative content
   {
     slug: "customer-support-voice",
     prompt: `${SHARED}
