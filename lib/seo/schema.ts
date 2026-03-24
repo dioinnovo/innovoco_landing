@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 type WithContext<T> = T & { "@context": string };
 
 const organizationDescription =
@@ -133,6 +131,26 @@ export function createBreadcrumbSchema(items: Array<{ name: string; url: string 
       name: item.name,
       item: item.url
     }))
+  };
+}
+
+export function createWebPageSchema(opts: {
+  url: string;
+  name: string;
+  description: string;
+  webpageId?: string;
+}): WithContext<Record<string, any>> {
+  const fragment = opts.webpageId ?? "webpage";
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${opts.url}#${fragment}`,
+    url: opts.url,
+    name: opts.name,
+    description: opts.description,
+    isPartOf: { "@id": "https://innovoco.com/#website" },
+    publisher: { "@id": "https://innovoco.com/#organization" },
+    inLanguage: "en-US"
   };
 }
 

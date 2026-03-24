@@ -41,6 +41,8 @@ export default function SitemapPage() {
         { name: 'Manufacturing & Industrial', href: '/solutions/industries/manufacturing' },
         { name: 'Retail & E-Commerce', href: '/solutions/industries/retail' },
         { name: 'Construction & Engineering', href: '/solutions/industries/construction' },
+        { name: 'Insurance & Public Adjusters', href: '/solutions/industries/insurance' },
+        { name: 'Energy & Utilities', href: '/solutions/industries/energy-utilities' },
       ]
     },
     {

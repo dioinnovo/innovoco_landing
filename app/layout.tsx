@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { Providers } from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -88,12 +89,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="relative" suppressHydrationWarning>
       <body
-        className={`${inter.variable} font-sans antialiased transition-colors duration-300`}
+        className={`${inter.variable} relative font-sans antialiased transition-colors duration-300`}
         suppressHydrationWarning
       >
         <Providers>{children}</Providers>
+        <Script id="apollo-website-tracker" strategy="afterInteractive">
+          {`function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"695528a1f00f180019832456"})},
+document.head.appendChild(o)}initApollo();`}
+        </Script>
         <Analytics />
         <SpeedInsights />
       </body>

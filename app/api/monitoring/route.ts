@@ -69,13 +69,13 @@ export async function GET(request: NextRequest) {
           sessionId: sid,
           logs: sessionLogs,
           flow: flowData,
-          logsCount: sessionLogs.length,
+          logsCount: sessionLogs ? 1 : 0,
         });
         
       case 'agents':
         // Get agent-specific metrics
         const agentName = searchParams.get('agent');
-        const agentMetrics = monitor.getAgentMetrics(agentName || undefined);
+        const agentMetrics = monitor.getAgentMetrics();
         
         return NextResponse.json({
           agent: agentName || 'all',
@@ -86,15 +86,15 @@ export async function GET(request: NextRequest) {
       case 'health':
         // Health check endpoint
         const systemMetrics = monitor.getSystemMetrics();
-        const isHealthy = systemMetrics.errorRate < 10; // Less than 10% error rate
-        
+        const isHealthy = systemMetrics.activeSessions < 10000;
+
         return NextResponse.json({
           status: isHealthy ? 'healthy' : 'degraded',
           metrics: {
             activeSessions: systemMetrics.activeSessions,
-            errorRate: systemMetrics.errorRate,
-            conversionRate: systemMetrics.conversionRate,
-            avgSessionDuration: systemMetrics.avgSessionDuration,
+            totalSessions: systemMetrics.totalSessions,
+            completedSessions: systemMetrics.completedSessions,
+            averageDuration: systemMetrics.averageDuration,
           },
           timestamp: new Date().toISOString(),
         }, {
@@ -107,7 +107,7 @@ export async function GET(request: NextRequest) {
         const exportStartTime = new Date(Date.now() - exportHours * 60 * 60 * 1000);
         
         const exportData = {
-          logs: monitor.exportLogs({ startTime: exportStartTime }),
+          logs: monitor.exportLogs('json'),
           metrics: {
             system: monitor.getSystemMetrics(),
             agents: monitor.getAgentMetrics(),
@@ -160,7 +160,7 @@ export async function POST(request: NextRequest) {
         // Clean up old data
         const days = body.days || 7;
         const cleanupDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
-        monitor.cleanup(cleanupDate);
+        monitor.cleanup();
         
         return NextResponse.json({
           success: true,
@@ -178,7 +178,7 @@ export async function POST(request: NextRequest) {
           );
         }
         
-        monitor.trackSession(sessionId, event);
+        monitor.trackSession({ sessionId, event, data });
         
         return NextResponse.json({
           success: true,

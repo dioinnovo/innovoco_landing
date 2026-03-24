@@ -1,9 +1,9 @@
 @import "tailwindcss";
 @config "../tailwind.config.ts";
 
-/* Smooth scrolling behavior and scroll padding for sticky navbar */
+/* Scroll padding for sticky navbar. Smooth scrolling is handled by Lenis (see SmoothScrollProvider). */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 80px; /* Adjust based on navbar height */
 }
 
@@ -79,10 +79,6 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {

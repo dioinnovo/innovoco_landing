@@ -278,7 +278,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
       const endpoint = apiEndpoint || '/api/orchestrate'
       
       let requestBody: any
-      let headers: HeadersInit = {
+      const headers: HeadersInit = {
         "Content-Type": "application/json",
       }
 

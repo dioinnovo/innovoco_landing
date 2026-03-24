@@ -187,8 +187,8 @@ export async function POST(request: NextRequest) {
     revalidatePath('/blog/category/[category]', 'page');
 
     // Also revalidate using tags if available
-    revalidateTag('blog');
-    revalidateTag('articles');
+    revalidateTag("blog", "default");
+    revalidateTag("articles", "default");
 
     return NextResponse.json({
       success: true,

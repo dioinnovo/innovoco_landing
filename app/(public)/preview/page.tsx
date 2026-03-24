@@ -710,8 +710,8 @@ export default function OptimizedLandingPage() {
 
       {/* Contact Modal */}
       <ContactModal
-        isOpen={contactModalOpen}
-        onClose={() => setContactModalOpen(false)}
+        open={contactModalOpen}
+        onOpenChange={setContactModalOpen}
       />
 
       {/* Skip to content styles */}

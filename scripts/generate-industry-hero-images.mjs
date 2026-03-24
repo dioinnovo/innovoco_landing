@@ -1,6 +1,5 @@
 /**
- * Generate retail & construction industry hero images with Gemini
- * "Nano Banana 2" (gemini-3.1-flash-image-preview).
+ * Generate industry hero JPEGs with Gemini (gemini-3.1-flash-image-preview).
  *
  * Usage:
  *   export GEMINI_API_KEY=your_key
@@ -9,7 +8,10 @@
  * Or with .env.local (loaded via dotenv):
  *   node scripts/generate-industry-hero-images.mjs
  *
- * Outputs JPEGs to public/images/industries/{retail,construction}-hero.jpg
+ * Generate only selected jobs (job ids):
+ *   node scripts/generate-industry-hero-images.mjs energy-utilities insurance
+ *
+ * Outputs to public/images/industries/*-hero.jpg
  * Requires: sharp (devDependency) to normalize API PNG/WebP to JPEG for Next/Image.
  */
 
@@ -42,6 +44,22 @@ Hard constraints: no readable text, no logos, no brand names, no watermarks, no 
     prompt: `Photorealistic ultrawide 16:9 editorial hero image for a construction and home services AI technology website.
 Scene: active commercial construction site at golden hour—steel structure, crane silhouette, workers in proper PPE at medium distance (not identifiable), warm dust in light beams, engineering precision mood.
 Hard constraints: no readable text, no company logos, no watermarks. Cinematic documentary style with strong depth; suitable for dark gradient overlay.`,
+  },
+  {
+    id: "energy-utilities",
+    filename: "energy-utilities-hero-v2.jpg",
+    prompt: `Photorealistic ultrawide 16:9 editorial hero image for a utilities and energy sector AI technology website.
+Scene: modern electrical substation or utility-scale solar array at dawn—cool teal sky, warm horizon light on steel structures and insulators, faint atmospheric haze, transmission lines receding into depth, subtle sense of reliable grid and renewable generation (no charts, no UI).
+Mood: industrial resilience, clean infrastructure, operational excellence.
+Hard constraints: no readable text, no company logos, no watermarks, no people (omit workers entirely—pure infrastructure only). Cinematic wide shot with strong depth; suitable for dark cyan-teal gradient text overlay.`,
+  },
+  {
+    id: "insurance",
+    filename: "insurance-hero-v2.jpg",
+    prompt: `Photorealistic ultrawide 16:9 editorial hero image for an insurance and insurtech AI consulting website.
+Scene: empty modern corporate lobby or glass corridor at blue hour—floor-to-ceiling windows, soft indigo and violet ambient light, polished floor with reflections, architectural lines only. Absolutely no people, no faces, no human silhouettes. No monitors, no projections, no charts, no documents.
+Mood: quiet trust, stability, protection through architecture and light alone.
+Hard constraints: zero human figures, no readable text, no logos, no watermarks, no screens. Premium empty-space advertising photography; suitable for dark indigo-purple gradient overlay.`,
   },
 ];
 
@@ -90,7 +108,20 @@ async function main() {
   const outDir = path.join(root, "public", "images", "industries");
   fs.mkdirSync(outDir, { recursive: true });
 
-  for (const job of JOBS) {
+  const argvFilter = process.argv.slice(2).filter((a) => !a.startsWith("-"));
+  const jobsToRun =
+    argvFilter.length > 0
+      ? JOBS.filter((j) => argvFilter.includes(j.id))
+      : JOBS;
+
+  if (argvFilter.length > 0 && jobsToRun.length === 0) {
+    console.error(
+      `No jobs matched ${JSON.stringify(argvFilter)}. Valid ids: ${JOBS.map((j) => j.id).join(", ")}`
+    );
+    process.exit(1);
+  }
+
+  for (const job of jobsToRun) {
     console.log(`Generating ${job.id}…`);
     const { data, mimeType } = await generateImage(job.prompt);
     const outPath = path.join(outDir, job.filename);

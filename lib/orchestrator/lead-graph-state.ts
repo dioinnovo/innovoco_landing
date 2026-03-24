@@ -191,6 +191,12 @@ export function getQualifiedLeadData(state: LeadQualificationState) {
     return null;
   }
 
+  const conversationHistory = (state.messages ?? []).map((m) => ({
+    role: m._getType() === "human" ? "user" : "assistant",
+    content: typeof m.content === "string" ? m.content : String(m.content),
+    timestamp: new Date(),
+  }));
+
   return {
     name: state.leadInfo.name,
     company: state.leadInfo.company,
@@ -200,5 +206,6 @@ export function getQualifiedLeadData(state: LeadQualificationState) {
     budget: state.leadInfo.budget,
     timeline: state.leadInfo.timeline,
     qualifiedAt: new Date(),
+    conversationHistory,
   };
 }

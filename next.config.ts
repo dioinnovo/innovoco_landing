@@ -23,12 +23,10 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Quality gate: `package.json` `build` runs `npm run check` (eslint + tsc) then `next build`.
+  // `next build` runs TypeScript again — keep ignoreBuildErrors false so bad types fail deploys.
   typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",

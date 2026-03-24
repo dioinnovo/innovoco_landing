@@ -9,7 +9,7 @@
 
 import { Stack, Text, TextArea } from '@sanity/ui';
 import { useCallback } from 'react';
-import { set, unset, type PatchEvent } from 'sanity';
+import { PatchEvent, set, unset } from 'sanity';
 import type { TextInputProps } from 'sanity';
 
 // Factory function to create input with specific max length

@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+import { SmoothScrollProvider } from "./smooth-scroll-provider";
 import { ThemeProvider } from "./theme-provider";
 // TEMPORARILY DISABLED: VirtualAssistant has bugs being fixed
 // import VirtualAssistant from "./virtual-assistant";
@@ -51,7 +52,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
       <ThemeProvider defaultTheme="light">
-        {children}
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
         {/* TEMPORARILY DISABLED: VirtualAssistant has bugs being fixed */}
         {/* <div className="print:hidden">
           <VirtualAssistant apiEndpoint={chatEndpoint} />

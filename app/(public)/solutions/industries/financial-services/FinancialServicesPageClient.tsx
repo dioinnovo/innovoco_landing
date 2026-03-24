@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -46,12 +46,13 @@ import { SchemaMarkup } from "@/lib/seo/SchemaMarkup";
 import { createServiceSchema, createBreadcrumbSchema } from "@/lib/seo/schema";
 
 /* ─── animations ─── */
-const fadeUp = {
+const fadeEase = [0.25, 0.46, 0.45, 0.94] as [number, number, number, number];
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.5, delay: i * 0.1, ease: fadeEase },
   }),
 };
 
@@ -341,6 +342,7 @@ export function FinancialServicesPageClient() {
                 className="object-cover opacity-40"
                 priority
               />
+              <div className="absolute inset-0 bg-black/35" aria-hidden />
               <div className="absolute inset-0 bg-gradient-to-b from-[#0B1426]/70 via-[#0B1426]/50 to-[#0B1426]" />
             </div>
 
@@ -375,7 +377,7 @@ export function FinancialServicesPageClient() {
                 <motion.p
                   variants={fadeUp}
                   custom={2}
-                  className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-[#94A3B8] md:text-xl"
+                  className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-slate-200 md:text-xl [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]"
                 >
                   Real-time fraud detection, risk analytics, regulatory
                   compliance, and sponsor-side deal and portfolio intelligence—so
@@ -399,11 +401,11 @@ export function FinancialServicesPageClient() {
                   </Button>
                   <Button
                     size="lg"
-                    variant="outline"
+                    variant="ghost"
                     onClick={() =>
                       document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth" })
                     }
-                    className="border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#5BC0EB]/50 hover:bg-[#5BC0EB]/10 px-8 py-6 text-base font-semibold rounded-lg transition-all duration-300"
+                    className="border border-solid border-[#1E3A5F] px-8 py-6 text-base font-semibold text-white shadow-none transition-all duration-300 hover:border-[#5BC0EB]/50 hover:text-white hover:!bg-[#5BC0EB]/10"
                   >
                     Explore Solutions
                   </Button>
@@ -420,7 +422,7 @@ export function FinancialServicesPageClient() {
                       <div className="text-2xl font-bold text-white md:text-3xl">
                         {m.value}
                       </div>
-                      <div className="mt-1 text-xs text-[#64748B] md:text-sm">
+                      <div className="mt-1 text-xs text-slate-300 md:text-sm [text-shadow:0_1px_2px_rgba(0,0,0,0.75)]">
                         {m.label}
                       </div>
                     </div>

@@ -4,7 +4,7 @@ import { Calendar, FileText, Download, Users, ArrowRight } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-interface ActionCardProps {
+export interface ActionCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
@@ -71,14 +71,17 @@ interface ActionCTASectionProps {
   title?: string;
   subtitle?: string;
   onConsultationClick?: () => void;
+  /** When set, replaces the default industry action cards */
+  actionCards?: ActionCardProps[];
 }
 
 export function ActionCTASection({
   title = "Ready to Transform Your Industry?",
   subtitle = "Choose your next step to get started with industry-specific AI solutions",
-  onConsultationClick
+  onConsultationClick,
+  actionCards: actionCardsProp,
 }: ActionCTASectionProps) {
-  const actionCards: ActionCardProps[] = [
+  const defaultActionCards: ActionCardProps[] = [
     {
       icon: Calendar,
       title: "Schedule Consultation",
@@ -116,6 +119,8 @@ export function ActionCTASection({
       href: "/workshops"
     }
   ];
+
+  const actionCards = actionCardsProp ?? defaultActionCards;
 
   return (
     <section className="mt-16 mb-12 p-8 rounded-2xl bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]">

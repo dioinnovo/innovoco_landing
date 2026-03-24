@@ -31,7 +31,7 @@ const tokens = {
   badgeText: "#fbbf24",
   pulseDot: "#f59e0b",
   heroOverlayClassName: "from-[#0f172a]/80 via-[#0f172a]/55 to-[#0f172a]",
-  outlineButtonHoverBgClass: "hover:bg-[#f59e0b]/10",
+  outlineButtonHoverBgClass: "hover:!bg-[#f59e0b]/10",
   ctaShadowColor: "245, 158, 11",
 };
 

@@ -45,7 +45,7 @@ export interface UseRealtimeVoiceReturn {
   // Actions
   connect: () => Promise<void>;
   disconnect: () => void;
-  startCall: () => Promise<void>;
+  startCall: (hasExistingMessages?: boolean) => Promise<void>;
   endCall: () => void;
   sendText: (text: string) => void;
   setContext: (messages: Array<{ text: string; isUser: boolean }>) => void;

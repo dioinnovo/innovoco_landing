@@ -4,7 +4,7 @@ import { TrendingUp, Shield, Network, Target, ChevronDown, ChevronUp } from 'luc
 import { useState } from 'react';
 import { LucideIcon } from 'lucide-react';
 
-interface DifferentiatorCardProps {
+export interface DifferentiatorCardProps {
   icon: LucideIcon;
   title: string;
   metric: string;
@@ -79,9 +79,17 @@ function DifferentiatorCard({
 
 interface DifferentiatorGridProps {
   columns?: 1 | 2 | 3 | 4;
+  title?: string;
+  subtitle?: string;
+  differentiators?: DifferentiatorCardProps[];
 }
 
-export function DifferentiatorGrid({ columns = 2 }: DifferentiatorGridProps) {
+export function DifferentiatorGrid({
+  columns = 2,
+  title = 'Why Choose Innovoco for Industry Solutions',
+  subtitle = 'Deep sector expertise combined with technical excellence',
+  differentiators: differentiatorsProp,
+}: DifferentiatorGridProps) {
   const gridClasses = {
     1: 'grid-cols-1',
     2: 'grid-cols-1 md:grid-cols-2',
@@ -89,7 +97,7 @@ export function DifferentiatorGrid({ columns = 2 }: DifferentiatorGridProps) {
     4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
   };
 
-  const differentiators: DifferentiatorCardProps[] = [
+  const defaultDifferentiators: DifferentiatorCardProps[] = [
     {
       icon: TrendingUp,
       title: "Proven Track Record",
@@ -140,14 +148,16 @@ export function DifferentiatorGrid({ columns = 2 }: DifferentiatorGridProps) {
     }
   ];
 
+  const differentiators = differentiatorsProp ?? defaultDifferentiators;
+
   return (
     <section className="mt-16 mb-12">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-[#0B0F19] mb-3">
-          Why Choose Innovoco for Industry Solutions
+          {title}
         </h2>
         <p className="text-lg text-[#525252]">
-          Deep sector expertise combined with technical excellence
+          {subtitle}
         </p>
       </div>
 

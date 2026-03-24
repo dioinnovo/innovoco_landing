@@ -22,7 +22,7 @@ const tokens = {
   badgeText: "#a5b4fc",
   pulseDot: "#818cf8",
   heroOverlayClassName: "from-[#0f172a]/85 via-[#0f172a]/60 to-[#0f172a]",
-  outlineButtonHoverBgClass: "hover:bg-indigo-500/10",
+  outlineButtonHoverBgClass: "hover:!bg-indigo-500/10",
   ctaShadowColor: "99, 102, 241",
 };
 

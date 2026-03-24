@@ -55,8 +55,12 @@ export interface IVoiceProvider {
   getSupportedFeatures(): string[];
 }
 
+type VoiceEventListeners = {
+  [K in keyof VoiceProviderEvents]?: Array<VoiceProviderEvents[K]>;
+};
+
 export abstract class BaseVoiceProvider implements IVoiceProvider {
-  protected listeners: Partial<Record<keyof VoiceProviderEvents, Function[]>> = {};
+  protected listeners: VoiceEventListeners = {};
   protected connected = false;
   protected callActive = false;
   
@@ -84,13 +88,13 @@ export abstract class BaseVoiceProvider implements IVoiceProvider {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
-    this.listeners[event]!.push(handler as Function);
+    this.listeners[event]!.push(handler);
   }
   
   off<K extends keyof VoiceProviderEvents>(event: K, handler: VoiceProviderEvents[K]): void {
     const handlers = this.listeners[event];
     if (handlers) {
-      const index = handlers.indexOf(handler as Function);
+      const index = handlers.indexOf(handler);
       if (index > -1) {
         handlers.splice(index, 1);
       }
@@ -99,8 +103,10 @@ export abstract class BaseVoiceProvider implements IVoiceProvider {
   
   emit<K extends keyof VoiceProviderEvents>(event: K, ...args: Parameters<VoiceProviderEvents[K]>): void {
     const handlers = this.listeners[event];
-    if (handlers) {
-      handlers.forEach(handler => handler(...args));
-    }
+    if (!handlers) return;
+    const invoke = (fn: VoiceProviderEvents[K]) => {
+      (fn as (...a: Parameters<VoiceProviderEvents[K]>) => void)(...args);
+    };
+    handlers.forEach(invoke);
   }
 }

@@ -99,12 +99,12 @@ export const trackIndustrySelection = (industry: string) => {
   }
 };
 
-// Custom hook for scroll depth tracking
-export const useScrollDepthTracking = () => {
+/** Subscribes to scroll events and reports GA4 scroll milestones; returns unsubscribe. Not a React hook. */
+export const createScrollDepthTracking = () => {
   if (typeof window === 'undefined') return;
 
-  let scrollDepths = [25, 50, 75, 100];
-  let triggeredDepths: number[] = [];
+  const scrollDepths = [25, 50, 75, 100];
+  const triggeredDepths: number[] = [];
 
   const handleScroll = () => {
     const windowHeight = window.innerHeight;

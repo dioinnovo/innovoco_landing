@@ -8,7 +8,7 @@ import { SchemaMarkup } from '@/lib/seo/SchemaMarkup';
 import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
 import { Brain, Rocket, Database, Cloud, GitBranch, Shield, Zap, CheckCircle } from 'lucide-react';
 import { useEffect } from 'react';
-import { trackServicePageView, useScrollDepthTracking } from '@/lib/analytics/events';
+import { createScrollDepthTracking, trackServicePageView } from '@/lib/analytics/events';
 
 export function DataEngineeringPageClient() {
   const breadcrumbs = [
@@ -36,7 +36,7 @@ export function DataEngineeringPageClient() {
   // Track page view and scroll depth
   useEffect(() => {
     trackServicePageView('Data Engineering & Modernization');
-    const cleanup = useScrollDepthTracking();
+    const cleanup = createScrollDepthTracking();
     return cleanup;
   }, []);
 

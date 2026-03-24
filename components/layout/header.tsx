@@ -52,7 +52,10 @@ export function Header({ onContactClick, isLandingPage = false, activeSection = 
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50" role="banner">
+    <header
+      className="sticky top-0 z-50 border-b border-white/50 bg-white/65 shadow-sm backdrop-blur-xl backdrop-saturate-150 supports-backdrop-filter:bg-white/55"
+      role="banner"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between h-16 md:h-20" role="navigation" aria-label="Main navigation">
           {/* Logo */}
@@ -129,7 +132,7 @@ export function Header({ onContactClick, isLandingPage = false, activeSection = 
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-border/50 bg-background/95 backdrop-blur-md">
+        <div className="lg:hidden border-t border-white/50 bg-white/70 backdrop-blur-xl backdrop-saturate-150 supports-backdrop-filter:bg-white/60">
           <div className="mx-auto max-w-7xl px-4 py-4 space-y-1">
             {navItems.map((item) => {
               const isActive = isNavActive(item);

@@ -482,15 +482,6 @@ const functionalUseCases = [
       "Full compliance tracking",
     ],
   },
-  {
-    title: "BMAD‑Powered Development Accelerator",
-    desc: "From idea to MVP in hours, not months. Our AI agent system creates pitch decks, technical specs, and working prototypes.",
-    impact: [
-      "10x faster prototype development",
-      "Automatic technical documentation",
-      "Production‑ready code generation",
-    ],
-  },
 ];
 
 const matrixData = [
@@ -698,7 +689,7 @@ export const CaseStudiesPDF = () => (
           ))}
         </View>
         <View style={styles.column}>
-          {functionalUseCases.slice(2, 4).map((useCase, idx) => (
+          {functionalUseCases.slice(2).map((useCase, idx) => (
             <View key={idx} style={styles.card}>
               <Text style={styles.cardTitle}>{useCase.title}</Text>
               <Text style={styles.cardText}>{useCase.desc}</Text>

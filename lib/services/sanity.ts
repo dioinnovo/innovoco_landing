@@ -6,7 +6,7 @@
  */
 
 import { client, previewClient, isSanityConfigured, getBlogImageUrl, getAvatarUrl, urlFor } from '@/lib/sanity/client';
-import { toHTML } from '@portabletext/to-html';
+import { toHTML, type PortableTextHtmlComponents } from '@portabletext/to-html';
 import type { PortableTextBlock } from '@portabletext/types';
 import type {
   BlogArticle,
@@ -100,9 +100,10 @@ const portableTextComponents = {
     },
   },
   marks: {
-    link: ({ children, value }: { children: string; value: { href: string; blank?: boolean } }) => {
-      const target = value.blank ? ' target="_blank" rel="noopener noreferrer"' : '';
-      return `<a href="${value.href}"${target} class="text-blue-600 hover:text-blue-800 underline">${children}</a>`;
+    link: ({ children, value }: { children: string; value?: { href?: string; blank?: boolean } }) => {
+      const href = value?.href ?? '#';
+      const target = value?.blank ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a href="${href}"${target} class="text-blue-600 hover:text-blue-800 underline">${children}</a>`;
     },
     code: ({ children }: { children: string }) => {
       return `<code class="bg-gray-100 text-gray-800 px-1.5 py-0.5 rounded text-sm font-mono">${children}</code>`;
@@ -155,7 +156,9 @@ function portableTextToHtml(content: PortableTextBlock[] | null): string {
   }
 
   try {
-    return toHTML(content, { components: portableTextComponents });
+    return toHTML(content, {
+      components: portableTextComponents as Partial<PortableTextHtmlComponents>,
+    });
   } catch (error) {
     console.error('Error converting Portable Text to HTML:', error);
     return '';

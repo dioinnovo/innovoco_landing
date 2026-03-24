@@ -1,13 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { 
-  createDefaultClientEmailSchema,
-  validateClientEmailSchema
-} from '@/lib/email/client-schema'
-import { 
-  mapChallengesToSolutions, 
-  generateSuccessMetrics, 
-  generateIndustryProof 
-} from '@/lib/email/solution-vision'
+import type { ClientInfo } from '@/lib/email/client-schema'
 import { buildClientEmail } from '@/lib/email/client-template'
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || ''
@@ -25,47 +17,23 @@ async function sendQualificationEmail(
   }
 
   try {
-    // Create structured email schema
-    const emailSchema = createDefaultClientEmailSchema()
-    
-    // Populate with extracted lead info
-    emailSchema.personalization.recipientName = extractedInfo.name || 'there'
-    emailSchema.personalization.companyName = extractedInfo.company || 'your company'
-    emailSchema.personalization.role = extractedInfo.role || 'your team'
-    emailSchema.personalization.companySize = extractedInfo.employees ? `${extractedInfo.employees} employees` : 'your organization'
-    
-    // Map challenges if available
-    const challenges = extractedInfo.challenges ? extractedInfo.challenges.split(',') : []
-    if (challenges.length > 0) {
-      const mappedChallenges = mapChallengesToSolutions(
-        challenges,
-        extractedInfo.industry || 'General',
-        extractedInfo.employees || '50+',
-        extractedInfo.timeline || 'Q1 2025'
-      )
-      emailSchema.personalization.challenges = mappedChallenges
-      
-      if (mappedChallenges.length > 0) {
-        emailSchema.solutionVision.primarySolution = mappedChallenges[0].solution
-      }
+    const challenges = extractedInfo.challenges
+      ? String(extractedInfo.challenges)
+          .split(',')
+          .map((s: string) => s.trim())
+          .filter(Boolean)
+      : undefined
+
+    const clientInfo: ClientInfo = {
+      name: extractedInfo.name || 'there',
+      email: extractedInfo.email,
+      company: extractedInfo.company || undefined,
+      industry: extractedInfo.industry || undefined,
+      companySize: extractedInfo.employees ? String(extractedInfo.employees) : undefined,
+      currentChallenges: challenges,
     }
-    
-    // Set timeline and urgency
-    emailSchema.personalization.timeline = {
-      phase: extractedInfo.timeline || 'evaluation',
-      urgency: qualificationStatus === 'highly_qualified' ? 'immediate' : 'standard',
-      decisionTimeframe: extractedInfo.timeline || 'upcoming quarter',
-      businessDrivers: challenges
-    }
-    
-    // Configure email subject and tone
-    emailSchema.emailConfig.subject = `${extractedInfo.name || 'Hi'}, thank you for connecting with Innovoco`
-    emailSchema.emailConfig.preheader = `Next steps for your AI & automation transformation`
-    emailSchema.tone.formality = extractedInfo.decisionMaker ? 'executive' : 'professional'
-    emailSchema.tone.urgency = qualificationStatus === 'highly_qualified' ? 'priority' : 'standard'
-    
-    // Build and send email
-    const emailHtml = buildClientEmail(emailSchema)
+
+    const { html: emailHtml, subject } = buildClientEmail(clientInfo)
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
     const from = `Innovoco AI Team <${fromEmail}>`
     
@@ -78,7 +46,7 @@ async function sendQualificationEmail(
       body: JSON.stringify({
         from,
         to: [extractedInfo.email],
-        subject: emailSchema.emailConfig.subject,
+        subject,
         html: emailHtml,
       }),
     })
@@ -120,7 +88,7 @@ export async function POST(request: NextRequest) {
 
     // Initialize scoring
     let qualificationScore = 0
-    let qualificationReasons = []
+    const qualificationReasons = []
     const extractedInfo: any = {
       name: '',
       email: '',

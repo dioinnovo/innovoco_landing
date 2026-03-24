@@ -69,6 +69,8 @@ export interface RelatedIndustry {
   href: string;
   gradient: string;
   icon: LucideIcon;
+  /** Optional stat line for related-industry cards */
+  metrics?: Array<{ value: string; label: string }>;
 }
 
 export interface RelatedService {

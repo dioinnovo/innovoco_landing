@@ -8,7 +8,7 @@ import { SchemaMarkup } from "@/lib/seo/SchemaMarkup";
 import { createServiceSchema, createBreadcrumbSchema } from "@/lib/seo/schema";
 import { Brain, Database, Gauge, Shield, CheckCircle } from "lucide-react";
 import { useEffect } from "react";
-import { trackServicePageView, useScrollDepthTracking } from "@/lib/analytics/events";
+import { createScrollDepthTracking, trackServicePageView } from "@/lib/analytics/events";
 
 export function ManagedAIPageClient() {
   const breadcrumbs = [
@@ -35,7 +35,7 @@ export function ManagedAIPageClient() {
 
   useEffect(() => {
     trackServicePageView("Managed AI Services");
-    const cleanup = useScrollDepthTracking();
+    const cleanup = createScrollDepthTracking();
     return cleanup;
   }, []);
 

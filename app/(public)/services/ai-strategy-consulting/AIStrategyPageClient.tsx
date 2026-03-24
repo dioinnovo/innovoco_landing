@@ -8,7 +8,7 @@ import { SchemaMarkup } from '@/lib/seo/SchemaMarkup';
 import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
 import { Database, Rocket, Target, TrendingUp, DollarSign, Zap, CheckCircle } from 'lucide-react';
 import { useEffect } from 'react';
-import { trackServicePageView, useScrollDepthTracking } from '@/lib/analytics/events';
+import { createScrollDepthTracking, trackServicePageView } from '@/lib/analytics/events';
 
 export function AIStrategyPageClient() {
   const breadcrumbs = [
@@ -36,7 +36,7 @@ export function AIStrategyPageClient() {
   // Track page view and scroll depth
   useEffect(() => {
     trackServicePageView('AI Strategy & Consulting');
-    const cleanup = useScrollDepthTracking();
+    const cleanup = createScrollDepthTracking();
     return cleanup;
   }, []);
 

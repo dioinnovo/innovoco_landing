@@ -38,6 +38,10 @@
   "exclude": [
     "node_modules",
     "langgraph_env",
-    "scripts"
+    "scripts",
+    "nextjs-app",
+    "dist",
+    "app/(public)/page.optimized.tsx",
+    "test-voice-lead-flow.ts"
   ]
 }

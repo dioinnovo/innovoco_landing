@@ -143,20 +143,22 @@ export async function GET(request: NextRequest) {
       console.log('🎭 Forcing ALL animations to complete state...');
       
       // Find ALL elements with Framer Motion and force them visible
-      const allMotionElements = Array.from(document.querySelectorAll('*')).filter(el => {
-        const style = window.getComputedStyle(el);
-        const hasOpacity = style.opacity === '0' || el.style.opacity === '0';
-        const hasTransform = style.transform !== 'none' || el.style.transform;
+      const allMotionElements = Array.from(document.querySelectorAll('*')).filter((el) => {
+        const htmlEl = el as HTMLElement;
+        const style = window.getComputedStyle(htmlEl);
+        const hasOpacity = style.opacity === '0' || htmlEl.style.opacity === '0';
+        const hasTransform = style.transform !== 'none' || htmlEl.style.transform;
         return hasOpacity || hasTransform;
       });
       
       console.log(`Found ${allMotionElements.length} elements that need fixing`);
       
-      allMotionElements.forEach((el: HTMLElement) => {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-        el.style.visibility = 'visible';
-        el.style.display = el.style.display || 'block';
+      allMotionElements.forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        htmlEl.style.opacity = '1';
+        htmlEl.style.transform = 'none';
+        htmlEl.style.visibility = 'visible';
+        htmlEl.style.display = htmlEl.style.display || 'block';
       });
       
       // Force intersection observers to fire
@@ -527,7 +529,7 @@ export async function GET(request: NextRequest) {
     await browser.close();
 
     // Return the PDF
-    return new NextResponse(pdf, {
+    return new NextResponse(new Uint8Array(pdf), {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="AI-Discovery-Workshop-Executive-Brief.pdf"'

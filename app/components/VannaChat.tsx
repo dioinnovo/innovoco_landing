@@ -9,7 +9,7 @@ import {
   Table, FileDown, FileJson, FileSpreadsheet, Zap, BookOpen,
   CheckCircle, XCircle, Info, Eye, EyeOff, Copy, ExternalLink,
   History, Trash2, Plus, Filter, Search, Clock, ArrowUp, 
-  HelpCircle, GitBranch, Target, Layers, Award, TrendingDown
+  HelpCircle, GitBranch, Target, Layers, Award, TrendingDown, Key
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
@@ -644,7 +644,9 @@ export default function VannaChatUltimate({ className = '' }: VannaChatUltimateP
                     </div>
                     {item.id && (
                       <button
-                        onClick={() => removeTrainingData(item.id)}
+                        onClick={() => {
+                          if (item.id) removeTrainingData(item.id);
+                        }}
                         className="ml-4 p-2 text-red-600 hover:bg-red-50 rounded-lg"
                       >
                         <Trash2 className="w-4 h-4" />

@@ -18,7 +18,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { SchemaMarkup } from "@/lib/seo/SchemaMarkup";
 import { createServiceSchema, createBreadcrumbSchema } from "@/lib/seo/schema";
-import { trackServicePageView, useScrollDepthTracking } from "@/lib/analytics/events";
+import { createScrollDepthTracking, trackServicePageView } from "@/lib/analytics/events";
 import type { IndustryConfig } from "@/lib/content/industries/types";
 import type { IndustryVisualThemeKey } from "@/components/shared/industry-card-themes";
 import {
@@ -123,7 +123,7 @@ export function IndustryBloombergPage({
 
   useEffect(() => {
     trackServicePageView(trackEventName);
-    return useScrollDepthTracking();
+    return createScrollDepthTracking();
   }, [trackEventName]);
 
   return (
@@ -160,6 +160,8 @@ export function IndustryBloombergPage({
                 className="object-cover opacity-40"
                 priority
               />
+              {/* Dark scrim improves text contrast on busy photography without hiding the scene */}
+              <div className="absolute inset-0 bg-black/35" aria-hidden />
               <div className={`absolute inset-0 bg-gradient-to-b ${tokens.heroOverlayClassName}`} aria-hidden />
             </div>
 
@@ -200,14 +202,14 @@ export function IndustryBloombergPage({
                 <motion.p
                   variants={fadeUp}
                   custom={2}
-                  className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-[#94A3B8] md:text-xl"
+                  className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-slate-200 md:text-xl [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]"
                 >
                   {config.hero.subtitle}
                 </motion.p>
                 <motion.p
                   variants={fadeUp}
                   custom={3}
-                  className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-[#64748B] md:text-lg"
+                  className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-slate-300 md:text-lg [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]"
                 >
                   {config.hero.description}
                 </motion.p>
@@ -232,14 +234,13 @@ export function IndustryBloombergPage({
                   </Button>
                   <Button
                     size="lg"
-                    variant="outline"
+                    variant="ghost"
                     onClick={() =>
                       document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth" })
                     }
-                    className={`rounded-lg border px-8 py-6 text-base font-semibold transition-all duration-300 ${tokens.outlineButtonHoverBgClass}`}
+                    className={`rounded-lg border border-solid px-8 py-6 text-base font-semibold text-white shadow-none transition-all duration-300 hover:text-white ${tokens.outlineButtonHoverBgClass}`}
                     style={{
                       borderColor: tokens.heroBorder,
-                      color: tokens.subtext,
                     }}
                   >
                     Explore Capabilities
@@ -255,7 +256,9 @@ export function IndustryBloombergPage({
                   {config.hero.trustIndicators.map((m, i) => (
                     <div key={i} className="text-center">
                       <div className="text-2xl font-bold text-white md:text-3xl">{m.metric}</div>
-                      <div className="mt-1 text-xs text-[#64748B] md:text-sm">{m.label}</div>
+                      <div className="mt-1 text-xs text-slate-300 md:text-sm [text-shadow:0_1px_2px_rgba(0,0,0,0.75)]">
+                        {m.label}
+                      </div>
                     </div>
                   ))}
                 </motion.div>

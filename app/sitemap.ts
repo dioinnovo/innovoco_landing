@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { businessOutcomeUseCases } from "@/lib/content/case-studies-page-content";
 import { getPublishedArticlesForSitemap } from "@/lib/services/sanity";
 
 const baseUrl = "https://innovoco.com";
@@ -29,7 +30,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entry("/solutions/industries/manufacturing", { changeFrequency: "monthly", priority: 0.9 }),
     entry("/solutions/industries/retail", { changeFrequency: "monthly", priority: 0.9 }),
     entry("/solutions/industries/construction", { changeFrequency: "monthly", priority: 0.9 }),
+    entry("/solutions/industries/insurance", { changeFrequency: "monthly", priority: 0.9 }),
+    entry("/solutions/industries/energy-utilities", { changeFrequency: "monthly", priority: 0.9 }),
     entry("/case-studies", { changeFrequency: "weekly", priority: 0.7 }),
+    ...businessOutcomeUseCases.map((u) =>
+      entry(`/case-studies/use-cases/${u.slug}`, { changeFrequency: "monthly", priority: 0.65 })
+    ),
     entry("/projects/ai-discovery-workshop", { changeFrequency: "monthly", priority: 0.7 }),
     entry("/blog", { changeFrequency: "weekly", priority: 0.85 }),
     entry("/webinars", { changeFrequency: "monthly", priority: 0.55 }),

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { BackgroundGradientGlow } from "@/components/ui/background-gradient-glow";
 import { MotionWrapper, MotionText, MotionCard, MotionList, MotionListItem } from "@/components/ui/motion-wrapper";
 import { AnimatedSection, AnimatedDiv } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
@@ -104,7 +105,6 @@ export function LandingPageClient() {
         Skip to main content
       </a>
 
-      {/* Navigation Header */}
       <Header
         onContactClick={() => setContactModalOpen(true)}
         isLandingPage={true}
@@ -113,7 +113,6 @@ export function LandingPageClient() {
 
       {/* Main Content */}
       <main id="main-content" role="main">
-      
       {/* Hero Section */}
       <motion.section 
         id="hero"
@@ -122,9 +121,12 @@ export function LandingPageClient() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#DBEAFE] via-[#EDE9FE] to-[#FECACA]" />
-        <div className="absolute inset-0 bg-white/70" />
-        
+        <BackgroundGradientGlow />
+        <div
+          className="absolute inset-0 z-1 bg-white/45 pointer-events-none"
+          aria-hidden
+        />
+
         <div className="container mx-auto relative z-10">
           <motion.div
             className="max-w-5xl mx-auto text-center"
@@ -1298,15 +1300,15 @@ export function LandingPageClient() {
                   />
                 </div>
                 <div className="mt-8">
-                  <Button
-                    type="button"
-                    size="lg"
-                    onClick={() => setContactModalOpen(true)}
-                    className="w-full bg-[#6d28d9] hover:bg-[#5b21b6] text-white transition-all duration-300 group rounded-full h-12"
-                  >
-                    <span className="font-semibold">Discuss Insurance & Claims AI</span>
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Button>
+                  <Link href="/solutions/industries/insurance" className="block w-full cursor-pointer">
+                    <Button
+                      size="lg"
+                      className="w-full bg-[#6d28d9] hover:bg-[#5b21b6] text-white transition-all duration-300 group rounded-full h-12"
+                    >
+                      <span className="font-semibold">Explore Insurance & Public Adjusters Solutions</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -1361,21 +1363,19 @@ export function LandingPageClient() {
                   />
                 </div>
                 <div className="mt-8">
-                  <Button
-                    type="button"
-                    size="lg"
-                    onClick={() => setContactModalOpen(true)}
-                    className="w-full bg-[#0369a1] hover:bg-[#0c4a6e] text-white transition-all duration-300 group rounded-full h-12"
-                  >
-                    <span className="font-semibold">Discuss Energy & Utilities AI</span>
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Button>
+                  <Link href="/solutions/industries/energy-utilities" className="block w-full cursor-pointer">
+                    <Button
+                      size="lg"
+                      className="w-full bg-[#0369a1] hover:bg-[#0c4a6e] text-white transition-all duration-300 group rounded-full h-12"
+                    >
+                      <span className="font-semibold">Explore Energy & Utilities Solutions</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-
-          {/* Client Logos          </Accordion>
 
           {/* Client Logos - Creating FOMO before CTA */}
           <div className="mt-16 pt-16 border-t border-border/50">
