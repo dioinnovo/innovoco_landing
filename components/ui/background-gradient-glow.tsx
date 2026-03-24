@@ -12,6 +12,19 @@ const AURORA_BACKGROUND = `
             linear-gradient(180deg, #f7eaff 0%, #fde2ea 100%)
       `.trim();
 
+/**
+ * Landing hero: same geometry + alpha strengths as `AURORA_BACKGROUND`, but hues aligned
+ * with the case-studies brand ramp (sky / blue / indigo / rose / red family)—not brighter,
+ * just a different pigment mix. Base wash stays in the same lightness band as the lavender ramp.
+ */
+const AURORA_BRAND_BACKGROUND = `
+        radial-gradient(ellipse 85% 65% at 8% 8%, rgba(129, 140, 248, 0.42), transparent 60%),
+            radial-gradient(ellipse 75% 60% at 75% 35%, rgba(125, 211, 252, 0.55), transparent 62%),
+            radial-gradient(ellipse 70% 60% at 15% 80%, rgba(244, 114, 182, 0.40), transparent 62%),
+            radial-gradient(ellipse 70% 60% at 92% 92%, rgba(56, 189, 248, 0.45), transparent 62%),
+            linear-gradient(180deg, #f0f9ff 0%, #fff1f2 100%)
+      `.trim();
+
 /** Case-studies / brand: saturated blue → indigo/violet → crimson + left grid. */
 const BRAND_BASE_LAYERS = `
             radial-gradient(ellipse 125% 75% at -5% 42%, rgba(56, 189, 248, 0.5), transparent 56%),
@@ -34,8 +47,8 @@ const BRAND_BASE_LAYERS = `
 export type BackgroundGradientGlowProps = {
   className?: string;
   children?: ReactNode;
-  /** `aurora` = original landing hero. `brand` = case-studies / blue–red. Default: `aurora`. */
-  variant?: "aurora" | "brand";
+  /** `aurora` = original lavender hero. `aurora-brand` = same softness, on-brand sky→rose hues. `brand` = case-studies saturated ramp. Default: `aurora`. */
+  variant?: "aurora" | "aurora-brand" | "brand";
 };
 
 function AuroraGradientLayers({ className }: { className?: string }) {
@@ -43,6 +56,16 @@ function AuroraGradientLayers({ className }: { className?: string }) {
     <div
       className={cn("absolute inset-0 overflow-hidden", className)}
       style={{ background: AURORA_BACKGROUND }}
+      aria-hidden
+    />
+  );
+}
+
+function AuroraBrandGradientLayers({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn("absolute inset-0 overflow-hidden", className)}
+      style={{ background: AURORA_BRAND_BACKGROUND }}
       aria-hidden
     />
   );
@@ -82,7 +105,12 @@ export function BackgroundGradientGlow({
   children,
   variant = "aurora",
 }: BackgroundGradientGlowProps) {
-  const Layers = variant === "brand" ? BrandGradientLayers : AuroraGradientLayers;
+  const Layers =
+    variant === "brand"
+      ? BrandGradientLayers
+      : variant === "aurora-brand"
+        ? AuroraBrandGradientLayers
+        : AuroraGradientLayers;
 
   if (children != null) {
     return (

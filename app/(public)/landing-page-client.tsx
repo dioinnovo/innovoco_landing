@@ -121,7 +121,7 @@ export function LandingPageClient() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        <BackgroundGradientGlow />
+        <BackgroundGradientGlow variant="aurora-brand" />
         <div
           className="absolute inset-0 z-1 bg-white/45 pointer-events-none"
           aria-hidden
