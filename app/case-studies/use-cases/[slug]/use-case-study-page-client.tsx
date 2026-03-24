@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -63,6 +64,24 @@ const outcomeIcons = {
   search: Search,
   "git-branch": GitBranch,
 } as const;
+
+/** Map use case industry IDs → per-industry CTA background image paths. */
+const industryCtaBgMap: Record<string, string> = {
+  "financial-services": "/images/industries/financial-services/cta-prioritization-bg.jpg",
+  healthcare: "/images/industries/healthcare/cta-prioritization-bg.jpg",
+  "retail-consumer": "/images/industries/retail/cta-prioritization-bg.jpg",
+  "manufacturing-logistics": "/images/industries/manufacturing/cta-prioritization-bg.jpg",
+  "energy-field": "/images/industries/energy-utilities/cta-prioritization-bg.jpg",
+  technology: "/images/case-studies/cta-prioritization-bg.jpg",
+  "cross-enterprise": "/images/case-studies/cta-prioritization-bg.jpg",
+};
+
+function resolveCtaBg(industries: string[]): string {
+  for (const id of industries) {
+    if (industryCtaBgMap[id]) return industryCtaBgMap[id];
+  }
+  return "/images/case-studies/cta-prioritization-bg.jpg";
+}
 
 type Props = {
   summary: BusinessOutcomeUseCase;
@@ -159,24 +178,44 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
           />
         ) : null}
 
-        <section className="bg-[#f0f3f7] py-20 dark:bg-[#0B0F19] md:py-28">
-          <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-            <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] dark:text-[#F9FAFB] sm:text-4xl md:text-5xl">
+        <section className="relative overflow-hidden">
+          <Image
+            src={resolveCtaBg(summary.industries)}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            quality={85}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 bg-linear-to-b from-[#0B0F19]/45 via-[#0B0F19]/35 to-[#0B0F19]/50"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 bg-linear-to-r from-[#0A58D0]/15 via-transparent to-[#DC2626]/10"
+            aria-hidden="true"
+          />
+          <div className="relative z-10 mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 md:py-28">
+            <h2 className="text-3xl font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] sm:text-4xl md:text-5xl">
               Explore this outcome on your stack
             </h2>
-            <p className="mt-5 text-pretty text-lg leading-relaxed text-[#525252] dark:text-[#D1D5DB] md:text-xl">
+            <p className="mt-5 text-pretty text-lg leading-relaxed text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] md:text-xl">
               We map scope, guardrails, and rollout to your data boundaries and teams—practical next steps, not a
               generic slide deck.
             </p>
             <Button
               type="button"
               size="lg"
-              className="mt-10 rounded-full bg-[#00518e] px-10 py-7 text-lg font-semibold hover:bg-[#00518e]/90 dark:bg-[#0A58D0]"
+              className="mt-10 rounded-full bg-white px-10 py-7 text-lg font-semibold text-[#0B0F19] shadow-[0_8px_32px_rgba(255,255,255,0.2)] transition-all duration-300 hover:scale-105 hover:bg-neutral-100 hover:shadow-[0_12px_44px_rgba(255,255,255,0.3)]"
               onClick={() => setContactOpen(true)}
             >
               Book a briefing
               <ArrowRight className="ml-3 h-5 w-5" />
             </Button>
+            <p className="mt-4 text-sm font-medium text-white/60 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
+              60 min · Free · No obligation
+            </p>
           </div>
         </section>
 
