@@ -32,7 +32,7 @@ const MODEL = "gemini-3.1-flash-image-preview";
 /** Brand guardrails only—per-card contrast is what stops the grid from looking identical. */
 const SHARED = `Premium editorial illustration for an enterprise AI consulting website—warm, aspirational tech romanticism; never cold corporate minimalism or dark dystopian futurism.
 ${CINEMATIC_STYLE_ANCHOR}
-Innovoco brand colors must appear: cobalt/sapphire blues AND crimson/ruby reds (plus violet where they meet)—HOW you balance them changes every image (see contrast recipe below). NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots. Abstract, sophisticated, inviting.`;
+Color palette: Use the Innovoco brand range (cobalt, sapphire, indigo, violet, rose, amber, gold) but let the subject matter guide the dominant palette. NOT every image needs red or crimson — cool blues, warm ambers, soft teals, or muted neutrals are all valid depending on what the topic calls for. Aim for variety across the grid. NOT photorealistic people. No readable text, no logos, no watermarks, no UI screenshots. Abstract, sophisticated, inviting.`;
 
 /**
  * Each card gets a distinct visual strategy so the library grid has variety, not one harmonious template repeated.
