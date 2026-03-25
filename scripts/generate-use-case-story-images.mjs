@@ -157,7 +157,21 @@ async function main() {
       const headline = extractString("headline");
       const subheadline = extractString("subheadline");
       const technicalInnovation = extractString("technicalInnovation");
-      const challenge = extractString("challenge");
+
+      // Challenge may be JSX (<>...</>) with <strong> tags — extract and strip tags
+      let challenge = extractString("challenge");
+      if (!challenge) {
+        const jsxPattern = /challenge:\s*<>([\s\S]*?)<\/>/;
+        const jsxSub = detailsSrc.slice(startIdx, startIdx + 3000);
+        const jsxMatch = jsxSub.match(jsxPattern);
+        if (jsxMatch) {
+          challenge = jsxMatch[1]
+            .replace(/<strong>/g, "")
+            .replace(/<\/strong>/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+      }
 
       // Extract impactMetrics array
       const metricsBlock = detailsSrc.slice(startIdx, startIdx + 8000);

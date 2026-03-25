@@ -98,11 +98,13 @@ async function main() {
       if (manualSlugs.has(slug)) continue;
       const startIdx = detailsSrc.indexOf(`"${slug}": {`);
       if (startIdx === -1) continue;
-      const pattern = /challenge:\s*"([^"]*(?:\\.[^"]*)*)"/s;
       const sub = detailsSrc.slice(startIdx, startIdx + 3000);
-      const m = sub.match(pattern);
+      // Try string literal first, then JSX
+      const stringPattern = /challenge:\s*"([^"]*(?:\\.[^"]*)*)"/s;
+      const jsxPattern = /challenge:\s*<>([\s\S]*?)<\/>/;
+      const m = sub.match(stringPattern) || sub.match(jsxPattern);
       if (m) {
-        const challenge = m[1].replace(/\\"/g, '"').replace(/\\n/g, " ");
+        const challenge = m[1].replace(/<strong>/g, "").replace(/<\/strong>/g, "").replace(/\\"/g, '"').replace(/\\n/g, " ").replace(/\s+/g, " ").trim();
         effectiveJobs.push({
           slug,
           prompt: buildChallengePromptFromNarrative({ challenge }),
