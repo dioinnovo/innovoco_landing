@@ -174,32 +174,28 @@ export function buildPromptsFromNarrative(narrative) {
   const phases = narrative.phases.map(
     (p) => `${SHARED_SOLUTION}
 
-This image accompanies the following text. Read it and create a visual interpretation:
-"${p.title}: ${p.body}"
+The topic: "${p.title}: ${p.body}"
 
-Illustrate the essence of what this phase describes. No text labels.`
+Include recognizable elements from this domain rendered artistically — not photorealistic, but enough detail that the viewer knows what field this is about. Balance atmospheric artistry with concrete domain context. No text labels.`
   );
 
   const implementations = `${SHARED_SOLUTION}
 
-This image accompanies these key implementations. Read them and create a visual interpretation:
-${narrative.keyImplementations.map((ki) => `- ${ki.title}`).join("\n")}
+The key elements working together: ${narrative.keyImplementations.map((ki) => ki.title).join(", ")}.
 
-Illustrate how these elements connect and work together. No text labels.`;
+Show these as an artistic composition where recognizable domain forms connect and work in harmony. Balance: enough detail to understand the domain, enough artistry to feel sublime. No text labels.`;
 
   const technical = `${SHARED_SOLUTION}
 
-This image accompanies the following technical description. Read it and create a visual interpretation:
-"${narrative.technicalInnovation}"
+The innovation: "${narrative.technicalInnovation}"
 
-4:3 aspect ratio. No text labels.`;
+Capture the elegance of this approach — recognizable domain elements composed with artistic sophistication. Not a technical diagram, but not pure abstraction either. 4:3 aspect ratio. No text labels.`;
 
   const impact = `${SHARED_SOLUTION}
 
-This image accompanies these business results — the value delivered to the client. Read them and create a visual interpretation:
-${narrative.impactMetrics.map((m) => `- ${m}`).join("\n")}
+The results achieved: ${narrative.impactMetrics.map((m) => m.split("—")[0].split("–")[0].trim()).join("; ")}.
 
-Mood: achievement, milestone reached, business value delivered. A subtle sense of accomplishment and forward momentum — not celebration confetti, but the quiet confidence of results that speak for themselves. Think: summit reached, horizon clear, metrics ascending. 4:3 aspect ratio. No text labels.`;
+Mood: achievement, milestone reached, quiet confidence. The domain should still be recognizable but elevated — a summit reached, horizon clear, the work bearing fruit. 4:3 aspect ratio. No text labels.`;
 
   return { phases, implementations, technical, impact };
 }
@@ -212,10 +208,9 @@ Mood: achievement, milestone reached, business value delivered. A subtle sense o
 export function buildChallengePromptFromNarrative(narrative) {
   return `${SHARED_CHALLENGE}
 
-This image accompanies the following challenge description. Read it and create a visual interpretation showing the friction and obstacles described:
-"${narrative.challenge}"
+The challenge: "${narrative.challenge}"
 
-No text labels.`;
+Show recognizable elements from this domain under stress — friction, fragmentation, obstacles — rendered artistically. The viewer should understand what field this is and feel the tension. Balance domain detail with atmospheric artistry. No text labels.`;
 }
 
 /** @type {Record<string, StoryPrompts>} */

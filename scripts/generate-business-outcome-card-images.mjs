@@ -67,7 +67,7 @@ const CONTRAST_RECIPES = [
 function buildThemeFromContent(title, outcome) {
   return `This image represents: "${title} — ${outcome}"
 
-This is a REPRESENTATION OF THIS SOLUTION THROUGH AN ARTISTIC LENS. Read the text, identify the industry and domain, then create an artistic interpretation that captures what it's about. The viewer should feel the domain — not through literal depiction of people at desks, but through the spirit, atmosphere, and symbolic forms that evoke that world. 4:3 composition.`;
+Include recognizable elements from this domain rendered artistically — the viewer should know what industry and topic this is at a glance. Balance: enough domain detail to be specific, enough artistry to be sublime. Not a literal depiction, not pure abstraction. 4:3 composition. No text labels.`;
 }
 
 /**
