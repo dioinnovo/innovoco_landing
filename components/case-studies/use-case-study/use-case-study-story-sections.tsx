@@ -85,8 +85,8 @@ const atekoSolutionPhaseRowClass =
   "flex flex-row flex-nowrap items-start gap-4 sm:gap-5 md:items-center md:gap-8 lg:gap-10";
 
 const atekoSolutionPhaseImageColClass =
-  "flex w-[6.75rem] shrink-0 flex-col items-stretch justify-start sm:w-[7.5rem] " +
-  "md:w-auto md:max-w-none md:basis-[30%] md:items-center md:justify-center md:px-3 md:py-1 lg:px-4";
+  "flex w-[8.5rem] shrink-0 flex-col items-stretch justify-start sm:w-[9.5rem] " +
+  "md:w-auto md:max-w-none md:basis-[35%] md:items-center md:justify-center md:px-3 md:py-1 lg:px-4";
 
 const atekoSolutionPhaseTextColClass =
   "min-w-0 flex-1 pt-0.5 md:flex-1 md:min-w-0 md:pt-0";
@@ -105,7 +105,7 @@ const atekoSolutionImageColClass =
 
 /** Keeps square art at a stable size while sitting inside the wider 30% column. */
 const atekoSolutionImageInnerClass =
-  "w-full max-w-[7.5rem] sm:max-w-32 md:max-w-[clamp(7.25rem,14vw,10.5rem)]";
+  "w-full max-w-[9rem] sm:max-w-[10rem] md:max-w-[clamp(9rem,16vw,13rem)]";
 
 const atekoSolutionTextColClass =
   "min-w-0 w-full md:flex-1 md:min-w-0";
@@ -177,7 +177,7 @@ export function UseCaseIntroSection({ headline, subheadline, tags, image, icon: 
 
 type ChallengeProps = {
   contextItalic: string;
-  challenge: string;
+  challenge: React.ReactNode;
   challengeImage: string;
   /** Outcome card (or other) art if challenge-specific file is missing */
   challengeImageFallback?: string;
@@ -243,14 +243,14 @@ export function UseCaseChallengeSection({
     <section
       className={cn(
         "relative overflow-hidden border-b border-[#eceef0] bg-[#f8f9fb] dark:border-[#1f2937] dark:bg-[#111827]/50",
-        "[--challenge-grid:rgba(0,81,142,0.065)] dark:[--challenge-grid:rgba(148,163,184,0.11)]"
+        "[--challenge-grid:rgba(0,81,142,0.09)] dark:[--challenge-grid:rgba(148,163,184,0.14)]"
       )}
     >
       {/* Soft blueprint grid — working-surface / case-study board before the build */}
       <div
         aria-hidden
         className={cn(
-          "pointer-events-none absolute inset-0 opacity-[0.5] dark:opacity-[0.42]",
+          "pointer-events-none absolute inset-0 opacity-[0.6] dark:opacity-[0.5]",
           "bg-[linear-gradient(to_right,var(--challenge-grid)_1px,transparent_1px),linear-gradient(to_bottom,var(--challenge-grid)_1px,transparent_1px)] bg-size-[32px_32px] bg-position-[center_top]"
         )}
       />
@@ -461,6 +461,7 @@ export function UseCaseRelatedSection({ related, iconFor }: RelatedProps) {
     <RelatedResourceCardsSection
       heading="More case studies"
       description="Explore adjacent patterns from the same production playbook."
+      variant="carousel"
     >
       {related.map((u) => {
         const RIcon = iconFor(u.icon);

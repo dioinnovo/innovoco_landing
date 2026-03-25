@@ -89,13 +89,13 @@ function BrandGradientLayers({ className }: { className?: string }) {
               90deg,
               transparent,
               transparent 22px,
-              rgba(186, 230, 253, 0.09) 23px
+              rgba(186, 230, 253, 0.12) 23px
             ),
             repeating-linear-gradient(
               0deg,
               transparent,
               transparent 22px,
-              rgba(186, 230, 253, 0.09) 23px
+              rgba(186, 230, 253, 0.12) 23px
             )
           `,
           maskImage: "linear-gradient(to right, black 0%, black 30%, transparent 56%)",

@@ -93,12 +93,22 @@ function loadJobsFromContent() {
   return entries;
 }
 
+/** Per-slug theme overrides — when the auto-generated theme doesn't steer the model enough. */
+const THEME_OVERRIDES = {
+  "marketing-personalization": `This image represents: "Marketing hyper-personalization — Hyper-personalized campaigns that reduced churn 30%, lifted conversion 28%, and drove 15-25% revenue growth with full brand and compliance controls."
+
+The setting is a MODERN MARKETING COMMAND CENTER. Show: large screens displaying customer segments, personalized campaign variants, A/B test results, conversion funnels, and audience dashboards. Visualize the idea of one-to-one messaging at scale — branching campaign flows, customer journey maps with personalized touchpoints. Include elements like email templates, push notifications, audience clusters. The mood is creative precision — art meets data. Absolutely NO landscapes, NO mountains, NO factories. This is DIGITAL MARKETING and CUSTOMER EXPERIENCE. 4:3 composition. No text labels.`,
+  "deal-flow-ai-diligence": `This image represents: "Deal flow & AI diligence — Structured IC-ready outputs from CIMs, datarooms, and portfolio reporting with mandate-aware access controls."
+
+The setting is PRIVATE EQUITY / INVESTMENT BANKING. Show: stacks of confidential information memorandums and financial documents being transformed into structured, organized deal intelligence. Include elements like financial charts, EBITDA waterfalls, deal screening dashboards, document extraction flows. The mood is sophisticated analytical power — intelligence emerging from document complexity. Absolutely NO landscapes, NO mountains, NO factories, NO generic abstract shapes. This is FINANCE and DEAL ANALYSIS. 4:3 composition. No text labels.`,
+};
+
 const autoJobs = loadJobsFromContent();
 console.log(`Loaded ${autoJobs.length} outcome card jobs from content registry.`);
 
 const JOBS = autoJobs.map((job, index) => ({
   ...job,
-  prompt: `${job.theme}
+  prompt: `${THEME_OVERRIDES[job.id] || job.theme}
 
 ${SHARED}
 

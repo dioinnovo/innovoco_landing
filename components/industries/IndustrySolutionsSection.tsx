@@ -89,9 +89,9 @@ export function IndustrySolutionsSection({
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-                className={`flex flex-col gap-10 lg:gap-16 ${
+                className={`flex flex-col gap-10 md:gap-14 lg:gap-16 ${
                   hasImage
-                    ? `items-center lg:items-start ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"}`
+                    ? `items-center md:items-start ${isReversed ? "md:flex-row-reverse" : "md:flex-row"}`
                     : "mx-auto max-w-3xl"
                 }`}
               >
@@ -148,7 +148,7 @@ export function IndustrySolutionsSection({
                   <motion.div
                     variants={fadeUp}
                     custom={2}
-                    className="w-full max-w-md shrink-0 lg:w-[420px]"
+                    className="w-full max-w-md shrink-0 md:w-[340px] lg:w-[420px]"
                   >
                     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--muted)] shadow-md">
                       <Image

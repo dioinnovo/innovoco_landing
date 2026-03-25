@@ -232,7 +232,75 @@ ${SHARED_CHALLENGE}
 Show recognizable elements from this domain under stress — friction, fragmentation, obstacles — rendered artistically. The viewer should understand what field this is and feel the tension. No text labels.`;
 }
 
-/** @type {Record<string, StoryPrompts>} */
+/** @type {Record<string, Partial<StoryPrompts>>} */
 export const STORY_PROMPTS_BY_SLUG = {
-  // All manual overrides removed — every slug uses auto-generated prompts from narrative content
+  "marketing-personalization": {
+    phases: [
+      undefined, // Phase 1 uses auto-generated prompt
+      `THIS IMAGE IS ABOUT: A marketing team using AI to systematically generate campaign variants, test them scientifically, and learn from results.
+The topic: "Phase 2 — Automate creation & learning: Generate variants within brand rubrics; route approvals; log outcomes for reuse. The AI system learns from data and creates better campaigns in a systematic, almost scientific way."
+
+${SHARED_SOLUTION}
+
+Show a MARKETING ANALYTICS LAB — a sleek workspace where AI is generating multiple campaign variants displayed on screens side by side (email layouts, ad creatives, push notification variants). Visualize the learning loop: results flowing back from campaigns into the system, with performance metrics (conversion rates, engagement scores) feeding optimization algorithms. Show A/B test comparisons, lift charts, and a feedback cycle diagram glowing on a central display. People reviewing the AI-suggested winning variants. The mood is systematic experimentation — science meets creativity. Absolutely NO landscapes, NO mountains, NO nature scenes. This is DATA-DRIVEN MARKETING. Square 1:1 for phase tiles. No text labels.`,
+    ],
+    technical: `THIS IMAGE IS ABOUT: Closed-loop analytics that tie exposure data to downstream pipeline impact — personalization that optimizes revenue, not just clicks.
+The innovation: "Closed-loop analytics tie exposure data to downstream pipeline impact—so personalization optimizes revenue, not just clicks."
+
+${SHARED_SOLUTION}
+
+Show a MARKETING INTELLIGENCE CENTER — a sophisticated analytics workspace with large curved screens showing the FULL FUNNEL: campaign exposure at the top flowing through engagement metrics, pipeline conversion, and ultimately revenue attribution at the bottom. Visualize the closed loop: revenue data feeding back up to optimize future campaigns. Show causal attribution paths (not just correlation), holdout group comparisons, and incremental lift measurements. The mood is clarity and precision — marketing as a measurable revenue engine. Absolutely NO landscapes, NO mountains, NO nature. This is MARKETING ANALYTICS and REVENUE SCIENCE. 4:3 aspect ratio. No text labels.`,
+  },
+  "customer-360-identity-resolution": {
+    phases: [
+      undefined, // Phase 1 uses auto-generated prompt
+      `THIS IMAGE IS ABOUT: A multi-channel retailer resolving fragmented customer identities into unified golden records.
+The topic: "Phase 2 — Resolution + activation: Applied clustering algorithms to identify groups of records that belong to the same person. Produced golden records with merge provenance and exposed resolved profiles via API to the CDP, CRM, loyalty, and marketing platforms. Consent and preference records follow the golden identity—so opt-outs propagate across all fragments automatically."
+
+${SHARED_SOLUTION}
+
+Show a MODERN RETAIL DATA OPERATIONS ROOM — large screens displaying customer identity graphs where scattered fragments merge into unified golden profiles. Visualize connections between email icons, phone icons, loyalty cards, and device silhouettes converging into single glowing profile nodes. People in business casual reviewing the unified customer view on screens and tablets. The mood is clarity and resolution — order emerging from fragmentation. Absolutely NO factories, NO industrial machinery, NO landscapes. This is RETAIL CUSTOMER DATA. Square 1:1 for phase tiles. No text labels.`,
+    ],
+    impact: `THIS IMAGE IS ABOUT: A multi-channel retailer that unified fragmented customer records into a single golden profile. The results achieved:
+- Duplicate records reduced from 22% to under 3%
+- Marketing spend efficiency improved 28%
+- Customer lifetime value models became reliable with 35% more accurate CLV predictions
+- Consent compliance achieved across all channels
+
+${SHARED_SOLUTION}
+
+The setting is a MODERN RETAIL HEADQUARTERS — open-plan marketing floor with large screens showing unified customer dashboards, data visualizations of merged identity graphs, and campaign performance metrics. People in business casual reviewing consolidated customer profiles. Warm, successful atmosphere. Absolutely NO factories, NO industrial machinery, NO manufacturing floors. This is a RETAIL and MARKETING story. 4:3 aspect ratio. No text labels.`,
+  },
+  "deal-flow-ai-diligence": {
+    phases: [
+      `THIS IMAGE IS ABOUT: A middle-market private equity fund using AI to screen and extract data from deal documents (CIMs, teasers, management presentations).
+The topic: "Phase 1 — Deal screening and extraction: Built intake pipelines for CIMs, teasers, and management presentations. Extraction models pull financial metrics (revenue, EBITDA, growth rates, customer concentration), industry classification, and deal terms into structured templates."
+
+${SHARED_SOLUTION}
+
+Show a PRIVATE EQUITY ANALYST'S OFFICE — stacks of confidential information memorandums (CIMs) and deal documents on a polished desk, with a large screen showing structured financial data being extracted: revenue charts, EBITDA waterfall, deal scoring dashboard. A person in business attire reviewing extracted metrics on a tablet. The mood is focused and analytical — intelligence emerging from document chaos. Absolutely NO factories, NO landscapes, NO mountains. This is PRIVATE EQUITY and INVESTMENT BANKING. Square 1:1 for phase tiles. No text labels.`,
+      `THIS IMAGE IS ABOUT: A PE fund extending AI extraction to dataroom documents and normalizing portfolio company reporting.
+The topic: "Phase 2 — Diligence workflow and portfolio normalization: Extended extraction to dataroom documents (QofE, legal, commercial). Structured outputs feed IC memo templates with sourced citations. Portfolio module normalizes monthly and quarterly reporting from portcos into comparable dashboards with variance flagging."
+
+${SHARED_SOLUTION}
+
+Show a PRIVATE EQUITY WAR ROOM — a large conference table with multiple screens displaying normalized portfolio dashboards, IC memo drafts with highlighted citations, and dataroom document flows. Investment professionals reviewing structured deal materials. Financial charts showing comparable KPIs across portfolio companies. The mood is command and clarity — decisions informed by structured intelligence. Absolutely NO factories, NO landscapes, NO mountains. This is PRIVATE EQUITY and FINANCE. Square 1:1 for phase tiles. No text labels.`,
+    ],
+    technical: `THIS IMAGE IS ABOUT: A PE fund's document understanding system that combines layout analysis, table extraction, and entity linking for financial documents.
+The innovation: "A document understanding layer combines layout analysis, table extraction, and entity linking to handle the diverse formats of financial documents—from formatted CIMs to scanned QofE appendices—without per-document template programming. Mandate-level isolation is enforced at the infrastructure layer."
+
+${SHARED_SOLUTION}
+
+Show an ELEGANT FINANCE TECHNOLOGY WORKSPACE — holographic displays revealing the inner structure of financial documents being parsed: tables being identified, entities being linked, metrics being extracted and connected. The visual metaphor is X-ray vision into complex documents. Sophisticated, precise atmosphere. Absolutely NO factories, NO landscapes, NO mountains. This is FINTECH and DOCUMENT INTELLIGENCE. 4:3 aspect ratio. No text labels.`,
+    impact: `THIS IMAGE IS ABOUT: A PE fund that achieved 60% reduction in analyst time, structured IC-ready outputs, unified portfolio views, and full audit trails.
+The results achieved:
+- 60% reduction in analyst time on initial deal screening and CIM processing
+- Structured, IC-ready diligence outputs with page-level citations
+- Unified cross-portfolio KPI views replacing manual spreadsheet consolidation
+- Full audit trail satisfying LP transparency requirements
+
+${SHARED_SOLUTION}
+
+Show a PRESTIGIOUS INVESTMENT COMMITTEE BOARDROOM — partners and analysts around a long table reviewing clean, structured deal materials on large wall-mounted screens. Portfolio performance dashboards with comparable metrics across companies. The mood is confidence and efficiency — decisions flowing from trusted, structured data. Golden hour light through floor-to-ceiling windows overlooking a financial district skyline. Absolutely NO factories, NO landscapes, NO mountains. This is PRIVATE EQUITY SUCCESS. 4:3 aspect ratio. No text labels.`,
+  },
 };

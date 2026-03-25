@@ -53,7 +53,7 @@ export default async function UseCaseStudyPage({
   const detail = getUseCaseStudyDetail(slug);
   if (!summary || !detail) notFound();
 
-  const related = businessOutcomeUseCases.filter((u) => u.slug !== slug).slice(0, 3);
+  const related = businessOutcomeUseCases.filter((u) => u.slug !== slug).slice(0, 9);
 
   return <UseCaseStudyPageClient summary={summary} detail={detail} related={related} />;
 }

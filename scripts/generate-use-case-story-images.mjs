@@ -196,8 +196,13 @@ async function main() {
   /** @type {Record<string, import("./use-case-story-prompts.mjs").StoryPrompts>} */
   const effectivePrompts = { ...STORY_PROMPTS_BY_SLUG };
   for (const [slug, narrative] of Object.entries(narrativeDetails)) {
-    if (!effectivePrompts[slug] && narrative.phases.length > 0) {
-      effectivePrompts[slug] = buildPromptsFromNarrative(narrative);
+    if (narrative.phases.length > 0) {
+      const auto = buildPromptsFromNarrative(narrative);
+      const manual = effectivePrompts[slug] || {};
+      // Merge: manual overrides win per-field, auto fills the rest
+      // For phases array, merge per-element so undefined slots fall back to auto
+      const mergedPhases = auto.phases.map((autoP, i) => manual.phases?.[i] ?? autoP);
+      effectivePrompts[slug] = { ...auto, ...manual, phases: mergedPhases };
       console.log(`  Auto-generated prompts for: ${slug}`);
     }
   }

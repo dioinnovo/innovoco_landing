@@ -224,10 +224,10 @@ export default function CaseStudiesPageClient() {
               </div>
             </div>
 
-            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(260px,380px)] print:grid-cols-1 print:gap-6">
+            <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(220px,340px)] lg:grid-cols-[minmax(0,1fr)_minmax(260px,380px)] print:grid-cols-1 print:gap-6">
               <div>
                 <h1 className="max-w-[20ch] text-3xl font-semibold leading-[1.08] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-4xl md:text-[2.65rem] print:max-w-none print:text-2xl print:text-[#0B0F19] print:drop-shadow-none">
-                  Production AI that ships as outcomes—not slide decks.
+                  Production AI that ships as outcomes.
                 </h1>
                 <p
                   className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-100 drop-shadow-[0_1px_6px_rgba(0,0,0,0.55)] sm:text-lg print:text-sm print:text-[#1f2937] print:drop-shadow-none"
@@ -253,7 +253,7 @@ export default function CaseStudiesPageClient() {
               </div>
 
               {/* aspect-square at ALL breakpoints — lg:aspect-auto was collapsing height (only abs children), hiding the Image fill layer */}
-              <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] print:hidden lg:mx-0 lg:max-w-none">
+              <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] print:hidden md:mx-0 md:max-w-none">
                 <div
                   className="absolute inset-0 rounded-[2rem] bg-linear-to-br from-sky-400/35 via-indigo-500/30 to-rose-500/40 opacity-95 dark:from-sky-500/25 dark:via-violet-600/22 dark:to-red-600/32"
                   aria-hidden
