@@ -171,9 +171,15 @@ export function extractVisualEntities(text) {
  * @returns {StoryPrompts}
  */
 export function buildPromptsFromNarrative(narrative) {
+  // Extract domain context from challenge (first sentence gives the industry/setting)
+  const domainHint = narrative.challenge
+    ? narrative.challenge.split(".")[0] + "."
+    : "";
+
   const phases = narrative.phases.map(
     (p) => `${SHARED_SOLUTION}
 
+Domain context: ${domainHint}
 The topic: "${p.title}: ${p.body}"
 
 Include recognizable elements from this domain rendered artistically — not photorealistic, but enough detail that the viewer knows what field this is about. Balance atmospheric artistry with concrete domain context. No text labels.`
@@ -181,18 +187,21 @@ Include recognizable elements from this domain rendered artistically — not pho
 
   const implementations = `${SHARED_SOLUTION}
 
+Domain context: ${domainHint}
 The key elements working together: ${narrative.keyImplementations.map((ki) => ki.title).join(", ")}.
 
-Show these as an artistic composition where recognizable domain forms connect and work in harmony. Balance: enough detail to understand the domain, enough artistry to feel sublime. No text labels.`;
+Show these in the context of this domain — recognizable forms from this industry working in harmony. Balance: enough detail to understand the domain, enough artistry to feel sublime. No text labels.`;
 
   const technical = `${SHARED_SOLUTION}
 
+Domain context: ${domainHint}
 The innovation: "${narrative.technicalInnovation}"
 
-Capture the elegance of this approach — recognizable domain elements composed with artistic sophistication. Not a technical diagram, but not pure abstraction either. 4:3 aspect ratio. No text labels.`;
+Capture the elegance of this approach within this domain — recognizable elements composed with artistic sophistication. 4:3 aspect ratio. No text labels.`;
 
   const impact = `${SHARED_SOLUTION}
 
+Domain context: ${domainHint}
 The results achieved: ${narrative.impactMetrics.map((m) => m.split("—")[0].split("–")[0].trim()).join("; ")}.
 
 Mood: achievement, milestone reached, quiet confidence. The domain should still be recognizable but elevated — a summit reached, horizon clear, the work bearing fruit. 4:3 aspect ratio. No text labels.`;
