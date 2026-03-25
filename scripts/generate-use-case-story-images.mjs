@@ -101,17 +101,18 @@ async function main() {
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean);
-    const allowed = new Set(["phases", "implementations", "technical", "impact"]);
+    const allowed = new Set(["intro", "phases", "implementations", "technical", "impact"]);
     for (const p of parts) {
       if (!allowed.has(p)) {
         console.error(
-          `Invalid --only segment "${p}". Use one or more of: phases, implementations, technical, impact`
+          `Invalid --only segment "${p}". Use one or more of: intro, phases, implementations, technical, impact`
         );
         process.exit(1);
       }
     }
     onlySet = new Set(parts);
   }
+  const runIntro = !onlySet || onlySet.has("intro");
   const runPhases = !onlySet || onlySet.has("phases");
   const runImplementations = !onlySet || onlySet.has("implementations");
   const runTechnical = !onlySet || onlySet.has("technical");
@@ -153,6 +154,8 @@ async function main() {
         detail: m[2].replace(/\\"/g, '"'),
       }));
 
+      const headline = extractString("headline");
+      const subheadline = extractString("subheadline");
       const technicalInnovation = extractString("technicalInnovation");
       const challenge = extractString("challenge");
 
@@ -167,7 +170,7 @@ async function main() {
       }
 
       if (phases.length > 0) {
-        narrativeDetails[slug] = { phases, keyImplementations, technicalInnovation, impactMetrics, challenge };
+        narrativeDetails[slug] = { headline, subheadline, phases, keyImplementations, technicalInnovation, impactMetrics, challenge };
       }
     }
     console.log(`Loaded ${Object.keys(narrativeDetails).length} narratives for auto-prompt generation.`);
@@ -215,6 +218,16 @@ async function main() {
 
     /** @type {{ outPath: string; prompt: string; aspect: string }[]} */
     const tasks = [];
+
+    if (runIntro && data.intro) {
+      const outPath = path.join(storyDir, `${slug}-intro.jpg`);
+      if (!forceAll && fs.existsSync(outPath)) {
+        console.log(`Skip (exists): ${outPath}`);
+        skipped++;
+      } else {
+        tasks.push({ outPath, prompt: data.intro, aspect: "4:3" });
+      }
+    }
 
     if (runPhases) {
       for (let i = 0; i < data.phases.length; i++) {

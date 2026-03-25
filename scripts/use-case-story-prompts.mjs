@@ -24,7 +24,7 @@ ${CINEMATIC_STYLE_ANCHOR}
 
 This image is a REPRESENTATION OF THE CHALLENGE THROUGH AN ARTISTIC LENS. Read the text provided below, identify the industry, service, and domain, then create an artistic interpretation that captures the friction, obstacles, and pain described. The viewer should feel the struggle — not through literal depiction, but through atmosphere, broken forms, and tension in the composition. Square 1:1.`;
 
-/** @typedef {{ phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
+/** @typedef {{ intro: string; phases: string[]; implementations: string; technical: string; impact: string }} StoryPrompts */
 
 /**
  * Extract concrete nouns and visual entities from text.
@@ -167,7 +167,7 @@ export function extractVisualEntities(text) {
  * Build prompts automatically from narrative content.
  * Extracts visual entities from the text and creates explicit MUST INCLUDE directives.
  *
- * @param {{ phases: Array<{title: string; body: string}>; keyImplementations: Array<{title: string; detail: string}>; technicalInnovation: string; impactMetrics: string[] }} narrative
+ * @param {{ headline?: string; subheadline?: string; phases: Array<{title: string; body: string}>; keyImplementations: Array<{title: string; detail: string}>; technicalInnovation: string; impactMetrics: string[]; challenge?: string }} narrative
  * @returns {StoryPrompts}
  */
 export function buildPromptsFromNarrative(narrative) {
@@ -175,6 +175,13 @@ export function buildPromptsFromNarrative(narrative) {
   const domainHint = narrative.challenge
     ? narrative.challenge.split(".")[0] + "."
     : "";
+
+  const intro = `THIS IMAGE IS ABOUT: ${domainHint}
+The solution: "${narrative.headline ?? ""} — ${narrative.subheadline ?? ""}"
+
+${SHARED_SOLUTION}
+
+This is the INTRO image for this use case — a grounded visual that represents the specific solution being offered. Include recognizable objects, tools, and elements from this domain that relate to the solution described above. For example, if it's about voice and digital assistants, show microphones, waveforms, chat interfaces rendered artistically. If it's about inspections, show cameras, tablets, measurement tools. The viewer should immediately understand what service this is. 4:3 aspect ratio. No text labels.`;
 
   const phases = narrative.phases.map(
     (p) => `THIS IMAGE IS ABOUT: ${domainHint}
@@ -209,7 +216,7 @@ ${SHARED_SOLUTION}
 
 Show these results in the workplace and setting of this specific domain. The image should feel like the successful outcome of the work described. Achievement mood through the domain itself. 4:3 aspect ratio. No text labels.`;
 
-  return { phases, implementations, technical, impact };
+  return { intro, phases, implementations, technical, impact };
 }
 
 /**

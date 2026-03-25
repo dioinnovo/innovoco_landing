@@ -31,7 +31,13 @@ export function caseStoryImpactImagePath(slug: string): string {
   return `/images/case-studies/use-cases/story/${slug}-impact.jpg`;
 }
 
+/** Intro image — grounded variation of the outcome card for the section after the header. */
+export function caseStoryIntroImagePath(slug: string): string {
+  return `/images/case-studies/use-cases/story/${slug}-intro.jpg`;
+}
+
 export type UseCaseVisualSet = {
+  introImage: string;
   challengeImage: string;
   phaseImages: string[];
   keyImplementationsImage: string;
@@ -40,6 +46,7 @@ export type UseCaseVisualSet = {
 };
 
 type Override = Partial<{
+  introImage: string;
   challengeImage: string;
   phaseImages: string[];
   keyImplementationsImage: string;
@@ -64,6 +71,7 @@ export function resolveUseCaseVisualSet(
     return casePhaseImagePath(slug, i + 1);
   });
   return {
+    introImage: o.introImage ?? caseStoryIntroImagePath(slug),
     challengeImage: o.challengeImage ?? challengeDefault,
     phaseImages: phases,
     keyImplementationsImage: o.keyImplementationsImage ?? caseStoryImplementationsImagePath(slug),
