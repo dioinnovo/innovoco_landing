@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useCallback, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, type LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
 import {
   Factory,
   HardHat,
@@ -14,7 +13,6 @@ import {
   ShieldCheck,
   PlugZap,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 /* ─── Industry Data ─── */
@@ -157,30 +155,15 @@ const industries: IndustryData[] = [
 
 /* ─── Industry Card ─── */
 
-function IndustryCard({
-  industry,
-  isSelected,
-  onClick,
-}: {
-  industry: IndustryData;
-  isSelected: boolean;
-  onClick: () => void;
-}) {
+function IndustryCard({ industry }: { industry: IndustryData }) {
   const Icon = industry.icon;
   return (
-    <motion.button
-      type="button"
-      onClick={onClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={cn(
-        "group relative overflow-hidden rounded-2xl text-left transition-all duration-500 cursor-pointer",
-        isSelected
-          ? cn("ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#0B0F19]", industry.accentGlow)
-          : "hover:shadow-xl opacity-100",
-      )}
-      style={{ "--tw-ring-color": isSelected ? industry.accent : "transparent" } as React.CSSProperties}
-    >
+    <Link href={industry.href} className="block">
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="group relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 hover:shadow-xl"
+      >
       <div className="relative aspect-[16/10] w-full">
         <Image
           src={industry.cardImage}
@@ -188,15 +171,15 @@ function IndustryCard({
           fill
           className={cn(
             "object-cover transition-all duration-500",
-            isSelected ? "brightness-110" : "group-hover:scale-105 group-hover:brightness-110",
+            "group-hover:scale-105 group-hover:brightness-110",
           )}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
         {/* Accent glow at bottom */}
         <div
-          className="absolute inset-x-0 bottom-0 h-1 transition-opacity duration-500"
-          style={{ backgroundColor: industry.accent, opacity: isSelected ? 1 : 0 }}
+          className="absolute inset-x-0 bottom-0 h-1 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{ backgroundColor: industry.accent }}
         />
       </div>
       <div className="absolute inset-x-0 bottom-0 p-5">
@@ -213,115 +196,19 @@ function IndustryCard({
           </div>
         </div>
       </div>
-    </motion.button>
-  );
-}
-
-/* ─── Solution Card ─── */
-
-function SolutionCard({ solution, accent }: { solution: IndustrySolution; accent: string }) {
-  const content = (
-    <div className="group relative overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
-      {solution.image && (
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
-          <Image
-            src={solution.image}
-            alt={solution.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 300px"
-          />
-        </div>
-      )}
-      <div className="p-4">
-        <h4 className="text-sm font-semibold text-[var(--foreground)]">{solution.title}</h4>
-        <div className="mt-2 flex items-baseline gap-1.5">
-          <span className="text-xl font-bold" style={{ color: accent }}>
-            {solution.metric}
-          </span>
-          <span className="text-xs text-[#64748B]">{solution.metricLabel}</span>
-        </div>
-      </div>
-    </div>
-  );
-
-  if (solution.useCaseSlug) {
-    return (
-      <Link href={`/case-studies/use-cases/${solution.useCaseSlug}`} className="block">
-        {content}
-      </Link>
-    );
-  }
-  return content;
-}
-
-/* ─── Industry Detail Panel ─── */
-
-function IndustryDetail({ industry }: { industry: IndustryData }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.35 }}
-    >
-      <div className="pt-8">
-        {/* Solution Cards */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {industry.solutions.map((solution) => (
-            <SolutionCard
-              key={solution.title}
-              solution={solution}
-              accent={industry.accent}
-            />
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="mt-8 text-center">
-          <Button asChild variant="outline" className="rounded-full px-8 py-5 text-base font-semibold">
-            <Link href={industry.href}>
-              Explore {industry.name} Solutions
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </div>
     </motion.div>
+    </Link>
   );
 }
 
 /* ─── Main Showcase ─── */
 
 export function IndustryShowcase() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selected = industries.find((i) => i.id === selectedId) ?? null;
-
-  const toggle = useCallback(
-    (id: string) => setSelectedId((prev) => (prev === id ? null : id)),
-    [],
-  );
-
   return (
-    <div className="space-y-8">
-      {/* Industry Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {industries.map((industry) => (
-          <IndustryCard
-            key={industry.id}
-            industry={industry}
-            isSelected={selectedId === industry.id}
-            onClick={() => toggle(industry.id)}
-          />
-        ))}
-      </div>
-
-      {/* Expandable Detail */}
-      <AnimatePresence>
-        {selected && (
-          <IndustryDetail key={selected.id} industry={selected} />
-        )}
-      </AnimatePresence>
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {industries.map((industry) => (
+        <IndustryCard key={industry.id} industry={industry} />
+      ))}
     </div>
   );
 }
