@@ -39,65 +39,8 @@ Tension should still feel human and surmountable: soft storm light, mist obscuri
 
 IMPORTANT — SEMANTIC GROUNDING: The illustration MUST include recognizable domain-specific silhouettes or abstract forms that visually represent the industry and challenge topic. Pure landscapes without domain context are NOT acceptable. Include stylized versions of industry objects (equipment, tools, documents, flows) rendered as painterly silhouettes integrated into the atmospheric scene. The viewer should immediately understand what DOMAIN and PROBLEM this image represents.`;
 
-const JOBS = [
-  // "executive-self-serve-analytics" — removed; auto-generated from narrative content
-  // "customer-support-voice" — removed; auto-generated from narrative content
-  {
-    slug: "regulated-onboarding-kyc-aml",
-    prompt: `${SHARED}
-Theme: compliance onboarding gridlock — stacks of abstract sealed forms without text, friction between speed and scrutiny, vault-like curves, muted alarm amber, orderly but stuck.`,
-  },
-  {
-    slug: "supply-chain-demand",
-    prompt: `${SHARED}
-Theme: supply chain uncertainty — broken rhythm between forecast and execution, abstract nodes drifting apart, timeline gaps as empty bands, motion interrupted mid-flow.`,
-  },
-  {
-    slug: "field-services-iot-playbooks",
-    prompt: `${SHARED}
-Theme: field operations chaos — scattered signals, disconnected wrench-like geometry (abstract only), work orders as floating shards not documents, maintenance backlog as cooler receding weight, not horror darkness.`,
-  },
-  {
-    slug: "finance-close-reconciliation",
-    prompt: `${SHARED}
-Theme: month-end reconciliation drag — mismatched abstract ledgers as offset bands, exceptions piling as stacked shapes, clock pressure as subtle radial tension, slate and emerald.`,
-  },
-  {
-    slug: "hr-onboarding-policy",
-    prompt: `${SHARED}
-Theme: onboarding handoff chaos — diverging paths between HR, IT, facilities as split ribbons, waiting and gaps, warm human tone vs bureaucratic cool, abstract only.`,
-  },
-  {
-    slug: "marketing-personalization",
-    prompt: `${SHARED}
-Theme: personalization vs control — fractured audience mosaic, brand risk as sharp contrast edges, experiment chaos without data discipline, dynamic but uneasy composition.`,
-  },
-  {
-    slug: "reporting-audit-packs",
-    prompt: `${SHARED}
-Theme: reporting time pressure — layers that do not quite align, provenance fog as mist between sheets (no text), uncertainty as soft cool spotlight, not alarmist.`,
-  },
-  {
-    slug: "governed-knowledge-copilot",
-    prompt: `${SHARED}
-Theme: knowledge silos and unsanctioned workarounds — walled gardens of light, blocked connections, answers behind abstract barriers, temptation of shortcuts as a risky warm edge (not evil, just human).`,
-  },
-  {
-    slug: "healthcare-capacity-clinical-ops",
-    prompt: `${SHARED}
-Theme: capacity strain before the cliff — rising demand curves as soft waves, staffing gaps as negative space, supplies and time pressure, clinical blues and urgent coral hints, abstract.`,
-  },
-  {
-    slug: "global-payroll-pay-compliance",
-    prompt: `${SHARED}
-Theme: global payroll complexity — meridian arcs in conflict, jurisdiction friction as intersecting grids (no flags), calculation anxiety as subtle vibration, navy and gold tension.`,
-  },
-  {
-    slug: "predictive-maintenance-manufacturing",
-    prompt: `${SHARED}
-Theme: equipment failure looming on a factory floor. MUST INCLUDE: massive interlocking gear and press silhouettes showing visible stress — hairline fracture lines glowing amber/red at stress points, vibration distortion waves radiating outward from a failing bearing or shaft. A faded clock or countdown element suggesting time running out. Scattered, disconnected maintenance tools (wrench silhouettes, clipboards) suggesting reactive chaos. The production line is interrupted — a gap in the conveyor flow. Steel blue machinery going amber-red at failure points. Atmospheric factory mist. Tension, but surmountable.`,
-  },
-];
+// All manual overrides removed — every slug uses auto-generated prompts from narrative content
+const JOBS = [];
 
 async function generateImage(prompt) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(API_KEY)}`;
