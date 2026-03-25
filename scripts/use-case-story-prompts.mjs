@@ -191,9 +191,9 @@ Include recognizable elements from this domain rendered artistically — not pho
   const implementations = `${SHARED_SOLUTION}
 
 Domain context: ${domainHint}
-The key implementations this image represents: ${implSummary}
+The key implementations: ${implSummary}
 
-Show these working together in the context of this domain. Balance recognizable domain detail with artistic atmosphere. No text labels.`;
+Show this as a scene in the ACTUAL WORK ENVIRONMENT for this domain — with the real tools, devices, screens, and objects that people in this field use day-to-day. Phones, tablets, cameras, charts, documents, emails, dashboards — whatever fits the implementations described. Paint these real objects beautifully in the romantic realism style, but keep them recognizable and grounded. NOT a fantasy landscape. NOT abstract energy flows. A real workplace elevated through art. No text labels.`;
 
   const technical = `${SHARED_SOLUTION}
 
