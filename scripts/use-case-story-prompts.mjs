@@ -185,12 +185,15 @@ The topic: "${p.title}: ${p.body}"
 Include recognizable elements from this domain rendered artistically — not photorealistic, but enough detail that the viewer knows what field this is about. Balance atmospheric artistry with concrete domain context. No text labels.`
   );
 
+  const implSummary = narrative.keyImplementations
+    .map((ki) => `${ki.title}: ${ki.detail}`)
+    .join(". ");
   const implementations = `${SHARED_SOLUTION}
 
 Domain context: ${domainHint}
-The key elements working together: ${narrative.keyImplementations.map((ki) => ki.title).join(", ")}.
+The key implementations this image represents: ${implSummary}
 
-Show these in the context of this domain — recognizable forms from this industry working in harmony. Balance: enough detail to understand the domain, enough artistry to feel sublime. No text labels.`;
+Show these working together in the context of this domain. Balance recognizable domain detail with artistic atmosphere. No text labels.`;
 
   const technical = `${SHARED_SOLUTION}
 
