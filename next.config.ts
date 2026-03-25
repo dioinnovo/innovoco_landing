@@ -64,7 +64,7 @@ const nextConfig: NextConfig = {
     // `/images/**` plus root-level assets (e.g. /google-cloud-premier-partner-1.webp).
     // Omit `search` on patterns so `?v=*` cache bust still works under /images/industries/.
     localPatterns: [{ pathname: "/images/**" }, { pathname: "/*" }],
-    qualities: [75, 90],
+    qualities: [75, 85, 90],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
