@@ -94,6 +94,16 @@ export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
     image: "/images/case-studies/outcomes/supply-chain.jpg",
   },
   {
+    slug: "customer-360-identity-resolution",
+    title: "Customer 360 & identity resolution",
+    outcome:
+      "Graph-based entity resolution unifying 12+ channels into a single customer profile with 94-98% match accuracy.",
+    industries: ["retail-consumer", "financial-services"],
+    tags: ["CX", "Cost"],
+    icon: "users",
+    image: "/images/case-studies/outcomes/customer-360-identity-resolution.jpg",
+  },
+  {
     slug: "field-services-iot-playbooks",
     title: "Field services & IoT playbooks",
     outcome: "Anomaly → dispatch → work order → close-out—with human gates.",
@@ -327,15 +337,5 @@ export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
     tags: ["Speed", "Compliance"],
     icon: "factory",
     image: "/images/case-studies/outcomes/configurable-bom-product-design.jpg",
-  },
-  {
-    slug: "customer-360-identity-resolution",
-    title: "Customer 360 & identity resolution",
-    outcome:
-      "Graph-based entity resolution unifying 12+ channels into a single customer profile with 94-98% match accuracy.",
-    industries: ["retail-consumer", "financial-services"],
-    tags: ["CX", "Cost"],
-    icon: "users",
-    image: "/images/case-studies/outcomes/customer-360-identity-resolution.jpg",
   },
 ];
