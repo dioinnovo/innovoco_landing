@@ -202,12 +202,12 @@ The innovation: "${narrative.technicalInnovation}"
 
 Capture the elegance of this approach within this domain — recognizable elements composed with artistic sophistication. 4:3 aspect ratio. No text labels.`;
 
-  const impact = `${SHARED_SOLUTION}
+  const impact = `THIS IMAGE IS ABOUT: ${domainHint} The results achieved:
+${narrative.impactMetrics.map((m) => `- ${m}`).join("\n")}
 
-Domain context: ${domainHint}
-The results achieved: ${narrative.impactMetrics.map((m) => m.split("—")[0].split("–")[0].trim()).join("; ")}.
+${SHARED_SOLUTION}
 
-Mood: achievement, milestone reached, quiet confidence. The domain should still be recognizable but elevated — a summit reached, horizon clear, the work bearing fruit. 4:3 aspect ratio. No text labels.`;
+Show these results in the workplace and setting of this specific domain. The image should feel like the successful outcome of the work described. Achievement mood through the domain itself. 4:3 aspect ratio. No text labels.`;
 
   return { phases, implementations, technical, impact };
 }
