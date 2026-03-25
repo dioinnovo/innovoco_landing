@@ -111,7 +111,7 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
       </div>
 
       <main id="use-case-main">
-        <section className="relative overflow-hidden border-b border-border/40">
+        <section className="relative aspect-[4/3] overflow-hidden border-b border-border/40">
           <Image
             src={summary.image}
             alt=""
@@ -132,24 +132,26 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
             className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-[#0B0F19]/80 via-[#0B0F19]/40 to-transparent"
             aria-hidden="true"
           />
-          {/* Back button — top left */}
-          <div className="relative z-10 mx-auto max-w-6xl px-4 pt-5 md:pt-6">
-            <Link
-              href="/case-studies#business-outcomes"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:text-white hover:underline"
-            >
-              <ArrowLeft className="h-4 w-4" aria-hidden />
-              Back to use case library
-            </Link>
-          </div>
-          {/* Title — bottom */}
-          <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-20 md:pb-14 md:pt-28">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
-              Use case
-            </p>
-            <h1 className="mt-2 max-w-4xl font-semibold leading-[1.08] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] text-[clamp(2rem,5vw,3rem)]">
-              {summary.title}
-            </h1>
+          <div className="relative z-10 flex h-full flex-col justify-between">
+            {/* Back button — top left */}
+            <div className="mx-auto w-full max-w-6xl px-4 pt-5 md:pt-6">
+              <Link
+                href="/case-studies#business-outcomes"
+                className="inline-flex items-center gap-2 text-sm font-medium text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:text-white hover:underline"
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden />
+                Back to use case library
+              </Link>
+            </div>
+            {/* Title — bottom */}
+            <div className="mx-auto w-full max-w-6xl px-4 pb-8 md:pb-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
+                Use case
+              </p>
+              <h1 className="mt-2 max-w-4xl font-semibold leading-[1.08] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] text-[clamp(2rem,5vw,3rem)]">
+                {summary.title}
+              </h1>
+            </div>
           </div>
         </section>
 
