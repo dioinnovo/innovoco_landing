@@ -111,7 +111,7 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
       </div>
 
       <main id="use-case-main">
-        <section className="relative aspect-[4/3] overflow-hidden border-b border-border/40">
+        <section className="relative h-[280px] overflow-hidden border-b border-border/40 md:h-[360px]">
           <Image
             src={summary.image}
             alt=""
