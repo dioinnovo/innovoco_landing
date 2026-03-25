@@ -122,22 +122,32 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
             priority
             aria-hidden="true"
           />
+          {/* Top gradient for back button contrast */}
           <div
-            className="absolute inset-0 bg-linear-to-t from-[#0B0F19]/80 via-[#0B0F19]/40 to-transparent"
+            className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-[#0B0F19]/60 to-transparent"
             aria-hidden="true"
           />
-          <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-16 md:pb-14 md:pt-20">
+          {/* Bottom gradient for title contrast */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-[#0B0F19]/80 via-[#0B0F19]/40 to-transparent"
+            aria-hidden="true"
+          />
+          {/* Back button — top left */}
+          <div className="relative z-10 mx-auto max-w-6xl px-4 pt-5 md:pt-6">
             <Link
               href="/case-studies#business-outcomes"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:text-white hover:underline"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden />
               Back to use case library
             </Link>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70">
+          </div>
+          {/* Title — bottom */}
+          <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-20 md:pb-14 md:pt-28">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
               Use case
             </p>
-            <h1 className={cn("mt-2 max-w-4xl text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]", useCaseStoryHeroTitleClass)}>
+            <h1 className="mt-2 max-w-4xl font-semibold leading-[1.08] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] text-[clamp(2rem,5vw,3rem)]">
               {summary.title}
             </h1>
           </div>
