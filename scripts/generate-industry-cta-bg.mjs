@@ -150,6 +150,21 @@ warm gold and amber where dawn strikes. Upper sky: vast Shinkai-style
 clouds with the green-gold palette of prosperity.
 NOT literal banks, NOT money/coins, NOT trading floors or screens.`,
   },
+  {
+    id: "government",
+    metaphor: `INDUSTRY METAPHOR — Government & Public Sector:
+Abstract civic landscape at dawn. Stylized classical government
+building forms with columns and domes rendered as romantic painterly
+shapes — NOT photorealistic buildings. A network of luminous pathways
+connects the civic structures, representing inter-agency collaboration
+and citizen services flowing between departments. A protective shield
+dome of translucent light arcs over the scene, suggesting security
+and compliance. Warm golden dawn light illuminates the architecture
+from behind, with cobalt and indigo in the shadow regions.
+Subtle data stream ribbons weave between the buildings, representing
+intelligence sharing and unified citizen records.
+NOT literal flags, NOT military imagery, NOT surveillance cameras.`,
+  },
 ];
 
 async function generateImage(job, force = false) {

@@ -8,6 +8,8 @@ export type IndustryVisualThemeKey =
   | "insurance"
   /** Homepage accordion — utilities, pipelines, grid operators. */
   | "energy"
+  /** Government & public sector — navy/slate with blue accent. */
+  | "government"
   /** @deprecated Prefer `retail` — kept for compatibility; same indigo retail palette. */
   | "enterpriseBlue";
 
@@ -89,6 +91,15 @@ export const industryVisualThemes: Record<IndustryVisualThemeKey, IndustryVisual
     metricPrimary: "text-[#0c4a6e]",
     footerBorder: "border-[#7dd3fc]/25",
     footerBg: "bg-[#f0f9ff]/55",
+  },
+  government: {
+    hoverBorder: "hover:border-[#3b82f6]/45",
+    iconGradient: "bg-gradient-to-br from-[#eff6ff] to-[#93c5fd]",
+    iconText: "text-[#1d4ed8]",
+    metricCell: "bg-[#eff6ff]/55",
+    metricPrimary: "text-[#1e3a5f]",
+    footerBorder: "border-[#93c5fd]/25",
+    footerBg: "bg-[#eff6ff]/55",
   },
   enterpriseBlue: {
     hoverBorder: "hover:border-[#6366f1]/50",

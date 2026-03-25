@@ -142,6 +142,18 @@ OPTIONAL: umbrella ribs, rain streaks on glass, modest city block shapes in mist
 
 MOOD: safety and underwriting in the modern built world—umbrella or shield clearly dominant.`,
   },
+  {
+    id: "government",
+    filename: "government.jpg",
+    atmosphere: `SETTING & LIGHT: Civic architecture, grand but approachable—dawn or golden light on classical columns and domes, atmospheric mist in public spaces.`,
+    theme: `INDUSTRY: GOVERNMENT & PUBLIC SECTOR.
+
+MUST SHOW at least THREE readable motifs: (1) classical column or dome as civic architecture silhouette; (2) shield or protective barrier suggesting security and compliance; (3) interconnected pathways or bridges suggesting inter-agency collaboration and citizen services.
+
+OPTIONAL: luminous data streams connecting buildings, scales of justice as abstract form, document/policy shapes flowing between structures.
+
+MOOD: civic dignity, trust, transparency, and service—not surveillance, military, or dystopian control.`,
+  },
 ].map((job, index) => ({
   ...job,
   prompt: `${SHARED}

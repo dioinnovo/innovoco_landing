@@ -3,6 +3,7 @@ import {
   Factory,
   HardHat,
   HeartPulse,
+  Landmark,
   Shield,
   ShoppingCart,
   Zap,
@@ -89,6 +90,19 @@ export const ALL_INDUSTRY_EXPLORE: RelatedIndustry[] = [
       "Load forecasting, grid asset health, DER visibility, and outage analytics.",
     href: "/solutions/industries/energy-utilities",
     gradient: "bg-gradient-to-br from-[#e0f2fe] to-[#0284c7]",
+  },
+  {
+    icon: Landmark,
+    title: "Government & Public Sector",
+    description:
+      "Citizen services AI, fraud detection, cybersecurity, and inter-agency compliance.",
+    href: "/solutions/industries/government",
+    gradient: "bg-gradient-to-br from-[#eff6ff] to-[#3b82f6]",
+    metrics: [
+      { value: "100%", label: "Audit Compliant" },
+      { value: "60%", label: "Faster Threat Response" },
+      { value: "94-98%", label: "Identity Match Rate" },
+    ],
   },
 ];
 

@@ -12,6 +12,7 @@ import {
   Building2,
   ShieldCheck,
   PlugZap,
+  Landmark,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -149,6 +150,22 @@ const industries: IndustryData[] = [
       { title: "Load & Renewable Forecasting", metric: "14%", metricLabel: "MAPE reduction", image: "/images/industries/energy-utilities/solutions/load-renewable-forecasting.jpg", useCaseSlug: "load-renewable-forecasting" },
       { title: "Grid Asset Health", metric: "22%", metricLabel: "emergency trips reduction", image: "/images/industries/energy-utilities/solutions/grid-generation-asset-health.jpg", useCaseSlug: "grid-asset-health-monitoring" },
       { title: "DER Visibility", metric: "70%", metricLabel: "study time reduction", image: "/images/industries/energy-utilities/solutions/der-visibility-operations.jpg", useCaseSlug: "der-visibility-operations" },
+    ],
+  },
+  {
+    id: "government",
+    name: "Government",
+    tagline: "Citizen services, fraud detection, cybersecurity, compliance",
+    icon: Landmark,
+    accent: "#3b82f6",
+    accentGlow: "shadow-[0_0_30px_rgba(59,130,246,0.3)]",
+    cardImage: "/images/industries/related-cards/government.jpg",
+    heroImage: "/images/industries/government-hero.jpg",
+    href: "/solutions/industries/government",
+    solutions: [
+      { title: "Citizen Services & Identity", metric: "94-98%", metricLabel: "identity match rate", useCaseSlug: "customer-360-identity-resolution" },
+      { title: "Fraud Detection & Investigation", metric: "31%", metricLabel: "false referrals reduction", useCaseSlug: "fraud-siu-link-analytics" },
+      { title: "Cybersecurity & Threat Intel", metric: "60%", metricLabel: "faster threat response", useCaseSlug: "reporting-audit-packs" },
     ],
   },
 ];
