@@ -123,7 +123,7 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
             aria-hidden="true"
           />
           <div
-            className="absolute inset-0 bg-linear-to-b from-[#0B0F19]/60 via-[#0B0F19]/50 to-[#0B0F19]/70"
+            className="absolute inset-0 bg-linear-to-t from-[#0B0F19]/80 via-[#0B0F19]/40 to-transparent"
             aria-hidden="true"
           />
           <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-16 md:pb-14 md:pt-20">
