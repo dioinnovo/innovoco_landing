@@ -174,12 +174,12 @@ function IndustryCard({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
-        "group relative overflow-hidden rounded-2xl text-left transition-all duration-500",
+        "group relative overflow-hidden rounded-2xl text-left transition-all duration-500 cursor-pointer",
         isSelected
           ? cn("ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#0B0F19]", industry.accentGlow)
-          : "hover:shadow-xl",
+          : "hover:shadow-xl opacity-100",
       )}
-      style={isSelected ? { ringColor: industry.accent } as React.CSSProperties : undefined}
+      style={{ "--tw-ring-color": isSelected ? industry.accent : "transparent" } as React.CSSProperties}
     >
       <div className="relative aspect-[16/10] w-full">
         <Image
@@ -260,11 +260,10 @@ function SolutionCard({ solution, accent }: { solution: IndustrySolution; accent
 function IndustryDetail({ industry }: { industry: IndustryData }) {
   return (
     <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "auto" }}
-      exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.35 }}
     >
       <div className="pt-8">
         {/* Solution Cards */}
@@ -318,7 +317,7 @@ export function IndustryShowcase() {
       </div>
 
       {/* Expandable Detail */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {selected && (
           <IndustryDetail key={selected.id} industry={selected} />
         )}
