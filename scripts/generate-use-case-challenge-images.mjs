@@ -91,7 +91,7 @@ async function main() {
   const effectiveJobs = [...JOBS];
   const manualSlugs = new Set(JOBS.map((j) => j.slug));
   try {
-    const detailsPath = path.join(root, "lib", "content", "use-case-study-details.ts");
+    const detailsPath = path.join(root, "lib", "content", "use-case-study-details.tsx");
     const detailsSrc = fs.readFileSync(detailsPath, "utf-8");
     const slugMatches = [...detailsSrc.matchAll(/"([a-z][\w-]*)"\s*:\s*\{/g)].map((m) => m[1]);
     for (const slug of slugMatches) {

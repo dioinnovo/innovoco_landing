@@ -118,11 +118,11 @@ async function main() {
   const runTechnical = !onlySet || onlySet.has("technical");
   const runImpact = !onlySet || onlySet.has("impact");
 
-  // Load narratives from use-case-study-details.ts for auto-prompt generation
+  // Load narratives from use-case-study-details.tsx for auto-prompt generation
   let narrativeDetails = {};
   try {
     // Dynamic import of the TS content via tsx or direct JS fallback
-    const detailsPath = path.join(root, "lib", "content", "use-case-study-details.ts");
+    const detailsPath = path.join(root, "lib", "content", "use-case-study-details.tsx");
     const detailsSrc = fs.readFileSync(detailsPath, "utf-8");
     // Quick extraction: find all slug keys in the details record
     const slugMatches = [...detailsSrc.matchAll(/"([a-z][\w-]*)"\s*:\s*\{/g)].map((m) => m[1]);
