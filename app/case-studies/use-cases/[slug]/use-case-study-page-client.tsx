@@ -111,23 +111,33 @@ export default function UseCaseStudyPageClient({ summary, detail, related }: Pro
       </div>
 
       <main id="use-case-main">
-        <section className="relative overflow-hidden border-b border-border/40 bg-[linear-gradient(135deg,rgba(10,88,208,0.12)_0%,rgba(139,92,246,0.1)_45%,rgba(219,234,254,0.35)_100%)] dark:bg-[linear-gradient(135deg,rgba(10,88,208,0.18)_0%,rgba(15,23,42,0.95)_55%)]">
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_20%,rgba(10,88,208,0.2),transparent_55%)] dark:opacity-40"
-            aria-hidden
+        <section className="relative overflow-hidden border-b border-border/40">
+          <Image
+            src={summary.image}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            quality={85}
+            priority
+            aria-hidden="true"
           />
-          <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-16 md:pb-14 md:pt-20">
+          <div
+            className="absolute inset-0 bg-linear-to-b from-[#0B0F19]/60 via-[#0B0F19]/50 to-[#0B0F19]/70"
+            aria-hidden="true"
+          />
+          <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-16 md:pb-14 md:pt-20">
             <Link
               href="/case-studies#business-outcomes"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#00518e] hover:underline dark:text-[#93C5FD]"
+              className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white hover:underline"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden />
               Back to use case library
             </Link>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#00518e] dark:text-[#93C5FD]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70">
               Use case
             </p>
-            <h1 className={cn("mt-2 max-w-4xl", useCaseStoryHeroTitleClass)}>
+            <h1 className={cn("mt-2 max-w-4xl text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]", useCaseStoryHeroTitleClass)}>
               {summary.title}
             </h1>
           </div>
