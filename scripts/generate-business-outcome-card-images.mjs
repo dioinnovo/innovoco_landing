@@ -98,11 +98,11 @@ console.log(`Loaded ${autoJobs.length} outcome card jobs from content registry.`
 
 const JOBS = autoJobs.map((job, index) => ({
   ...job,
-  prompt: `${SHARED}
+  prompt: `${job.theme}
 
-${CONTRAST_RECIPES[index % CONTRAST_RECIPES.length]}
+${SHARED}
 
-Theme: ${job.theme}`,
+${CONTRAST_RECIPES[index % CONTRAST_RECIPES.length]}`,
 }));
 
 async function generateImage(prompt) {

@@ -177,30 +177,30 @@ export function buildPromptsFromNarrative(narrative) {
     : "";
 
   const phases = narrative.phases.map(
-    (p) => `${SHARED_SOLUTION}
-
-Domain context: ${domainHint}
+    (p) => `THIS IMAGE IS ABOUT: ${domainHint}
 The topic: "${p.title}: ${p.body}"
 
-Include recognizable elements from this domain rendered artistically — not photorealistic, but enough detail that the viewer knows what field this is about. Balance atmospheric artistry with concrete domain context. No text labels.`
+${SHARED_SOLUTION}
+
+Include recognizable elements from this domain rendered artistically. The viewer should know what field this is about. No text labels.`
   );
 
   const implSummary = narrative.keyImplementations
     .map((ki) => `${ki.title}: ${ki.detail}`)
     .join(". ");
-  const implementations = `${SHARED_SOLUTION}
-
-Domain context: ${domainHint}
+  const implementations = `THIS IMAGE IS ABOUT: ${domainHint}
 The key implementations: ${implSummary}
 
-Show this as a scene in the ACTUAL WORK ENVIRONMENT for this domain — with the real tools, devices, screens, and objects that people in this field use day-to-day. Phones, tablets, cameras, charts, documents, emails, dashboards — whatever fits the implementations described. Paint these real objects beautifully in the romantic realism style, but keep them recognizable and grounded. NOT a fantasy landscape. NOT abstract energy flows. A real workplace elevated through art. No text labels.`;
+${SHARED_SOLUTION}
 
-  const technical = `${SHARED_SOLUTION}
+Show this as a scene in the ACTUAL WORK ENVIRONMENT for this domain — with the real tools, devices, screens, and objects people use. Paint them beautifully but keep them recognizable and grounded. No text labels.`;
 
-Domain context: ${domainHint}
+  const technical = `THIS IMAGE IS ABOUT: ${domainHint}
 The innovation: "${narrative.technicalInnovation}"
 
-Capture the elegance of this approach within this domain — recognizable elements composed with artistic sophistication. 4:3 aspect ratio. No text labels.`;
+${SHARED_SOLUTION}
+
+Capture the elegance of this approach within this specific domain. Recognizable elements composed with artistic sophistication. 4:3 aspect ratio. No text labels.`;
 
   const impact = `THIS IMAGE IS ABOUT: ${domainHint} The results achieved:
 ${narrative.impactMetrics.map((m) => `- ${m}`).join("\n")}
@@ -218,11 +218,11 @@ Show these results in the workplace and setting of this specific domain. The ima
  * @returns {string}
  */
 export function buildChallengePromptFromNarrative(narrative) {
-  return `${SHARED_CHALLENGE}
+  return `THIS IMAGE IS ABOUT: ${narrative.challenge}
 
-The challenge: "${narrative.challenge}"
+${SHARED_CHALLENGE}
 
-Show recognizable elements from this domain under stress — friction, fragmentation, obstacles — rendered artistically. The viewer should understand what field this is and feel the tension. Balance domain detail with atmospheric artistry. No text labels.`;
+Show recognizable elements from this domain under stress — friction, fragmentation, obstacles — rendered artistically. The viewer should understand what field this is and feel the tension. No text labels.`;
 }
 
 /** @type {Record<string, StoryPrompts>} */
