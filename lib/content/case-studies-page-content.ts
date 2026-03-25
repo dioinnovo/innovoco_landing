@@ -97,7 +97,7 @@ export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
     slug: "customer-360-identity-resolution",
     title: "Customer 360 & identity resolution",
     outcome:
-      "Graph-based entity resolution unifying 12+ channels into a single customer profile with 94-98% match accuracy.",
+      "One golden customer record powering hyper-personalization, churn reduction, and 25-35% more accurate lifetime value predictions across every channel.",
     industries: ["retail-consumer", "financial-services"],
     tags: ["CX", "Cost"],
     icon: "users",
@@ -133,7 +133,7 @@ export const businessOutcomeUseCases: BusinessOutcomeUseCase[] = [
   {
     slug: "marketing-personalization",
     title: "Marketing personalization",
-    outcome: "Segments, variants, and experiment readouts into CDP / CRM.",
+    outcome: "Hyper-personalized campaigns that reduced churn 30%, lifted conversion 28%, and drove 15-25% revenue growth with full brand and compliance controls.",
     industries: ["retail-consumer", "technology"],
     tags: ["CX", "Speed"],
     icon: "megaphone",
