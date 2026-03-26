@@ -276,7 +276,7 @@ export function AIImplementationPageClient() {
 
               <div className="mt-14 space-y-4 max-w-3xl mx-auto">
                 {[
-                  { icon: Clock, text: "87% of AI projects fail to deploy — the gap isn't the model, it's the engineering to make it production-grade" },
+                  { icon: Clock, text: "95% of GenAI pilots fail to achieve measurable P&L impact — the gap isn't the model, it's the engineering to make it production-grade (MIT 2025)" },
                   { icon: CircleDollarSign, text: "Average failed AI project wastes $500K–$2M in sunk costs before the team admits it won't ship" },
                   { icon: BarChart3, text: "40%+ of agentic AI initiatives will be discontinued by 2027 without proper governance (Gartner)" },
                 ].map((item, i) => {
