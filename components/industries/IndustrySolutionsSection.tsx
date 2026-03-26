@@ -98,7 +98,7 @@ export function IndustrySolutionsSection({
                 <div className={`space-y-5 ${hasImage ? "flex-1" : "w-full"}`}>
                   <motion.div variants={fadeUp} className="flex items-center gap-3">
                     <div
-                      className="flex h-11 w-11 items-center justify-center rounded-lg"
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
                       style={{ backgroundColor: `${accent}1a` }}
                     >
                       <Icon className="h-5 w-5" style={{ color: accent }} />
@@ -116,9 +116,9 @@ export function IndustrySolutionsSection({
                     <dl
                       className={`grid max-w-xl gap-4 border-t border-[var(--border)] pt-5 ${
                         cap.stats.length >= 4
-                          ? "sm:grid-cols-2 lg:grid-cols-4"
-                          : "sm:grid-cols-3"
-                      } sm:gap-6`}
+                          ? "grid-cols-2 lg:grid-cols-4"
+                          : "grid-cols-3"
+                      } gap-x-6`}
                     >
                       {cap.stats.map((s, si) => (
                         <div key={si}>
@@ -138,7 +138,7 @@ export function IndustrySolutionsSection({
                       className="group inline-flex items-center font-semibold transition-colors"
                       style={{ color: accent }}
                     >
-                      Learn more
+                      See use case
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </motion.div>

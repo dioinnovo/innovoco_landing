@@ -1,483 +1,564 @@
 "use client";
 
-import { ServicePageLayout } from '@/components/services/ServicePageLayout';
-import { ServiceHero } from '@/components/services/ServiceHero';
-import { ServiceSection } from '@/components/services/ServiceSection';
-import { RelatedServices } from '@/components/services/RelatedServices';
-import { SchemaMarkup } from '@/lib/seo/SchemaMarkup';
-import { createServiceSchema, createBreadcrumbSchema } from '@/lib/seo/schema';
-import { Database, Rocket, Target, TrendingUp, DollarSign, Zap, CheckCircle } from 'lucide-react';
-import { useEffect } from 'react';
-import { createScrollDepthTracking, trackServicePageView } from '@/lib/analytics/events';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Target,
+  TrendingUp,
+  Shield,
+  DollarSign,
+  CheckCircle2,
+  Brain,
+  Zap,
+  Database,
+  Rocket,
+  LifeBuoy,
+  Users,
+  BarChart3,
+  FileText,
+  Search,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BackgroundGradientGlow } from "@/components/ui/background-gradient-glow";
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+import ContactModal from "@/components/landing/ContactModal";
+import { FaqMonochrome } from "@/components/ui/faq-monochrome";
+import { SchemaMarkup } from "@/lib/seo/SchemaMarkup";
+import { createServiceSchema, createBreadcrumbSchema, organizationSchema } from "@/lib/seo/schema";
+import { createScrollDepthTracking, trackServicePageView } from "@/lib/analytics/events";
 
+/* ─── animation ─── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  }),
+};
+
+/* ─── data ─── */
+const coreServices = [
+  {
+    icon: Search,
+    title: "AI Maturity Assessment",
+    description: "Quantified scoring across 5 dimensions — data infrastructure, talent, governance, business alignment, and analytics capabilities. Benchmarked against 500+ enterprise assessments.",
+    deliverables: ["AI Maturity Score with peer benchmarks", "Data readiness audit", "Gap analysis with prioritized recommendations"],
+  },
+  {
+    icon: Brain,
+    title: "Framework Selection & Architecture",
+    description: "Multi-criteria evaluation of AI frameworks — OpenAI, Anthropic, Google, open-source — based on cost, performance, latency, privacy, and your existing stack. No vendor bias.",
+    deliverables: ["Framework comparison matrix", "Architecture blueprint with IaC templates", "3-year TCO analysis"],
+  },
+  {
+    icon: FileText,
+    title: "Enterprise AI Roadmap",
+    description: "Use cases scored on ROI, complexity, data readiness, and strategic alignment. Sequenced into Quick Wins (0-6 mo), Strategic Initiatives (6-18 mo), and Transformation (18+ mo).",
+    deliverables: ["Prioritized use case backlog (10-20 initiatives)", "3-year phased roadmap", "Board-ready executive presentation"],
+  },
+  {
+    icon: Shield,
+    title: "AI Governance & Compliance",
+    description: "Responsible AI frameworks tailored to your industry — HIPAA, SOX, GDPR, EU AI Act. Model approval workflows, bias testing, explainability, and audit trails from day one.",
+    deliverables: ["AI governance policy framework", "Bias detection protocols", "Incident response plan"],
+  },
+  {
+    icon: DollarSign,
+    title: "ROI Modeling & Business Case",
+    description: "Financial models projecting 3-year TCO and benefits with sensitivity analysis. Clear KPIs per initiative. Our business cases have helped clients secure $500K–$5M+ in AI budgets.",
+    deliverables: ["Financial model with break-even timeline", "KPI measurement framework", "Executive one-pager for board approval"],
+  },
+];
+
+const processPhases = [
+  { phase: "Discovery", duration: "2–3 weeks", description: "Stakeholder interviews, data infrastructure audit, compliance gap analysis", deliverable: "AI Maturity Report" },
+  { phase: "Prioritization", duration: "2–3 weeks", description: "Workshop to brainstorm 20-30 use cases, score and narrow to top 10-15", deliverable: "Prioritized Use Case Backlog" },
+  { phase: "Architecture", duration: "2–3 weeks", description: "Framework selection, architecture design, cost modeling per use case", deliverable: "Technical Blueprint & TCO" },
+  { phase: "Roadmap", duration: "2–3 weeks", description: "Sequence initiatives, define governance, build resource and budget plans", deliverable: "3-Year AI Roadmap" },
+  { phase: "Alignment", duration: "1–2 weeks", description: "Executive presentation, Q&A, implementation handoff with 30-day support", deliverable: "Board Deck & Handoff Package" },
+];
+
+const faqItems = [
+  {
+    question: "How long does an AI strategy engagement take?",
+    answer: "Typically 6–12 weeks from discovery to final roadmap delivery. Quick Wins are identified in the first 3 weeks so you can start showing value immediately, even while the full strategy is being finalized.",
+  },
+  {
+    question: "Do we need to use Innovoco for implementation?",
+    answer: "No. The roadmap, architecture blueprints, and governance frameworks are designed to be vendor-agnostic. You can implement with your internal team, another partner, or with us. No lock-in.",
+  },
+  {
+    question: "What if we already have an AI strategy that's stalled?",
+    answer: "We specialize in AI recovery. We'll audit what went wrong, salvage viable initiatives, and rebuild the roadmap around realistic timelines and proven architectures. 40% of our strategy clients come to us after a failed first attempt.",
+  },
+  {
+    question: "How do you handle sensitive data during assessment?",
+    answer: "All assessments are conducted under NDA with SOC 2-compliant practices. We can work on-premise if required. Data never leaves your environment without explicit authorization.",
+  },
+  {
+    question: "What industries do you specialize in?",
+    answer: "Healthcare, financial services, manufacturing, retail, insurance, energy, construction, and government. Each vertical has dedicated solution architects who understand the regulatory and operational nuances.",
+  },
+  {
+    question: "How much does AI strategy consulting cost?",
+    answer: "Strategy engagements range from $50K for a focused assessment to $150K+ for comprehensive enterprise roadmaps. Every engagement includes ROI projections — you see the expected return before committing.",
+  },
+];
+
+/* ─── component ─── */
 export function AIStrategyPageClient() {
-  const breadcrumbs = [
-    { label: 'Services', href: '/services' },
-    { label: 'AI Strategy & Consulting', href: '/services/ai-strategy-consulting' }
-  ];
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const openContact = () => setContactModalOpen(true);
 
-  const relatedServices = [
-    {
-      icon: Database,
-      iconGradient: "bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]",
-      title: "Data Engineering & Modernization",
-      description: "Build the modern data infrastructure your AI needs. Cloud-native architecture ready for AI workloads from day one.",
-      href: "/services/data-engineering-modernization"
-    },
-    {
-      icon: Rocket,
-      iconGradient: "bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]",
-      title: "Enterprise AI Implementation",
-      description: "From proof of concept to production in 12-16 weeks. Turn your AI strategy into measurable business results.",
-      href: "/services/ai-implementation"
-    }
-  ];
-
-  // Track page view and scroll depth
   useEffect(() => {
-    trackServicePageView('AI Strategy & Consulting');
+    trackServicePageView("AI Strategy & Consulting");
     const cleanup = createScrollDepthTracking();
     return cleanup;
   }, []);
 
   return (
     <>
-      <SchemaMarkup schema={createServiceSchema({
-        name: "AI Strategy & Consulting Services",
-        description: "Expert AI strategy consulting to guide your enterprise AI transformation with framework-agnostic roadmaps, governance, and ROI modeling backed by 10+ years of data expertise.",
-        url: "https://innovoco.com/services/ai-strategy-consulting",
-        serviceType: "AI Consulting"
-      })} />
+      <SchemaMarkup
+        schema={createServiceSchema({
+          name: "AI Strategy & Consulting Services",
+          description: "Enterprise AI strategy consulting: maturity assessment, use-case prioritization, and board-ready roadmaps backed by 500+ deployments.",
+          url: "https://innovoco.com/services/ai-strategy-consulting",
+          serviceType: "AI Strategy Consulting",
+        })}
+      />
+      <SchemaMarkup
+        schema={createBreadcrumbSchema([
+          { name: "Home", url: "https://innovoco.com" },
+          { name: "Services", url: "https://innovoco.com/services" },
+          { name: "AI Strategy & Consulting", url: "https://innovoco.com/services/ai-strategy-consulting" },
+        ])}
+      />
+      <SchemaMarkup schema={organizationSchema} />
+      <SchemaMarkup
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }}
+      />
 
-      <SchemaMarkup schema={createBreadcrumbSchema([
-        { name: "Home", url: "https://innovoco.com" },
-        { name: "Services", url: "https://innovoco.com/services" },
-        { name: "AI Strategy & Consulting", url: "https://innovoco.com/services/ai-strategy-consulting" }
-      ])} />
+      <div className="min-h-screen bg-white">
+        <a href="#main-content" className="skip-to-content">Skip to main content</a>
+        <Header onContactClick={openContact} customLogo="/images/logos/innovoco-ai-hires.png" />
 
-      <ServicePageLayout breadcrumbs={breadcrumbs} customLogo="/images/logos/innovoco-ai-hires.png">
-        <ServiceHero
-          badge="Trusted by 500+ Enterprises"
-          title="AI Strategy & Consulting Services"
-          subtitle="Turn AI Vision into Measurable Business Results"
-          description="Expert AI strategy consulting to navigate your enterprise AI transformation with confidence. Framework-agnostic roadmaps, responsible AI governance, and ROI modeling backed by 10+ years of data expertise and 500+ successful AI solutions."
-          trustIndicators={[
-            { metric: "500+", label: "AI Solutions Delivered" },
-            { metric: "10Y+", label: "Data & AI Expertise" },
-            { metric: "500+", label: "Enterprise Clients" },
-            { metric: "90D", label: "Avg. Strategy Delivery" }
-          ]}
-          primaryCTA={{
-            text: "Schedule Strategy Assessment",
-            onClick: () => {
-              // Navigate to contact or calendar
-              window.location.href = '/contact?service=ai-strategy';
-            }
-          }}
-          secondaryCTA={{
-            text: "View AI Case Studies",
-            href: "/case-studies"
-          }}
-          backgroundGradient="bg-gradient-to-br from-[#DBEAFE] via-[#EDE9FE] to-[#FECACA]"
-        />
+        <main id="main-content" role="main">
 
-        {/* Overview Section */}
-        <ServiceSection
-          icon={Target}
-          iconGradient="bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]"
-          title="Why AI Strategy Matters"
-          subtitle="The difference between AI success and expensive experimentation"
-        >
-          <p>
-            In 2025, enterprise AI adoption is no longer a question of "if" but "how." Yet 87% of AI initiatives fail to reach production,
-            often due to a lack of strategic planning, unclear ROI expectations, or misalignment between technical capabilities and business objectives.
-            Our AI strategy consulting services bridge this gap by providing a framework-agnostic, pragmatic approach to AI transformation
-            that prioritizes measurable business outcomes over technological novelty.
-          </p>
+          {/* ═══════════ HERO ═══════════ */}
+          <section className="relative overflow-hidden">
+            <BackgroundGradientGlow variant="aurora-brand" className="absolute inset-0" />
+            <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 md:py-32 lg:py-40">
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+                className="text-center"
+              >
+                <motion.div variants={fadeUp} className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm">
+                  <Brain className="h-4 w-4" />
+                  AI Strategy & Consulting
+                </motion.div>
 
-          <p>
-            With over 10 years of data engineering expertise and 500+ successful AI implementations across industries like healthcare,
-            finance, manufacturing, and retail, Innovoco's AI strategy consulting goes beyond generic frameworks. We assess your current
-            data maturity, identify high-ROI AI use cases, select the right AI frameworks and architectures, and build actionable roadmaps
-            that align with your budget, timeline, and risk tolerance. Our AI strategy consulting ensures you invest in AI initiatives that
-            deliver results, not just prototypes that never leave the sandbox.
-          </p>
+                <motion.h1
+                  variants={fadeUp}
+                  custom={1}
+                  className="mx-auto max-w-4xl text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-6xl"
+                >
+                  Turn AI Ambition Into a{" "}
+                  <span className="bg-gradient-to-r from-sky-300 via-blue-200 to-rose-300 bg-clip-text text-transparent">
+                    Board-Ready Roadmap
+                  </span>
+                </motion.h1>
 
-          <p>
-            Whether you're taking your first steps in AI adoption or scaling existing AI capabilities across multiple departments, our
-            enterprise AI roadmap services provide the clarity, governance, and technical direction you need to succeed. From responsible
-            AI governance frameworks to AI framework selection and ROI modeling, we help you navigate the complexity of modern AI with
-            confidence and precision.
-          </p>
-        </ServiceSection>
+                <motion.p
+                  variants={fadeUp}
+                  custom={2}
+                  className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl"
+                >
+                  Framework-agnostic AI strategy that cuts through the hype. We assess your data maturity,
+                  prioritize the highest-ROI use cases, and deliver an actionable roadmap — in 4 weeks, not 4 months.
+                </motion.p>
 
-        {/* Core Strategy Services Section */}
-        <ServiceSection
-          icon={TrendingUp}
-          iconGradient="bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]"
-          title="Core AI Strategy Services"
-          subtitle="Comprehensive planning for enterprise AI transformation"
-        >
-          <h3>1. AI Maturity Assessment & Current State Analysis</h3>
-          <p>
-            Before investing in AI, you need to understand where you stand. Our AI maturity assessment evaluates your organization across
-            five critical dimensions: data infrastructure, technical talent, governance policies, business alignment, and existing analytics
-            capabilities. Using a proprietary scoring methodology developed from 500+ enterprise assessments, we identify your current AI
-            maturity level (from Ad-Hoc to Optimized) and map the gaps preventing you from reaching the next stage.
-          </p>
+                <motion.div variants={fadeUp} custom={3} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                  <Button
+                    onClick={openContact}
+                    size="lg"
+                    className="cursor-pointer rounded-full bg-white px-8 py-6 text-base font-semibold text-[#0B0F19] shadow-[0_8px_32px_rgba(255,255,255,0.2)] transition-all duration-300 hover:scale-105 hover:bg-neutral-100"
+                  >
+                    Schedule Strategy Assessment
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="cursor-pointer rounded-full border-white/30 bg-transparent px-8 py-6 text-base font-semibold text-white hover:bg-white/10"
+                  >
+                    <Link href="/case-studies">View Case Studies</Link>
+                  </Button>
+                </motion.div>
 
-          <p>
-            This assessment includes a detailed audit of your data warehouse architecture, data quality standards, security policies, and
-            technical debt. We evaluate whether your current infrastructure can support modern AI workloads—including large language models
-            (LLMs), vector databases, and real-time inference pipelines—or if modernization is required. The result is a Current State Report
-            that provides a transparent, jargon-free view of your AI readiness with specific, prioritized recommendations.
-          </p>
+                <motion.div
+                  variants={fadeUp}
+                  custom={4}
+                  className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-8 border-t border-white/15 pt-10 md:grid-cols-4"
+                >
+                  {[
+                    { value: "500+", label: "AI Solutions" },
+                    { value: "4 Wk", label: "Roadmap Delivery" },
+                    { value: "171%", label: "Avg Client ROI" },
+                    { value: "10Y+", label: "Data Expertise" },
+                  ].map((m) => (
+                    <div key={m.label} className="text-center">
+                      <p className="text-2xl font-bold tabular-nums text-white md:text-3xl">{m.value}</p>
+                      <p className="mt-1.5 text-xs font-medium uppercase tracking-wide text-slate-400">{m.label}</p>
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
 
-          <p>
-            <strong>Key Deliverables:</strong>
-          </p>
-          <ul>
-            <li><strong>AI Maturity Score:</strong> Quantified assessment across 5 dimensions with benchmarking against industry peers</li>
-            <li><strong>Data Readiness Audit:</strong> Evaluation of data quality, accessibility, and infrastructure for AI workloads</li>
-            <li><strong>Gap Analysis:</strong> Identification of technical, organizational, and process gaps blocking AI success</li>
-            <li><strong>Quick Win Identification:</strong> High-ROI, low-effort AI initiatives you can start immediately</li>
-          </ul>
+          {/* ═══════════ WHAT WE DELIVER ═══════════ */}
+          <section className="py-20 md:py-28">
+            <div className="mx-auto max-w-6xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#0A58D0]">
+                  Core Services
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl lg:text-5xl">
+                  What We Deliver
+                </motion.h2>
+                <motion.p variants={fadeUp} custom={2} className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-[#64748B]">
+                  Five integrated deliverables that take you from &ldquo;we should do something with AI&rdquo;
+                  to a funded, governed, board-approved transformation plan.
+                </motion.p>
+              </motion.div>
 
-          <h3>2. AI Framework Selection & Architecture Design</h3>
-          <p>
-            Not all AI frameworks are created equal, and choosing the wrong one can cost you months of development time and hundreds of
-            thousands in sunk costs. Our AI framework selection service evaluates your specific use cases against the latest AI architectures—
-            including OpenAI GPT-4, Azure OpenAI, Google Gemini, Anthropic Claude, open-source LLMs like Llama 3 and Mistral, and specialized
-            frameworks like LangChain, LlamaIndex, and Semantic Kernel.
-          </p>
+              <div className="mt-14 space-y-5">
+                {coreServices.map((s, i) => {
+                  const Icon = s.icon;
+                  return (
+                    <motion.div
+                      key={s.title}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeUp}
+                      custom={i}
+                    >
+                      <Card className="border-border/30 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 rounded-[22px]">
+                        <CardContent className="p-6 md:p-8">
+                          <div className="grid gap-6 md:grid-cols-[1fr_auto]">
+                            <div>
+                              <div className="flex items-center gap-3 mb-3">
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#DBEAFE]">
+                                  <Icon className="h-5 w-5 text-[#0A58D0]" />
+                                </div>
+                                <h3 className="text-lg font-bold text-[#0B0F19]">{s.title}</h3>
+                              </div>
+                              <p className="text-sm leading-relaxed text-[#64748B]">{s.description}</p>
+                            </div>
+                            <div className="md:min-w-[260px] md:border-l md:border-[#0B0F19]/5 md:pl-6">
+                              <p className="text-xs font-semibold uppercase tracking-wide text-[#64748B] mb-2">Key Deliverables</p>
+                              <ul className="space-y-1.5">
+                                {s.deliverables.map((d) => (
+                                  <li key={d} className="flex items-start gap-2 text-sm text-[#525252]">
+                                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0A58D0] mt-0.5" />
+                                    {d}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
 
-          <p>
-            We conduct a multi-criteria comparison based on cost per token, model performance on your domain, latency requirements, data
-            privacy policies, on-premise vs. cloud deployment needs, and integration complexity with your existing tech stack. Our AI
-            framework consulting ensures you select the right architecture for each use case—whether that's a managed cloud service,
-            fine-tuned open-source model, or hybrid RAG (Retrieval-Augmented Generation) system.
-          </p>
+          {/* ═══════════ OUR PROCESS ═══════════ */}
+          <section className="bg-[#F8FAFC] py-20 md:py-28">
+            <div className="mx-auto max-w-5xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#0A58D0]">
+                  Our Process
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl lg:text-5xl">
+                  Discovery to Roadmap in 6–12 Weeks
+                </motion.h2>
+              </motion.div>
 
-          <p>
-            Beyond framework selection, we design the end-to-end AI architecture including vector database selection (Pinecone, Weaviate,
-            ChromaDB, Qdrant), embedding strategy, prompt engineering frameworks, observability tools (LangSmith, Helicone), and integration
-            patterns with your data warehouse. Our architecture blueprints are production-ready, not whiteboard concepts—complete with
-            infrastructure-as-code templates, CI/CD pipelines, and security guardrails.
-          </p>
+              <div className="mt-14 space-y-4">
+                {processPhases.map((p, i) => (
+                  <motion.div
+                    key={p.phase}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                  >
+                    <div className="flex gap-4 rounded-2xl bg-white px-6 py-5">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0A58D0] text-sm font-bold text-white mt-0.5">
+                        {i + 1}
+                      </span>
+                      <div className="min-w-0 flex-grow">
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <h3 className="text-base font-bold text-[#0B0F19]">{p.phase}</h3>
+                          <Badge variant="secondary" className="bg-blue-50 text-[#0A58D0] border-blue-200 text-xs">
+                            {p.duration}
+                          </Badge>
+                        </div>
+                        <p className="mt-1 text-sm text-[#64748B]">{p.description}</p>
+                      </div>
+                      <div className="hidden sm:flex items-center gap-2 shrink-0 text-xs font-semibold text-[#0B0F19]">
+                        <Target className="h-4 w-4 text-[#0A58D0]" />
+                        {p.deliverable}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
-          <p>
-            <strong>Key Deliverables:</strong>
-          </p>
-          <ul>
-            <li><strong>Framework Comparison Matrix:</strong> Side-by-side evaluation of AI frameworks against your specific requirements</li>
-            <li><strong>Architecture Blueprint:</strong> Detailed technical design with component diagrams, data flow, and integration points</li>
-            <li><strong>Cost Projection Model:</strong> TCO analysis comparing cloud-managed vs. self-hosted options over 3 years</li>
-            <li><strong>Proof of Concept Plan:</strong> 2-4 week POC roadmap to validate architecture decisions with real data</li>
-          </ul>
+          {/* ═══════════ WHY US ═══════════ */}
+          <section className="py-20 md:py-28">
+            <div className="mx-auto max-w-5xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center mb-14"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#0A58D0]">
+                  Why Innovoco
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl">
+                  Not Your Typical Strategy Deck
+                </motion.h2>
+              </motion.div>
 
-          <h3>3. Enterprise AI Roadmap Development</h3>
-          <p>
-            An enterprise AI roadmap is more than a Gantt chart—it's a strategic plan that sequences AI initiatives based on business impact,
-            technical dependencies, and organizational readiness. Our AI roadmap consulting services prioritize use cases using a proprietary
-            scoring framework that evaluates each initiative across ROI potential, implementation complexity, data availability, and stakeholder
-            alignment.
-          </p>
+              <div className="grid gap-6 md:grid-cols-2">
+                {[
+                  {
+                    icon: Users,
+                    title: "Data Engineers, Not Slide Makers",
+                    description: "10+ years building enterprise data platforms. We don't just advise — we've built the warehouses, pipelines, and ML infrastructure that AI runs on. Our strategies are grounded in what actually ships.",
+                  },
+                  {
+                    icon: Zap,
+                    title: "Framework-Agnostic",
+                    description: "OpenAI, Anthropic, Google, open-source. AWS, Azure, GCP. We evaluate every option against your constraints — cost, privacy, latency, compliance — and recommend what's right, not what pays us.",
+                  },
+                  {
+                    icon: BarChart3,
+                    title: "ROI Before You Commit",
+                    description: "Every initiative in your roadmap has a financial model attached. Break-even timelines, sensitivity analysis, and clear KPIs. No faith-based AI budgets.",
+                  },
+                  {
+                    icon: Rocket,
+                    title: "Strategy That Ships",
+                    description: "Unlike consultancies that hand you a deck and disappear, we can execute the roadmap we create. Same team, no knowledge loss, no handoff risk. Strategy → Build → Operate.",
+                  },
+                ].map((d, i) => {
+                  const Icon = d.icon;
+                  return (
+                    <motion.div
+                      key={d.title}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeUp}
+                      custom={i}
+                    >
+                      <Card className="h-full border-border/30 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 rounded-[22px]">
+                        <CardContent className="p-8">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#DBEAFE] mb-5">
+                            <Icon className="h-5 w-5 text-[#0A58D0]" />
+                          </div>
+                          <h3 className="text-lg font-bold text-[#0B0F19] mb-2">{d.title}</h3>
+                          <p className="text-sm leading-relaxed text-[#64748B]">{d.description}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
 
-          <p>
-            We structure your AI roadmap into three phases: Quick Wins (0-6 months), Strategic Initiatives (6-18 months), and Transformational
-            Projects (18+ months). Quick Wins focus on high-ROI, low-risk projects that build organizational confidence and secure executive
-            buy-in. Strategic Initiatives tackle more complex use cases that require process re-engineering or data infrastructure upgrades.
-            Transformational Projects are moonshot ideas that fundamentally change how your business operates—like fully autonomous supply chain
-            optimization or AI-driven drug discovery.
-          </p>
+          {/* ═══════════ RELATED SERVICES ═══════════ */}
+          <section className="bg-[#F8FAFC] py-20 md:py-28">
+            <div className="mx-auto max-w-5xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center mb-14"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#0A58D0]">
+                  What Comes Next
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl">
+                  From Strategy to Production
+                </motion.h2>
+              </motion.div>
 
-          <p>
-            Each roadmap includes milestone definitions, success metrics, resource requirements (FTEs, cloud budget, vendor costs), and risk
-            mitigation strategies. We also define your AI operating model—whether you'll build an internal Center of Excellence, partner with
-            external AI consultants like Innovoco, or use a hybrid approach. The result is a living document that guides your AI investments
-            over the next 2-3 years while remaining flexible enough to adapt to new AI breakthroughs.
-          </p>
+              <div className="grid gap-5 md:grid-cols-3">
+                {[
+                  {
+                    icon: Database,
+                    gradient: "from-[#D1FAE5] to-[#6EE7B7]",
+                    title: "Data Engineering",
+                    description: "Build the AI-ready data platform your roadmap requires.",
+                    href: "/services/data-engineering-modernization",
+                  },
+                  {
+                    icon: Zap,
+                    gradient: "from-[#EDE9FE] to-[#C4B5FD]",
+                    title: "AI Implementation",
+                    description: "Turn your prioritized use cases into production systems in 12 weeks.",
+                    href: "/services/ai-implementation",
+                  },
+                  {
+                    icon: LifeBuoy,
+                    gradient: "from-[#FEF3C7] to-[#FDE68A]",
+                    title: "Managed AI Ops",
+                    description: "24/7 monitoring and optimization once your AI is live.",
+                    href: "/services/managed-ai-services",
+                  },
+                ].map((s, i) => {
+                  const Icon = s.icon;
+                  return (
+                    <motion.div
+                      key={s.href}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeUp}
+                      custom={i}
+                    >
+                      <Link href={s.href}>
+                        <Card className="group h-full border-border/30 bg-white shadow-sm hover:shadow-md transition-all duration-300 rounded-[22px] cursor-pointer">
+                          <CardContent className="p-6 text-center">
+                            <div className={`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${s.gradient}`}>
+                              <Icon className="h-6 w-6 text-white" />
+                            </div>
+                            <h3 className="text-base font-bold text-[#0B0F19] mb-1 group-hover:text-[#0A58D0] transition-colors">{s.title}</h3>
+                            <p className="text-sm text-[#64748B] mb-3">{s.description}</p>
+                            <span className="text-sm font-medium text-[#0A58D0] inline-flex items-center gap-1">
+                              Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                            </span>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
 
-          <p>
-            <strong>Key Deliverables:</strong>
-          </p>
-          <ul>
-            <li><strong>Prioritized Use Case Backlog:</strong> Ranked list of 10-20 AI initiatives with ROI scores and effort estimates</li>
-            <li><strong>3-Year AI Roadmap:</strong> Phase-based implementation plan with quarterly milestones and dependencies</li>
-            <li><strong>Resource Plan:</strong> Detailed staffing, budget, and vendor partnership requirements per phase</li>
-            <li><strong>Executive Presentation:</strong> Board-ready slide deck communicating the AI vision and business case</li>
-          </ul>
+          {/* ═══════════ FAQ ═══════════ */}
+          <FaqMonochrome
+            title="AI Strategy — Common Questions"
+            subtitle="What to expect when working with us on your AI roadmap."
+            items={faqItems.map((f) => ({ question: f.question, answer: f.answer }))}
+          />
 
-          <h3>4. Responsible AI Governance & Risk Management</h3>
-          <p>
-            As AI regulation tightens globally—with frameworks like the EU AI Act, US Executive Orders on AI safety, and industry-specific
-            guidelines (HIPAA for healthcare, SOC 2 for SaaS)—enterprises need robust AI governance frameworks to manage compliance risk,
-            bias detection, explainability, and ethical use. Our responsible AI consulting helps you build governance structures that balance
-            innovation speed with regulatory compliance.
-          </p>
+          {/* ═══════════ CTA ═══════════ */}
+          <section className="relative overflow-hidden">
+            <Image
+              src="/images/case-studies/cta-prioritization-bg.jpg"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0B0F19]/45 via-[#0B0F19]/35 to-[#0B0F19]/50" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A58D0]/15 via-transparent to-[#DC2626]/10" />
 
-          <p>
-            We design AI governance policies covering model approval workflows, bias testing protocols, data lineage tracking, explainability
-            requirements, and incident response procedures. For high-risk AI applications (credit scoring, hiring algorithms, medical diagnosis),
-            we implement red-team testing, adversarial validation, and continuous monitoring dashboards to detect model drift or unexpected
-            behaviors.
-          </p>
+            <div className="relative z-10 mx-auto max-w-4xl px-6 py-24 md:py-32 text-center">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+              >
+                <motion.h2
+                  variants={fadeUp}
+                  className="text-3xl font-bold leading-[1.1] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] sm:text-4xl md:text-5xl"
+                >
+                  Ready to Cut Through the AI Hype?
+                </motion.h2>
+                <motion.p
+                  variants={fadeUp}
+                  custom={1}
+                  className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] md:text-xl"
+                >
+                  60-minute strategy assessment. No cost, no obligation. Walk out with clarity on which AI initiatives will actually move your P&L.
+                </motion.p>
+                <motion.div variants={fadeUp} custom={2} className="mt-10">
+                  <Button
+                    onClick={openContact}
+                    size="lg"
+                    className="group cursor-pointer rounded-full bg-white px-10 py-7 text-lg font-semibold text-[#0B0F19] shadow-[0_8px_32px_rgba(255,255,255,0.2)] transition-all duration-300 hover:scale-105 hover:bg-neutral-100"
+                  >
+                    Schedule Your AI Briefing
+                    <ArrowRight className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" />
+                  </Button>
+                </motion.div>
+                <motion.p
+                  variants={fadeUp}
+                  custom={3}
+                  className="mt-5 text-sm font-medium text-white/60 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]"
+                >
+                  60 min · Free · No obligation
+                </motion.p>
+              </motion.div>
+            </div>
+          </section>
 
-          <p>
-            Our governance frameworks are tailored to your industry and risk profile. For healthcare clients, we ensure HIPAA compliance,
-            de-identification strategies, and audit trails for AI-assisted diagnoses. For financial services, we implement model risk management
-            (MRM) frameworks aligned with Federal Reserve SR 11-7 guidance. For retail, we focus on consumer privacy, GDPR compliance, and
-            transparency in AI-driven personalization.
-          </p>
+        </main>
+      </div>
 
-          <p>
-            <strong>Key Deliverables:</strong>
-          </p>
-          <ul>
-            <li><strong>AI Governance Framework:</strong> Policies covering model development, approval, monitoring, and decommissioning</li>
-            <li><strong>Bias Detection Protocols:</strong> Testing procedures to identify and mitigate bias across demographic groups</li>
-            <li><strong>Compliance Checklist:</strong> Industry-specific regulatory requirements mapped to your AI initiatives</li>
-            <li><strong>Incident Response Plan:</strong> Procedures for handling AI failures, data breaches, or unexpected model behavior</li>
-          </ul>
-
-          <h3>5. AI ROI Modeling & Business Case Development</h3>
-          <p>
-            Securing executive buy-in for AI investments requires more than technical feasibility—you need a compelling financial business case.
-            Our AI ROI modeling services quantify the expected value of AI initiatives using both hard savings (cost reduction, efficiency gains)
-            and soft benefits (customer satisfaction, employee retention, competitive differentiation).
-          </p>
-
-          <p>
-            We build financial models that project 3-year TCO (Total Cost of Ownership) including cloud infrastructure, model training costs,
-            vendor licensing, internal staffing, and ongoing maintenance. On the benefit side, we quantify impact using metrics like revenue
-            lift from personalized recommendations, time savings from automated document processing, or fraud prevention from anomaly detection
-            models. Our models include sensitivity analysis to show how ROI changes under different adoption scenarios, cost assumptions, or
-            performance outcomes.
-          </p>
-
-          <p>
-            For each AI use case, we define clear KPIs and measurement frameworks to track actual vs. projected ROI post-deployment. This
-            ensures accountability and provides the data needed to secure funding for future AI initiatives. Our business cases have helped
-            clients secure $500K to $5M+ in AI investment budgets by translating technical potential into language executives understand:
-            profit, growth, and competitive advantage.
-          </p>
-
-          <p>
-            <strong>Key Deliverables:</strong>
-          </p>
-          <ul>
-            <li><strong>Financial Model:</strong> 3-year TCO and benefit projections with sensitivity analysis and break-even timeline</li>
-            <li><strong>KPI Framework:</strong> Measurable success criteria for each AI initiative with baseline and target values</li>
-            <li><strong>Executive Business Case:</strong> One-pager summarizing investment, expected ROI, risks, and strategic rationale</li>
-            <li><strong>Measurement Plan:</strong> Post-deployment tracking methodology to validate actual ROI vs. projections</li>
-          </ul>
-        </ServiceSection>
-
-        {/* Why Choose Innovoco Section */}
-        <ServiceSection
-          icon={CheckCircle}
-          iconGradient="bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]"
-          title="Why Choose Innovoco for AI Strategy Consulting"
-          subtitle="Experience, pragmatism, and results that matter"
-        >
-          <h3>10+ Years of Data & AI Expertise</h3>
-          <p>
-            Unlike pure-play AI consultancies founded in the ChatGPT era, Innovoco has been building enterprise data platforms and analytics
-            solutions since 2014. We understand that AI strategy consulting isn't just about picking the latest LLM—it's about ensuring your
-            data infrastructure, governance policies, and organizational capabilities can support AI at scale. Our team has built data warehouses
-            for Fortune 500 companies, migrated petabyte-scale datasets to the cloud, and implemented MLOps pipelines long before "LLMOps" became
-            a buzzword.
-          </p>
-
-          <p>
-            This depth of data engineering experience means we can spot the red flags other consultants miss: siloed data systems that will
-            block RAG implementations, data quality issues that will poison your fine-tuned models, or security gaps that will fail compliance
-            audits. Our AI strategy consulting is grounded in the reality of enterprise IT environments, not theoretical best practices that
-            assume greenfield projects.
-          </p>
-
-          <h3>Framework-Agnostic, Technology-Neutral Guidance</h3>
-          <p>
-            We're not in the business of selling you a specific AI vendor or framework. Our AI framework consulting evaluates the full landscape—
-            OpenAI, Azure OpenAI, Google Vertex AI, AWS Bedrock, Anthropic Claude, open-source models (Llama 3, Mistral, Falcon), and specialized
-            frameworks like LangChain, Haystack, and Semantic Kernel. We recommend what's best for your use case, budget, and risk profile, even
-            if that means multiple frameworks for different workloads.
-          </p>
-
-          <p>
-            This technology-neutral stance extends to deployment models. We'll help you evaluate managed cloud services vs. self-hosted open-source
-            models, hybrid architectures that keep sensitive data on-premise, and edge AI deployments for latency-sensitive applications. Our goal
-            is to find the right fit for your constraints, not to push a one-size-fits-all solution.
-          </p>
-
-          <h3>Proven Methodologies from 500+ AI Implementations</h3>
-          <p>
-            Our AI strategy consulting framework is battle-tested across 500+ implementations spanning healthcare (clinical decision support,
-            patient triage), finance (fraud detection, credit risk modeling), retail (demand forecasting, personalized recommendations),
-            manufacturing (predictive maintenance, quality control), and logistics (route optimization, warehouse automation).
-          </p>
-
-          <p>
-            We've learned what works and what doesn't. We know that starting with a massive enterprise-wide AI transformation is a recipe for
-            failure—Quick Wins build momentum and trust. We know that ignoring data quality issues in favor of fancy models leads to "garbage in,
-            garbage out." We know that responsible AI governance can't be bolted on after deployment—it must be baked into the architecture from
-            day one. These lessons, earned through real-world successes and failures, inform every enterprise AI roadmap we create.
-          </p>
-
-          <h3>Business-Outcome Focus, Not Technology for Technology's Sake</h3>
-          <p>
-            Our AI roadmap consulting starts with the business problem, not the technology solution. We don't recommend implementing LLMs because
-            they're trendy—we recommend them when they're the best tool to solve a specific pain point like contract analysis, customer support
-            automation, or internal knowledge search. If a simpler solution (rule-based system, traditional ML model, process automation) delivers
-            90% of the value at 10% of the cost, we'll tell you.
-          </p>
-
-          <p>
-            This pragmatic approach ensures that AI investments are judged by the same ROI standards as any other business initiative. Every AI
-            use case in your roadmap will have clear success metrics, measurable KPIs, and a defined path to production. We don't do research
-            projects disguised as business solutions—we build AI systems that deliver results.
-          </p>
-
-          <h3>End-to-End Partnership from Strategy to Managed Services</h3>
-          <p>
-            Unlike strategy-only consultancies that hand you a PowerPoint deck and disappear, Innovoco offers a full spectrum of AI services
-            from initial AI strategy consulting through data engineering, AI implementation, and long-term managed AI services. This means the
-            roadmap we create is one we can actually execute—no handoff risk, no knowledge loss, no finger-pointing between consultants and
-            implementation teams.
-          </p>
-
-          <p>
-            If you choose to implement with us (no obligation), we already understand your technical landscape, business priorities, and
-            organizational constraints from the strategy phase. This continuity accelerates delivery, reduces rework, and ensures the final
-            solution matches the original vision. And with our managed AI services, we can monitor, optimize, and evolve your AI systems long
-            after deployment—turning initial Quick Wins into sustained competitive advantages.
-          </p>
-        </ServiceSection>
-
-        {/* Our AI Strategy Process Section */}
-        <ServiceSection
-          icon={Zap}
-          iconGradient="bg-gradient-to-br from-[#FECACA] to-[#FCA5A5]"
-          title="Our AI Strategy Process"
-          subtitle="From discovery to actionable roadmap in 6-12 weeks"
-        >
-          <h3>Phase 1: Discovery & Assessment (2-3 Weeks)</h3>
-          <p>
-            We begin with stakeholder interviews across business units, IT, data teams, and executives to understand your AI ambitions, current
-            pain points, and organizational constraints. In parallel, we conduct a technical assessment of your data infrastructure, analytics
-            capabilities, and existing AI/ML initiatives. This includes architecture reviews, data quality audits, and compliance gap analysis.
-          </p>
-
-          <p>
-            <strong>Deliverables:</strong> AI Maturity Assessment Report, Current State Architecture Diagram, Stakeholder Alignment Summary
-          </p>
-
-          <h3>Phase 2: Use Case Identification & Prioritization (2-3 Weeks)</h3>
-          <p>
-            Through facilitated workshops, we brainstorm 20-30 potential AI use cases spanning operational efficiency, customer experience,
-            revenue growth, and risk management. Each use case is scored on business impact, technical feasibility, data readiness, and strategic
-            alignment. We then narrow the list to 10-15 high-priority initiatives and validate them with cross-functional teams.
-          </p>
-
-          <p>
-            <strong>Deliverables:</strong> Prioritized Use Case Backlog, ROI Estimates per Use Case, Data Readiness Assessment
-          </p>
-
-          <h3>Phase 3: Architecture Design & Framework Selection (2-3 Weeks)</h3>
-          <p>
-            For each prioritized use case, we design the target AI architecture and recommend the optimal AI framework. This includes detailed
-            cost modeling, latency analysis, and compliance validation. We also define your AI technology stack including vector databases,
-            observability tools, prompt management platforms, and MLOps infrastructure.
-          </p>
-
-          <p>
-            <strong>Deliverables:</strong> AI Architecture Blueprint, Framework Comparison Matrix, TCO Analysis, POC Recommendations
-          </p>
-
-          <h3>Phase 4: Roadmap Development & Governance Design (2-3 Weeks)</h3>
-          <p>
-            We sequence the prioritized use cases into a phased roadmap spanning Quick Wins (0-6 months), Strategic Initiatives (6-18 months),
-            and Transformational Projects (18+ months). For each phase, we define milestones, resource requirements, budget estimates, and
-            success metrics. We also build the responsible AI governance framework including policies, approval workflows, and monitoring protocols.
-          </p>
-
-          <p>
-            <strong>Deliverables:</strong> 3-Year AI Roadmap, AI Governance Framework, Resource & Budget Plan, Executive Presentation
-          </p>
-
-          <h3>Phase 5: Executive Alignment & Handoff (1-2 Weeks)</h3>
-          <p>
-            We present the final AI strategy to executive leadership, secure buy-in, and facilitate Q&A sessions to address concerns. If you
-            choose to proceed with implementation, we conduct a detailed handoff to internal teams or transition to Innovoco's AI implementation
-            services. We also provide a 30-day post-delivery support period to answer questions and refine the roadmap based on new insights.
-          </p>
-
-          <p>
-            <strong>Deliverables:</strong> Executive Summary Deck, Implementation Handoff Package, 30-Day Post-Delivery Support
-          </p>
-        </ServiceSection>
-
-        {/* Industries We Serve Section */}
-        <ServiceSection
-          icon={Target}
-          iconGradient="bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]"
-          title="Industries We Serve"
-          subtitle="Deep expertise across high-value sectors"
-        >
-          <p>
-            Our AI strategy consulting has delivered measurable results across diverse industries. In <strong>healthcare</strong>, we've helped
-            hospital networks build AI roadmaps for clinical decision support, patient risk stratification, and administrative automation while
-            ensuring HIPAA compliance and bias-free models. In <strong>financial services</strong>, we've designed fraud detection architectures,
-            credit risk models, and regulatory compliance frameworks aligned with model risk management (MRM) standards.
-          </p>
-
-          <p>
-            For <strong>retail and e-commerce</strong> clients, we've prioritized AI use cases in demand forecasting, personalized product
-            recommendations, and dynamic pricing optimization—delivering 10-25% revenue lifts in pilot programs. In <strong>manufacturing</strong>,
-            our AI roadmaps have focused on predictive maintenance, quality control automation, and supply chain optimization, reducing downtime
-            by 15-30% and defect rates by 20-40%.
-          </p>
-
-          <p>
-            We also serve <strong>logistics and transportation</strong> (route optimization, warehouse automation), <strong>energy and utilities</strong>
-            (demand forecasting, grid optimization), and <strong>professional services</strong> (document automation, knowledge management).
-            Regardless of industry, our AI strategy consulting adapts to your unique regulatory environment, competitive landscape, and
-            operational realities.
-          </p>
-        </ServiceSection>
-
-        {/* Get Started Section */}
-        <ServiceSection
-          icon={DollarSign}
-          iconGradient="bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]"
-          title="Get Started with AI Strategy Consulting"
-          subtitle="Turn AI potential into competitive advantage"
-        >
-          <p>
-            Whether you're just beginning your AI journey or looking to accelerate existing initiatives, Innovoco's AI strategy consulting
-            provides the clarity, confidence, and actionable roadmap you need to succeed. Our framework-agnostic approach, proven methodologies,
-            and 10+ years of data expertise ensure you invest in AI initiatives that deliver measurable business results.
-          </p>
-
-          <p>
-            <strong>Next Steps:</strong>
-          </p>
-          <ul>
-            <li><strong>Schedule a Strategy Assessment:</strong> 60-minute consultation to discuss your AI goals and current challenges (no cost, no obligation)</li>
-            <li><strong>Request a Proposal:</strong> Receive a customized AI strategy consulting proposal with scope, timeline, and investment details</li>
-            <li><strong>Download Our AI Readiness Guide:</strong> Free resource covering AI maturity assessment, use case prioritization, and governance best practices</li>
-            <li><strong>View Case Studies:</strong> See how we've helped enterprises across healthcare, finance, retail, and manufacturing build winning AI strategies</li>
-          </ul>
-
-          <p>
-            Ready to transform your AI vision into reality? Contact Innovoco today to schedule your complimentary AI strategy assessment.
-            Let's build an enterprise AI roadmap that turns data into your most valuable business asset.
-          </p>
-        </ServiceSection>
-
-        {/* Related Services */}
-        <RelatedServices services={relatedServices} />
-      </ServicePageLayout>
+      <Footer />
+      <ContactModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
     </>
   );
 }

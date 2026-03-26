@@ -46,15 +46,19 @@ export function generateMetadata({
 // Pre-configured metadata for each service page
 export const SERVICE_METADATA = {
   aiStrategy: {
-    title: "AI Strategy & Consulting Services | Enterprise AI Roadmap",
-    description: "Expert AI strategy consulting to guide your AI transformation. Framework-agnostic roadmaps, governance, and ROI modeling. 10+ years data expertise.",
+    title: "AI Strategy Consulting | Board-Ready Roadmap in 4 Weeks",
+    description: "Enterprise AI strategy consulting: maturity assessment, use-case prioritization, and board-ready roadmaps. 171% avg ROI across 500+ deployments. Book a free workshop.",
     keywords: [
       "AI strategy consulting",
       "enterprise AI roadmap",
+      "AI maturity assessment",
       "AI framework selection",
       "AI governance framework",
-      "AI maturity assessment",
-      "AI consulting services"
+      "AI consulting services",
+      "AI use case prioritization",
+      "responsible AI governance",
+      "AI ROI modeling",
+      "enterprise AI transformation",
     ],
     canonical: "https://innovoco.com/services/ai-strategy-consulting",
   },
