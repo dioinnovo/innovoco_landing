@@ -20,6 +20,10 @@ import {
   BarChart3,
   FileText,
   Search,
+  AlertTriangle,
+  Scale,
+  Bot,
+  CircleDollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -110,6 +114,38 @@ const faqItems = [
     question: "How much does AI strategy consulting cost?",
     answer: "Strategy engagements range from $50K for a focused assessment to $150K+ for comprehensive enterprise roadmaps. Every engagement includes ROI projections — you see the expected return before committing.",
   },
+  {
+    question: "What does an AI strategy consultant actually do?",
+    answer: "We assess your data maturity, identify the highest-ROI AI use cases for your business, select the right frameworks and architectures, build a phased roadmap with timelines and budgets, and create the governance structure to keep it compliant. The output is a board-ready plan your team can execute.",
+  },
+  {
+    question: "What is an AI strategy framework?",
+    answer: "An AI strategy framework is a structured methodology for evaluating, prioritizing, and sequencing AI initiatives. Ours — the Innovoco AI Acceleration Framework — covers five pillars: Assess (data maturity), Prioritize (use cases by ROI), Architect (framework selection), Govern (compliance and ethics), and Roadmap (phased execution plan).",
+  },
+  {
+    question: "Who should own AI strategy in our organization?",
+    answer: "Ideally a cross-functional steering committee led by a C-suite sponsor (CTO, CDO, or COO). The strategy needs business alignment, not just technical direction. We facilitate this alignment as part of every engagement — ensuring IT, business units, and executives are on the same page.",
+  },
+  {
+    question: "What's the difference between AI consulting and AI implementation?",
+    answer: "AI consulting (strategy) tells you what to build and why. AI implementation builds it. We do both, but they're separate engagements. Strategy takes 4–12 weeks and produces a roadmap. Implementation takes 8–16 weeks and produces production software. Many clients start with strategy and continue to implementation with us.",
+  },
+  {
+    question: "Is AI consulting worth the investment?",
+    answer: "Yes — if done right. Our clients see 171% average ROI within the first year. The cost of NOT having a strategy is higher: 85% of unguided AI projects fail to reach production, wasting $500K–$2M in sunk costs. A $50K–$150K strategy engagement prevents millions in failed experiments.",
+  },
+  {
+    question: "How do you handle EU AI Act compliance?",
+    answer: "Full enforcement of the EU AI Act hits August 2, 2026 with penalties up to 7% of global revenue. Our governance framework includes AI system classification, risk assessment, documentation requirements, and monitoring protocols aligned with the Act. We help you inventory your AI systems and ensure compliance before the deadline.",
+  },
+  {
+    question: "Why choose a boutique AI firm over Accenture or Deloitte?",
+    answer: "Three reasons: speed (4 weeks vs 4 months for a roadmap), cost (50–70% less than Big 4 rates), and access (you work with senior architects, not junior analysts learning on your dime). We deliver the same enterprise-grade output without the overhead of a 200-person account team.",
+  },
+  {
+    question: "Can you help with agentic AI strategy?",
+    answer: "Yes — agentic AI (autonomous multi-step agents) is one of the most requested topics in 2026. Gartner predicts 40% of enterprise apps will feature AI agents by end of 2026, but 40%+ of those initiatives will fail without proper governance. We design agentic AI architectures with human-in-the-loop controls, guardrails, and clear ROI frameworks.",
+  },
 ];
 
 /* ─── component ─── */
@@ -179,7 +215,7 @@ export function AIStrategyPageClient() {
                   custom={1}
                   className="mx-auto max-w-4xl text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-6xl"
                 >
-                  Turn AI Ambition Into a{" "}
+                  AI Strategy Consulting That Delivers a{" "}
                   <span className="bg-gradient-to-r from-sky-300 via-blue-200 to-rose-300 bg-clip-text text-transparent">
                     Board-Ready Roadmap
                   </span>
@@ -231,6 +267,64 @@ export function AIStrategyPageClient() {
                   ))}
                 </motion.div>
               </motion.div>
+            </div>
+          </section>
+
+          {/* ═══════════ THE PROBLEM ═══════════ */}
+          <section className="py-20 md:py-28">
+            <div className="mx-auto max-w-5xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-red-500">
+                  The Reality
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl lg:text-5xl">
+                  AI Without Strategy Is Expensive Experimentation
+                </motion.h2>
+                <motion.p variants={fadeUp} custom={2} className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-[#64748B]">
+                  The numbers are clear — and they haven&apos;t improved since 2024.
+                </motion.p>
+              </motion.div>
+
+              <div className="mt-14 grid gap-5 md:grid-cols-3">
+                {[
+                  { stat: "95%", label: "of GenAI pilots fail to achieve measurable P&L impact", source: "MIT 2025" },
+                  { stat: "56%", label: "of CEOs report getting 'nothing' from AI adoption", source: "PwC 2026" },
+                  { stat: "80%", label: "of companies miss AI cost forecasts by over 25%", source: "Gartner 2026" },
+                ].map((s, i) => (
+                  <motion.div
+                    key={s.stat}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                  >
+                    <div className="rounded-2xl bg-[#FEF2F2]/60 p-8 text-center">
+                      <p className="text-4xl font-bold text-red-500 md:text-5xl">{s.stat}</p>
+                      <p className="mt-3 text-sm leading-relaxed text-[#525252]">{s.label}</p>
+                      <p className="mt-2 text-xs text-[#94A3B8]">{s.source}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.p
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="mt-10 text-center text-base text-[#64748B] max-w-2xl mx-auto leading-relaxed"
+              >
+                The problem isn&apos;t the technology. It&apos;s the absence of a strategy that connects
+                AI capabilities to business outcomes, governance, and realistic timelines. That&apos;s
+                what we build.
+              </motion.p>
             </div>
           </section>
 
@@ -417,6 +511,209 @@ export function AIStrategyPageClient() {
                   );
                 })}
               </div>
+            </div>
+          </section>
+
+          {/* ═══════════ PRICING ═══════════ */}
+          <section className="bg-[#F8FAFC] py-20 md:py-28">
+            <div className="mx-auto max-w-5xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#0A58D0]">
+                  Investment
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl">
+                  Transparent Pricing, No Surprises
+                </motion.h2>
+                <motion.p variants={fadeUp} custom={2} className="mx-auto mt-5 max-w-2xl text-base text-[#64748B]">
+                  Every engagement includes ROI projections before you commit. No hidden fees, no scope creep clauses.
+                </motion.p>
+              </motion.div>
+
+              <div className="mt-14 grid gap-5 md:grid-cols-3">
+                {[
+                  {
+                    tier: "AI Readiness Assessment",
+                    price: "$15K–$30K",
+                    duration: "2–3 weeks",
+                    includes: ["AI maturity score with benchmarks", "Data readiness audit", "Quick win identification", "Executive summary"],
+                  },
+                  {
+                    tier: "Full Strategy & Roadmap",
+                    price: "$50K–$100K",
+                    duration: "6–10 weeks",
+                    includes: ["Everything in Assessment", "Framework selection & architecture", "3-year phased roadmap", "AI governance framework", "Board-ready presentation"],
+                    featured: true,
+                  },
+                  {
+                    tier: "Enterprise Transformation",
+                    price: "$100K–$200K+",
+                    duration: "10–16 weeks",
+                    includes: ["Everything in Full Strategy", "Multi-BU use case analysis", "Change management plan", "Org design recommendations", "90-day implementation support"],
+                  },
+                ].map((t, i) => (
+                  <motion.div
+                    key={t.tier}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                  >
+                    <Card className={`h-full rounded-[22px] ${t.featured ? "border-[#0A58D0] border-2 shadow-md" : "border-border/30 shadow-sm"}`}>
+                      <CardContent className="p-8">
+                        {t.featured && (
+                          <Badge className="bg-[#0A58D0] text-white mb-4 text-xs">Most Popular</Badge>
+                        )}
+                        <p className="text-sm font-semibold text-[#64748B] uppercase tracking-wide">{t.tier}</p>
+                        <p className="mt-2 text-3xl font-bold text-[#0B0F19]">{t.price}</p>
+                        <p className="mt-1 text-sm text-[#0A58D0] font-medium">{t.duration}</p>
+                        <ul className="mt-6 space-y-2">
+                          {t.includes.map((item) => (
+                            <li key={item} className="flex items-start gap-2 text-sm text-[#525252]">
+                              <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0A58D0] mt-0.5" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                        <Button
+                          onClick={openContact}
+                          className={`mt-6 w-full rounded-full cursor-pointer ${t.featured ? "bg-[#0A58D0] hover:bg-[#084BB3] text-white" : "bg-white border border-[#0A58D0] text-[#0A58D0] hover:bg-[#DBEAFE]/50"}`}
+                        >
+                          Get Started
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ═══════════ 2026 FOCUS AREAS ═══════════ */}
+          <section className="py-20 md:py-28">
+            <div className="mx-auto max-w-5xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#0A58D0]">
+                  What&apos;s Different in 2026
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl">
+                  The AI Strategy Landscape Has Shifted
+                </motion.h2>
+              </motion.div>
+
+              <div className="mt-14 grid gap-6 md:grid-cols-3">
+                {[
+                  {
+                    icon: Bot,
+                    title: "Agentic AI Is Here",
+                    description: "Gartner predicts 40% of enterprise apps will feature AI agents by end of 2026. But 40%+ of those initiatives will fail without proper governance. Your strategy needs an agentic AI playbook.",
+                  },
+                  {
+                    icon: Scale,
+                    title: "EU AI Act Enforcement",
+                    description: "Full enforcement hits August 2, 2026 with penalties up to 7% of global revenue. Most enterprises lack systematic AI system inventories. Compliance readiness is now a strategy priority, not an afterthought.",
+                  },
+                  {
+                    icon: CircleDollarSign,
+                    title: "Boards Want P&L Impact",
+                    description: "The question shifted from 'What can AI do?' to 'How much did AI add to our EBITDA?' Strategy must connect every initiative to measurable financial outcomes — not innovation theater.",
+                  },
+                ].map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div
+                      key={item.title}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeUp}
+                      custom={i}
+                    >
+                      <Card className="h-full border-border/30 bg-white shadow-sm rounded-[22px]">
+                        <CardContent className="p-8">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#DBEAFE] mb-5">
+                            <Icon className="h-5 w-5 text-[#0A58D0]" />
+                          </div>
+                          <h3 className="text-lg font-bold text-[#0B0F19] mb-2">{item.title}</h3>
+                          <p className="text-sm leading-relaxed text-[#64748B]">{item.description}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          {/* ═══════════ BOUTIQUE vs BIG 4 ═══════════ */}
+          <section className="bg-[#F8FAFC] py-20 md:py-28">
+            <div className="mx-auto max-w-4xl px-6">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="text-center"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#0A58D0]">
+                  The Honest Comparison
+                </motion.p>
+                <motion.h2 variants={fadeUp} custom={1} className="mt-3 text-3xl font-bold text-[#0B0F19] md:text-4xl">
+                  Boutique AI Firm vs. the Big Consultancies
+                </motion.h2>
+                <motion.p variants={fadeUp} custom={2} className="mx-auto mt-5 max-w-2xl text-base text-[#64748B]">
+                  We&apos;re not for everyone. If you need a brand name to satisfy a board checkbox,
+                  go with the Big 4. If you need results, read on.
+                </motion.p>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="mt-14"
+              >
+                <div className="overflow-hidden rounded-2xl border border-border/30 bg-white">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-border/30 bg-[#F8FAFC]">
+                        <th className="px-6 py-4 text-left font-semibold text-[#64748B]"></th>
+                        <th className="px-6 py-4 text-center font-bold text-[#0A58D0]">Innovoco</th>
+                        <th className="px-6 py-4 text-center font-semibold text-[#64748B]">Big 4 / MBB</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border/20">
+                      {[
+                        ["Roadmap delivery", "4 weeks", "3–6 months"],
+                        ["Who does the work", "Senior architects", "Junior analysts"],
+                        ["Cost range", "$50K–$150K", "$250K–$1M+"],
+                        ["Framework bias", "Technology agnostic", "Partner-dependent"],
+                        ["Strategy → Build handoff", "Same team", "Different team / vendor"],
+                        ["Post-strategy support", "30 days included", "Separate SOW"],
+                      ].map(([label, us, them]) => (
+                        <tr key={label as string}>
+                          <td className="px-6 py-3.5 font-medium text-[#0B0F19]">{label}</td>
+                          <td className="px-6 py-3.5 text-center font-semibold text-[#0A58D0]">{us}</td>
+                          <td className="px-6 py-3.5 text-center text-[#64748B]">{them}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </motion.div>
             </div>
           </section>
 
