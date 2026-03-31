@@ -620,57 +620,53 @@ export function LandingPageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
+              className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                <div className="p-4 bg-gradient-to-br from-[#FEF3C7] to-[#FCD34D]/20 rounded-2xl">
-                  <Image
-                    src="/ai-transformation-network.png"
-                    alt="AI Strategy Implementation - Agentic AI Development LLM Integration"
-                    width={800}
-                    height={800}
-                    quality={90}
-                    className="w-full h-auto rounded-xl"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
-                </div>
-                <div className="p-6 md:p-8">
-                  <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
-                    AI Strategy & Implementation
-                  </h3>
-                  <p className="text-base md:text-lg text-[#525252] leading-relaxed">
-                    Vision to production in 12-16 weeks. We deliver agentic AI systems that execute multi-step tasks autonomously—not simple chatbots, but intelligent agents that drive 171% ROI and transform operations.
-                  </p>
-                </div>
+              <div className="p-4 bg-gradient-to-br from-[#FEF3C7] to-[#FCD34D]/20 rounded-2xl">
+                <Image
+                  src="/ai-transformation-network.png"
+                  alt="AI Strategy Implementation - Agentic AI Development LLM Integration"
+                  width={800}
+                  height={800}
+                  quality={90}
+                  className="w-full h-auto rounded-xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
               </div>
+              <div className="p-6 md:p-8">
+                <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
+                  AI Strategy & Implementation
+                </h3>
+                <p className="text-base md:text-lg text-[#525252] mb-6 leading-relaxed">
+                  Vision to production in 12-16 weeks. We deliver agentic AI systems that execute multi-step tasks autonomously—not simple chatbots, but intelligent agents that drive 171% ROI and transform operations.
+                </p>
 
-              <div className="grid md:grid-cols-3 lg:grid-cols-1 gap-4 mt-6 px-2 md:px-4 lg:w-1/2 lg:ml-auto lg:px-8">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Agentic AI Development</p>
-                    <p className="text-sm text-[#525252]">Autonomous agents that complete complex workflows with minimal oversight—compressing 4-week tasks into 6 hours</p>
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Agentic AI Development</p>
+                      <p className="text-sm text-[#525252]">Autonomous agents that complete complex workflows with minimal oversight—compressing 4-week tasks into 6 hours</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Workflow Automation & Orchestration</p>
+                      <p className="text-sm text-[#525252]">Multi-agent systems that automate end-to-end business processes—from data entry to approvals, running 24/7 without human intervention</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Enterprise LLM Integration with RAG</p>
+                      <p className="text-sm text-[#525252]">ChatGPT, Claude, Gemini grounded in your data—no hallucinations, just accurate enterprise intelligence</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Workflow Automation & Orchestration</p>
-                    <p className="text-sm text-[#525252]">Multi-agent systems that automate end-to-end business processes—from data entry to approvals, running 24/7 without human intervention</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Enterprise LLM Integration with RAG</p>
-                    <p className="text-sm text-[#525252]">ChatGPT, Claude, Gemini grounded in your data—no hallucinations, just accurate enterprise intelligence</p>
-                  </div>
-                </div>
-              </div>
 
-              <div className="flex items-center justify-between mt-6 px-2 md:px-4 flex-wrap gap-4">
-                <div className="flex items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-3 mb-6 flex-wrap">
                   <Badge variant="secondary" className="bg-amber-50 text-[#D97706] border-amber-200 text-xs">
                     171% ROI
                   </Badge>
@@ -685,7 +681,7 @@ export function LandingPageClient() {
                 <Button
                   onClick={() => setContactModalOpen(true)}
                   size="lg"
-                  className="bg-[#D97706] hover:bg-[#B45309] text-white transition-all duration-300 group/btn text-base rounded-full h-14 px-8"
+                  className="w-full bg-[#D97706] hover:bg-[#B45309] text-white transition-all duration-300 group/btn text-base rounded-full h-14"
                 >
                   <span className="font-semibold">Discuss My Roadmap</span>
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -700,65 +696,52 @@ export function LandingPageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
+              className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                <div className="p-4 bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]/20 rounded-2xl md:order-2">
-                  <Image
-                    src="/analytics-bi-illustration.png"
-                    alt="Advanced Analytics Business Intelligence Predictive Analytics Machine Learning Executive Dashboards KPI Tracking"
-                    width={800}
-                    height={800}
-                    quality={90}
-                    className="w-full h-auto rounded-xl"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-6 md:p-8 md:order-1">
-                  <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
-                    Advanced Analytics & BI
-                  </h3>
-                  <p className="text-base md:text-lg text-[#525252] leading-relaxed">
-                    Transform data into strategic intelligence. AI-powered predictive analytics, executive dashboards, and machine learning models that improve decision-making by 64% and accelerate insights by 28%.
-                  </p>
-                </div>
+              <div className="p-4 bg-gradient-to-br from-[#EDE9FE] to-[#C4B5FD]/20 rounded-2xl md:order-2">
+                <Image
+                  src="/analytics-bi-illustration.png"
+                  alt="Advanced Analytics Business Intelligence Predictive Analytics Machine Learning Executive Dashboards KPI Tracking"
+                  width={800}
+                  height={800}
+                  quality={90}
+                  className="w-full h-auto rounded-xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
+              <div className="p-6 md:p-8 md:order-1">
+                <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
+                  Advanced Analytics & BI
+                </h3>
+                <p className="text-base md:text-lg text-[#525252] mb-6 leading-relaxed">
+                  Transform data into strategic intelligence. AI-powered predictive analytics, executive dashboards, and machine learning models that improve decision-making by 64% and accelerate insights by 28%.
+                </p>
 
-              <div className="grid md:grid-cols-3 lg:grid-cols-1 gap-4 mt-6 px-2 md:px-4 lg:w-1/2 lg:px-8">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Predictive Analytics & ML Models</p>
-                    <p className="text-sm text-[#525252]">Forecast demand, detect anomalies, predict churn—machine learning that spots risks and opportunities before they happen</p>
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Predictive Analytics & ML Models</p>
+                      <p className="text-sm text-[#525252]">Forecast demand, detect anomalies, predict churn—machine learning that spots risks and opportunities before they happen</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Executive Dashboards & KPI Tracking</p>
+                      <p className="text-sm text-[#525252]">Real-time strategic visualization with voice-enabled exploration—see revenue, margins, and efficiency in one intelligent view</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Managed Analytics Services</p>
+                      <p className="text-sm text-[#525252]">End-to-end BI solutions with continuous optimization and enterprise-grade governance—empowering data-driven decision making</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Executive Dashboards & KPI Tracking</p>
-                    <p className="text-sm text-[#525252]">Real-time strategic visualization with voice-enabled exploration—see revenue, margins, and efficiency in one intelligent view</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Managed Analytics Services</p>
-                    <p className="text-sm text-[#525252]">End-to-end BI solutions with continuous optimization and enterprise-grade governance—empowering data-driven decision making</p>
-                  </div>
-                </div>
-              </div>
 
-              <div className="flex items-center justify-between mt-6 px-2 md:px-4 flex-wrap gap-4">
-                <Button
-                  onClick={() => setContactModalOpen(true)}
-                  size="lg"
-                  className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white transition-all duration-300 group/btn text-base rounded-full h-14 px-8"
-                >
-                  <span className="font-semibold">Unlock My Insights</span>
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                </Button>
-
-                <div className="flex items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-3 mb-6 flex-wrap">
                   <Badge variant="secondary" className="bg-purple-50 text-[#7C3AED] border-purple-200 text-xs">
                     64% Faster Decisions
                   </Badge>
@@ -769,6 +752,15 @@ export function LandingPageClient() {
                     AI-Powered ML
                   </Badge>
                 </div>
+
+                <Button
+                  onClick={() => setContactModalOpen(true)}
+                  size="lg"
+                  className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white transition-all duration-300 group/btn text-base rounded-full h-14"
+                >
+                  <span className="font-semibold">Unlock My Insights</span>
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                </Button>
               </div>
             </motion.div>
 
@@ -779,56 +771,52 @@ export function LandingPageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
+              className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                <div className="p-4 bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]/20 rounded-2xl">
-                  <Image
-                    src="/data-warehouse-illustration.png"
-                    alt="Data Engineering Modernization - Real-Time Streaming Cloud Migration"
-                    width={800}
-                    height={800}
-                    quality={90}
-                    className="w-full h-auto rounded-xl"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-6 md:p-8">
-                  <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
-                    Data Engineering & Modernization
-                  </h3>
-                  <p className="text-base md:text-lg text-[#525252] leading-relaxed">
-                    10+ years building AI-ready data platforms. Real-time streaming analytics, zero-ETL architectures, and cloud-native migrations that deliver 3x faster insights at 40% lower costs.
-                  </p>
-                </div>
+              <div className="p-4 bg-gradient-to-br from-[#DBEAFE] to-[#93C5FD]/20 rounded-2xl">
+                <Image
+                  src="/data-warehouse-illustration.png"
+                  alt="Data Engineering Modernization - Real-Time Streaming Cloud Migration"
+                  width={800}
+                  height={800}
+                  quality={90}
+                  className="w-full h-auto rounded-xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
+              <div className="p-6 md:p-8">
+                <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
+                  Data Engineering & Modernization
+                </h3>
+                <p className="text-base md:text-lg text-[#525252] mb-6 leading-relaxed">
+                  10+ years building AI-ready data platforms. Real-time streaming analytics, zero-ETL architectures, and cloud-native migrations that deliver 3x faster insights at 40% lower costs.
+                </p>
 
-              <div className="grid md:grid-cols-3 lg:grid-cols-1 gap-4 mt-6 px-2 md:px-4 lg:w-1/2 lg:ml-auto lg:px-8">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0A58D0] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Real-Time Data Pipelines</p>
-                    <p className="text-sm text-[#525252]">Apache Kafka, Flink, Spark Streaming—process data at the source with edge computing for instant insights</p>
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#0A58D0] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Real-Time Data Pipelines</p>
+                      <p className="text-sm text-[#525252]">Apache Kafka, Flink, Spark Streaming—process data at the source with edge computing for instant insights</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#0A58D0] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Cloud-Native Migration</p>
+                      <p className="text-sm text-[#525252]">Snowflake, Databricks, AWS, Azure, GCP—zero-downtime replatforming with automated optimization</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#0A58D0] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">AI-Ready Lakehouse Architecture</p>
+                      <p className="text-sm text-[#525252]">Unified data lakes + warehouses built for machine learning from day one—AI-ready infrastructure with decentralized ownership and centralized governance</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0A58D0] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Cloud-Native Migration</p>
-                    <p className="text-sm text-[#525252]">Snowflake, Databricks, AWS, Azure, GCP—zero-downtime replatforming with automated optimization</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0A58D0] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">AI-Ready Lakehouse Architecture</p>
-                    <p className="text-sm text-[#525252]">Unified data lakes + warehouses built for machine learning from day one—AI-ready infrastructure with decentralized ownership and centralized governance</p>
-                  </div>
-                </div>
-              </div>
 
-              <div className="flex items-center justify-between mt-6 px-2 md:px-4 flex-wrap gap-4">
-                <div className="flex items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-3 mb-6 flex-wrap">
                   <Badge variant="secondary" className="bg-blue-50 text-[#0A58D0] border-blue-200 text-xs">
                     40% Cost Reduction
                   </Badge>
@@ -843,7 +831,7 @@ export function LandingPageClient() {
                 <Button
                   onClick={() => setContactModalOpen(true)}
                   size="lg"
-                  className="bg-[#0A58D0] hover:bg-[#084BB3] text-white transition-all duration-300 group/btn text-base rounded-full h-14 px-8"
+                  className="w-full bg-[#0A58D0] hover:bg-[#084BB3] text-white transition-all duration-300 group/btn text-base rounded-full h-14"
                 >
                   <span className="font-semibold">Modernize My Data</span>
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -857,65 +845,52 @@ export function LandingPageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
+              className="grid md:grid-cols-2 gap-6 items-center bg-white rounded-[22px] shadow-sm hover:shadow-md transition-all duration-300 p-4"
             >
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                <div className="p-4 bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]/20 rounded-2xl md:order-2">
-                  <Image
-                    src="/cloud-optimization-illustration.png"
-                    alt="Managed AI Services - MLOps Monitoring Optimization"
-                    width={800}
-                    height={800}
-                    quality={90}
-                    className="w-full h-auto rounded-xl"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-6 md:p-8 md:order-1">
-                  <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
-                    Managed AI Operations
-                  </h3>
-                  <p className="text-base md:text-lg text-[#525252] leading-relaxed">
-                    24/7 monitoring, continuous optimization, and SLA-backed support. Your AI stays sharp with automated retraining, predictive cost analysis, and 99.9% uptime guarantees.
-                  </p>
-                </div>
+              <div className="p-4 bg-gradient-to-br from-[#D1FAE5] to-[#6EE7B7]/20 rounded-2xl md:order-2">
+                <Image
+                  src="/cloud-optimization-illustration.png"
+                  alt="Managed AI Services - MLOps Monitoring Optimization"
+                  width={800}
+                  height={800}
+                  quality={90}
+                  className="w-full h-auto rounded-xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
+              <div className="p-6 md:p-8 md:order-1">
+                <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B0F19] mb-4">
+                  Managed AI Operations
+                </h3>
+                <p className="text-base md:text-lg text-[#525252] mb-6 leading-relaxed">
+                  24/7 monitoring, continuous optimization, and SLA-backed support. Your AI stays sharp with automated retraining, predictive cost analysis, and 99.9% uptime guarantees.
+                </p>
 
-              <div className="grid md:grid-cols-3 lg:grid-cols-1 gap-4 mt-6 px-2 md:px-4 lg:w-1/2 lg:px-8">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Enterprise MLOps</p>
-                    <p className="text-sm text-[#525252]">Automated deployment, monitoring, and retraining—CI/CD for AI that detects drift and self-heals</p>
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Enterprise MLOps</p>
+                      <p className="text-sm text-[#525252]">Automated deployment, monitoring, and retraining—CI/CD for AI that detects drift and self-heals</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Cloud FinOps Optimization</p>
+                      <p className="text-sm text-[#525252]">Predictive cost analysis and automated recommendations—reduce cloud spend by 40% with zero manual effort</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#0B0F19] font-semibold">Governance & Compliance</p>
+                      <p className="text-sm text-[#525252]">GDPR, HIPAA, CCPA-ready frameworks with encryption, IAM, and audit trails built in</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Cloud FinOps Optimization</p>
-                    <p className="text-sm text-[#525252]">Predictive cost analysis and automated recommendations—reduce cloud spend by 40% with zero manual effort</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-[#0B0F19] font-semibold">Governance & Compliance</p>
-                    <p className="text-sm text-[#525252]">GDPR, HIPAA, CCPA-ready frameworks with encryption, IAM, and audit trails built in</p>
-                  </div>
-                </div>
-              </div>
 
-              <div className="flex items-center justify-between mt-6 px-2 md:px-4 flex-wrap gap-4">
-                <Button
-                  onClick={() => setContactModalOpen(true)}
-                  size="lg"
-                  className="bg-[#0F766E] hover:bg-[#0D5B53] text-white transition-all duration-300 group/btn text-base rounded-full h-14 px-8"
-                >
-                  <span className="font-semibold">Streamline My Operations</span>
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                </Button>
-
-                <div className="flex items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-3 mb-6 flex-wrap">
                   <Badge variant="secondary" className="bg-emerald-50 text-[#0F766E] border-emerald-200 text-xs">
                     99.9% Uptime
                   </Badge>
@@ -926,6 +901,15 @@ export function LandingPageClient() {
                     Auto-Optimization
                   </Badge>
                 </div>
+
+                <Button
+                  onClick={() => setContactModalOpen(true)}
+                  size="lg"
+                  className="w-full bg-[#0F766E] hover:bg-[#0D5B53] text-white transition-all duration-300 group/btn text-base rounded-full h-14"
+                >
+                  <span className="font-semibold">Streamline My Operations</span>
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                </Button>
               </div>
             </motion.div>
           </div>
